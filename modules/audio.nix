@@ -1,4 +1,8 @@
- # Enable sound.
+
+{ config, pkgs, ... }:
+
+{
+   # Enable sound.
    hardware.pulseaudio.enable = false;
    services.pipewire = {
      enable = true;
@@ -32,4 +36,5 @@
       #name "ALSA Sound Server"
    # }
   '';
-};
+ };
+}
