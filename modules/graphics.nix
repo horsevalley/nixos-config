@@ -18,12 +18,12 @@
 };
 
   # OpenGL
-  hardware.opengl.graphics = {
+  hardware.opengl = {
     enable = true;
     driSupport32Bit = true;
-    graphics.extraPackages = with pkgs; [
-      vaapiVdpau # Video Acceleration API
-    ];
+    # graphics.extraPackages = with pkgs; [
+      # vaapiVdpau # Video Acceleration API
+    # ];
   };
 
   # STEAM
