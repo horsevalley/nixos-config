@@ -1,0 +1,32 @@
+{
+  description = "My NixOS configuration with modular flakes";
+
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+  outputs = { self, nixpkgs }: {
+    nixosConfigurations = {
+      horsepowr-nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./modules/audio.nix
+          ./modules/desktop.nix
+          ./modules/editor.nix
+          ./modules/fonts.nix
+          ./modules/graphics.nix
+          ./modules/hardware.nix
+          ./modules/keyboard.nix
+          ./modules/localization.nix
+          ./modules/networking.nix
+          ./modules/packages.nix
+          ./modules/security.nix
+          ./modules/services.nix
+          ./modules/shell.nix
+          ./modules/system.nix
+          ./modules/users.nix
+          ./modules/variables.nix
+        ];
+      };
+    };
+  };
+}
+
