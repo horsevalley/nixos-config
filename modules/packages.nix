@@ -9,7 +9,7 @@
     xorg.xinit
     pkgs.gnome-terminal
     pkgs.gnome-tweaks
-    gnome-software
+    # pkgs.gnome-software
     pkgs.gnome-applets
     pkgs.gnome-common
     pkgs.gnome-session
