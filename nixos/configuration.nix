@@ -315,15 +315,6 @@
   };
 
   xdg.mime.enable = true;
-  xdg.mime.defaultApplications = {
-    "video/*" = "mpv.desktop";
-    "audio/*" = "ncmpcpp.desktop";
-    "image/*" = "img.desktop";
-    "application/pdf" = "org.pwmt.zathura.desktop";
-    "text/html" = "org.qutebrowser.qutebrowser.desktop";
-    "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
-    "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";
-};
 
 # Enable the Syncthing service
   services.syncthing = {
