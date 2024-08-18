@@ -18,7 +18,7 @@
 };
 
   # OpenGL
-  hardware.opengl = {
+  hardware.opengl.graphics = {
     enable = true;
     driSupport32Bit = true;
     graphics.extraPackages = with pkgs; [
