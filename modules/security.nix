@@ -15,4 +15,21 @@
   };
 
   security.rtkit.enable = true;
+
+  # Set SUID bit on slock
+  security.wrappers.slock = {
+    owner = "root";
+    group = "root";
+    source = "${pkgs.slock}/bin/slock";
+    capabilities = "cap_ipc_lock+ep";
+  };
+
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+   programs.mtr.enable = true;
+   programs.gnupg.agent = {
+     enable = true;
+     enableSSHSupport = true;
+   };
+
 }

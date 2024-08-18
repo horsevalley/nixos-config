@@ -9,6 +9,8 @@
     BROWSER = "qutebrowser";
   };
 
+  xdg.mime.enable = true;
+
   # Set the custom path for .desktop files
   environment.sessionVariables = {
     XDG_DATA_DIRS = [ 
