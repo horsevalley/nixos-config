@@ -115,6 +115,9 @@
     pinentry-curses
     jq
     wireplumber
+    bottles
+    lutris
+    heroic
 
   ];
 
