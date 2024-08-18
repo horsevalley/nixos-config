@@ -55,6 +55,15 @@
     };
   };
 
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions = true;
+    enableCompletion = true;
+    #envExtra = ''
+      #export SOMEZSHVARIABLE="something"
+    #'';
+  };
+
   gtk = {
     enable = true;
     theme.name = "adw-gtk3";
