@@ -119,6 +119,7 @@
     lutris
     heroic
     ncdu
+    tree
 
   ];
 
