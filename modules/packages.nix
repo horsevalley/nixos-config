@@ -118,6 +118,7 @@
     bottles
     lutris
     heroic
+    ncdu
 
   ];
 
