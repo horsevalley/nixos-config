@@ -21,7 +21,7 @@
   hardware.opengl = {
     enable = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs; [
+    graphics.extraPackages = with pkgs; [
       vaapiVdpau # Video Acceleration API
     ];
   };
