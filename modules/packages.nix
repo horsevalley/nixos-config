@@ -7,14 +7,14 @@
   environment.systemPackages = with pkgs; [
     xorg.xorgserver
     xorg.xinit
-    pkgs.gnome-terminal
-    pkgs.gnome-tweaks
-    pkgs.gnome-software
-    pkgs.gnome-applets
-    pkgs.gnome-common
-    pkgs.gnome-session
-    pkgs.gnome-session-ctl
-    pkgs.gnome-keyring
+    pkgs.gnome.gnome-terminal
+    pkgs.gnome.gnome-tweaks
+    pkgs.gnome.gnome-software
+    pkgs.gnome.gnome-applets
+    pkgs.gnome.gnome-common
+    pkgs.gnome.gnome-session
+    pkgs.gnome.gnome-session-ctl
+    pkgs.gnome.gnome-keyring
     gnome-desktop
     gnome-extension-manager
     vim 
