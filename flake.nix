@@ -3,25 +3,33 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    # you can also add the nixos stable channel here if u dont want unstable
   };
 
   outputs = { self, nixpkgs }: 
   let
     system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
+
+    pkgs = import nixpkgs {
+      inherit system;
+
+      config = {
+        allowUnfree = true;
+      };
+    };
+
   in 
   {
-    devShells.${system}.default = 
-      pkgs.mkShell
-      {
-        buildInputs = [
-          pkgs.neovim
-          pkgs.vim
-        ];
 
-        shellHook = ''
-          echo "hello mom"
-        '';
-      };
-  };
-}
+    nixosConfigurations = {
+    nixos-config = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit system; };
+
+      modules = [
+      ./nixos/configuration.nix
+      ];
+    };
+   };
+
+   };
+  }
