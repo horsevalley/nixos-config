@@ -23,7 +23,7 @@
   xdg.mime.enable = true;
 
   # Set up XDG MIME types
-  xdg.mimeTypes = {
+  xdg.mimeApps = {
     "video/mp4" = [ "mpv.desktop" ];
     "video/x-matroska" = [ "mpv.desktop" ];
     "image/jpeg" = [ "nsxiv.desktop" ];
