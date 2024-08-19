@@ -120,6 +120,7 @@
     heroic
     ncdu
     tree
+    libreoffice
 
   ];
 
