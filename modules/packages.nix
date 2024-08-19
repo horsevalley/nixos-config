@@ -5,8 +5,104 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    wget
+    curl
+    git
+    inkscape
+    gimp
+    syncthing 
+    insync
+    newsboat
+    home-manager
+    rofi
+    yt-dlp
+    nvtopPackages.full
+    inxi 
+    glxinfo 
+    signal-desktop 
+    libnotify
+    libvirt
+    slock
+    fastfetch
+
+    # Productivity
+    obsidian
+    libreoffice
+
+    # Linux utilities
+    fzf
+    bat
+    ripgrep
+    unzip
+    p7zip
+    fd
+    ripgrep
+    stow
+    xclip
+    jq
+    ncdu
+    tree
+    tldr
+    killall
+    man
+
+    # Programming languages and compilers
+    gcc
+    gnumake
+    python3
+    go
+    rustc
+    cargo
+    nodejs_22
+
+    # X11
     xorg.xorgserver
     xorg.xinit
+
+    # Audio
+    wireplumber
+    pulsemixer 
+    youtube-music
+    ncmpcpp
+
+    # Video
+    mpv
+    mpd
+    mpc-cli
+
+    # Viewers
+    zathura 
+    nsxiv
+    glow
+    litemdview
+
+    # Shell
+    zsh
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    zsh-autocomplete
+    starship
+    
+    # Terminal emulators
+    kitty
+    st 
+
+    # Editors
+    vim 
+    neovim 
+    tmux 
+
+    # File managers
+    yazi
+    lf
+    xfce.thunar
+    xfce.thunar-volman
+
+    # Browsers
+    qutebrowser
+    librewolf
+
+    # GNOME programs and utilities
     pkgs.gnome.gnome-terminal
     pkgs.gnome.gnome-tweaks
     pkgs.gnome.gnome-software
@@ -17,41 +113,8 @@
     pkgs.gnome.gnome-keyring
     gnome-desktop
     gnome-extension-manager
-    vim 
-    neovim 
-    tmux 
-    wget
-    curl
-    git
-    kitty
-    starship
-    zsh-syntax-highlighting
-    zsh-autosuggestions
-    zsh-autocomplete
-    fzf
-    bat
-    ripgrep
-    qutebrowser
-    unzip
-    p7zip
-    yazi
-    lf
-    starship
-    fzf
-    bat
-    fd
-    ripgrep
-    zsh
-    unzip
-    youtube-music
-    stow
-    xclip
-    neovim
-    pam_gnupg
-    ncmpcpp
-    mpv
-    mpd
-    mpc-cli
+
+    # Email
     mutt-wizard
     neomutt
     curl
@@ -60,67 +123,38 @@
     lynx
     notmuch
     abook
+
+    # Gaming
+    bottles
+    lutris
+    heroic
+
+    # Security
+    pam_gnupg
     pass
+    pass-nodmenu
     passExtensions.pass-otp
-    insync
-    inkscape
-    gimp
-    gcc
-    gnumake
-    python3
-    go
-    rustc
-    cargo
-    nodejs_22
-    newsboat
-    nsxiv
-    home-manager
-    obsidian
-    cmatrix
-    tldr
-    glow
+    pinentry-curses
+    gpgme
+
+    # System monitoring 
+    htop 
+    gotop 
+    bottom 
+
+
+    # Torrenting
+    tremc 
+    transmission 
+    transmission-remote-gtk 
+
+
+    # Silly programs
     cowsay
     figlet
     lolcat
     asciiquarium
-    glow
-    litemdview
-    rofi
-    yt-dlp
-    st 
-    zathura 
-    tremc 
-    transmission 
-    transmission-remote-gtk 
-    syncthing 
-    pulsemixer 
-    htop 
-    gotop 
-    bottom 
-    nvtopPackages.full
-    inxi 
-    glxinfo 
-    signal-desktop 
-    libnotify
-    libvirt
-    slock
-    obsidian
-    xfce.thunar
-    xfce.thunar-volman
-    fastfetch
-    youtube-music
-    killall
-    man
-    pass-nodmenu
-    pinentry-curses
-    jq
-    wireplumber
-    bottles
-    lutris
-    heroic
-    ncdu
-    tree
-    libreoffice
+    cmatrix
 
   ];
 
