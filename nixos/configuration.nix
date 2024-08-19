@@ -7,7 +7,6 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      # ./hardware-configuration.nix # this gets imported from modules
       ./audio.nix
       ./desktop.nix
       ./editor.nix
