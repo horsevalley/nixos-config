@@ -1,3 +1,4 @@
+
 { config, pkgs, ... }:
 
 {
@@ -23,12 +24,12 @@
 
   # Set up XDG MIME types
   xdg.mimeTypes = {
-    "video/mp4" = "mpv.desktop";
-    "video/x-matroska" = "mpv.desktop";
-    "image/jpeg" = "nsxiv.desktop";
-    "image/png" = "nsxiv.desktop";
-    "application/pdf" = "zathura.desktop";
-    "text/html" = "qutebrowser.desktop";
+    "video/mp4" = [ "mpv.desktop" ];
+    "video/x-matroska" = [ "mpv.desktop" ];
+    "image/jpeg" = [ "nsxiv.desktop" ];
+    "image/png" = [ "nsxiv.desktop" ];
+    "application/pdf" = [ "zathura.desktop" ];
+    "text/html" = [ "qutebrowser.desktop" ];
   };
 
 }
