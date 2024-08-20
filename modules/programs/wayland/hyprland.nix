@@ -14,10 +14,12 @@
   # Hyprland specific packages
   environment.systemPackages = with pkgs; [
     hyprland
+    waybar
     rofi-wayland
     hyprpaper
     wl-clipboard
     mako
+    swww # wallpaper daemon
   ];
 
   # Enable XDG portal with Hyprland support
@@ -29,6 +31,12 @@
 
   # Enable hyprlock
   programs.hyprlock.enable = true;
+
+  # Enable waybar
+  programs.waybar.enable = true;
+
+  # Enable swww
+  programs.swww.enable = true;
 
   # Enable iio-hyprland
   programs.iio-hyprland.enable = true;
