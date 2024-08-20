@@ -9,7 +9,7 @@
         system = "x86_64-linux";
         modules = [
           ./modules/audio.nix
-          ./modules/desktop.nix
+          ./modules/gnome.nix
           ./modules/editor.nix
           ./modules/fonts.nix
           ./modules/graphics.nix
