@@ -3,7 +3,19 @@
 
 {
   # Enable Hyprland
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    package = true;
+    xwayland.enable = true;
+    hyprlock.enable = true;
+    portalPackage
+    iio-hyprland.package
+    systemd.setPath.enable;
+    iio-hyprland.enable = true;
+  };
+
+  # Enable Hypr idle
+  services.hypridle.enable = true;
 
   # Enable Wayland
   wayland.windowManager.hyprland = {
@@ -15,14 +27,6 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   }
 
-  programs.hyprland.portalPackage
-  programs.iio-hyprland.package
-  programs.hyprland.systemd.setPath.enable;
-  programs.iio-hyprland.enable = true;
-  services.hypridle.enable = true;
-  programs.hyprland.package = true;
-  programs.hyprland.xwayland.enable = true;
-  programs.hyprlock.enable = true;
 
   # Some env variables from the NixOS nvidia docs
   environment.sessionVariables = {
