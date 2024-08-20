@@ -17,14 +17,6 @@
   # Enable iio-hyprland
   programs.iio-hyprland.enable
 
-  # Hyprland-specific packages
-  environment.systemPackages = with pkgs; [
-    hyprland
-    hyprlock
-    # iio-hyprland
-
-  ];
-
   # Enable Hypr idle
   services.hypridle.enable = true;
 
@@ -34,7 +26,6 @@
   }
 
   {
-
   # Optional, hint electron apps to use wayland
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
