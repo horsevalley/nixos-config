@@ -20,7 +20,6 @@
   programs.hyprland.systemd.setPath.enable;
   programs.iio-hyprland.enable = true;
   services.hypridle.enable = true;
-  programs.hyprlock.enable = true;
   programs.hyprland.package = true;
   programs.hyprland.xwayland.enable = true;
   programs.hyprlock.enable = true;
