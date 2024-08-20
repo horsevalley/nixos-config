@@ -23,11 +23,9 @@
   # Enable Wayland
   wayland.windowManager.hyprland.enable = true;
 
-  {
   # Optional, hint electron apps to use wayland
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-  };
   };
 
   # Environment variables for NVIDIA and Wayland
