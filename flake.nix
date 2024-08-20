@@ -11,6 +11,7 @@
           ./modules/audio.nix
           ./modules/X11.nix
           ./modules/gnome.nix
+          ./modules/programs/wayland/hyprland.nix
           ./modules/editor.nix
           ./modules/fonts.nix
           ./modules/graphics.nix
