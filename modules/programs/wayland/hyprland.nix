@@ -15,10 +15,14 @@
   environment.systemPackages = with pkgs; [
     hyprland
     waybar
+    grim
+    slurp
+    ulauncher
     rofi-wayland
-    hyprpaper
+    # hyprpaper
     wl-clipboard
-    mako
+    # mako
+    swaynotificationcenter
     swww # wallpaper daemon
   ];
 
@@ -34,9 +38,6 @@
 
   # Enable waybar
   programs.waybar.enable = true;
-
-  # Enable swww
-  programs.swww.enable = true;
 
   # Enable iio-hyprland
   programs.iio-hyprland.enable = true;
