@@ -5,7 +5,7 @@
   # Enable Hyprland
   programs.hyprland = {
     enable = true;
-    package = true;
+    # package = true;
     xwayland.enable = true;
     # portalPackage.enable = true;
     systemd.setPath.enable = true;
