@@ -10,8 +10,10 @@
     enable = true;
   }
 
+  {
   # Optional, hint electron apps to use wayland:
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  }
 
   programs.hyprland.portalPackage
   programs.iio-hyprland.package
