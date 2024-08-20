@@ -21,9 +21,7 @@
   services.hypridle.enable = true;
 
   # Enable Wayland
-  wayland.windowManager.hyprland = {
-    enable = true;
-  }
+  wayland.windowManager.hyprland.enable = true;
 
   {
   # Optional, hint electron apps to use wayland
