@@ -17,8 +17,10 @@
   # Enable iio-hyprland
   programs.iio-hyprland.enable
 
+  {
   # Enable Hypr idle
   services.hypridle.enable = true;
+  };
 
   # Enable Wayland
   wayland.windowManager.hyprland = {
