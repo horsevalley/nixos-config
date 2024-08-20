@@ -7,8 +7,23 @@
     enable = true;
     package = true;
     xwayland.enable = true;
-    portalPackage.enable = true;
+    # portalPackage.enable = true;
     systemd.setPath.enable = true;
+  };
+
+  # Hyprland specific packages
+  environment.systemPackages = with pkgs; [
+    rofi-wayland
+    hyprpaper
+    wl-clipboard
+    mako
+  ];
+
+  # Enable XDG portal with Hyprland support
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    config.common.default = "*";
   };
 
   # Enable hyprlock
