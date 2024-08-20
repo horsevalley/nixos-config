@@ -10,16 +10,16 @@
   services.xserver.desktopManager.gnome.enable = true;
 
   # Disable Wayland
-  services.xserver.displayManager.gdm.wayland = false;
+  services.xserver.displayManager.gdm.wayland = true;
 
   # Exclude GNOME packages that are Wayland-specific
-  environment.gnome.excludePackages = with pkgs.gnome; [
-    mutter
-    gnome-shell
+  #environment.gnome.excludePackages = with pkgs.gnome; [
+  #mutter
+  #gnome-shell
 ];
 
   # Force X11 for GNOME session
-  services.displayManager.defaultSession = "gnome-xorg";
+  #services.displayManager.defaultSession = "gnome-xorg";
 
   # GNOME programs and utilities
   environment.systemPackages = with pkgs; [
