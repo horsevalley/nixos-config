@@ -55,10 +55,6 @@
     cargo
     nodejs_22
 
-    # X11
-    xorg.xorgserver
-    xorg.xinit
-
     # Audio
     wireplumber
     pulsemixer 
@@ -102,17 +98,6 @@
     qutebrowser
     librewolf
 
-    # GNOME programs and utilities
-    pkgs.gnome.gnome-terminal
-    pkgs.gnome.gnome-tweaks
-    pkgs.gnome.gnome-software
-    pkgs.gnome.gnome-applets
-    pkgs.gnome.gnome-common
-    pkgs.gnome.gnome-session
-    pkgs.gnome.gnome-session-ctl
-    pkgs.gnome.gnome-keyring
-    gnome-desktop
-    gnome-extension-manager
 
     # Email
     mutt-wizard

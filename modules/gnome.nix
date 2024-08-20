@@ -20,4 +20,20 @@
 
   # Force X11 for GNOME session
   services.displayManager.defaultSession = "gnome-xorg";
+
+  # GNOME programs and utilities
+  environment.systemPackages = with pkgs; [
+    pkgs.gnome.gnome-terminal
+    pkgs.gnome.gnome-tweaks
+    pkgs.gnome.gnome-software
+    pkgs.gnome.gnome-applets
+    pkgs.gnome.gnome-common
+    pkgs.gnome.gnome-session
+    pkgs.gnome.gnome-session-ctl
+    pkgs.gnome.gnome-keyring
+    gnome-desktop
+    gnome-extension-manager
+
+  ];
+
 }

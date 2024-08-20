@@ -8,7 +8,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ./audio.nix
-      ./desktop.nix
+      ./X11.nix
+      ./gnome.nix
       ./editor.nix
       ./fonts.nix
       ./graphics.nix
