@@ -16,7 +16,7 @@
   #environment.gnome.excludePackages = with pkgs.gnome; [
   #mutter
   #gnome-shell
-];
+# ];
 
   # Force X11 for GNOME session
   #services.displayManager.defaultSession = "gnome-xorg";
