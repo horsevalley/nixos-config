@@ -14,7 +14,6 @@
       ./fonts.nix
       ./graphics.nix
       ./hardware.nix
-      ./hardware.nix
       ./keyboard.nix
       ./localization.nix
       ./networking.nix
