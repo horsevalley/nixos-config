@@ -20,7 +20,7 @@
   {
   # Enable Hypr idle
   services.hypridle.enable = true;
-  };
+  }
 
   # Enable Wayland
   wayland.windowManager.hyprland = {
