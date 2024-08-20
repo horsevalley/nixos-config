@@ -13,6 +13,7 @@
 
   # Hyprland specific packages
   environment.systemPackages = with pkgs; [
+    hyprland
     rofi-wayland
     hyprpaper
     wl-clipboard
