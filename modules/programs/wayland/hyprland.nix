@@ -8,11 +8,18 @@
     package = true;
     xwayland.enable = true;
     hyprlock.enable = true;
-    portalPackage
-    iio-hyprland.package
-    systemd.setPath.enable;
+    portalPackage.enable = true;
+    systemd.setPath.enable = true;
     iio-hyprland.enable = true;
   };
+
+  # Hyprland-specific packages
+  environment.systemPackages = with pkgs; [
+    hyprland
+    iio-hyprland
+
+  ];
+
 
   # Enable Hypr idle
   services.hypridle.enable = true;
