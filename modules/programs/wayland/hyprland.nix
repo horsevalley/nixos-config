@@ -20,7 +20,6 @@
 
   ];
 
-
   # Enable Hypr idle
   services.hypridle.enable = true;
 
@@ -34,10 +33,8 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   }
 
-
   # Some env variables from the NixOS nvidia docs
-  environment.sessionVariables = {
-
+  environment.variables = {
     LIBVA_DRIVER_NAME = "nvidia";
     XDG_SESSION_TYPE = "wayland";
     GBM_BACKEND = "nvidia-drm";
