@@ -17,7 +17,7 @@
 
   programs.hyprland.portalPackage
   programs.iio-hyprland.package
-  programs.hyprland.systemd.setPath.enable = true;
+  programs.hyprland.systemd.setPath.enable;
   programs.hyprland.enable = true;
   programs.iio-hyprland.enable = true;
   services.hypridle.enable = true;
