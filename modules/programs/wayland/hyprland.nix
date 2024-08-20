@@ -9,11 +9,13 @@
     xwayland.enable = true;
     portalPackage.enable = true;
     systemd.setPath.enable = true;
-    iio-hyprland.enable = true;
   };
 
   # Enable hyprlock
   programs.hyprlock.enable = true;
+
+  # Enable iio-hyprland
+  programs.iio-hyprland.enable
 
   # Hyprland-specific packages
   environment.systemPackages = with pkgs; [
