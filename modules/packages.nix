@@ -26,6 +26,7 @@
     fastfetch # aesthetic sysinfo
     sdcv # console version of stardict
     bc # basic calculator 
+    arandr  
 
     # Productivity
     obsidian
