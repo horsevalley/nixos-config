@@ -17,8 +17,8 @@
   };
 
   # OpenGL
-  hardware.graphics.enable = true;
-  hardware.graphics.enable32Bit = true;
+  # hardware.graphics.enable = true;
+  # hardware.graphics.enable32Bit = true;
 
     # STEAM
   hardware.steam-hardware.enable = true;
