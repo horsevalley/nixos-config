@@ -31,6 +31,7 @@
     fastfetch 
     neofetch 
     ipfetch 
+    uwufetch 
 
     # Productivity
     obsidian
