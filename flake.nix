@@ -15,10 +15,10 @@
           ./modules/programs/wayland/hyprland.nix
           ./modules/editor.nix
           ./modules/fonts.nix
-          ./modules/nvidia.nix
-          ./modules/opengl.nix
           ./modules/gaming.nix
-          ./modules/hardware.nix
+          ./modules/hardware/nvidia.nix
+          ./modules/hardware/opengl.nix
+          ./modules/hardware/hardware.nix
           ./modules/keyboard.nix
           ./modules/localization.nix
           ./modules/networking.nix
