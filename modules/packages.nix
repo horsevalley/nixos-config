@@ -25,6 +25,7 @@
     slock
     fastfetch # aesthetic sysinfo
     sdcv # console version of stardict
+    bc # basic calculator 
 
     # Productivity
     obsidian
