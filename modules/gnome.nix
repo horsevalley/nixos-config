@@ -11,7 +11,7 @@
 
   # Disable Wayland
   services.xserver.displayManager.gdm.wayland = true;
-  services.xserver.displayManager.gdm.defaultSession = "hyprland.desktop";
+  services.xserver.displayManager.gdm.defaultSession = "hyprland";
 
   # Exclude GNOME packages that are Wayland-specific
   #environment.gnome.excludePackages = with pkgs.gnome; [
