@@ -7,24 +7,27 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./audio.nix
-      ./X11.nix
-      ./gnome.nix
-      ./editor.nix
-      ./fonts.nix
-      ./graphics.nix
-      ./hardware.nix
-      ./keyboard.nix
-      ./localization.nix
-      ./networking.nix
-      ./packages.nix
-      ./security.nix
-      ./services.nix
-      ./shell.nix
-      ./system.nix
-      ./users.nix
-      ./variables.nix
       # inputs.home-manager.nixosModules.home-manager
+      ./modules/audio.nix
+      ./modules/X11.nix
+      ./modules/gnome.nix
+      ./modules/programs/wayland/hyprland.nix
+      ./modules/editor.nix
+      ./modules/fonts.nix
+      ./modules/gaming.nix
+      ./modules/hardware/nvidia.nix
+      ./modules/hardware/opengl.nix
+      ./modules/hardware/hardware.nix
+      ./modules/keyboard.nix
+      ./modules/localization.nix
+      ./modules/networking.nix
+      ./modules/packages.nix
+      ./modules/security.nix
+      ./modules/services.nix
+      ./modules/shell.nix
+      ./modules/system.nix
+      ./modules/users.nix
+      ./modules/variables.nix
     ];
 
   # This value determines the NixOS release from which the default
