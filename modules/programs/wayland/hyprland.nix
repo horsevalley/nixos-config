@@ -13,17 +13,18 @@
   environment.systemPackages = with pkgs; [
     hyprland
     waybar
+    dunst
     wofi
     wofi-pass
     grim
     slurp
     # ulauncher
     # rofi-wayland
-    # hyprpaper
+    hyprpaper
     wl-clipboard
-    mako
+    # mako
     # swaynotificationcenter
-    swww # wallpaper daemon
+    # swww # wallpaper daemon
     unclutter # hides mouse when idle 
     mnemosyne # spaced repetiton software 
   ];
