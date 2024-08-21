@@ -17,12 +17,12 @@
     wofi-pass
     grim
     slurp
-    ulauncher
-    rofi-wayland
+    # ulauncher
+    # rofi-wayland
     # hyprpaper
     wl-clipboard
-    # mako
-    swaynotificationcenter
+    mako
+    # swaynotificationcenter
     swww # wallpaper daemon
     unclutter # hides mouse when idle 
     mnemosyne # spaced repetiton software 
@@ -52,12 +52,4 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  # Environment variables for NVIDIA and Wayland
-  # environment.variables = {
-  #   LIBVA_DRIVER_NAME = "nvidia";
-  #   XDG_SESSION_TYPE = "wayland";
-  #   GBM_BACKEND = "nvidia-drm";
-  #   __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-  #   WLR_NO_HARDWARE_CURSORS = "1";
-  # };
 }
