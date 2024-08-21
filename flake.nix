@@ -15,7 +15,9 @@
           ./modules/programs/wayland/hyprland.nix
           ./modules/editor.nix
           ./modules/fonts.nix
-          ./modules/graphics.nix
+          ./modules/nvidia.nix
+          ./modules/opengl.nix
+          ./modules/gaming.nix
           ./modules/hardware.nix
           ./modules/keyboard.nix
           ./modules/localization.nix

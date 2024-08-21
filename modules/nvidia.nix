@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # GRAPHICS SETTINGS
   # Enable NVIDIA Drivers
   services.xserver.videoDrivers = [ "nvidia" ];
   # NVIDIA
@@ -15,20 +14,5 @@
     powerManagement.enable = false;
     # Turns off GPU when not in use. Experimental. Only works on modern NVIDIA GPUs (Turing and newer).
     powerManagement.finegrained = false;
-};
-
-  # OpenGL
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    # graphics.extraPackages = with pkgs; [
-      # vaapiVdpau # Video Acceleration API
-    # ];
   };
-
-  # STEAM
-  hardware.steam-hardware.enable = true;
-
-  # OTHER GAME SETTINGS
-  programs.gamemode.enable = true;
 }
