@@ -12,6 +12,7 @@
   # Hyprland specific packages
   environment.systemPackages = with pkgs; [
     hyprland
+    kdePackages.polkit-qt-1
     waybar
     dunst
     wofi
