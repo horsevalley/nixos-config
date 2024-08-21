@@ -44,7 +44,7 @@
   programs.waybar.enable = true;
 
   # Enable iio-hyprland
-  programs.iio-hyprland.enable = true;
+  # programs.iio-hyprland.enable = true;
 
   # Enable Hypr idle
   services.hypridle.enable = true;
