@@ -14,10 +14,8 @@
       ./modules/programs/wayland/hyprland.nix
       ./modules/editor.nix
       ./modules/fonts.nix
-      ./modules/gaming.nix
-      ./modules/hardware/nvidia.nix
-      ./modules/hardware/opengl.nix
-      ./modules/hardware/hardware.nix
+      ./modules/graphics.nix
+      ./modules/hardware.nix
       ./modules/keyboard.nix
       ./modules/localization.nix
       ./modules/networking.nix
