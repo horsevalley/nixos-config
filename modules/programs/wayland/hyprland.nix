@@ -13,6 +13,8 @@
   environment.systemPackages = with pkgs; [
     hyprland
     waybar
+    wofi
+    wofi-pass
     grim
     slurp
     ulauncher
