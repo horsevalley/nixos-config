@@ -30,8 +30,6 @@
     # Aesthetic sysinfo
     fastfetch 
     neofetch 
-    ipfetch 
-    uwufetch 
 
     # Productivity
     obsidian
@@ -128,6 +126,7 @@
     passExtensions.pass-otp
     pinentry-curses
     gpgme
+    kdePackages.polkit-qt-1
 
     # System monitoring 
     htop 
