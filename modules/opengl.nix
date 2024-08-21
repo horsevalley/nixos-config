@@ -9,6 +9,6 @@
     # graphics.extraPackages = with pkgs; [
       # vaapiVdpau # Video Acceleration API
     # ];
-  }
+  };
 
 }
