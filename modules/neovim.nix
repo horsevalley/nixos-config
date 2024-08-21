@@ -11,7 +11,7 @@ in {
   ];
 
   programs.neovim = {
-    = true;
+    enable = true;
     defaultEditor = true;
     vimAlias = true;
     viAlias = true;
