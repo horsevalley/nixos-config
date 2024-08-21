@@ -86,7 +86,6 @@
 
     # Editors
     vim 
-    neovim 
     tmux 
 
     # File managers
