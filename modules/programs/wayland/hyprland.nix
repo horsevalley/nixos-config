@@ -25,6 +25,7 @@
     swaynotificationcenter
     swww # wallpaper daemon
     unclutter # hides mouse when idle 
+    mnemosyne # spaced repetiton software 
   ];
 
   # Enable XDG portal with Hyprland support
