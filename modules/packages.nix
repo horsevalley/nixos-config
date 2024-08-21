@@ -23,7 +23,8 @@
     libnotify
     libvirt
     slock
-    fastfetch
+    fastfetch # aesthetic sysinfo
+    sdcv # console version of stardict
 
     # Productivity
     obsidian
