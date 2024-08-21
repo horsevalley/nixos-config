@@ -96,6 +96,8 @@
     # File managers
     yazi
     lf
+    dolphin
+    pcmanfm
     xfce.thunar
     xfce.thunar-volman
 
