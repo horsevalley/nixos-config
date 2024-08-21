@@ -24,6 +24,7 @@
     # mako
     swaynotificationcenter
     swww # wallpaper daemon
+    unclutter # hides mouse when idle 
   ];
 
   # Enable XDG portal with Hyprland support
