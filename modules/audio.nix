@@ -13,8 +13,9 @@
    };
 
   
-  # Enable wireplumber service
-  services.wireplumber.enable = true;
+   services.wireplumber = {
+     enable = true;
+   };
   # OR
   # services.pipewireMediaSession.enable = true;
 
