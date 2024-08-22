@@ -61,6 +61,12 @@
     cargo
     nodejs_22
 
+    # DevOps programs and utilities
+    kubernetes
+    kubectl
+    kubeadm
+    k3s
+
     # Audio
     wireplumber
     pulsemixer 
