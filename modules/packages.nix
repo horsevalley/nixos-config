@@ -64,7 +64,6 @@
     # DevOps programs and utilities
     kubernetes
     kubectl
-    kubeadm
     k3s
 
     # Audio
