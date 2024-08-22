@@ -3,9 +3,6 @@
 
 {
 
-  # Add all directories in `~/.local/bin` to $PATH
-    export PATH="$PATH:$(find ~/.local/bin -type d | paste -sd ':' -)"
-
   # System-wide environment variables
   environment.variables = {
     EDITOR = "nvim";
@@ -29,5 +26,10 @@
 
   # Enable xdg mime
   xdg.mime.enable = true;
+
+  {
+    # Add all directories in `~/.local/bin` to $PATH
+    export PATH="$PATH:$(find ~/.local/bin -type d | paste -sd ':' -)"
+  }
 
 }
