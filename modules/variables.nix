@@ -27,9 +27,7 @@
   # Enable xdg mime
   xdg.mime.enable = true;
 
-  {
-    # Add all directories in `~/.local/bin` to $PATH
-    export PATH="$PATH:$(find ~/.local/bin -type d | paste -sd ':' -)"
-  };
+  # Add all directories in `~/.local/bin` to $PATH
+  export PATH="$PATH:$(find ~/.local/bin -type d | paste -sd ':' -)"
 
 }
