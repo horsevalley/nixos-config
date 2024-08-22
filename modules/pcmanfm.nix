@@ -2,7 +2,7 @@
 
 let
   theme = pkgs.kdePackages.kde-gtk-config;  # Or choose another GTK theme package
-  icons = pkgs.adwaita-icon-theme;    # Or choose another icon theme package
+  icons = pkgs.gnome.adwaita-icon-theme;    # Or choose another icon theme package
 in {
   environment.systemPackages = with pkgs; [
     pcmanfm
