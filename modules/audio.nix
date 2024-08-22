@@ -12,6 +12,12 @@
      jack.enable = true;
    };
 
+  
+  # Enable wireplumber service
+  services.wireplumber.enable = true;
+  # OR
+  # services.pipewireMediaSession.enable = true;
+
    # MPD settings
   services.mpd = {
   enable = true;
