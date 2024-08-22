@@ -25,14 +25,6 @@ in {
     gtk-enable-animations=true
   '';
   
-  # Hyprland-specific settings for transparency (this assumes you have Hyprland configured for transparency)
-  programs.hyprland.settings = {
-    decoration {
-      blur = true;  # if you want blurred transparency
-    }
-    # Set other Hyprland transparency settings as needed
-  };
-
   # Configure pcmanfm settings declaratively
   environment.etc."xdg/pcmanfm/default/pcmanfm.conf".text = ''
     [Desktop]
