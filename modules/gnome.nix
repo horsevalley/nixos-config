@@ -22,7 +22,7 @@
   #services.displayManager.defaultSession = "gnome-xorg";
   
   # Force Hyprland for GNOME session
-  services.displayManager.defaultSession = "Hyprland";
+  services.displayManager.defaultSession = "hyprland";
 
   # GNOME programs and utilities
   environment.systemPackages = with pkgs; [
