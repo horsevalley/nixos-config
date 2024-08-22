@@ -27,6 +27,4 @@
   # Enable xdg mime
   xdg.mime.enable = true;
 
-  wayland.windowManager.hyprland.systemd.variables = ["--all"];
-
 }
