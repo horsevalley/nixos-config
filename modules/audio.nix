@@ -12,10 +12,11 @@
      jack.enable = true;
    };
 
-  
-   services.wireplumber = {
+  # Enable wireplumber
+  services.pipewire.wireplumber = {
      enable = true;
-   };
+  };
+  
   # OR
   # services.pipewireMediaSession.enable = true;
 
