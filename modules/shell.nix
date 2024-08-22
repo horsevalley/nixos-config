@@ -17,5 +17,5 @@
       source "$HOME/.config/shell/aliasrc"
     fi
   '';
-};
+  };
 }
