@@ -40,5 +40,5 @@ in {
     always_show_tabs=true
   '';
 
-};
+}
 
