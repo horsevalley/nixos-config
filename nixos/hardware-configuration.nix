@@ -13,6 +13,7 @@
   boot.blacklistedKernelModules = ["nouveau"];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/31bf8a74-6cac-45e1-8252-a4150417d90c";

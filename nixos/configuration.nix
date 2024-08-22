@@ -14,7 +14,8 @@
       ./modules/programs/wayland/hyprland.nix
       ./modules/neovim.nix
       ./modules/fonts.nix
-      ./modules/graphics.nix
+      ./modules/hardware/nvidia.nix
+      ./modules/hardware/opengl.nix
       ./modules/hardware.nix
       ./modules/keyboard.nix
       ./modules/localization.nix
