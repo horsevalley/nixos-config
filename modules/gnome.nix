@@ -33,7 +33,7 @@
     pkgs.gnome.gnome-keyring
     gnome-desktop
     gnome-extension-manager
-    polkit_gnome
+    # polkit_gnome
 
   ];
 
