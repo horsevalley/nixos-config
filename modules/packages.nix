@@ -27,13 +27,16 @@
     bc # basic calculator 
     arandr  
 
+    # Wayland-specific packages
+    wl-clipboard
+
     # Aesthetic sysinfo
     fastfetch 
     neofetch 
 
     # Productivity
     obsidian
-    # libreoffice
+    libreoffice
 
     # Linux utilities
     fzf
