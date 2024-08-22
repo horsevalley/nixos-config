@@ -19,7 +19,7 @@
     nvtopPackages.full
     inxi 
     glxinfo 
-    # signal-desktop 
+    signal-desktop 
     libnotify
     libvirt
     slock
@@ -64,7 +64,7 @@
     # Audio
     wireplumber
     pulsemixer 
-    # youtube-music
+    youtube-music
     ncmpcpp
 
     # Video
@@ -98,12 +98,12 @@
     lf
     dolphin
     pcmanfm
-    # xfce.thunar
-    # xfce.thunar-volman
+    xfce.thunar
+    xfce.thunar-volman
 
     # Browsers
     qutebrowser
-    # librewolf
+    librewolf
 
 
     # Email
