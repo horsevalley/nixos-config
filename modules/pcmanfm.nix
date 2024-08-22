@@ -29,7 +29,7 @@ in {
   environment.etc."xdg/pcmanfm/default/pcmanfm.conf".text = ''
     [Desktop]
     wallpaper_mode=stretch
-    wallpaper=/path/to/your/wallpaper
+    wallpaper=~/repos/github/wallpapers/JaKooLit/Dynamic-Wallpapers/Dark/Mountain_dark.png
 
     [GTK]
     theme=Adwaita-dark
