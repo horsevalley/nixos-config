@@ -8,8 +8,8 @@
     wget
     curl
     git
-    inkscape
-    gimp
+    # inkscape
+    # gimp
     syncthing 
     insync
     newsboat
