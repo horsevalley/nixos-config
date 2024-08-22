@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  theme = pkgs.gtk3.kde-gtk-config;  # Or choose another GTK theme package
+  theme = pkgs.kdePackages.kde-gtk-config;  # Or choose another GTK theme package
   icons = pkgs.adwaita-icon-theme;    # Or choose another icon theme package
 in {
   environment.systemPackages = with pkgs; [
