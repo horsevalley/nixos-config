@@ -19,7 +19,7 @@
     nvtopPackages.full
     inxi 
     glxinfo 
-    signal-desktop 
+    # signal-desktop 
     libnotify
     libvirt
     slock
@@ -33,7 +33,7 @@
 
     # Productivity
     obsidian
-    libreoffice
+    # libreoffice
 
     # Linux utilities
     fzf
@@ -64,7 +64,7 @@
     # Audio
     wireplumber
     pulsemixer 
-    youtube-music
+    # youtube-music
     ncmpcpp
 
     # Video
@@ -98,12 +98,12 @@
     lf
     dolphin
     pcmanfm
-    xfce.thunar
-    xfce.thunar-volman
+    # xfce.thunar
+    # xfce.thunar-volman
 
     # Browsers
     qutebrowser
-    librewolf
+    # librewolf
 
 
     # Email
@@ -135,12 +135,10 @@
     gotop 
     bottom 
 
-
     # Torrenting
     tremc 
     transmission 
     transmission-remote-gtk 
-
 
     # Silly programs
     cowsay
