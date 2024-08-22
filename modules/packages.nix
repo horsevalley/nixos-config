@@ -29,6 +29,10 @@
 
     # Wayland-specific packages
     wl-clipboard
+    waybar
+    jq          # Not Wayland-specific, but needed for some Waybar modules
+    grim        # For screenshots (optional)
+    slurp       # For area selection (optional)
 
     # Aesthetic sysinfo
     fastfetch 
