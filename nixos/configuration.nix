@@ -12,7 +12,6 @@
       ./modules/X11.nix
       ./modules/gnome.nix
       ./modules/programs/wayland/hyprland.nix
-      ./modules/editor.nix
       ./modules/neovim.nix
       ./modules/fonts.nix
       ./modules/graphics.nix
