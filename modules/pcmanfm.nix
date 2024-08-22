@@ -2,15 +2,15 @@
 
 {
 
-  let
-    theme = pkgs.gtk3.kde-gtk-config;  # Or choose another GTK theme package
-    icons = pkgs.adwaita-icon-theme;    # Or choose another icon theme package
-  in {
-    environment.systemPackages = with pkgs; [
-      pcmanfm
-      theme
-      icons
-    ];
+  # let
+  #   theme = pkgs.gtk3.kde-gtk-config;  # Or choose another GTK theme package
+  #   icons = pkgs.adwaita-icon-theme;    # Or choose another icon theme package
+  # in {
+  #   environment.systemPackages = with pkgs; [
+  #     pcmanfm
+  #     theme
+  #     icons
+  #   ];
 
   # GTK settings for pcmanfm
   environment.variables = {
