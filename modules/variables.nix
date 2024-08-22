@@ -30,6 +30,6 @@
   {
     # Add all directories in `~/.local/bin` to $PATH
     export PATH="$PATH:$(find ~/.local/bin -type d | paste -sd ':' -)"
-  }
+  };
 
 }
