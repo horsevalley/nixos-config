@@ -24,6 +24,7 @@
     libvirt
     slock
     sdcv # console version of stardict
+    wordnet
     bc # basic calculator 
     arandr  
 
