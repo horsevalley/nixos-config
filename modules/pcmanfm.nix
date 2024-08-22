@@ -3,14 +3,14 @@
 {
 
   let
-  theme = pkgs.gtk3.kde-gtk-config;  # Or choose another GTK theme package
-  icons = pkgs.adwaita-icon-theme;    # Or choose another icon theme package
+    theme = pkgs.gtk3.kde-gtk-config;  # Or choose another GTK theme package
+    icons = pkgs.adwaita-icon-theme;    # Or choose another icon theme package
   in {
-  environment.systemPackages = with pkgs; [
-    pcmanfm
-    theme
-    icons
-  ];
+    environment.systemPackages = with pkgs; [
+      pcmanfm
+      theme
+      icons
+    ];
 
   # GTK settings for pcmanfm
   environment.variables = {
@@ -27,21 +27,11 @@
     gtk-icon-theme-name=Adwaita
     gtk-enable-animations=true
   '';
-
-  # Hyprland-specific settings for transparency (this assumes you have Hyprland configured for transparency)
-  programs.hyprland.settings = {
-    decoration {
-    blur = true;  # if you want blurred transparency
-  }
-    # Set other Hyprland transparency settings as needed
-    };
-
+  
   # Configure pcmanfm to use the dark theme and icons
   programs.pcmanfm = {
     enable = true;
-    configFile = ./pcmanfm.conf;
-  };
-
+    configFile = ~/.config/pcmanfm/default/pcmanfm.conf;
   };
 
 }
