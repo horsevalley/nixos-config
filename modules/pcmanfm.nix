@@ -22,7 +22,7 @@ in {
     gtk-application-prefer-dark-theme=1
     gtk-theme-name=Adwaita-dark
     gtk-icon-theme-name=Adwaita
-    gtk-enable-animations=true
+    gtk-enable-animations=false
   '';
   
   # Configure pcmanfm settings declaratively
@@ -35,6 +35,7 @@ in {
     theme=Adwaita-dark
     icons=Adwaita
     enable_transparency=true
+    transparency = 0.8
 
     [UI]
     always_show_tabs=true
