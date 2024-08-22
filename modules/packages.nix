@@ -8,8 +8,8 @@
     wget
     curl
     git
-    # inkscape
-    # gimp
+    inkscape
+    gimp
     syncthing 
     insync
     newsboat
@@ -24,8 +24,6 @@
     libvirt
     slock
     sdcv # console version of stardict
-    # dict
-    # dictdDBs.wordnet
     bc # basic calculator 
     arandr  
 
@@ -104,13 +102,10 @@
     yazi
     lf
     pcmanfm
-    # xfce.thunar
-    # xfce.thunar-volman
 
     # Browsers
     qutebrowser
     librewolf
-
 
     # Email
     mutt-wizard

@@ -8,8 +8,6 @@
   # Enable GNOME Desktop Environment
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-  services.xdg.portal.gnome.enable = true;
-  services.xdg.portal.enable = true;
 
   # Disable Wayland
   services.xserver.displayManager.gdm.wayland = true;
@@ -22,6 +20,9 @@
 
   # Force X11 for GNOME session
   #services.displayManager.defaultSession = "gnome-xorg";
+  
+  # Force Hyprland for GNOME session
+  services.displayManager.defaultSession = "Hyprland";
 
   # GNOME programs and utilities
   environment.systemPackages = with pkgs; [
