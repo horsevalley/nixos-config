@@ -28,6 +28,7 @@
     # swww # wallpaper daemon
     unclutter # hides mouse when idle 
     mnemosyne # spaced repetiton software 
+    xdg-desktop-portal-hyprland
   ];
 
   # Enable XDG portal with Hyprland support
