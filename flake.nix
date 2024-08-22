@@ -28,6 +28,7 @@
           ./modules/system.nix
           ./modules/users.nix
           ./modules/variables.nix
+          ./modules/pcmanfm.nix
         ];
       };
     };

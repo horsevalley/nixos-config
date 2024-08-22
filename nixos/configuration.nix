@@ -27,6 +27,7 @@
       ./modules/system.nix
       ./modules/users.nix
       ./modules/variables.nix
+      ./modules/pcmanfm.nix
     ];
 
   # This value determines the NixOS release from which the default
