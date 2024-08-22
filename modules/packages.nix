@@ -98,8 +98,8 @@
     lf
     dolphin
     pcmanfm
-    xfce.thunar
-    xfce.thunar-volman
+    # xfce.thunar
+    # xfce.thunar-volman
 
     # Browsers
     qutebrowser
