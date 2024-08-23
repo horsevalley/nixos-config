@@ -17,7 +17,6 @@
 
   # Set default session to hyprland
   services.displayManager.defaultSession = "hyprland";
-  services.xserver.windowManager.hyprland.updateSessionEnvironment = true;
 
   # Hyprland specific packages
   environment.systemPackages = with pkgs; [
