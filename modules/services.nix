@@ -5,7 +5,10 @@
   services.printing.enable = true; 
 
   # Enable the OpenSSH daemon.
-   services.openssh.enable = true;
+  services.openssh.enable = true;
+
+  # Enable swww wallpaper daemon
+  services.swww.enable = true;
 
   # Enable the Syncthing service
   services.syncthing = {
