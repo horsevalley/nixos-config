@@ -37,6 +37,7 @@
     gnome-desktop
     gnome-extension-manager
     polkit_gnome
+    gnome.dconf-editor
 
   ];
 

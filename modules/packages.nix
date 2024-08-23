@@ -8,23 +8,18 @@
     wget
     curl
     git
-    inkscape
-    gimp
-    syncthing 
-    insync
     newsboat
     home-manager
     rofi
     yt-dlp
     nvtopPackages.full
-    inxi 
-    glxinfo 
     signal-desktop 
     libnotify
     libvirt
     slock
     sdcv # console version of stardict
     bc # basic calculator 
+    unclutter # hides mouse when idle 
     arandr  
 
     # Wayland-specific packages
@@ -33,14 +28,23 @@
     jq          # Not Wayland-specific, but needed for some Waybar modules
     grim        # For screenshots (optional)
     slurp       # For area selection (optional)
+    wofi
+    wofi-pass
 
     # Aesthetic sysinfo
     fastfetch 
     neofetch 
+    inxi 
+    glxinfo 
 
     # Productivity
     obsidian
     libreoffice
+    mnemosyne # spaced repetiton software 
+
+    # File sync
+    syncthing 
+    insync
 
     # Linux utilities
     fzf
@@ -82,6 +86,12 @@
     mpv
     mpd
     mpc-cli
+    ffmpeg
+
+    # Photo/image 
+    gimp
+    inkscape
+    imagemagick
 
     # Viewers
     zathura 
@@ -135,7 +145,6 @@
     passExtensions.pass-otp
     pinentry-curses
     gpgme
-    kdePackages.polkit-qt-1
 
     # System monitoring 
     htop 

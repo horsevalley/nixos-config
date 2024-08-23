@@ -13,10 +13,9 @@
   environment.systemPackages = with pkgs; [
     hyprland
     kdePackages.polkit-qt-1
+    polkit_gnome
     waybar
     dunst
-    wofi
-    wofi-pass
     grim
     slurp
     # ulauncher
@@ -26,9 +25,8 @@
     # mako
     # swaynotificationcenter
     # swww # wallpaper daemon
-    unclutter # hides mouse when idle 
-    mnemosyne # spaced repetiton software 
     xdg-desktop-portal-hyprland
+
   ];
 
   # Enable XDG portal with Hyprland support
