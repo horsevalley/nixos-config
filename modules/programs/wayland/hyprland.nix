@@ -36,7 +36,6 @@
     rofi-wayland
     swww # Simple Wayland Wallpaper Watcher
     
-
   # Enable XDG portal with Hyprland support
   xdg.portal = {
     enable = true;
