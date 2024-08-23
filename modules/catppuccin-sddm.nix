@@ -1,4 +1,4 @@
-{ config, pkgs, lib, stdenv, fetchFromGitHub }:
+{ config, lib, stdenv, fetchFromGitHub }:
 
 stdenv.mkDerivation rec {
   pname = "catppuccin-sddm";
