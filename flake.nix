@@ -30,7 +30,7 @@
           ./modules/users.nix
           ./modules/variables.nix
           ./modules/pcmanfm.nix
-          # ./modules/catppuccin-sddm.nix
+          ./modules/catppuccin-sddm.nix
         ];
       };
     };
