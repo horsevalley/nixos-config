@@ -2,7 +2,7 @@
 
 {
 
-  programs.waybar = {
+  programs.wayland.waybar = {
   enable = true;
   systemd.enable = true;
     config = {
