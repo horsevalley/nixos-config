@@ -24,6 +24,7 @@
     # greetd.tuigreet
     plymouth
     catppuccin-plymouth
+    catppuccin-sddm
 
     # Wayland-specific packages
     wl-clipboard
