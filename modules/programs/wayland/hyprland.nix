@@ -40,7 +40,7 @@
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
       font = "Noto Sans";
-      fontSize = 16;
+      fontSize = "16";
       background = ./wallpaper.png;
       loginBackground = true;
     })
