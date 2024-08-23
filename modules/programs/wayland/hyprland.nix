@@ -36,15 +36,6 @@
     rofi-wayland
     swww # Simple Wayland Wallpaper Watcher
     
-    pkgs.catppuccin-sddm.override {
-    flavor = "mocha";
-    font  = "Noto Sans";
-    fontSize = "9";
-    # background = "${./background/}";
-    # CustomBackground = false; # when true it will read from backgrounds/ dir
-    loginBackground = true;
-    ClockEnabled = true;
-  }
 
   # Enable XDG portal with Hyprland support
   xdg.portal = {
