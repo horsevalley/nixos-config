@@ -20,7 +20,7 @@
   security.wrappers.slock = {
     owner = "root";
     group = "root";
-    source = "${pkgs.slock}nix/store/rlhf18hnaik6nhiq1i1y51bj386jybm9-system-path/bin/slock";
+    source = "${pkgs.slock}";
     capabilities = "cap_ipc_lock+ep";
   };
 
