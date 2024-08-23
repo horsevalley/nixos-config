@@ -8,7 +8,7 @@
   settings = [{
 
   {
-  "layer": "bottom",
+  "layer": "top",
   "height": 30,
   "modules-right": [
     "network",
