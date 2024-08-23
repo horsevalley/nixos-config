@@ -37,16 +37,17 @@
     xdg-desktop-portal-wlr
 
     catppuccin-sddm
-    pkgs.catppuccin-sddm.override {
+    catppuccin-sddm.override {
     flavor = "mocha";
     font  = "Noto Sans";
     fontSize = "16";
     clockEnabled = true;
     background = "${./backgrounds/Mountain_dark.png}";
     loginBackground = true;
-    CustomBackground = true;
-  }
-  ];
+    customBackground = true;
+    }
+
+   ];
     
   # Enable XDG portal with Hyprland support
   xdg.portal = {
