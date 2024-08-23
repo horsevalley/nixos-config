@@ -3,5 +3,10 @@
 {
   programs.waybar = {
     enable = true;
-  };
+
+    (pkgs.waybar.overrideAttrs (oldAttrs: {
+       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      })
+    )
+
 }

@@ -14,6 +14,11 @@
     hyprland
     kdePackages.polkit-kde-agent-1
     waybar
+        (waybar.overrideAttrs (oldAttrs: {
+       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      })
+    )
+
     dunst
     grim
     slurp
