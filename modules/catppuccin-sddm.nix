@@ -1,9 +1,10 @@
 { config, lib, pkgs, ... }:
 
+{
 
   stdenv.mkDerivation = {
-  pname = "catppuccin-sddm";
-  version = "0.1.0";
+    pname = "catppuccin-sddm";
+    version = "0.1.0";
 
   src = fetchFromGitHub {
     owner = "catppuccin";
@@ -22,5 +23,6 @@
     homepage = "https://github.com/catppuccin/sddm";
     license = licenses.mit;
     platforms = platforms.all;
+  };
   };
 }
