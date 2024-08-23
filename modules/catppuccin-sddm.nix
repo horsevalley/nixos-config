@@ -2,7 +2,7 @@
 
 {
 
-  stdenv.mkDerivation = {
+  pkgs.stdenv.mkDerivation = {
     pname = "catppuccin-sddm";
     version = "0.1.0";
 
