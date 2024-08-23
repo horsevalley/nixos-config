@@ -4,22 +4,14 @@
   # Enable CUPS to print documents
   services.printing.enable = true; 
 
+  # Enable dbus
+  services.dbus.enable = true;
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   
   # Disable waiting for online services before boot
   systemd.services.NetworkManager-wait-online.enable = false;
-
-  # Enable tuigreet instead of default greeter 
-  # services.greetd = {
-  #   enable = true;
-  #   settings = {
-  #     default_session = {
-  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-  #       user = "greeter";
-  #     };
-  #   };
-  # };
 
   # Enable Plymouth as greeter
   boot.plymouth = {

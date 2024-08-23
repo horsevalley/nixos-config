@@ -2,6 +2,9 @@
 
 {
   # Security
+  # Enable polkit
+  security.polkit.enable = true;
+
   # Configure PAM
   security.pam.services = {
     login.gnupg = {

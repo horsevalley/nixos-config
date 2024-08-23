@@ -1,4 +1,3 @@
-
 { config, pkgs, ... }:
 
 {
@@ -6,7 +5,7 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-    systemd.setPath.enable = true;
+    # systemd.setPath.enable = true;
   };
 
   # Set SDDM as display manager
@@ -37,10 +36,12 @@
     rofi-wayland
     swww # Simple Wayland Wallpaper Watcher
     xdg-desktop-portal-hyprland
+    xdg-desktop-portal-wlr
     
   # Enable XDG portal with Hyprland support
   xdg.portal = {
     enable = true;
+    wlr.enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
     config.common.default = "*";
   };
