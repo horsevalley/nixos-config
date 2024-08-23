@@ -13,18 +13,12 @@
   environment.systemPackages = with pkgs; [
     hyprland
     kdePackages.polkit-kde-agent-1
-    polkit_gnome
     waybar
     dunst
     grim
     slurp
-    # ulauncher
-    # rofi-wayland
     hyprpaper
     wl-clipboard
-    # mako
-    # swaynotificationcenter
-    # swww # wallpaper daemon
     xdg-desktop-portal-hyprland
     nwg-look # GTK3 settings editor
 
@@ -44,7 +38,7 @@
   programs.waybar.enable = true;
 
   # Enable iio-hyprland
-  # programs.iio-hyprland.enable = true;
+  # programs.iio-hyprland.enable = true; # only works on unstable channel
 
   # Enable Hypr idle
   services.hypridle.enable = true;
