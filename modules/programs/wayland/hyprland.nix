@@ -25,6 +25,7 @@
     hyprpaper
     wl-clipboard
     xdg-desktop-portal-hyprland
+    xdg-desktop-portal-gtk
     nwg-look # GTK3 settings editor
 
   ];
@@ -32,7 +33,7 @@
   # Enable XDG portal with Hyprland support
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk ];
     config.common.default = "*";
   };
 
