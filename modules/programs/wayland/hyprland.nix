@@ -13,7 +13,6 @@
       enable = true;
       theme = "catppuccin-mocha";
       package = pkgs.kdePackages.sddm;
-      fontSize = "16";
   };
 
   # Set default session to hyprland
@@ -41,7 +40,7 @@
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
       font = "Noto Sans";
-      fontSize = "16";
+      fontSize = 16;
       background = ../../backgrounds/Mountain_dark.png;
       loginBackground = false;
     })
