@@ -46,7 +46,6 @@
       fontSize = "16";
       background = "${./modules/backgrounds/Mountain_dark.png}";
       loginBackground = true;
-      clockEnabled = true;
     })
 
   ];
