@@ -1,15 +1,15 @@
 { lib, stdenv, fetchFromGitHub }:
 
 {
-  stdenv.mkDerivation rec {
+  stdenv.mkDerivation {
   pname = "catppuccin-sddm";
   version = "0.1.0";
 
   src = fetchFromGitHub {
     owner = "catppuccin";
     repo = "sddm";
-    rev = "7fc67d1027cdb7f4d833c5d23a8c34a0029b0661"; # This is the latest commit as of now
-    sha256 = "sha256-SjYwyUvvx/ageqVH5MmYmHNRKNvvnF3DYMJ/f2/L+Go="; # Updated hash
+    rev = "7fc67d1027cdb7f4d833c5d23a8c34a0029b0661";
+    sha256 = "sha256-SjYwyUvvx/ageqVH5MmYmHNRKNvvnF3DYMJ/f2/L+Go=";
   };
 
   installPhase = ''
