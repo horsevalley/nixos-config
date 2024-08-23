@@ -4,12 +4,7 @@
 
   # Enable Waybar
   programs.waybar = {
-  enable = true;
-  };
-
-  services.waybar = {
     enable = true;
-    # Point to the Waybar config file
     package = pkgs.waybar;
     extraConfig = ''
       # The contents of your Waybar config file
