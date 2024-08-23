@@ -37,7 +37,7 @@
     xdg-desktop-portal-wlr
 
     catppuccin-sddm
-    pkgs.kdePackages.sddm.override {
+    kdePackages.sddm.override {
     flavor = "mocha";
     font  = "Noto Sans";
     fontSize = "16";
