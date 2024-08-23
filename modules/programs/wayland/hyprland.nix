@@ -13,6 +13,7 @@
       enable = true;
       theme = "catppuccin-mocha";
       package = pkgs.kdePackages.sddm;
+      fontSize = "16";
   };
 
   # Set default session to hyprland
