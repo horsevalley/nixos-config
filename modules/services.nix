@@ -25,7 +25,7 @@
   boot.plymouth = {
     enable = true;
     theme = "catppuccin-mocha";
-    themePackages = [ pkgs.catppuccin-plymouth  ];
+    themePackages = [ pkgs.plymouth-theme-catppuccin  ];
   };
 
   # Enable the Syncthing service
