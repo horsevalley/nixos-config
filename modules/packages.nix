@@ -21,21 +21,6 @@
     unclutter # hides mouse when idle 
     arandr  
     dmenu
-    # greetd.tuigreet
-    plymouth
-    catppuccin-plymouth
-    catppuccin-sddm
-
-    # Wayland-specific packages
-    wl-clipboard
-    waybar
-    jq          # Not Wayland-specific, but needed for some Waybar modules
-    grim        # For screenshots (optional)
-    slurp       # For area selection (optional)
-    # wofi
-    # wofi-pass
-    rofi-wayland
-    swww # Simple Wayland Wallpaper Watcher
 
     # Aesthetic sysinfo
     fastfetch 

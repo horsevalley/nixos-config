@@ -9,24 +9,31 @@
     systemd.setPath.enable = true;
   };
 
+  # Set SDDM as display manager
+   services.displayManager.sddm = {
+      enable = true;
+      theme = "catppuccin-sddm";
+  };
+
+  # Set default session to hyprland
+  services.displayManager.defaultSession = "hyprland";
+
   # Hyprland specific packages
   environment.systemPackages = with pkgs; [
     hyprland
     kdePackages.polkit-kde-agent-1
-    waybar
-        (waybar.overrideAttrs (oldAttrs: {
-       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      })
-    )
-
-    dunst
-    grim
-    slurp
     hyprpaper
+    hyprlock
     wl-clipboard
-    # xdg-desktop-portal-hyprland
-    # xdg-desktop-portal-gtk
     nwg-look # GTK3 settings editor
+    catppuccin-sddm
+    wl-clipboard
+    waybar
+    jq          # Not Wayland-specific, but needed for some Waybar modules
+    grim        # For screenshots 
+    slurp       # For area selection 
+    rofi-wayland
+    swww # Simple Wayland Wallpaper Watcher
 
   ];
 

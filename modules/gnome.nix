@@ -10,14 +10,6 @@
     desktopManager.gnome.enable = false;
     };
 
-  services.displayManager.sddm = {
-      enable = true;
-      theme = "catppuccin";
-  };
-
-  # Set default session to hyprland
-  services.displayManager.defaultSession = "hyprland";
-
   # GNOME programs and utilities
   environment.systemPackages = with pkgs; [
     gnome.gnome-terminal
@@ -31,13 +23,6 @@
     gnome-desktop
     gnome-extension-manager
     gnome.dconf-editor
-
-  # Exclude GNOME packages that are Wayland-specific
-  #environment.gnome.excludePackages = with pkgs.gnome; [
-  #mutter
-  #gnome-shell
-  # ];
-
 
   ];
 
