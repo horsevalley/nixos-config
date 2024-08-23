@@ -36,7 +36,7 @@
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-wlr
 
-    # catppuccin-sddm
+    catppuccin-sddm
     catppuccin-sddm.override {
     flavor = "mocha";
     font  = "Noto Sans";
