@@ -3,20 +3,22 @@
 
 {
   # Enable X11
-  services.xserver.enable = true;
+  services.xserver = {
+    enable = true;
+    displayManager.gdm.enable = true;
+    displayManager.gdm.wayland = true;
+    desktopManager.gnome.enable = true;
+    
+  };
+
+  # services.xserver.enable = true;
 
   # Enable GNOME Desktop Environment
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
   # Disable Wayland
-  services.xserver.displayManager.gdm.wayland = true;
-
-  # Exclude GNOME packages that are Wayland-specific
-  #environment.gnome.excludePackages = with pkgs.gnome; [
-  #mutter
-  #gnome-shell
-  # ];
+  # services.xserver.displayManager.gdm.wayland = true;
 
   # Force X11 for GNOME session
   #services.displayManager.defaultSession = "gnome-xorg";
@@ -36,8 +38,14 @@
     pkgs.gnome.gnome-keyring
     gnome-desktop
     gnome-extension-manager
-    # polkit_gnome
     gnome.dconf-editor
+
+  # Exclude GNOME packages that are Wayland-specific
+  #environment.gnome.excludePackages = with pkgs.gnome; [
+  #mutter
+  #gnome-shell
+  # ];
+
 
   ];
 
