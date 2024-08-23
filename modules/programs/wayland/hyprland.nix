@@ -26,7 +26,6 @@
     hyprlock
     wl-clipboard
     nwg-look # GTK3 settings editor
-    catppuccin-sddm
     wl-clipboard
     waybar
     jq          # Not Wayland-specific, but needed for some Waybar modules
@@ -36,6 +35,17 @@
     swww # Simple Wayland Wallpaper Watcher
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-wlr
+
+    catppuccin-sddm
+    pkgs.catppuccin-sddm.override {
+    flavor = "mocha";
+    font  = "Noto Sans";
+    fontSize = "16";
+    clockEnabled = true;
+    background = "${./backgrounds/Mountain_dark.png}";
+    loginBackground = true;
+    CustomBackground = true;
+  }
   ];
     
   # Enable XDG portal with Hyprland support
@@ -48,6 +58,9 @@
 
   # Enable hyprlock
   programs.hyprlock.enable = true;
+
+  # Enable hyprpaper
+  programs.hyprpaper.enable = true;
 
   # Enable waybar
   programs.waybar.enable = true;
