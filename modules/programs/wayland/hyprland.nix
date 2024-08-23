@@ -41,7 +41,7 @@
       flavor = "mocha";
       font = "Noto Sans";
       fontSize = "16";
-      background = "${../../backgrounds/Mountain_dark.png}";
+      background = "${./modules/backgrounds/Mountain_dark.png}";
       loginBackground = false;
     })
 
