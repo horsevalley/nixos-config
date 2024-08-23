@@ -40,8 +40,8 @@
     flavor = "mocha";
     font  = "Noto Sans";
     fontSize = "9";
-    background = "${./background/}";
-    CustomBackground = false; # when true it will read from backgrounds/ dir
+    # background = "${./background/}";
+    # CustomBackground = false; # when true it will read from backgrounds/ dir
     loginBackground = true;
     ClockEnabled = true;
 
