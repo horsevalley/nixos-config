@@ -2,10 +2,10 @@
 
 {
 
-  programs.wayland.waybar = {
+  programs.waybar = {
   enable = true;
   systemd.enable = true;
-    config = {
+    settings = {
       layer = "bottom";
       height = 30;
       modulesRight = [
