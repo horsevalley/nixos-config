@@ -21,6 +21,7 @@
     bc # basic calculator 
     unclutter # hides mouse when idle 
     arandr  
+    dmenu
 
     # Wayland-specific packages
     wl-clipboard
