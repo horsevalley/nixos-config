@@ -31,6 +31,7 @@
     # wofi
     # wofi-pass
     rofi-wayland
+    swww # wallpaper daemon
 
     # Aesthetic sysinfo
     fastfetch 
