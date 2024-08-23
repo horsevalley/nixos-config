@@ -2,14 +2,11 @@
 
 {
 
+  # Enable Waybar
   programs.waybar = {
   enable = true;
   };
 
-  { config, pkgs, ... }:
-
-
-  # Enable Waybar
   services.waybar = {
     enable = true;
     # Point to the Waybar config file
