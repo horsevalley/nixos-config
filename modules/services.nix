@@ -27,7 +27,7 @@
     theme = "catppuccin";
     themePackages = [
       (pkgs.catppuccin-plymouth.override {
-        flavor = "mocha"; # You can choose: latte, frappe, macchiato, mocha
+        variant = "mocha"; # You can choose: latte, frappe, macchiato, mocha
         accent = "blue"; # Choose your preferred accent color
       })
     ];
