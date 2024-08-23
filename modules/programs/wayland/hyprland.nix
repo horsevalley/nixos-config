@@ -12,7 +12,7 @@
   # Hyprland specific packages
   environment.systemPackages = with pkgs; [
     hyprland
-    kdePackages.polkit-qt-1
+    kdePackages.polkit-kde-agent-1
     polkit_gnome
     waybar
     dunst

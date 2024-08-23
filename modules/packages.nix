@@ -146,6 +146,7 @@
     passExtensions.pass-otp
     pinentry-curses
     gpgme
+    kdePackages.polkit-kde-agent-1
 
     # System monitoring 
     htop 
