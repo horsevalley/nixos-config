@@ -41,7 +41,7 @@
       flavor = "mocha";
       font = "Noto Sans";
       fontSize = "16";
-      background = "${./modules/backgrounds/Mountain_dark.png}";
+      background = "~/repos/github/wallpapers/JaKooLit/Dynamic-Wallpapers/Dark/Mountain_dark.png";
       loginBackground = false;
     })
 
