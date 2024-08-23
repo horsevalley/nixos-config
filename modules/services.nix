@@ -24,8 +24,7 @@
   # Enable Plymouth as greeter
   boot.plymouth = {
     enable = true;
-    theme = "catppuccin-mocha";
-    themePackages = [ pkgs.plymouth-theme-catppuccin  ];
+    theme = "spinner";
   };
 
   # Enable the Syncthing service
