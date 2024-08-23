@@ -11,20 +11,20 @@
   systemd.services.NetworkManager-wait-online.enable = false;
 
   # Enable tuigreet instead of default greeter 
-#   services.greetd = {
-#   enable = true;
-#   settings = {
-#     default_session = {
-#       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-#       user = "greeter";
-#     };
-#   };
-# };
+  # services.greetd = {
+  #   enable = true;
+  #   settings = {
+  #     default_session = {
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+  #       user = "greeter";
+  #     };
+  #   };
+  # };
 
   # Enable Plymouth as greeter
   boot.plymouth = {
     enable = true;
-    theme = "catppuccin";
+    theme = "catppuccin-mocha";
     themePackages = [ pkgs.catppuccin-plymouth  ];
   };
 

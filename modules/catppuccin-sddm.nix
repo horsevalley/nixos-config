@@ -1,6 +1,7 @@
 { lib, stdenv, fetchFromGitHub }:
 
-stdenv.mkDerivation rec {
+{
+  stdenv.mkDerivation rec {
   pname = "catppuccin-sddm";
   version = "0.1.0";
 
