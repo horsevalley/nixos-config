@@ -44,8 +44,8 @@
     # CustomBackground = false; # when true it will read from backgrounds/ dir
     loginBackground = true;
     ClockEnabled = true;
+  }
 
-  ];
 
   # Enable XDG portal with Hyprland support
   xdg.portal = {
