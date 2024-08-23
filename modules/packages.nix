@@ -21,6 +21,7 @@
     unclutter # hides mouse when idle 
     arandr  
     dmenu
+    greetd.tuigreet
 
     # Wayland-specific packages
     wl-clipboard

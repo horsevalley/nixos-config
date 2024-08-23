@@ -7,6 +7,17 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  # Enable tuigreet instead of default greeter 
+  services.greetd = {
+  enable = true;
+  settings = {
+    default_session = {
+      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+      user = "greeter";
+    };
+  };
+};
+
   # Enable the Syncthing service
   services.syncthing = {
     enable = true;
