@@ -13,7 +13,7 @@
    services.displayManager.sddm = {
       enable = true;
       theme = "catppuccin-mocha";
-      package = pkgs.kdePackages.sddm;
+      # package = pkgs.kdePackages.sddm;
   };
 
   # Set default session to hyprland
@@ -45,7 +45,6 @@
     loginBackground = true;
     ClockEnabled = true;
   }
-
 
   # Enable XDG portal with Hyprland support
   xdg.portal = {
