@@ -11,7 +11,10 @@
   # Set SDDM as display manager
    services.displayManager.sddm = {
       enable = true;
-      theme = "catppuccin-mocha";
+      # theme = "catppuccin-mocha";
+      theme = "elarun";
+      # theme = "maldives";
+      # theme = "maya";
       package = pkgs.kdePackages.sddm;
   };
 
@@ -41,7 +44,6 @@
       flavor = "mocha";
       font = "Noto Sans";
       fontSize = "16";
-      customBackground = true;
       background = "${./modules/backgrounds/Mountain_dark.png}";
       loginBackground = true;
       clockEnabled = true;
