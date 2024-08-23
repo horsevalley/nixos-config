@@ -6,6 +6,9 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  
+  # Disable waiting for online services before boot
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   # Enable tuigreet instead of default greeter 
   services.greetd = {
