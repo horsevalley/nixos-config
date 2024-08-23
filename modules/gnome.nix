@@ -2,7 +2,7 @@
 { config, pkgs, ... }:
 
 {
-  # Enable X11
+  # Enable X11, gdm and GNOME
   services.xserver = {
     enable = true;
     displayManager.gdm.enable = true;
@@ -11,31 +11,19 @@
     
   };
 
-  # services.xserver.enable = true;
-
-  # Enable GNOME Desktop Environment
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-
-  # Disable Wayland
-  # services.xserver.displayManager.gdm.wayland = true;
-
-  # Force X11 for GNOME session
-  #services.displayManager.defaultSession = "gnome-xorg";
-  
-  # Force Hyprland for GNOME session
+  # Set default session to hyprland
   services.displayManager.defaultSession = "hyprland";
 
   # GNOME programs and utilities
   environment.systemPackages = with pkgs; [
-    pkgs.gnome.gnome-terminal
-    pkgs.gnome.gnome-tweaks
-    pkgs.gnome.gnome-software
-    pkgs.gnome.gnome-applets
-    pkgs.gnome.gnome-common
-    pkgs.gnome.gnome-session
-    pkgs.gnome.gnome-session-ctl
-    pkgs.gnome.gnome-keyring
+    gnome.gnome-terminal
+    gnome.gnome-tweaks
+    gnome.gnome-software
+    gnome.gnome-applets
+    gnome.gnome-common
+    gnome.gnome-session
+    gnome.gnome-session-ctl
+    gnome.gnome-keyring
     gnome-desktop
     gnome-extension-manager
     gnome.dconf-editor
