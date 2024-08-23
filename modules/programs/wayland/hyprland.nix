@@ -26,6 +26,7 @@
     # swaynotificationcenter
     # swww # wallpaper daemon
     xdg-desktop-portal-hyprland
+    nwg-look # GTK3 settings editor
 
   ];
 
