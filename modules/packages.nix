@@ -10,7 +10,6 @@
     git
     newsboat
     home-manager
-    rofi
     yt-dlp
     nvtopPackages.full
     signal-desktop 
@@ -29,8 +28,9 @@
     jq          # Not Wayland-specific, but needed for some Waybar modules
     grim        # For screenshots (optional)
     slurp       # For area selection (optional)
-    wofi
-    wofi-pass
+    # wofi
+    # wofi-pass
+    rofi-wayland
 
     # Aesthetic sysinfo
     fastfetch 
