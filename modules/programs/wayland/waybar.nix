@@ -5,7 +5,7 @@
   programs.waybar = {
   enable = true;
   systemd.enable = true;
-    settings = {
+    config = {
       layer = "bottom";
       height = 30;
       modulesRight = [
