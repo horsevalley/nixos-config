@@ -42,7 +42,7 @@
       font = "Noto Sans";
       fontSize = "16";
       background = "~/repos/github/wallpapers/JaKooLit/Dynamic-Wallpapers/Dark/Mountain_dark.png";
-      loginBackground = false;
+      loginBackground = true;
     })
 
   ];
