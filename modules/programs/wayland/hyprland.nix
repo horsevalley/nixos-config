@@ -18,6 +18,7 @@
 
   # Set default session to hyprland
   services.displayManager.defaultSession = "hyprland";
+  services.xserver.windowManager.hyprland.updateSessionEnvironment = true;
 
   # Hyprland specific packages
   environment.systemPackages = with pkgs; [
@@ -35,6 +36,7 @@
     slurp       # For area selection 
     rofi-wayland
     swww # Simple Wayland Wallpaper Watcher
+    xdg-desktop-portal-hyprland
     
   # Enable XDG portal with Hyprland support
   xdg.portal = {
