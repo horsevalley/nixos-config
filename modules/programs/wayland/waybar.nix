@@ -7,7 +7,6 @@
   systemd.enable = true;
   settings = [{
 
-  {
   "layer": "top",
   "height": 30,
   "modules-right": [
