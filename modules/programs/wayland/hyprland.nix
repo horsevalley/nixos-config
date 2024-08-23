@@ -5,14 +5,14 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-    # systemd.setPath.enable = true;
+    systemd.setPath.enable = true;
   };
 
   # Set SDDM as display manager
    services.displayManager.sddm = {
       enable = true;
       theme = "catppuccin-mocha";
-      # package = pkgs.kdePackages.sddm;
+      package = pkgs.kdePackages.sddm;
   };
 
   # Set default session to hyprland
@@ -37,6 +37,7 @@
     swww # Simple Wayland Wallpaper Watcher
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-wlr
+  ];
     
   # Enable XDG portal with Hyprland support
   xdg.portal = {
