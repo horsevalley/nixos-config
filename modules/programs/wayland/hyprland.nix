@@ -37,13 +37,13 @@
     xdg-desktop-portal-wlr
 
     catppuccin-sddm
-    catppuccin.sddm.override {
-    flavor = "mocha";
-    font  = "Noto Sans";
-    fontSize = "16";
-    # background = "${./wallpaper.png}";
-    # loginBackground = true;
-    }
+    (pkgs.catppuccin-sddm.override {
+      flavor = "mocha";
+      font = "Noto Sans";
+      fontSize = 16;
+      background = ./wallpaper.png;
+      loginBackground = true;
+    })
 
   ];
     
