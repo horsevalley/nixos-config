@@ -5,9 +5,13 @@
   # Enable X11, gdm and GNOME
   services.xserver = {
     enable = true;
-    displayManager.gdm.enable = true;
-    displayManager.gdm.wayland = true;
-    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = false;
+    displayManager.gdm.wayland = false;
+    desktopManager.gnome.enable = false;
+    displayManager.sddm = {
+      enable = true;
+      theme = "catppuccin";
+    };
     
   };
 
