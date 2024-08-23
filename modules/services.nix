@@ -25,12 +25,7 @@
   boot.plymouth = {
     enable = true;
     theme = "catppuccin";
-    themePackages = [
-      (pkgs.catppuccin-plymouth.override {
-        variant = "mocha"; # You can choose: latte, frappe, macchiato, mocha
-        accent = "blue"; # Choose your preferred accent color
-      })
-    ];
+    themePackages = [ pkgs.catppuccin-plymouth  ];
   };
 
   # Enable the Syncthing service
