@@ -31,7 +31,7 @@
     # wofi
     # wofi-pass
     rofi-wayland
-    swww # wallpaper daemon
+    swww # Simple Wayland Wallpaper Watcher
 
     # Aesthetic sysinfo
     fastfetch 
