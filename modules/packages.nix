@@ -52,7 +52,6 @@
     ripgrep
     stow
     xclip
-    jq
     ncdu
     tree
     tldr

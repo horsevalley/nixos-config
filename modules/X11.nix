@@ -6,5 +6,6 @@
   environment.systemPackages = with pkgs; [
     xorg.xorgserver
     xorg.xinit
+    wl-clipboard-x11
   ];
 }
