@@ -48,6 +48,9 @@
     syncthing 
     insync
 
+    # Networking and utilities
+    networkmanagerapplet
+
     # Linux utilities
     fzf
     bat
