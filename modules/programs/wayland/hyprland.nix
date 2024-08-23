@@ -42,7 +42,7 @@
       font = "Noto Sans";
       fontSize = "16";
       background = ../../backgrounds/Mountain_dark.png;
-      customBackground = true;
+      CustomBackground = true;
       loginBackground = true;
     })
 
