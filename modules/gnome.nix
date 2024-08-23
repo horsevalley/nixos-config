@@ -8,11 +8,11 @@
     displayManager.gdm.enable = false;
     displayManager.gdm.wayland = false;
     desktopManager.gnome.enable = false;
-    displayManager.sddm = {
+    };
+
+  services.displayManager.sddm = {
       enable = true;
       theme = "catppuccin";
-    };
-    
   };
 
   # Set default session to hyprland
