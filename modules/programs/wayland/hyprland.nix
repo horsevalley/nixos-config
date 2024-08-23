@@ -59,9 +59,6 @@
   # Enable hyprlock
   programs.hyprlock.enable = true;
 
-  # Enable hyprpaper
-  programs.hyprpaper.enable = true;
-
   # Enable waybar
   programs.waybar.enable = true;
 
