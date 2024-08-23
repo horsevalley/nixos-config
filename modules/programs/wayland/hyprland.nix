@@ -11,8 +11,8 @@
   # Set SDDM as display manager
    services.displayManager.sddm = {
       enable = true;
-      # theme = "catppuccin-mocha";
-      theme = "elarun";
+      theme = "catppuccin-mocha";
+      # theme = "elarun";
       # theme = "maldives";
       # theme = "maya";
       package = pkgs.kdePackages.sddm;
