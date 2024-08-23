@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }:
 
-{
 
   stdenv.mkDerivation = {
   pname = "catppuccin-sddm";
