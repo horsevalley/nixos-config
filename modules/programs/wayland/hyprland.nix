@@ -26,7 +26,8 @@
     hyprland
     kdePackages.polkit-kde-agent-1
     hyprpaper
-    hyprlock
+    # hyprlock
+    swaylock
     wl-clipboard
     nwg-look # GTK3 settings editor
     wl-clipboard
