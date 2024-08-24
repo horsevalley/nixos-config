@@ -11,7 +11,6 @@
     newsboat
     home-manager
     yt-dlp
-    nvtopPackages.full
     signal-desktop 
     libnotify
     libvirt
@@ -27,6 +26,7 @@
     neofetch 
     inxi 
     glxinfo 
+    nvtopPackages.full
 
     # Productivity
     obsidian
