@@ -77,6 +77,7 @@
       "/run/current-system/sw/bin"
       "$HOME/.local/bin"
       "$PATH"
+    ];
   };
 
 }
