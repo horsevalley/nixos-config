@@ -22,6 +22,8 @@
     arandr  
     dmenu
     intelmetool # used to optimize system settings for intel chipsets
+    swaylock
+    swaylock-effects
 
     # Aesthetic sysinfo
     fastfetch 
