@@ -2,10 +2,14 @@
 
 let
   mediaplayer = pkgs.writeShellScriptBin "mediaplayer" (builtins.readFile ./mediaplayer.sh);
-  
-  waybar-config = pkgs.writeTextFile {
-    name = "waybar-config";
-    text = builtins.toJSON [{
+in
+{
+  programs.waybar = {
+    enable = true;
+    systemd.enable = true;
+    style = ./waybar-style.css;
+
+    settings = [{
       layer = "top";
       position = "top";
       height = 30;
@@ -47,7 +51,7 @@ let
 
       "clock" = {
         tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-        format-alt = "{:%a-%d-%b %H:M}";
+        format-alt = "{:%Y-%m-%d}";
       };
 
       "cpu" = {
@@ -60,7 +64,7 @@ let
       };
 
       "temperature" = {
-        critical-threshold = 90;
+        critical-threshold = 80;
         format = "{temperatureC}°C {icon}";
         format-icons = ["" "" ""];
       };
@@ -108,7 +112,7 @@ let
           car = "";
           default = ["" "" ""];
         };
-        on-click = "pulsemixer";
+        on-click = "pavucontrol";
       };
 
       "custom/media" = {
@@ -139,18 +143,11 @@ let
       };
     }];
   };
-in
-{
 
-  systemd.user.services.waybar = {
-    description = "Waybar";
-    wantedBy = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.waybar}/bin/waybar -c ${waybar-config} -s ${./waybar-style.css}";
-      ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
-      Restart = "on-failure";
-      KillMode = "mixed";
-    };
-  };
+  environment.systemPackages = with pkgs; [
+    playerctl
+    mpc_cli
+    mediaplayer
+  ];
+
 }
