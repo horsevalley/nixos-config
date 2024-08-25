@@ -79,6 +79,7 @@
     pulsemixer 
     youtube-music
     ncmpcpp
+    playerctl
 
     # Video
     mpv
