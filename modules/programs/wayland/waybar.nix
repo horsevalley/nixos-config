@@ -2,14 +2,10 @@
 
 let
   mediaplayer = pkgs.writeShellScriptBin "mediaplayer" (builtins.readFile ./mediaplayer.sh);
-in
-{
-  programs.waybar = {
-    enable = true;
-    systemd.enable = true;
-    style = ./waybar-style.css;
-
-    settings = [{
+  
+  waybar-config = pkgs.writeTextFile {
+    name = "waybar-config";
+    text = builtins.toJSON [{
       layer = "top";
       position = "top";
       height = 30;
@@ -51,7 +47,7 @@ in
 
       "clock" = {
         tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-        format-alt = "{:%a %d %b %H:M}";
+        format-alt = "{:%a-%d-%b %H:M}";
       };
 
       "cpu" = {
@@ -122,7 +118,7 @@ in
         format-icons = {
           "youtube-music" = "";
           "ncmpcpp" = "";
-          "default" = "🎜";
+          default = "🎜";
         };
         escape = true;
         exec = "${mediaplayer}/bin/mediaplayer";
@@ -143,17 +139,18 @@ in
       };
     }];
   };
+in
+{
 
-  # Optional: If you want to ensure Waybar starts with your Hyprland session
-  # systemd.user.services.waybar = {
-  #   description = "Waybar";
-  #   wantedBy = [ "graphical-session.target" ];
-  #   partOf = [ "graphical-session.target" ];
-  #   serviceConfig = {
-  #     ExecStart = "${pkgs.waybar}/bin/waybar";
-  #     ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
-  #     Restart = "on-failure";
-  #     KillMode = "mixed";
-  #   };
-  # };
+  systemd.user.services.waybar = {
+    description = "Waybar";
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.waybar}/bin/waybar -c ${waybar-config} -s ${./waybar-style.css}";
+      ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
+      Restart = "on-failure";
+      KillMode = "mixed";
+    };
+  };
 }
