@@ -62,7 +62,7 @@
   programs.hyprlock.enable = true;
 
   # Enable waybar
-  programs.waybar.enable = true;
+  # programs.waybar.enable = true;
 
   # Enable iio-hyprland
   # programs.iio-hyprland.enable = true; # only works on unstable channel
