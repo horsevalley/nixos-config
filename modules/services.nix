@@ -44,4 +44,21 @@
     #};
   #};
 
+  # Enable hypridle and set options
+  services.hypridle = {
+    enable = true;
+    lockCmd = "swaylock"; # Command to lock the screen
+    beforeSleepCmd = "systemctl suspend"; # Command before system sleep
+    timeouts = [
+      {
+        timeout = 5;
+        command = "${pkgs.libnotify}/bin/notify-send 'Idle' 'System will sleep soon'";
+      }
+      {
+        timeout = 10;
+        command = "systemctl suspend";
+      }
+    ];
+  };
+
 }
