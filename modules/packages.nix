@@ -20,6 +20,7 @@
     unclutter # hides mouse when idle 
     arandr  
     dmenu
+    intelmetool # used to optimize system settings for intel chipsets
 
     # Aesthetic sysinfo
     fastfetch 
