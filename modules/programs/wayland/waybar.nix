@@ -14,6 +14,7 @@ in
     playerctl
     mpc-cli
     mediaplayer
+    pulsemixer  # Added pulsemixer to ensure it's available
   ];
 
   # Override the existing Waybar systemd service
@@ -21,7 +22,7 @@ in
     description = "Waybar as systemd service";
     wantedBy = [ "graphical-session.target" ];
     partOf = [ "graphical-session.target" ];
-    path = [ pkgs.bash mediaplayer ]; # Ensure mediaplayer is in PATH
+    path = [ pkgs.bash mediaplayer ];
     serviceConfig = {
       ExecStart = "${pkgs.waybar}/bin/waybar";
       ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
@@ -142,7 +143,7 @@ in
         default = "🎜";
       };
       escape = true;
-      exec = "mediaplayer"; # Use the script name directly
+      exec = "mediaplayer";
       interval = 1;
     };
     "idle_inhibitor" = {
@@ -162,8 +163,10 @@ in
   environment.etc."xdg/waybar/style.css".source = ./waybar-style.css;
 
   # Ensure the mediaplayer script is in the system PATH
-  environment.systemPackages = [ mediaplayer ];
   environment.sessionVariables = {
-    PATH = [ "${mediaplayer}/bin" ];
+    PATH = [ 
+      "${mediaplayer}/bin"
+      "$PATH"
+    ];
   };
 }
