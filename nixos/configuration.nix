@@ -12,7 +12,6 @@
       ./modules/X11.nix
       ./modules/gnome.nix
       ./modules/programs/wayland/hyprland.nix
-      ./modules/programs/wayland/waybar.nix
       ./modules/neovim.nix
       ./modules/fonts.nix
       ./modules/hardware/nvidia.nix
