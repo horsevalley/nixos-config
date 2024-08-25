@@ -8,6 +8,7 @@
     wget
     curl
     git
+    git-lfs
     newsboat
     home-manager
     yt-dlp

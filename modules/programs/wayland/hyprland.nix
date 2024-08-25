@@ -25,7 +25,6 @@
   environment.systemPackages = with pkgs; [
     hyprland
     kdePackages.polkit-kde-agent-1
-    hyprpaper
     wl-clipboard
     nwg-look # GTK3 settings editor
     wl-clipboard
@@ -37,7 +36,6 @@
     swww # Simple Wayland Wallpaper Watcher
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-wlr
-    # hyprlock
     swaylock
     swaylock-effects
 
