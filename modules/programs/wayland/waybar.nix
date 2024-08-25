@@ -10,8 +10,9 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    waybar
     playerctl
-    mpc_cli
+    mpc-cli
     mediaplayer
   ];
 
@@ -20,6 +21,7 @@ in
     description = "Waybar as systemd service";
     wantedBy = [ "graphical-session.target" ];
     partOf = [ "graphical-session.target" ];
+    path = [ pkgs.bash mediaplayer ]; # Ensure mediaplayer is in PATH
     serviceConfig = {
       ExecStart = "${pkgs.waybar}/bin/waybar";
       ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
@@ -52,11 +54,9 @@ in
       "tray"
       "clock"
     ];
-
     "hyprland/workspaces" = {
-      disable-scroll = true;
-      all-outputs = true;
       format = "{icon}";
+      on-click = "activate";
       format-icons = {
         "1" = "";
         "2" = "";
@@ -67,38 +67,33 @@ in
         "7" = "";
         "8" = "";
         "9" = "";
-        "0" = "";
+        "10" = "";
         urgent = "";
         focused = "";
         default = "";
       };
+      sort-by-number = true;
     };
-
     "clock" = {
       tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-      format-alt = "{:%a %d %b %H:M}";
+      format-alt = "{:%a %d %b %H:%M}";
     };
-
     "cpu" = {
       format = "{usage}% ";
       tooltip = false;
     };
-
     "memory" = {
       format = "{}% ";
     };
-
     "temperature" = {
       critical-threshold = 90;
       format = "{temperatureC}°C {icon}";
       format-icons = ["" "" ""];
     };
-
     "backlight" = {
       format = "{percent}% {icon}";
       format-icons = ["" ""];
     };
-
     "battery" = {
       states = {
         good = 95;
@@ -111,7 +106,6 @@ in
       format-alt = "{time} {icon}";
       format-icons = ["" "" "" "" ""];
     };
-
     "network" = {
       format-wifi = "{essid} ({signalStrength}%) ";
       format-ethernet = "{ipaddr}/{cidr} ";
@@ -120,7 +114,6 @@ in
       format-disconnected = "Disconnected ⚠";
       format-alt = "{ifname}: {ipaddr}/{cidr}";
     };
-
     "pulseaudio" = {
       format = "{volume}% {icon} {format_source}";
       format-bluetooth = "{volume}% {icon} {format_source}";
@@ -139,7 +132,6 @@ in
       };
       on-click = "pulsemixer";
     };
-
     "custom/media" = {
       format = "{icon} {}";
       return-type = "json";
@@ -150,10 +142,9 @@ in
         default = "🎜";
       };
       escape = true;
-      exec = "${mediaplayer}/bin/mediaplayer";
+      exec = "mediaplayer"; # Use the script name directly
       interval = 1;
     };
-
     "idle_inhibitor" = {
       format = "{icon}";
       format-icons = {
@@ -161,7 +152,6 @@ in
         deactivated = "";
       };
     };
-
     "tray" = {
       icon-size = 21;
       spacing = 10;
@@ -170,4 +160,10 @@ in
 
   # Add a custom style file for Waybar
   environment.etc."xdg/waybar/style.css".source = ./waybar-style.css;
+
+  # Ensure the mediaplayer script is in the system PATH
+  environment.systemPackages = [ mediaplayer ];
+  environment.sessionVariables = {
+    PATH = [ "${mediaplayer}/bin" ];
+  };
 }
