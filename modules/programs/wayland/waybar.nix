@@ -41,26 +41,29 @@ in
       "tray"
       "clock"
     ];
+
     "hyprland/workspaces" = {
-      format = "{icon}";
-      on-click = "activate";
-      format-icons = {
-        "1" = "";
-        "2" = "";
-        "3" = "";
-        "4" = "";
-        "5" = "";
-        "6" = "";
-        "7" = "";
-        "8" = "";
-        "9" = "";
-        "10" = "";
-        urgent = "";
-        focused = "";
-        default = "";
-      };
-      sort-by-number = true;
+    format = "{name}: {icon}";
+    format-icons = {
+      "1" = "";
+      "2" = "";
+      "3" = "";
+      "4" = "";
+      "5" = "";
+      "6" = "";
+      "7" = "";
+      "8" = "";
+      "9" = "";
+      "10" = "";
+      urgent = "";
+      focused = "";
+      default = "";
     };
+    on-click = "activate";
+    sort-by-number = true;
+    active-only = false;
+    all-outputs = true;
+  };
     "clock" = {
       tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
       format-alt = "{:%a %d %b %H:%M}";
