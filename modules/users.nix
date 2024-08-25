@@ -9,4 +9,5 @@
     extraGroups = [ "networkmanager" "wheel" "user" "audio" "pipewire" "pulse" "pulse-access" "video" "input" "lib" "libexec" "mpd" ];
     packages = with pkgs; [];
   };
+
 }
