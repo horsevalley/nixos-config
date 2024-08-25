@@ -17,20 +17,6 @@ in
     pulsemixer  # Added pulsemixer to ensure it's available
   ];
 
-  # Override the existing Waybar systemd service
-  # systemd.user.services.waybar = lib.mkForce {
-  #   description = "Waybar as systemd service";
-  #   wantedBy = [ "graphical-session.target" ];
-  #   partOf = [ "graphical-session.target" ];
-  #   path = [ pkgs.bash mediaplayer ];
-  #   serviceConfig = {
-  #     ExecStart = "${pkgs.waybar}/bin/waybar";
-  #     ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
-  #     Restart = "on-failure";
-  #     KillMode = "mixed";
-  #   };
-  # };
-
   # Add a custom configuration file for Waybar
   environment.etc."xdg/waybar/config".text = builtins.toJSON [{
     layer = "top";
