@@ -39,7 +39,6 @@ in
       "custom/media"
     ];
     modules-center = [
-      "clock"
     ];
     modules-right = [
       "idle_inhibitor"
@@ -51,6 +50,7 @@ in
       "backlight"
       "battery"
       "tray"
+      "clock"
     ];
 
     "hyprland/workspaces" = {
@@ -63,6 +63,11 @@ in
         "3" = "";
         "4" = "";
         "5" = "";
+        "6" = "";
+        "7" = "";
+        "8" = "";
+        "9" = "";
+        "0" = "";
         urgent = "";
         focused = "";
         default = "";
@@ -71,7 +76,7 @@ in
 
     "clock" = {
       tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-      format-alt = "{:%Y-%m-%d}";
+      format-alt = "{:%a %d %b %H:M}";
     };
 
     "cpu" = {
@@ -84,7 +89,7 @@ in
     };
 
     "temperature" = {
-      critical-threshold = 80;
+      critical-threshold = 90;
       format = "{temperatureC}°C {icon}";
       format-icons = ["" "" ""];
     };
@@ -132,7 +137,7 @@ in
         car = "";
         default = ["" "" ""];
       };
-      on-click = "pavucontrol";
+      on-click = "pulsemixer";
     };
 
     "custom/media" = {
