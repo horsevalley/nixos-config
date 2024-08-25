@@ -2,161 +2,167 @@
 
 let
   mediaplayer = pkgs.writeShellScriptBin "mediaplayer" (builtins.readFile ./mediaplayer.sh);
-  
-  waybar-config = pkgs.writeTextFile {
-    name = "waybar-config.json";
-    text = builtins.toJSON [{
-      layer = "top";
-      position = "top";
-      height = 30;
-      modules-left = [
-        "hyprland/workspaces"
-        "hyprland/submap"
-        "custom/media"
-      ];
-      modules-center = [
-        "clock"
-      ];
-      modules-right = [
-        "idle_inhibitor"
-        "pulseaudio"
-        "network"
-        "cpu"
-        "memory"
-        "temperature"
-        "backlight"
-        "battery"
-        "tray"
-      ];
-
-      "hyprland/workspaces" = {
-        disable-scroll = true;
-        all-outputs = true;
-        format = "{icon}";
-        format-icons = {
-          "1" = "";
-          "2" = "";
-          "3" = "";
-          "4" = "";
-          "5" = "";
-          urgent = "";
-          focused = "";
-          default = "";
-        };
-      };
-
-      "clock" = {
-        tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-        format-alt = "{:%Y-%m-%d}";
-      };
-
-      "cpu" = {
-        format = "{usage}% ";
-        tooltip = false;
-      };
-
-      "memory" = {
-        format = "{}% ";
-      };
-
-      "temperature" = {
-        critical-threshold = 80;
-        format = "{temperatureC}°C {icon}";
-        format-icons = ["" "" ""];
-      };
-
-      "backlight" = {
-        format = "{percent}% {icon}";
-        format-icons = ["" ""];
-      };
-
-      "battery" = {
-        states = {
-          good = 95;
-          warning = 30;
-          critical = 15;
-        };
-        format = "{capacity}% {icon}";
-        format-charging = "{capacity}% ";
-        format-plugged = "{capacity}% ";
-        format-alt = "{time} {icon}";
-        format-icons = ["" "" "" "" ""];
-      };
-
-      "network" = {
-        format-wifi = "{essid} ({signalStrength}%) ";
-        format-ethernet = "{ipaddr}/{cidr} ";
-        tooltip-format = "{ifname} via {gwaddr} ";
-        format-linked = "{ifname} (No IP) ";
-        format-disconnected = "Disconnected ⚠";
-        format-alt = "{ifname}: {ipaddr}/{cidr}";
-      };
-
-      "pulseaudio" = {
-        format = "{volume}% {icon} {format_source}";
-        format-bluetooth = "{volume}% {icon} {format_source}";
-        format-bluetooth-muted = " {icon} {format_source}";
-        format-muted = " {format_source}";
-        format-source = "{volume}% ";
-        format-source-muted = "";
-        format-icons = {
-          headphone = "";
-          hands-free = "";
-          headset = "";
-          phone = "";
-          portable = "";
-          car = "";
-          default = ["" "" ""];
-        };
-        on-click = "pavucontrol";
-      };
-
-      "custom/media" = {
-        format = "{icon} {}";
-        return-type = "json";
-        max-length = 40;
-        format-icons = {
-          "youtube-music" = "";
-          "ncmpcpp" = "";
-          default = "🎜";
-        };
-        escape = true;
-        exec = "${mediaplayer}/bin/mediaplayer";
-        interval = 1;
-      };
-
-      "idle_inhibitor" = {
-        format = "{icon}";
-        format-icons = {
-          activated = "";
-          deactivated = "";
-        };
-      };
-
-      "tray" = {
-        icon-size = 21;
-        spacing = 10;
-      };
-    }];
-  };
 in
 {
+  programs.waybar = {
+    enable = true;
+    package = pkgs.waybar;
+  };
+
   environment.systemPackages = with pkgs; [
-    waybar
     playerctl
     mpc_cli
     mediaplayer
   ];
 
-  systemd.user.services.waybar = {
-    description = "Waybar";
+  # Override the existing Waybar systemd service
+  systemd.user.services.waybar = lib.mkForce {
+    description = "Waybar as systemd service";
     wantedBy = [ "graphical-session.target" ];
     partOf = [ "graphical-session.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.waybar}/bin/waybar -c ${waybar-config} -s ${./waybar-style.css}";
+      ExecStart = "${pkgs.waybar}/bin/waybar";
       ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
       Restart = "on-failure";
       KillMode = "mixed";
     };
   };
+
+  # Add a custom configuration file for Waybar
+  environment.etc."xdg/waybar/config".text = builtins.toJSON [{
+    layer = "top";
+    position = "top";
+    height = 30;
+    modules-left = [
+      "hyprland/workspaces"
+      "hyprland/submap"
+      "custom/media"
+    ];
+    modules-center = [
+      "clock"
+    ];
+    modules-right = [
+      "idle_inhibitor"
+      "pulseaudio"
+      "network"
+      "cpu"
+      "memory"
+      "temperature"
+      "backlight"
+      "battery"
+      "tray"
+    ];
+
+    "hyprland/workspaces" = {
+      disable-scroll = true;
+      all-outputs = true;
+      format = "{icon}";
+      format-icons = {
+        "1" = "";
+        "2" = "";
+        "3" = "";
+        "4" = "";
+        "5" = "";
+        urgent = "";
+        focused = "";
+        default = "";
+      };
+    };
+
+    "clock" = {
+      tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+      format-alt = "{:%Y-%m-%d}";
+    };
+
+    "cpu" = {
+      format = "{usage}% ";
+      tooltip = false;
+    };
+
+    "memory" = {
+      format = "{}% ";
+    };
+
+    "temperature" = {
+      critical-threshold = 80;
+      format = "{temperatureC}°C {icon}";
+      format-icons = ["" "" ""];
+    };
+
+    "backlight" = {
+      format = "{percent}% {icon}";
+      format-icons = ["" ""];
+    };
+
+    "battery" = {
+      states = {
+        good = 95;
+        warning = 30;
+        critical = 15;
+      };
+      format = "{capacity}% {icon}";
+      format-charging = "{capacity}% ";
+      format-plugged = "{capacity}% ";
+      format-alt = "{time} {icon}";
+      format-icons = ["" "" "" "" ""];
+    };
+
+    "network" = {
+      format-wifi = "{essid} ({signalStrength}%) ";
+      format-ethernet = "{ipaddr}/{cidr} ";
+      tooltip-format = "{ifname} via {gwaddr} ";
+      format-linked = "{ifname} (No IP) ";
+      format-disconnected = "Disconnected ⚠";
+      format-alt = "{ifname}: {ipaddr}/{cidr}";
+    };
+
+    "pulseaudio" = {
+      format = "{volume}% {icon} {format_source}";
+      format-bluetooth = "{volume}% {icon} {format_source}";
+      format-bluetooth-muted = " {icon} {format_source}";
+      format-muted = " {format_source}";
+      format-source = "{volume}% ";
+      format-source-muted = "";
+      format-icons = {
+        headphone = "";
+        hands-free = "";
+        headset = "";
+        phone = "";
+        portable = "";
+        car = "";
+        default = ["" "" ""];
+      };
+      on-click = "pavucontrol";
+    };
+
+    "custom/media" = {
+      format = "{icon} {}";
+      return-type = "json";
+      max-length = 40;
+      format-icons = {
+        "youtube-music" = "";
+        "ncmpcpp" = "";
+        default = "🎜";
+      };
+      escape = true;
+      exec = "${mediaplayer}/bin/mediaplayer";
+      interval = 1;
+    };
+
+    "idle_inhibitor" = {
+      format = "{icon}";
+      format-icons = {
+        activated = "";
+        deactivated = "";
+      };
+    };
+
+    "tray" = {
+      icon-size = 21;
+      spacing = 10;
+    };
+  }];
+
+  # Add a custom style file for Waybar
+  environment.etc."xdg/waybar/style.css".source = ./waybar-style.css;
 }
