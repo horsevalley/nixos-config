@@ -24,6 +24,7 @@
     intelmetool # used to optimize system settings for intel chipsets
     swaylock
     swaylock-effects
+    socat
 
     # Aesthetic sysinfo
     fastfetch 
