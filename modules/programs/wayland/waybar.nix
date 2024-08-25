@@ -4,8 +4,7 @@ let
   mediaplayer = pkgs.writeShellScriptBin "mediaplayer" (builtins.readFile ./mediaplayer.sh);
 in
 {
-  programs.waybar.enable = true;
-
+  # Install Waybar and other required packages
   environment.systemPackages = with pkgs; [
     waybar
     playerctl
@@ -15,7 +14,7 @@ in
   ];
 
   # Waybar configuration
-  environment.etc."xdg/waybar/config".text = builtins.toJSON [{
+  environment.etc."xdg/waybar/config".source = pkgs.writeText "waybar-config" (builtins.toJSON [{
     layer = "top";
     position = "top";
     height = 30;
@@ -77,10 +76,10 @@ in
       icon-size = 21;
       spacing = 10;
     };
-  }];
+  }]);
 
   # Waybar style
-  environment.etc."xdg/waybar/style.css".text = ''
+  environment.etc."xdg/waybar/style.css".source = pkgs.writeText "waybar-style" ''
     * {
       border: none;
       border-radius: 0;
