@@ -14,10 +14,10 @@
   systemd.services.NetworkManager-wait-online.enable = false;
 
   # Enable Plymouth as greeter
-  boot.plymouth = {
-    enable = true;
-    theme = "spinner";
-  };
+  # boot.plymouth = {
+  #   enable = true;
+  #   theme = "spinner";
+  # };
 
   # Enable the Syncthing service
   services.syncthing = {
@@ -45,19 +45,18 @@
   #};
 
   # Enable hypridle and set options
-  services.hypridle = {
-    enable = true;
-    listeners = [
-      {
-        timeout = 5;
-        onTimeout = "${pkgs.libnotify}/bin/notify-send 'Idle' 'System will lock soon'";
-      }
-      {
-        timeout = 10;
-        onTimeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
-        onResume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
-      }
-    ];
-    lockCmd = "${pkgs.swaylock}/bin/swaylock";
-  };
+    services.hypridle = {
+      enable = true;
+      timeouts = [
+        {
+          timeout = 300; # 5 minutes
+          onTimeout = "${pkgs.libnotify}/bin/notify-send 'Idle' 'System will lock soon'";
+        }
+        {
+          timeout = 600; # 10 minutes
+          onTimeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+        }
+      ];
+      lockCmd = "${pkgs.swaylock}/bin/swaylock";
+    };
 }
