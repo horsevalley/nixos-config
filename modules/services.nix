@@ -45,19 +45,19 @@
   #};
 
   # Enable hypridle and set options
-  services.hypridle = {
-    enable = true;
-    listeners = [
-      {
-        timeout = 5;
-        onTimeout = "${pkgs.libnotify}/bin/notify-send 'Idle' 'System will lock soon'";
-      }
-      {
-        timeout = 10;
-        onTimeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
-        onResume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
-      }
-    ];
-    lockCmd = "${pkgs.swaylock}/bin/swaylock";
-  };
+  # services.hypridle = {
+  #   enable = true;
+  #   listeners = [
+  #     {
+  #       timeout = 5;
+  #       onTimeout = "${pkgs.libnotify}/bin/notify-send 'Idle' 'System will lock soon'";
+  #     }
+  #     {
+  #       timeout = 10;
+  #       onTimeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+  #       onResume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+  #     }
+  #   ];
+  #   lockCmd = "${pkgs.swaylock}/bin/swaylock";
+  # };
 }
