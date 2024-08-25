@@ -13,12 +13,6 @@
   # Disable waiting for online services before boot
   systemd.services.NetworkManager-wait-online.enable = false;
 
-  # Enable Plymouth as greeter
-  # boot.plymouth = {
-  #   enable = true;
-  #   theme = "spinner";
-  # };
-
   # Enable the Syncthing service
   services.syncthing = {
     enable = true;
@@ -44,18 +38,4 @@
     #};
   #};
 
-  # Enable hypridle and set options
-  services.hypridle = {
-    enable = true;
-    timeouts = [
-      {
-        timeout = 300;
-        onTimeout = "${pkgs.libnotify}/bin/notify-send 'Idle' 'System will lock soon'";
-      }
-      {
-        timeout = 600;
-        onTimeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
-      }
-    ];
-  };
 }
