@@ -13,7 +13,7 @@
   boot.blacklistedKernelModules = ["nouveau"];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1"  "usbcore.autosuspend=-1" "quiet" "splash" "plymouth.enable=1" "loglevel=3" "rd.udev.log_level=3" "vt.global_cursor_default=0" ];
+  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1"  "usbcore.autosuspend=-1" "quiet" "loglevel=3" "rd.udev.log_level=3" "vt.global_cursor_default=0" ];
   boot.consoleLogLevel = 0;
 
 
