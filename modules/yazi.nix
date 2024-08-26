@@ -19,13 +19,9 @@ in {
   ];
 
   # Configure Yazi
-  programs.yazi = {
-    enable = true;
-    # Note: Yazi doesn't have built-in shell integration options in NixOS
-  };
+  programs.yazi.enable = true;
 
   # You might want to add more Yazi specific configurations here, like plugins or custom settings
-  # For example, you can set up your custom configuration file or install plugins
   system.activationScripts = {
     installYaziPlugins = ''
       YAZI_PLUGIN_DIR="$HOME/.config/yazi/plugins"
@@ -38,15 +34,10 @@ in {
     '';
   };
 
-  # If you want to add shell integration manually, you can do it like this:
-  programs.bash.initExtra = ''
+  # Add shell integration for all users
+  environment.shellInit = ''
     if command -v yazi &> /dev/null; then
       eval "$(yazi --init-shell bash)"
-    fi
-  '';
-
-  programs.zsh.initExtra = ''
-    if command -v yazi &> /dev/null; then
       eval "$(yazi --init-shell zsh)"
     fi
   '';
