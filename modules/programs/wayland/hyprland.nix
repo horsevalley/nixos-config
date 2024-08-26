@@ -65,9 +65,6 @@
   # Enable waybar
   # programs.waybar.enable = true;
 
-  # Enable Eww (ElKowar’s Wacky Widgets)
-  programs.eww.enable = true;
-
   # Enable iio-hyprland
   # programs.iio-hyprland.enable = true; # only works on unstable channel
 
