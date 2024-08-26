@@ -16,7 +16,7 @@ in {
     };
     configDir = mkOption {
       type = types.str;
-      default = "$HOME/.config/eww";
+      default = "~/.config/eww";
       description = "The directory containing eww configuration files, relative to the user's home.";
     };
   };

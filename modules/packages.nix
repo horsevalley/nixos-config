@@ -25,6 +25,11 @@
     swaylock
     swaylock-effects
     socat
+    gtk-layer-shell
+    pango
+    libdbusmenu-gtk3
+    cairo
+    glibc
 
     # Aesthetic sysinfo
     fastfetch 

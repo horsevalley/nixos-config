@@ -31,7 +31,7 @@
       ./modules/sddm.nix
       ./modules/yazi.nix
       ./modules/git.nix
-      ./modules/eww.nix
+      # ./modules/eww.nix
     ];
 
   boot.extraModprobeConfig = ''
