@@ -31,6 +31,7 @@
           ./modules/pcmanfm.nix
           ./modules/sddm.nix
           ./modules/yazi.nix
+          ./modules/git.nix
         ];
       };
     };
