@@ -91,16 +91,5 @@ in {
       chown -R ${mainUser.name}:${mainUser.group} ${mainUser.home}/${cfg.configDir}
     '';
 
-    # Add a systemd user service to start eww
-    systemd.user.services.eww = {
-      description = "Eww Daemon";
-      wantedBy = [ "graphical-session.target" ];
-      partOf = [ "graphical-session.target" ];
-      serviceConfig = {
-        ExecStart = "${cfg.package}/bin/eww daemon --config ${mainUser.home}/${cfg.configDir}";
-        Restart = "always";
-        RestartSec = 3;
-      };
-    };
   };
 }

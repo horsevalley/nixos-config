@@ -6,15 +6,16 @@
     enable = true;
     xwayland.enable = true;
     systemd.setPath.enable = true;
+    extraConfig = ''
+    # Reserve space for top bar
+    monitor=,addreserved,40,0,0,0
+  '';
   };
 
   # Set SDDM as display manager
    services.displayManager.sddm = {
       enable = true;
       theme = "catppuccin-mocha";
-      # theme = "elarun";
-      # theme = "maldives";
-      # theme = "maya";
       package = pkgs.kdePackages.sddm;
   };
 
@@ -41,13 +42,6 @@
     eww # ElKowar’s Wacky Widgets
 
     catppuccin-sddm
-    # (pkgs.catppuccin-sddm.override {
-    #   flavor = "mocha";
-    #   font = "Noto Sans";
-    #   fontSize = "16";
-    #   background = "${./modules/backgrounds/Mountain_dark.png}";
-    #   loginBackground = true;
-    # })
 
   ];
     
@@ -58,15 +52,6 @@
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
     config.common.default = "*";
   };
-
-  # Enable hyprlock
-  programs.hyprlock.enable = true;
-
-  # Enable waybar
-  # programs.waybar.enable = true;
-
-  # Enable iio-hyprland
-  # programs.iio-hyprland.enable = true; # only works on unstable channel
 
   # Enable Hypr idle
   services.hypridle.enable = true;
