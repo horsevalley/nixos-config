@@ -30,6 +30,7 @@
           ./modules/variables.nix
           ./modules/pcmanfm.nix
           ./modules/sddm.nix
+          ./modules/yazi.nix
         ];
       };
     };

@@ -93,6 +93,7 @@
     gimp
     inkscape
     imagemagick
+    ueberzug
 
     # Viewers
     zathura 
