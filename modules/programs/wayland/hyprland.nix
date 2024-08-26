@@ -28,7 +28,7 @@
     wl-clipboard
     nwg-look # GTK3 settings editor
     wl-clipboard
-    waybar
+    # waybar
     jq          # Not Wayland-specific, but needed for some Waybar modules
     grim        # For screenshots 
     slurp       # For area selection 
@@ -38,6 +38,7 @@
     xdg-desktop-portal-wlr
     swaylock
     swaylock-effects
+    eww # ElKowar’s Wacky Widgets
 
     catppuccin-sddm
     # (pkgs.catppuccin-sddm.override {
@@ -62,7 +63,10 @@
   programs.hyprlock.enable = true;
 
   # Enable waybar
-  programs.waybar.enable = true;
+  # programs.waybar.enable = true;
+
+  # Enable Eww (ElKowar’s Wacky Widgets)
+  programs.eww.enable = true;
 
   # Enable iio-hyprland
   # programs.iio-hyprland.enable = true; # only works on unstable channel
