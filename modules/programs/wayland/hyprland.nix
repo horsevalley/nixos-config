@@ -6,11 +6,6 @@
     enable = true;
     xwayland.enable = true;
     systemd.setPath.enable = true;
-    settings = {
-      monitor = [
-        ",addreserved,40,0,0,0"
-      ];
-    };
   };
 
   # Set SDDM as display manager
