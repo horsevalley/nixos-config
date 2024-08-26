@@ -5,7 +5,6 @@ let
     url = "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
     sha256 = "1vc8bzz04ni7l15a9yd1x7jn0bw2b6rszg1krp6bcxyj3910pwb7";
   }) { 
-    # Assuming you're on the same system architecture as your NixOS configuration
     system = pkgs.system;
   };
 in {
@@ -21,25 +20,27 @@ in {
   # Configure Yazi
   programs.yazi.enable = true;
 
-  # You might want to add more Yazi specific configurations here, like plugins or custom settings
+  # Install Yazi plugins
   system.activationScripts = {
     installYaziPlugins = ''
       YAZI_PLUGIN_DIR="$HOME/.config/yazi/plugins"
       if [ ! -d "$YAZI_PLUGIN_DIR" ]; then
         mkdir -p "$YAZI_PLUGIN_DIR"
+        if [ -d "/tmp/yazi" ]; then
+          rm -rf /tmp/yazi
+        fi
         ${unstable.git}/bin/git clone https://github.com/sxyazi/yazi.git /tmp/yazi
-        cp -r /tmp/yazi/plugins/* "$YAZI_PLUGIN_DIR/"
+        if [ -d "/tmp/yazi/plugins" ]; then
+          cp -r /tmp/yazi/plugins/* "$YAZI_PLUGIN_DIR/"
+        fi
         rm -rf /tmp/yazi
       fi
     '';
   };
 
-  # Add shell integration for all users
+  # Add Yazi to PATH and set any necessary environment variables
   environment.shellInit = ''
-    if command -v yazi &> /dev/null; then
-      eval "$(yazi --init-shell bash)"
-      eval "$(yazi --init-shell zsh)"
-    fi
+    export PATH=$PATH:${unstable.yazi}/bin
   '';
 
   # If you have a custom configuration file, you can add it like this:
