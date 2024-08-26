@@ -94,12 +94,15 @@
     inkscape
     imagemagick
     ueberzug
+    ffmpegthumbnailer
+    poppler
 
     # Viewers
     zathura 
     nsxiv
     glow
     litemdview
+    file
 
     # Shell
     zsh
