@@ -6,10 +6,11 @@
     enable = true;
     xwayland.enable = true;
     systemd.setPath.enable = true;
-    extraConfig = ''
-    # Reserve space for top bar
-    monitor=,addreserved,40,0,0,0
-  '';
+    settings = {
+      monitor = [
+        ",addreserved,40,0,0,0"
+      ];
+    };
   };
 
   # Set SDDM as display manager
