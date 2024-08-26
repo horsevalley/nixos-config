@@ -37,6 +37,7 @@
     obsidian
     libreoffice
     mnemosyne # spaced repetiton software 
+    calcurse
 
     # File sync
     syncthing 
