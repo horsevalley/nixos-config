@@ -17,12 +17,13 @@ in {
     poppler
     file
   ];
+
   # Configure Yazi
   programs.yazi = {
     enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
+    # Note: Yazi doesn't have built-in shell integration options in NixOS
   };
+
   # You might want to add more Yazi specific configurations here, like plugins or custom settings
   # For example, you can set up your custom configuration file or install plugins
   system.activationScripts = {
@@ -36,4 +37,20 @@ in {
       fi
     '';
   };
+
+  # If you want to add shell integration manually, you can do it like this:
+  programs.bash.initExtra = ''
+    if command -v yazi &> /dev/null; then
+      eval "$(yazi --init-shell bash)"
+    fi
+  '';
+
+  programs.zsh.initExtra = ''
+    if command -v yazi &> /dev/null; then
+      eval "$(yazi --init-shell zsh)"
+    fi
+  '';
+
+  # If you have a custom configuration file, you can add it like this:
+  # environment.etc."yazi/yazi.toml".source = ./path/to/your/yazi.toml;
 }
