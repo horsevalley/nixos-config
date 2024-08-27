@@ -102,6 +102,11 @@
     ueberzug
     ffmpegthumbnailer
     poppler
+    exif # A utility to read and manipulate EXIF data in digital photographs
+    exiftool # A tool to read, write and edit EXIF meta information
+    exiftags # Displays EXIF data from JPEG files
+    exifprobe # Tool for reading EXIF data from image files produced by digital cameras
+    exiflooter # Finds geolocation on all image urls and directories
 
     # Viewers
     zathura 
