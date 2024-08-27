@@ -10,7 +10,8 @@ let
   };
 
   homeDir = builtins.getEnv "HOME";
-  librewolfConfigDir = "${homeDir}/.config/librewolf";
+  xdgConfigHome = builtins.getEnv "XDG_CONFIG_HOME";
+  librewolfConfigDir = if xdgConfigHome == "" then "${homeDir}/.config/librewolf" else "${xdgConfigHome}/librewolf";
   librewolfProfile = "${librewolfConfigDir}/ul33mnc7.default";
 in
 {
@@ -19,11 +20,19 @@ in
     pkgs.librewolf
   ];
 
-  # Create the ~/.config/librewolf directory and link ~/.librewolf to it
-  system.activationScripts.librewolfConfigDir = ''
+  # Move existing profiles to ~/.config/librewolf and set up symlink
+  system.activationScripts.librewolfMoveConfig = ''
     mkdir -p ${librewolfConfigDir}
-    if [ ! -d "$HOME/.librewolf" ]; then
-      ln -s ${librewolfConfigDir} $HOME/.librewolf
+
+    # If there is already a profile in ~/.librewolf, move it to the new location
+    if [ -d "$HOME/.librewolf" ] && [ ! -L "$HOME/.librewolf" ]; then
+      mv "$HOME/.librewolf"/* ${librewolfConfigDir}/
+      rm -rf "$HOME/.librewolf"
+    fi
+
+    # Ensure that ~/.librewolf is a symlink to the new location
+    if [ ! -L "$HOME/.librewolf" ]; then
+      ln -s ${librewolfConfigDir} "$HOME/.librewolf"
     fi
   '';
 
