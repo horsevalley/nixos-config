@@ -4,14 +4,14 @@ let
   arkenfoxUrl = "https://raw.githubusercontent.com/arkenfox/user.js/master/user.js";
   librewolfProfileDir = "$HOME/.librewolf";
   decentraleyesUrl = "https://addons.mozilla.org/firefox/downloads/file/3679754/decentraleyes-2.0.17.xpi";
-  idcacUrl = "https://addons.mozilla.org/firefox/downloads/file/3896217/i_dont_care_about_cookies-3.4.6.xpi";
+  idcacUrl = "https://github.com/ClearURLs/Addon/releases/download/1.26.1/clearurls-1.26.1.firefox.xpi";
 in
 {
   environment.systemPackages = with pkgs; [
     librewolf
     (writeShellScriptBin "librewolf-setup" ''
-      #!/bin/sh
-      set -ex
+      #!/bin/bash
+      set -e
 
       echo "Starting LibreWolf setup script..."
 
@@ -33,9 +33,35 @@ in
 
       echo "Default profile found at: $DEFAULT_PROFILE"
 
+      # Function to download with retry
+      download_with_retry() {
+        local url=$1
+        local output=$2
+        local max_retries=3
+        local retry_count=0
+
+        while [ $retry_count -lt $max_retries ]; do
+          if curl -L -o "$output" "$url"; then
+            if [ -s "$output" ]; then
+              echo "Successfully downloaded $(basename "$output")"
+              return 0
+            else
+              echo "Downloaded file is empty. Retrying..."
+            fi
+          else
+            echo "Download failed. Retrying..."
+          fi
+          retry_count=$((retry_count + 1))
+          sleep 5
+        done
+
+        echo "Failed to download $url after $max_retries attempts"
+        return 1
+      }
+
       # Download and set up Arkenfox user.js
       echo "Downloading Arkenfox user.js..."
-      curl -o "$DEFAULT_PROFILE/user.js" ${arkenfoxUrl}
+      download_with_retry ${arkenfoxUrl} "$DEFAULT_PROFILE/user.js"
       echo "user_pref(\"browser.startup.homepage\", \"about:home\");" >> "$DEFAULT_PROFILE/user.js"
       echo "user_pref(\"xpinstall.whitelist.required\", false);" >> "$DEFAULT_PROFILE/user.js"
 
@@ -45,10 +71,10 @@ in
 
       # Download and install extensions
       echo "Downloading Decentraleyes..."
-      curl -L -o "$DEFAULT_PROFILE/extensions/decentraleyes@decentraleyes.org.xpi" "${decentraleyesUrl}"
+      download_with_retry ${decentraleyesUrl} "$DEFAULT_PROFILE/extensions/decentraleyes@decentraleyes.org.xpi"
       
-      echo "Downloading I Don't Care About Cookies..."
-      curl -L -o "$DEFAULT_PROFILE/extensions/idcac-pub@guus.ninja.xpi" "${idcacUrl}"
+      echo "Downloading ClearURLs (replacement for I Don't Care About Cookies)..."
+      download_with_retry ${idcacUrl} "$DEFAULT_PROFILE/extensions/clearurls@example.com.xpi"
 
       echo "Verifying extension files..."
       ls -l "$DEFAULT_PROFILE/extensions"
@@ -59,121 +85,10 @@ in
         exit 1
       fi
 
-      if [ ! -s "$DEFAULT_PROFILE/extensions/idcac-pub@guus.ninja.xpi" ]; then
-        echo "Error: I Don't Care About Cookies extension file is empty or not downloaded correctly."
+      if [ ! -s "$DEFAULT_PROFILE/extensions/clearurls@example.com.xpi" ]; then
+        echo "Error: ClearURLs extension file is empty or not downloaded correctly."
         exit 1
       fi
-
-      # Create a extensions.json file to help LibreWolf recognize the extensions
-      cat << EOF > "$DEFAULT_PROFILE/extensions.json"
-      {
-        "schemaVersion": 36,
-        "addons": [
-          {
-            "id": "decentraleyes@decentraleyes.org",
-            "version": "2.0.17",
-            "type": "extension",
-            "loader": null,
-            "updateURL": null,
-            "optionsURL": null,
-            "optionsType": null,
-            "optionsBrowserStyle": true,
-            "aboutURL": null,
-            "defaultLocale": {
-              "name": "Decentraleyes"
-            },
-            "visible": true,
-            "active": true,
-            "userDisabled": false,
-            "appDisabled": false,
-            "installDate": $(date +%s)000,
-            "updateDate": $(date +%s)000,
-            "applyBackgroundUpdates": 1,
-            "path": "$DEFAULT_PROFILE/extensions/decentraleyes@decentraleyes.org.xpi",
-            "skinnable": false,
-            "sourceURI": null,
-            "releaseNotesURI": null,
-            "softDisabled": false,
-            "foreignInstall": false,
-            "strictCompatibility": true,
-            "locales": [],
-            "targetApplications": [
-              {
-                "id": "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}",
-                "minVersion": "52.0",
-                "maxVersion": "*"
-              }
-            ],
-            "targetPlatforms": [],
-            "seen": true,
-            "dependencies": [],
-            "incognito": "spanning",
-            "userPermissions": null,
-            "icons": {},
-            "iconURL": null,
-            "blocklistState": 0,
-            "blocklistURL": null,
-            "startupData": null,
-            "hidden": false,
-            "installTelemetryInfo": null,
-            "recommendationState": null,
-            "rootURI": "jar:file://$DEFAULT_PROFILE/extensions/decentraleyes@decentraleyes.org.xpi!/",
-            "location": "app-profile"
-          },
-          {
-            "id": "idcac-pub@guus.ninja",
-            "version": "3.4.6",
-            "type": "extension",
-            "loader": null,
-            "updateURL": null,
-            "optionsURL": null,
-            "optionsType": null,
-            "optionsBrowserStyle": true,
-            "aboutURL": null,
-            "defaultLocale": {
-              "name": "I Don't Care About Cookies"
-            },
-            "visible": true,
-            "active": true,
-            "userDisabled": false,
-            "appDisabled": false,
-            "installDate": $(date +%s)000,
-            "updateDate": $(date +%s)000,
-            "applyBackgroundUpdates": 1,
-            "path": "$DEFAULT_PROFILE/extensions/idcac-pub@guus.ninja.xpi",
-            "skinnable": false,
-            "sourceURI": null,
-            "releaseNotesURI": null,
-            "softDisabled": false,
-            "foreignInstall": false,
-            "strictCompatibility": true,
-            "locales": [],
-            "targetApplications": [
-              {
-                "id": "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}",
-                "minVersion": "52.0",
-                "maxVersion": "*"
-              }
-            ],
-            "targetPlatforms": [],
-            "seen": true,
-            "dependencies": [],
-            "incognito": "spanning",
-            "userPermissions": null,
-            "icons": {},
-            "iconURL": null,
-            "blocklistState": 0,
-            "blocklistURL": null,
-            "startupData": null,
-            "hidden": false,
-            "installTelemetryInfo": null,
-            "recommendationState": null,
-            "rootURI": "jar:file://$DEFAULT_PROFILE/extensions/idcac-pub@guus.ninja.xpi!/",
-            "location": "app-profile"
-          }
-        ]
-      }
-      EOF
 
       echo "LibreWolf setup complete. Please restart LibreWolf for changes to take effect."
     '')
