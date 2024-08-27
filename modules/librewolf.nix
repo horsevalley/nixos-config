@@ -5,41 +5,14 @@ let
   librewolfProfileDir = "$HOME/.librewolf";
 in
 {
-  # Install LibreWolf and add desktop entry
+  # Install LibreWolf
   environment.systemPackages = with pkgs; [
-    (librewolf.override {
-      extraExtensions = [
-        (fetchFirefoxAddon {
-          name = "decentraleyes";
-          url = "https://addons.mozilla.org/firefox/downloads/file/3679754/decentraleyes-2.0.17.xpi";
-          sha256 = "sha256-11qJnLiX5Z8+1TQ8tE50sWI15+3hxf8HaQpPdj1mFvo=";
-        })
-        (fetchFirefoxAddon {
-          name = "i-dont-care-about-cookies";
-          url = "https://addons.mozilla.org/firefox/downloads/file/3896217/i_dont_care_about_cookies-3.4.6.xpi";
-          sha256 = "sha256-+uW26qAGZ1zSgZqxV/AlYd8SENXTOWDWQdacwCzz5Bk=";
-        })
-      ];
-      extraPolicies = {
-        DisableFirefoxStudies = true;
-        DisableTelemetry = true;
-        DisableFirefoxAccounts = true;
-        NoDefaultBookmarks = true;
-        OverrideFirstRunPage = "";
-        OverridePostUpdatePage = "";
-        DontCheckDefaultBrowser = true;
-        ExtensionSettings = {
-          "*" = {
-            installation_mode = "allowed";
-          };
-        };
-      };
-    })
+    librewolf
   ];
 
-  # Download and set up Arkenfox user.js
+  # Download and set up Arkenfox user.js and install extensions
   systemd.user.services.setup-librewolf-arkenfox = {
-    description = "Set up LibreWolf with Arkenfox user.js";
+    description = "Set up LibreWolf with Arkenfox user.js and install extensions";
     wantedBy = [ "default.target" ];
     serviceConfig = {
       Type = "oneshot";
@@ -55,6 +28,11 @@ in
         if [ -n "$DEFAULT_PROFILE" ]; then
           # Copy user.js to the default profile directory
           cp "$PROFILE_DIR/user.js" "$DEFAULT_PROFILE/user.js"
+          
+          # Install extensions
+          mkdir -p "$DEFAULT_PROFILE/extensions"
+          ${pkgs.curl}/bin/curl -L -o "$DEFAULT_PROFILE/extensions/decentraleyes@decentraleyes.org.xpi" "https://addons.mozilla.org/firefox/downloads/file/3679754/decentraleyes-2.0.17.xpi"
+          ${pkgs.curl}/bin/curl -L -o "$DEFAULT_PROFILE/extensions/idcac-pub@guus.ninja.xpi" "https://addons.mozilla.org/firefox/downloads/file/3896217/i_dont_care_about_cookies-3.4.6.xpi"
         fi
       '';
     };
@@ -64,5 +42,23 @@ in
   environment.variables = {
     MOZ_LEGACY_PROFILES = "1";
     MOZ_ENABLE_WAYLAND = "1";
+  };
+
+  # Set LibreWolf policies
+  environment.etc."librewolf/policies/policies.json".text = builtins.toJSON {
+    policies = {
+      DisableFirefoxStudies = true;
+      DisableTelemetry = true;
+      DisableFirefoxAccounts = true;
+      NoDefaultBookmarks = true;
+      OverrideFirstRunPage = "";
+      OverridePostUpdatePage = "";
+      DontCheckDefaultBrowser = true;
+      ExtensionSettings = {
+        "*" = {
+          installation_mode = "allowed";
+        };
+      };
+    };
   };
 }
