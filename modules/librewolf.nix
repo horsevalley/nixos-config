@@ -7,7 +7,20 @@ in
 {
   # Install LibreWolf and add desktop entry
   environment.systemPackages = with pkgs; [
-    librewolf
+    (librewolf.override {
+      extraExtensions = [
+        (fetchFirefoxAddon {
+          name = "decentraleyes";
+          url = "https://addons.mozilla.org/firefox/downloads/file/3679754/decentraleyes-2.0.17.xpi";
+          sha256 = "sha256-11qJnLiX5Z8+1TQ8tE50sWI15+3hxf8HaQpPdj1mFvo=";
+        })
+        (fetchFirefoxAddon {
+          name = "i-dont-care-about-cookies";
+          url = "https://addons.mozilla.org/firefox/downloads/file/3896217/i_dont_care_about_cookies-3.4.6.xpi";
+          sha256 = "sha256-+uW26qAGZ1zSgZqxV/AlYd8SENXTOWDWQdacwCzz5Bk=";
+        })
+      ];
+    })
     (makeDesktopItem {
       name = "librewolf";
       exec = "librewolf %U";
@@ -54,4 +67,9 @@ in
     MOZ_LEGACY_PROFILES = "1";
     MOZ_ENABLE_WAYLAND = "1";
   };
+
+  # Allow add-on installation
+  xdg.configFile."librewolf/librewolf.overrides.cfg".text = ''
+    lockPref("xpinstall.whitelist.required", false);
+  '';
 }
