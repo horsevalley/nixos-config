@@ -4,7 +4,7 @@ let
   arkenfoxUrl = "https://raw.githubusercontent.com/arkenfox/user.js/master/user.js";
   librewolfProfileDir = "$HOME/.librewolf";
   decentraleyesUrl = "https://addons.mozilla.org/firefox/downloads/file/3679754/decentraleyes-2.0.17.xpi";
-  idcacUrl = "https://github.com/ClearURLs/Addon/releases/download/1.26.1/clearurls-1.26.1.firefox.xpi";
+  clearurlsUrl = "https://addons.mozilla.org/firefox/downloads/file/3986147/clearurls-1.25.0.xpi";
 in
 {
   environment.systemPackages = with pkgs; [
@@ -73,8 +73,8 @@ in
       echo "Downloading Decentraleyes..."
       download_with_retry ${decentraleyesUrl} "$DEFAULT_PROFILE/extensions/decentraleyes@decentraleyes.org.xpi"
       
-      echo "Downloading ClearURLs (replacement for I Don't Care About Cookies)..."
-      download_with_retry ${idcacUrl} "$DEFAULT_PROFILE/extensions/clearurls@example.com.xpi"
+      echo "Downloading ClearURLs..."
+      download_with_retry ${clearurlsUrl} "$DEFAULT_PROFILE/extensions/{74145f27-f039-47ce-a470-a662b129930a}.xpi"
 
       echo "Verifying extension files..."
       ls -l "$DEFAULT_PROFILE/extensions"
@@ -85,7 +85,7 @@ in
         exit 1
       fi
 
-      if [ ! -s "$DEFAULT_PROFILE/extensions/clearurls@example.com.xpi" ]; then
+      if [ ! -s "$DEFAULT_PROFILE/extensions/{74145f27-f039-47ce-a470-a662b129930a}.xpi" ]; then
         echo "Error: ClearURLs extension file is empty or not downloaded correctly."
         exit 1
       fi
@@ -111,6 +111,16 @@ in
       ExtensionSettings = {
         "*" = {
           installation_mode = "allowed";
+        };
+      };
+      Preferences = {
+        "services.settings.server" = {
+          Value = "https://example.com";
+          Status = "locked";
+        };
+        "browser.contentblocking.category" = {
+          Value = "strict";
+          Status = "locked";
         };
       };
     };
