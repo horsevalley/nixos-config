@@ -9,8 +9,8 @@ let
     sha256 = "1vc8bzz04ni7l15a9yd1x7jn0bw2b6rszg1krp6bcxyj3910pwb7";  # Provided SHA256
   };
 
-  # Set the Librewolf profile path using the $XDG_CONFIG_HOME variable
-  librewolfProfile = "${config.xdg.configHome}/librewolf/ul33mnc7.default";  # Adjust the profile directory as needed
+  # Set the Librewolf profile path manually using the makeHomePath function
+  librewolfProfile = "${pkgs.lib.makeHomePath "~/.config/librewolf/ul33mnc7.default"}";  # Adjust the profile directory name as needed
 in
 {
   # Ensure Librewolf is installed
