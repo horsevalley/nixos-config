@@ -54,7 +54,7 @@
     networkmanagerapplet
 
     # Linux utilities
-    fzf
+    fzf # general-purpose command-line fuzzy finder
     ncdu # console disk usage analyzer for quick space management
     fd # simple and fast file search tool, enhancing the Unix find command
     eza # modern replacement for ls, enhancing file listing with better defaults
@@ -63,10 +63,9 @@
     dust # visualizes disk usage with an emphasis on clarity, acting as a more intuitive du
     duf # modern disk usage utility for the command-line with an intuitive interface
     xh # modern, feature-rich DNS client for the command-line
-    ripgrep
+    ripgrep # line-oriented search tool that recursively searches the current directory for a regex pattern
     unzip
     p7zip
-    ripgrep
     stow
     xclip
     tree
