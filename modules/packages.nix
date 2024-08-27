@@ -54,15 +54,20 @@
 
     # Linux utilities
     fzf
+    ncdu
+    fd
+    exa
     bat
+    dog
+    dust
+    duf
+    xh
     ripgrep
     unzip
     p7zip
-    fd
     ripgrep
     stow
     xclip
-    ncdu
     tree
     tldr
     killall
