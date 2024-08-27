@@ -66,6 +66,7 @@ in
       download_with_retry ${arkenfoxUrl} "$DEFAULT_PROFILE/user.js"
       echo "user_pref(\"browser.startup.homepage\", \"about:home\");" >> "$DEFAULT_PROFILE/user.js"
       echo "user_pref(\"xpinstall.whitelist.required\", false);" >> "$DEFAULT_PROFILE/user.js"
+      echo "user_pref(\"extensions.webextensions.restrictedDomains\", \"\");" >> "$DEFAULT_PROFILE/user.js"
 
       # Create extensions directory if it doesn't exist
       mkdir -p "$DEFAULT_PROFILE/extensions"
@@ -81,52 +82,99 @@ in
       echo "Verifying extension files..."
       ls -l "$DEFAULT_PROFILE/extensions"
 
-      # Create or update extensions.json
-      cat > "$DEFAULT_PROFILE/extensions.json" << EOF
-      {
-        "schemaVersion": 36,
-        "addons": [
-          {
-            "id": "decentraleyes@decentraleyes.org",
-            "version": "2.0.17",
-            "type": "extension",
-            "loader": null,
-            "updateURL": null,
-            "optionsURL": null,
-            "optionsType": null,
-            "optionsBrowserStyle": true,
-            "aboutURL": null,
-            "defaultLocale": {
-              "name": "Decentraleyes"
-            },
-            "visible": true,
-            "active": true,
-            "userDisabled": false,
-            "installDate": $(date +%s)000,
-            "path": "$DEFAULT_PROFILE/extensions/decentraleyes@decentraleyes.org.xpi"
-          },
-          {
-            "id": "{446900e4-71c2-419f-a6a7-df9c091e268b}",
-            "version": "1.25.0",
-            "type": "extension",
-            "loader": null,
-            "updateURL": null,
-            "optionsURL": null,
-            "optionsType": null,
-            "optionsBrowserStyle": true,
-            "aboutURL": null,
-            "defaultLocale": {
-              "name": "ClearURLs"
-            },
-            "visible": true,
-            "active": true,
-            "userDisabled": false,
-            "installDate": $(date +%s)000,
-            "path": "$DEFAULT_PROFILE/extensions/{446900e4-71c2-419f-a6a7-df9c091e268b}.xpi"
-          }
-        ]
-      }
-      EOF
+      # Update extensions.json
+      echo "Updating extensions.json..."
+      EXTENSIONS_JSON="$DEFAULT_PROFILE/extensions.json"
+      if [ -f "$EXTENSIONS_JSON" ]; then
+        # Backup the original file
+        cp "$EXTENSIONS_JSON" "$EXTENSIONS_JSON.bak"
+        # Remove the closing bracket and add our new extensions
+        sed -i '$ d' "$EXTENSIONS_JSON"
+        echo '  ,{
+    "id": "decentraleyes@decentraleyes.org",
+    "version": "2.0.17",
+    "type": "extension",
+    "loader": null,
+    "updateURL": null,
+    "optionsURL": null,
+    "optionsType": null,
+    "optionsBrowserStyle": true,
+    "aboutURL": null,
+    "defaultLocale": {
+      "name": "Decentraleyes"
+    },
+    "visible": true,
+    "active": true,
+    "userDisabled": false,
+    "installDate": '$(date +%s%3N)',
+    "path": "'$DEFAULT_PROFILE/extensions/decentraleyes@decentraleyes.org.xpi'"
+  },
+  {
+    "id": "{446900e4-71c2-419f-a6a7-df9c091e268b}",
+    "version": "1.25.0",
+    "type": "extension",
+    "loader": null,
+    "updateURL": null,
+    "optionsURL": null,
+    "optionsType": null,
+    "optionsBrowserStyle": true,
+    "aboutURL": null,
+    "defaultLocale": {
+      "name": "ClearURLs"
+    },
+    "visible": true,
+    "active": true,
+    "userDisabled": false,
+    "installDate": '$(date +%s%3N)',
+    "path": "'$DEFAULT_PROFILE/extensions/{446900e4-71c2-419f-a6a7-df9c091e268b}.xpi'"
+  }
+]}' >> "$EXTENSIONS_JSON"
+      else
+        echo "Error: extensions.json not found. Creating a new one."
+        echo '{
+  "schemaVersion": 36,
+  "addons": [
+    {
+      "id": "decentraleyes@decentraleyes.org",
+      "version": "2.0.17",
+      "type": "extension",
+      "loader": null,
+      "updateURL": null,
+      "optionsURL": null,
+      "optionsType": null,
+      "optionsBrowserStyle": true,
+      "aboutURL": null,
+      "defaultLocale": {
+        "name": "Decentraleyes"
+      },
+      "visible": true,
+      "active": true,
+      "userDisabled": false,
+      "installDate": '$(date +%s%3N)',
+      "path": "'$DEFAULT_PROFILE/extensions/decentraleyes@decentraleyes.org.xpi'"
+    },
+    {
+      "id": "{446900e4-71c2-419f-a6a7-df9c091e268b}",
+      "version": "1.25.0",
+      "type": "extension",
+      "loader": null,
+      "updateURL": null,
+      "optionsURL": null,
+      "optionsType": null,
+      "optionsBrowserStyle": true,
+      "aboutURL": null,
+      "defaultLocale": {
+        "name": "ClearURLs"
+      },
+      "visible": true,
+      "active": true,
+      "userDisabled": false,
+      "installDate": '$(date +%s%3N)',
+      "path": "'$DEFAULT_PROFILE/extensions/{446900e4-71c2-419f-a6a7-df9c091e268b}.xpi'"
+    }
+  ]
+}' > "$EXTENSIONS_JSON"
+      fi
 
       echo "LibreWolf setup complete. Please restart LibreWolf for changes to take effect."
     '')
@@ -153,12 +201,12 @@ in
       };
       Preferences = {
         "services.settings.server" = {
-          Value = "https://example.com";
-          Status = "default";
+          Value = "data:,";
+          Status = "locked";
         };
         "browser.contentblocking.category" = {
           Value = "strict";
-          Status = "default";
+          Status = "locked";
         };
       };
     };
