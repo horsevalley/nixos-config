@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   # Fetch the Arkenfox user.js file from the GitHub repository
@@ -6,10 +6,10 @@ let
     owner = "arkenfox";
     repo = "user.js";
     rev = "108.0";  # Replace with the latest tag if necessary
-    sha256 = "lib.fakeSha256"; # Replace with the actual SHA256
+    sha256 = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";  # Replace with the actual SHA256
   };
 
-  librewolfProfile = "$XDG_CONFIG_HOME/librewolf";  # Adjust this path if your profile is in a different location
+  librewolfProfile = "${config.xdg.configHome}/librewolf";  # Adjust this path if your profile is in a different location
 in
 {
   # Ensure Librewolf is installed
