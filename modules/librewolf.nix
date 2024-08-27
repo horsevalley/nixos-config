@@ -1,44 +1,38 @@
 { config, pkgs, lib, ... }:
 
 let
-  # Fetch the Arkenfox user.js file from the GitHub repository
-  arkenfoxUserJS = pkgs.fetchFromGitHub {
-    owner = "arkenfox";
-    repo = "user.js";
-    rev = "108.0";  # Replace with the latest tag if necessary
-    sha256 = "1vc8bzz04ni7l15a9yd1x7jn0bw2b6rszg1krp6bcxyj3910pwb7";  # Provided SHA256
-  };
-
-  homeDir = builtins.getEnv "HOME";
-  xdgConfigHome = builtins.getEnv "XDG_CONFIG_HOME";
-  librewolfConfigDir = if xdgConfigHome == "" then "${homeDir}/.config/librewolf" else "${xdgConfigHome}/librewolf";
-  librewolfProfile = "${librewolfConfigDir}/ul33mnc7.default";
+  arkenfoxUrl = "https://raw.githubusercontent.com/arkenfox/user.js/master/user.js";
+  xdgConfigHome = "$HOME/.config";
 in
 {
-  # Ensure Librewolf is installed
-  environment.systemPackages = [
-    pkgs.librewolf
-  ];
+  # Enable LibreWolf
+  programs.librewolf = {
+    enable = true;
+    package = pkgs.librewolf;
+  };
 
-  # Move existing profiles to ~/.config/librewolf and set up symlink
-  system.activationScripts.librewolfMoveConfig = ''
-    mkdir -p ${librewolfConfigDir}
+  # Download and set up Arkenfox user.js
+  systemd.user.services.setup-librewolf-arkenfox = {
+    description = "Set up LibreWolf with Arkenfox user.js";
+    wantedBy = [ "default.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "setup-librewolf-arkenfox" ''
+        mkdir -p ${xdgConfigHome}/librewolf
+        ${pkgs.curl}/bin/curl -o ${xdgConfigHome}/librewolf/user.js ${arkenfoxUrl}
+        echo "user_pref(\"browser.startup.homepage\", \"about:home\");" >> ${xdgConfigHome}/librewolf/user.js
+      '';
+    };
+  };
 
-    # If there is already a profile in ~/.librewolf, move it to the new location
-    if [ -d "$HOME/.librewolf" ] && [ ! -L "$HOME/.librewolf" ]; then
-      mv "$HOME/.librewolf"/* ${librewolfConfigDir}/
-      rm -rf "$HOME/.librewolf"
-    fi
+  # Set XDG_CONFIG_HOME
+  environment.variables = {
+    XDG_CONFIG_HOME = xdgConfigHome;
+  };
 
-    # Ensure that ~/.librewolf is a symlink to the new location
-    if [ ! -L "$HOME/.librewolf" ]; then
-      ln -s ${librewolfConfigDir} "$HOME/.librewolf"
-    fi
-  '';
-
-  # Copy the user.js file to the correct Librewolf profile directory
-  system.activationScripts.librewolfArkenfox = ''
-    mkdir -p ${librewolfProfile}
-    cp ${arkenfoxUserJS}/user.js ${librewolfProfile}/user.js
+  # Ensure LibreWolf uses the correct config directory
+  environment.shellInit = ''
+    export MOZ_LEGACY_PROFILES=1
+    export MOZ_ENABLE_WAYLAND=1
   '';
 }
