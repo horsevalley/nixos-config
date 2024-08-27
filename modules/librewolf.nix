@@ -20,23 +20,20 @@ in
           sha256 = "sha256-+uW26qAGZ1zSgZqxV/AlYd8SENXTOWDWQdacwCzz5Bk=";
         })
       ];
-    })
-    (makeDesktopItem {
-      name = "librewolf";
-      exec = "librewolf %U";
-      icon = "librewolf";
-      desktopName = "LibreWolf";
-      genericName = "Web Browser";
-      categories = [ "Network" "WebBrowser" ];
-      mimeTypes = [
-        "text/html"
-        "text/xml"
-        "application/xhtml+xml"
-        "application/vnd.mozilla.xul+xml"
-        "x-scheme-handler/http"
-        "x-scheme-handler/https"
-        "x-scheme-handler/ftp"
-      ];
+      extraPolicies = {
+        DisableFirefoxStudies = true;
+        DisableTelemetry = true;
+        DisableFirefoxAccounts = true;
+        NoDefaultBookmarks = true;
+        OverrideFirstRunPage = "";
+        OverridePostUpdatePage = "";
+        DontCheckDefaultBrowser = true;
+        ExtensionSettings = {
+          "*" = {
+            installation_mode = "allowed";
+          };
+        };
+      };
     })
   ];
 
@@ -51,6 +48,7 @@ in
         mkdir -p "$PROFILE_DIR"
         ${pkgs.curl}/bin/curl -o "$PROFILE_DIR/user.js" ${arkenfoxUrl}
         echo "user_pref(\"browser.startup.homepage\", \"about:home\");" >> "$PROFILE_DIR/user.js"
+        echo "user_pref(\"xpinstall.whitelist.required\", false);" >> "$PROFILE_DIR/user.js"
         
         # Find the default profile directory
         DEFAULT_PROFILE=$(find "$PROFILE_DIR" -maxdepth 1 -type d -name "*.default" | head -n 1)
@@ -67,9 +65,4 @@ in
     MOZ_LEGACY_PROFILES = "1";
     MOZ_ENABLE_WAYLAND = "1";
   };
-
-  # Allow add-on installation
-  xdg.configFile."librewolf/librewolf.overrides.cfg".text = ''
-    lockPref("xpinstall.whitelist.required", false);
-  '';
 }
