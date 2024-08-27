@@ -21,8 +21,8 @@
 
   # Set SUID bit on slock
   security.wrappers.slock = {
-    owner = "root";
-    group = "root";
+    owner = "jonash";
+    group = "wheel";
     source = "${pkgs.slock}";
     capabilities = "cap_ipc_lock+ep";
   };
