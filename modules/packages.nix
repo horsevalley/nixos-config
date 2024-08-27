@@ -54,14 +54,14 @@
 
     # Linux utilities
     fzf
-    ncdu
-    fd
-    eza
-    bat
-    dog
-    dust
-    duf
-    xh
+    ncdu # console disk usage analyzer for quick space management
+    fd # simple and fast file search tool, enhancing the Unix find command
+    eza # modern replacement for ls, enhancing file listing with better defaults
+    bat # cat clone with syntax highlighting and Git integration for the command-line
+    dog # modern, feature-rich DNS client for the command-line
+    dust # visualizes disk usage with an emphasis on clarity, acting as a more intuitive du
+    duf # modern disk usage utility for the command-line with an intuitive interface
+    xh # modern, feature-rich DNS client for the command-line
     ripgrep
     unzip
     p7zip
