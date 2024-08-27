@@ -2,41 +2,34 @@
 
 let
   arkenfoxUrl = "https://raw.githubusercontent.com/arkenfox/user.js/master/user.js";
-  librewolfProfileDir = "$HOME/.librewolf";
+  librewolfSetupScript = pkgs.writeShellScriptBin "setup-librewolf" ''
+    PROFILE_DIR="$HOME/.librewolf"
+    DEFAULT_PROFILE="$PROFILE_DIR/$(ls $PROFILE_DIR | grep .default)"
+    
+    if [ ! -d "$DEFAULT_PROFILE" ]; then
+      echo "LibreWolf profile not found. Please run LibreWolf at least once before running this script."
+      exit 1
+    fi
+
+    # Download and set up Arkenfox user.js
+    curl -o "$DEFAULT_PROFILE/user.js" ${arkenfoxUrl}
+    echo "user_pref(\"browser.startup.homepage\", \"about:home\");" >> "$DEFAULT_PROFILE/user.js"
+    echo "user_pref(\"xpinstall.whitelist.required\", false);" >> "$DEFAULT_PROFILE/user.js"
+
+    # Install extensions
+    mkdir -p "$DEFAULT_PROFILE/extensions"
+    curl -L -o "$DEFAULT_PROFILE/extensions/decentraleyes@decentraleyes.org.xpi" "https://addons.mozilla.org/firefox/downloads/file/3679754/decentraleyes-2.0.17.xpi"
+    curl -L -o "$DEFAULT_PROFILE/extensions/idcac-pub@guus.ninja.xpi" "https://addons.mozilla.org/firefox/downloads/file/3896217/i_dont_care_about_cookies-3.4.6.xpi"
+
+    echo "LibreWolf setup complete. Please restart LibreWolf for changes to take effect."
+  '';
 in
 {
-  # Install LibreWolf
+  # Install LibreWolf and setup script
   environment.systemPackages = with pkgs; [
     librewolf
+    librewolfSetupScript
   ];
-
-  # Download and set up Arkenfox user.js and install extensions
-  systemd.user.services.setup-librewolf-arkenfox = {
-    description = "Set up LibreWolf with Arkenfox user.js and install extensions";
-    wantedBy = [ "default.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = pkgs.writeShellScript "setup-librewolf-arkenfox" ''
-        PROFILE_DIR="${librewolfProfileDir}"
-        mkdir -p "$PROFILE_DIR"
-        ${pkgs.curl}/bin/curl -o "$PROFILE_DIR/user.js" ${arkenfoxUrl}
-        echo "user_pref(\"browser.startup.homepage\", \"about:home\");" >> "$PROFILE_DIR/user.js"
-        echo "user_pref(\"xpinstall.whitelist.required\", false);" >> "$PROFILE_DIR/user.js"
-        
-        # Find the default profile directory
-        DEFAULT_PROFILE=$(find "$PROFILE_DIR" -maxdepth 1 -type d -name "*.default" | head -n 1)
-        if [ -n "$DEFAULT_PROFILE" ]; then
-          # Copy user.js to the default profile directory
-          cp "$PROFILE_DIR/user.js" "$DEFAULT_PROFILE/user.js"
-          
-          # Install extensions
-          mkdir -p "$DEFAULT_PROFILE/extensions"
-          ${pkgs.curl}/bin/curl -L -o "$DEFAULT_PROFILE/extensions/decentraleyes@decentraleyes.org.xpi" "https://addons.mozilla.org/firefox/downloads/file/3679754/decentraleyes-2.0.17.xpi"
-          ${pkgs.curl}/bin/curl -L -o "$DEFAULT_PROFILE/extensions/idcac-pub@guus.ninja.xpi" "https://addons.mozilla.org/firefox/downloads/file/3896217/i_dont_care_about_cookies-3.4.6.xpi"
-        fi
-      '';
-    };
-  };
 
   # Ensure LibreWolf uses the correct config directory
   environment.variables = {
