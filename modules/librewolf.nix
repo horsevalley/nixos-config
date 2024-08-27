@@ -5,11 +5,10 @@ let
   xdgConfigHome = "$HOME/.config";
 in
 {
-  # Enable LibreWolf
-  programs.librewolf = {
-    enable = true;
-    package = pkgs.librewolf;
-  };
+  # Install LibreWolf
+  environment.systemPackages = with pkgs; [
+    librewolf
+  ];
 
   # Download and set up Arkenfox user.js
   systemd.user.services.setup-librewolf-arkenfox = {
@@ -35,4 +34,25 @@ in
     export MOZ_LEGACY_PROFILES=1
     export MOZ_ENABLE_WAYLAND=1
   '';
+
+  # Add a desktop entry for LibreWolf
+  environment.systemPackages = with pkgs; [
+    (makeDesktopItem {
+      name = "librewolf";
+      exec = "librewolf %U";
+      icon = "librewolf";
+      desktopName = "LibreWolf";
+      genericName = "Web Browser";
+      categories = [ "Network" "WebBrowser" ];
+      mimeTypes = [
+        "text/html"
+        "text/xml"
+        "application/xhtml+xml"
+        "application/vnd.mozilla.xul+xml"
+        "x-scheme-handler/http"
+        "x-scheme-handler/https"
+        "x-scheme-handler/ftp"
+      ];
+    })
+  ];
 }
