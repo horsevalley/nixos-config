@@ -6,7 +6,7 @@ let
     owner = "arkenfox";
     repo = "user.js";
     rev = "108.0";  # Replace with the latest tag if necessary
-    sha256 = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";  # Replace with the actual SHA256
+    sha256 = "1vc8bzz04ni7l15a9yd1x7jn0bw2b6rszg1krp6bcxyj3910pwb7";  # Replace with the actual SHA256
   };
 
   librewolfProfile = "$XDG_CONFIG_HOME/librewolf";  # Adjust this path if your profile is in a different location
