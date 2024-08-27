@@ -30,6 +30,7 @@
     libdbusmenu-gtk3
     cairo
     glibc
+    dunst
 
     # Aesthetic sysinfo
     fastfetch 
