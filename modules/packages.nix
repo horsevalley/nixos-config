@@ -56,7 +56,7 @@
     fzf
     ncdu
     fd
-    exa
+    eza
     bat
     dog
     dust
