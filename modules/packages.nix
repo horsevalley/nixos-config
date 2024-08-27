@@ -37,6 +37,7 @@
     inxi 
     glxinfo 
     nvtopPackages.full
+    mediainfo
 
     # Productivity
     obsidian
