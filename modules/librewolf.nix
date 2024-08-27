@@ -2,7 +2,7 @@
 
 let
   arkenfoxUrl = "https://raw.githubusercontent.com/arkenfox/user.js/master/user.js";
-  xdgConfigHome = "$HOME/.config";
+  librewolfProfileDir = "$HOME/.librewolf";
 in
 {
   # Install LibreWolf and add desktop entry
@@ -34,21 +34,24 @@ in
     serviceConfig = {
       Type = "oneshot";
       ExecStart = pkgs.writeShellScript "setup-librewolf-arkenfox" ''
-        mkdir -p ${xdgConfigHome}/librewolf
-        ${pkgs.curl}/bin/curl -o ${xdgConfigHome}/librewolf/user.js ${arkenfoxUrl}
-        echo "user_pref(\"browser.startup.homepage\", \"about:home\");" >> ${xdgConfigHome}/librewolf/user.js
+        PROFILE_DIR="${librewolfProfileDir}"
+        mkdir -p "$PROFILE_DIR"
+        ${pkgs.curl}/bin/curl -o "$PROFILE_DIR/user.js" ${arkenfoxUrl}
+        echo "user_pref(\"browser.startup.homepage\", \"about:home\");" >> "$PROFILE_DIR/user.js"
+        
+        # Find the default profile directory
+        DEFAULT_PROFILE=$(find "$PROFILE_DIR" -maxdepth 1 -type d -name "*.default" | head -n 1)
+        if [ -n "$DEFAULT_PROFILE" ]; then
+          # Copy user.js to the default profile directory
+          cp "$PROFILE_DIR/user.js" "$DEFAULT_PROFILE/user.js"
+        fi
       '';
     };
   };
 
-  # Set XDG_CONFIG_HOME
-  environment.variables = {
-    XDG_CONFIG_HOME = xdgConfigHome;
-  };
-
   # Ensure LibreWolf uses the correct config directory
-  environment.shellInit = ''
-    export MOZ_LEGACY_PROFILES=1
-    export MOZ_ENABLE_WAYLAND=1
-  '';
+  environment.variables = {
+    MOZ_LEGACY_PROFILES = "1";
+    MOZ_ENABLE_WAYLAND = "1";
+  };
 }
