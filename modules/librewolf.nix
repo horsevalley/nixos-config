@@ -8,9 +8,12 @@ let
   idcacUrl = "https://addons.mozilla.org/firefox/downloads/file/3896217/i_dont_care_about_cookies-3.4.6.xpi";
 in
 {
-  # Install LibreWolf
+  # Install LibreWolf and create a desktop entry to run the setup script
   environment.systemPackages = with pkgs; [
     librewolf
+    (writeShellScriptBin "librewolf-setup" ''
+      /etc/librewolf-setup.sh
+    '')
   ];
 
   # Create a script to set up LibreWolf and install extensions
@@ -49,13 +52,6 @@ in
       echo "LibreWolf setup complete. Please restart LibreWolf for changes to take effect."
     '';
   };
-
-  # Create a desktop entry to run the setup script
-  environment.systemPackages = with pkgs; [
-    (writeShellScriptBin "librewolf-setup" ''
-      /etc/librewolf-setup.sh
-    '')
-  ];
 
   # Ensure LibreWolf uses the correct config directory
   environment.variables = {
