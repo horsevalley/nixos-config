@@ -42,7 +42,9 @@ in
 
         while [ $retry_count -lt $max_retries ]; do
           if curl -L -o "$output" "$url"; then
-            if [ -s "$output" ]; then
+            local file_size=$(stat -c%s "$output")
+            echo "Downloaded file size: $file_size bytes"
+            if [ $file_size -gt 0 ]; then
               echo "Successfully downloaded $(basename "$output")"
               return 0
             else
@@ -74,7 +76,7 @@ in
       download_with_retry ${decentraleyesUrl} "$DEFAULT_PROFILE/extensions/decentraleyes@decentraleyes.org.xpi"
       
       echo "Downloading ClearURLs..."
-      download_with_retry ${clearurlsUrl} "$DEFAULT_PROFILE/extensions/{74145f27-f039-47ce-a470-a662b129930a}.xpi"
+      download_with_retry ${clearurlsUrl} "$DEFAULT_PROFILE/extensions/{446900e4-71c2-419f-a6a7-df9c091e268b}.xpi"
 
       echo "Verifying extension files..."
       ls -l "$DEFAULT_PROFILE/extensions"
@@ -85,7 +87,7 @@ in
         exit 1
       fi
 
-      if [ ! -s "$DEFAULT_PROFILE/extensions/{74145f27-f039-47ce-a470-a662b129930a}.xpi" ]; then
+      if [ ! -s "$DEFAULT_PROFILE/extensions/{446900e4-71c2-419f-a6a7-df9c091e268b}.xpi" ]; then
         echo "Error: ClearURLs extension file is empty or not downloaded correctly."
         exit 1
       fi
@@ -116,11 +118,11 @@ in
       Preferences = {
         "services.settings.server" = {
           Value = "https://example.com";
-          Status = "locked";
+          Status = "default";
         };
         "browser.contentblocking.category" = {
           Value = "strict";
-          Status = "locked";
+          Status = "default";
         };
       };
     };
