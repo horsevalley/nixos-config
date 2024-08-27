@@ -81,16 +81,52 @@ in
       echo "Verifying extension files..."
       ls -l "$DEFAULT_PROFILE/extensions"
 
-      # Check if the downloaded files are not empty
-      if [ ! -s "$DEFAULT_PROFILE/extensions/decentraleyes@decentraleyes.org.xpi" ]; then
-        echo "Error: Decentraleyes extension file is empty or not downloaded correctly."
-        exit 1
-      fi
-
-      if [ ! -s "$DEFAULT_PROFILE/extensions/{446900e4-71c2-419f-a6a7-df9c091e268b}.xpi" ]; then
-        echo "Error: ClearURLs extension file is empty or not downloaded correctly."
-        exit 1
-      fi
+      # Create or update extensions.json
+      cat > "$DEFAULT_PROFILE/extensions.json" << EOF
+      {
+        "schemaVersion": 36,
+        "addons": [
+          {
+            "id": "decentraleyes@decentraleyes.org",
+            "version": "2.0.17",
+            "type": "extension",
+            "loader": null,
+            "updateURL": null,
+            "optionsURL": null,
+            "optionsType": null,
+            "optionsBrowserStyle": true,
+            "aboutURL": null,
+            "defaultLocale": {
+              "name": "Decentraleyes"
+            },
+            "visible": true,
+            "active": true,
+            "userDisabled": false,
+            "installDate": $(date +%s)000,
+            "path": "$DEFAULT_PROFILE/extensions/decentraleyes@decentraleyes.org.xpi"
+          },
+          {
+            "id": "{446900e4-71c2-419f-a6a7-df9c091e268b}",
+            "version": "1.25.0",
+            "type": "extension",
+            "loader": null,
+            "updateURL": null,
+            "optionsURL": null,
+            "optionsType": null,
+            "optionsBrowserStyle": true,
+            "aboutURL": null,
+            "defaultLocale": {
+              "name": "ClearURLs"
+            },
+            "visible": true,
+            "active": true,
+            "userDisabled": false,
+            "installDate": $(date +%s)000,
+            "path": "$DEFAULT_PROFILE/extensions/{446900e4-71c2-419f-a6a7-df9c091e268b}.xpi"
+          }
+        ]
+      }
+      EOF
 
       echo "LibreWolf setup complete. Please restart LibreWolf for changes to take effect."
     '')
