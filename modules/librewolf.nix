@@ -9,9 +9,9 @@ let
     sha256 = "1vc8bzz04ni7l15a9yd1x7jn0bw2b6rszg1krp6bcxyj3910pwb7";  # Provided SHA256
   };
 
-  # Manually construct the Librewolf profile path
   homeDir = builtins.getEnv "HOME";
-  librewolfProfile = "${homeDir}/.config/librewolf/ul33mnc7.default";  # Adjust the profile directory name as needed
+  librewolfConfigDir = "${homeDir}/.config/librewolf";
+  librewolfProfile = "${librewolfConfigDir}/ul33mnc7.default";
 in
 {
   # Ensure Librewolf is installed
@@ -19,7 +19,15 @@ in
     pkgs.librewolf
   ];
 
-  # Add a script to copy the user.js file to the Librewolf profile
+  # Create the ~/.config/librewolf directory and link ~/.librewolf to it
+  system.activationScripts.librewolfConfigDir = ''
+    mkdir -p ${librewolfConfigDir}
+    if [ ! -d "$HOME/.librewolf" ]; then
+      ln -s ${librewolfConfigDir} $HOME/.librewolf
+    fi
+  '';
+
+  # Copy the user.js file to the correct Librewolf profile directory
   system.activationScripts.librewolfArkenfox = ''
     mkdir -p ${librewolfProfile}
     cp ${arkenfoxUserJS}/user.js ${librewolfProfile}/user.js
