@@ -9,7 +9,7 @@ let
     sha256 = "lib.fakeSha256"; # Replace with the actual SHA256
   };
 
-  librewolfProfile = "${XDG_CONFIG_HOME}/librewolf";  # Adjust this path if your profile is in a different location
+  librewolfProfile = "$XDG_CONFIG_HOME/librewolf";  # Adjust this path if your profile is in a different location
 in
 {
   # Ensure Librewolf is installed
