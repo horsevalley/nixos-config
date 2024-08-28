@@ -93,6 +93,7 @@
     youtube-music
     ncmpcpp
     playerctl
+    pamixer
 
     # Video
     mpv
