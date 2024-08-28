@@ -31,6 +31,7 @@
     cairo
     glibc
     dunst
+    lm_sensors
 
     # Aesthetic sysinfo
     fastfetch 
