@@ -33,6 +33,7 @@
           ./modules/yazi.nix
           ./modules/git.nix
           ./modules/librewolf.nix
+          ./modules/gaming.nix
         ];
       };
     };
