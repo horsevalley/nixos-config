@@ -1,23 +1,18 @@
 { config, pkgs, ... }:
 
 {
-  
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+
   environment.systemPackages = with pkgs; [
     wget
     curl
     git
     git-lfs
     newsboat
-    home-manager
+    # home-manager
     yt-dlp
-    signal-desktop 
     libnotify
     libvirt
     slock
-    sdcv # console version of stardict
-    bc # basic calculator 
     unclutter # hides mouse when idle 
     arandr  
     dmenu
@@ -41,11 +36,17 @@
     nvtopPackages.full
     mediainfo
 
+    # Social
+    discord
+    signal-desktop 
+
     # Productivity
     obsidian
     libreoffice
     mnemosyne # spaced repetiton software 
     calcurse
+    sdcv # console version of stardict
+    bc # basic calculator 
 
     # File sync
     syncthing 
