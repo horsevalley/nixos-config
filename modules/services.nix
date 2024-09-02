@@ -14,7 +14,7 @@
   systemd.services.NetworkManager-wait-online.enable = false;
 
   # Enable the Syncthing service
-  services.syncthing = {
+  services.syncthing.settings.devices = {
     enable = true;
     user = "jonash";  # Replace with your actual username
     dataDir = "/mnt/IronWolf8TB/Syncthing";  # Adjust this path as needed
