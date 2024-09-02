@@ -103,7 +103,8 @@
     mpc-cli
     ffmpeg
     wf-recorder # Utility program for screen recording of wlroots-based compositors
-
+    jellyfin
+    jftui
 
     # Photo/image 
     gimp
