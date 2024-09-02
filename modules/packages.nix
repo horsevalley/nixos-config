@@ -37,7 +37,6 @@
     mediainfo
 
     # Social
-    discord
     signal-desktop 
 
     # Productivity
