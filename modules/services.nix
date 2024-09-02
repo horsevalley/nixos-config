@@ -13,6 +13,9 @@
   # Disable waiting for online services before boot
   systemd.services.NetworkManager-wait-online.enable = false;
 
+  # Enable Jellyfin
+  services.jellyfin.enable = true;
+
   # Enable the Syncthing service
   services.syncthing.settings.devices = {
     enable = true;
