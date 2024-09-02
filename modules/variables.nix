@@ -27,10 +27,4 @@
   # Enable xdg mime
   xdg.mime.enable = true;
 
-  # Add MIME type associations for torrents
-  xdg.mimeApplications = {
-    "application/x-bittorrent" = [ "tremc.desktop" "transmission.desktop" "transmission-remote-gtk.desktop" ];
-    "x-scheme-handler/magnet" = [ "tremc.desktop" "transmission.desktop" "transmission-remote-gtk.desktop" ];
-  };
-
 }
