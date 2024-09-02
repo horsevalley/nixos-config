@@ -102,6 +102,8 @@
     mpd
     mpc-cli
     ffmpeg
+    wf-recorder # Utility program for screen recording of wlroots-based compositors
+
 
     # Photo/image 
     gimp
