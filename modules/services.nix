@@ -21,13 +21,13 @@
     #configDir = "/home/your_username/.config/syncthing";
     #overrideDevices = true;     # overrides any devices added or deleted through the WebUI
     #overrideFolders = true;     # overrides any folders added or deleted through the WebUI
-    #devices = {
+    devices = {
       # You can define your devices here if you want
-      # "device-id" = {
-      #   id = "device-id";
-      #   name = "device-name";
+       "device-id" = {
+         id = "QGRRFNK-KICED3C-NPZWBQ4-DSRWY4T-UIKOI2P-WN7Z3YJ-5UHZWYA-6ZESHQL";
+         name = "Pixel 6a";
       #   addresses = [ "tcp://ip:port" ];
-      # };
+       };
     };
     #folders = {
       # You can define your sync folders here
