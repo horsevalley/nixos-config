@@ -148,6 +148,7 @@
     # Browsers
     qutebrowser
     librewolf
+    firefox
 
     # Email
     mutt-wizard
