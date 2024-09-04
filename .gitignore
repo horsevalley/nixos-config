@@ -1,1 +1,22 @@
 result
+# Nix build output
+result
+result-*
+
+# Temporary files
+*.swp
+*~
+
+# Direnv
+.direnv
+
+# Editor specific files
+.vscode/
+.idea/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Sops
+.decrypted~*
