@@ -13,13 +13,13 @@
     in
     {
       nixosConfigurations = {
-        workstation = nixpkgs.lib.nixosSystem {
+        "horsepowr-nixos" = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             ./hosts/workstation
           ];
         };
-        laptop = nixpkgs.lib.nixosSystem {
+        "legiony540-nixos" = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             ./hosts/laptop
