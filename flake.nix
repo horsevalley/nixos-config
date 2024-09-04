@@ -16,13 +16,13 @@
         workstation = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./hosts/horsepowr-nixos
+            ./hosts/workstation
           ];
         };
         laptop = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./hosts/legiony540-nixos
+            ./hosts/laptop
           ];
         };
       };
