@@ -3,50 +3,28 @@
 {
   services.mpd = {
     enable = true;
-    musicDirectory = "/home/jonash/Music";  # Replace with your actual username
-    playlistDirectory = "/home/jonash/.config/mpd/playlists";  # Replace with your actual username
+    musicDirectory = "/home/jonash/Music";  # Adjust this path
     extraConfig = ''
-      auto_update "yes"
-      restore_paused "yes"
-      max_output_buffer_size "16384"
-
       audio_output {
-        type  "pipewire"
-        name  "PipeWire Sound Server"
+        type "pulse"
+        name "PulseAudio"
       }
-
-      audio_output {
-        type    "fifo"
-        name    "Visualizer feed"
-        path    "/tmp/mpd.fifo"
-        format  "44100:16:2"
-      }
+      bind_to_address "127.0.0.1"
+      port "6600"
     '';
-    network = {
-      listenAddress = "127.0.0.1";  # Bind to localhost
-      port = 6600;  # Default MPD port
-    };
+    # If you want MPD to run as your user instead of the mpd user
+    user = "jonash";  # Replace with your username
   };
 
-  # Configure MPD user and group
-  users.users.mpd = {
-    isSystemUser = true;
-    group = "mpd";
-    extraGroups = [ "audio" ];
-  };
+  # Ensure necessary packages are installed
+  environment.systemPackages = with pkgs; [
+    mpc_cli
+    ncmpcpp
+  ];
 
-  users.groups.mpd = {};
+  # Allow your user to access MPD
+  users.users.jonash.extraGroups = [ "audio" ];
 
-  # Create the playlists directory
-  system.activationScripts = {
-    mpdPlaylistDir = ''
-      mkdir -p /home/jonash/.config/mpd/playlists
-      chown -R mpd:mpd /home/jonash/.config/mpd
-    '';
-  };
-
-  # Ensure the MPD user has access to the music directory
-  systemd.services.mpd.serviceConfig = {
-    SupplementaryGroups = [ "users" ];
-  };
+  # Open the firewall port for MPD (if needed)
+  networking.firewall.allowedTCPPorts = [ 6600 ];
 }
