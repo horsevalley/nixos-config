@@ -73,6 +73,8 @@
     tldr
     killall
     man
+    highlight # Source code highlighting tool
+
 
     # Programming languages and compilers
     gcc

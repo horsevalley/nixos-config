@@ -2,7 +2,7 @@
 
 {
   environment.shellAliases = {
-    # Verbosity and settings that you pretty much just always are going to want.
+    # Existing aliases
     cp = "cp -iv";
     mv = "mv -iv";
     rm = "rm -vI";
@@ -13,8 +13,6 @@
     yta = "yt -x -f bestaudio/best";
     ytt = "yt --skip-download --write-thumbnail";
     ffmpeg = "ffmpeg -hide_banner";
-
-    # Colorize commands when possible.
     ls = "ls -hN --color=auto --group-directories-first";
     la = "ls -AhN --color=auto --group-directories-first";
     ll = "ls -lA --color=auto --group-directories-first";
@@ -24,8 +22,6 @@
     diff = "diff --color=auto";
     ccat = "highlight --out-format=ansi";
     ip = "ip -color=auto";
-
-    # Abbreviated commands
     ka = "killall";
     g = "git";
     trem = "transmission-remote";
@@ -38,15 +34,45 @@
     xr = "sudo xbps-remove -R";
     xq = "xbps-query";
     z = "zathura";
-
-    # Directory navigation
     ".." = "cd ..";
     "..." = "cd ../..";
     "...." = "cd ../../..";
     "....." = "cd ../../../..";
     "......" = "cd ../../../../..";
-
-    # Additional aliases
+    
+    # Newly added aliases from shortcutrc
+    cac = "cd /home/jonash/.cache && ls -A";
+    cf = "cd /home/jonash/.config && ls -A";
+    D = "cd /home/jonash/Downloads && ls -A";
+    d = "cd /home/jonash/Documents && ls -A";
+    dt = "cd /home/jonash/.local/share && ls -A";
+    rr = "cd /home/jonash/.local/src && ls -A";
+    h = "cd /home/jonash && ls -A";
+    m = "cd /home/jonash/Music && ls -A";
+    mn = "cd /mnt && ls -A";
+    pp = "cd /home/jonash/Pictures && ls -A";
+    sc = "cd /home/jonash/.local/bin && ls -A";
+    src = "cd /home/jonash/.local/src && ls -A";
+    vv = "cd /home/jonash/Videos && ls -A";
+    bf = "$EDITOR /home/jonash/.config/shell/bm-files";
+    bd = "$EDITOR /home/jonash/.config/shell/bm-dirs";
+    cfx = "$EDITOR /home/jonash/.config/x11/xresources";
+    cfb = "$EDITOR ~/.local/src/dwmblocks/config.h";
+    cfv = "$EDITOR /home/jonash/.config/nvim/lua/config/lazy.lua";
+    cfz = "$EDITOR /home/jonash/.config/zsh/.zshrc";
+    cfa = "$EDITOR /home/jonash/.config/shell/aliasrc";
+    cfp = "$EDITOR /home/jonash/.config/shell/profile";
+    cfm = "$EDITOR /home/jonash/.config/mutt/muttrc";
+    cfn = "$EDITOR /home/jonash/.config/newsboat/config";
+    cfu = "$EDITOR /home/jonash/.config/newsboat/urls";
+    cfmb = "$EDITOR /home/jonash/.config/ncmpcpp/bindings";
+    cfmc = "$EDITOR /home/jonash/.config/ncmpcpp/config";
+    cfl = "$EDITOR /home/jonash/.config/lf/lfrc";
+    cfL = "$EDITOR /home/jonash/.config/lf/scope";
+    cfX = "$EDITOR /home/jonash/.config/nsxiv/exec/key-handler";
+    sn = "$EDITOR ~/.local/share/larbs/snippets";
+    
+    # Your other existing aliases
     school = "cd ~/Insync/hestdahl@gmail.com/School/Bachelor\\ Ingeniørfag/Bachelor\\ Ingeniørfag\\ -\\ Bygg && ls -lahN";
     so = "source ~/.config/zsh/.zshrc";
     calc = "speedcrunch";
@@ -131,10 +157,10 @@
     rofi = "rofi -show drun";
     nixos-config = "cd ~/repos/github/nixos-config/ && la ";
     nconfig-backup = "/home/jonash/dotfiles-nix/scripts/.local/bin/nixos-backup";
-    fr = "sudo nixos-rebuild switch --flake ~/repos/github/nixos-config/#$(hostname)";
     podcasts = "cd ~/Videos/podcasts/ && la";
     nfu = "sudo nix flake update";
     cfy = "vim ~/.config/yazi/yazi.toml";
+    fr = "sudo nixos-rebuild switch --flake ~/repos/github/nixos-config/#$(hostname)";
     frd = "sudo nixos-rebuild dry-run --flake ~/repos/github/nixos-config/#$(hostname)";
   };
 }
