@@ -32,13 +32,10 @@
   networking.hostName = "legiony540-nixos";
   system.stateVersion = "24.05";
 
-  systemd = {
-  services.logind = {
-    extraConfig = ''
-      HandleLidSwitchExternalPower=ignore
-    '';
-  };
-};
-
+  {
+  services.logind.extraConfig = ''
+    HandleLidSwitchExternalPower=ignore
+  '';
+  }
 
 }
