@@ -2,17 +2,17 @@
 
 let
   aliasrc = import ./aliasrc.nix { inherit config lib pkgs; };
+  profile = import ./profile.nix { inherit config lib pkgs; };
 in
 {
-  imports = [ aliasrc ];
+  imports = [ aliasrc profile ];
 
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
-    enableCompletion = true;
+    autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
 
-    initExtra = ''
+    shellInit = ''
       # Function to clear the screen with ctrl-l
       function clear_screen() {
         if [[ -n "$TMUX" ]]; then
@@ -24,30 +24,25 @@ in
         fi
       }
 
-      # Bind Ctrl+l to clear_screen function
-      bindkey '^l' clear_screen
+      # FZF options
+      export FZF_CTRL_R_OPTS="
+        --preview 'echo {}' --preview-window up:3:hidden:wrap
+        --bind 'ctrl-/:toggle-preview'
+        --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+        --color header:italic
+        --history-size=1000000
+        --header 'Press CTRL-Y to copy command into clipboard'"
 
-      # Enable colors and change prompt:
-      autoload -U colors && colors
-      PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+      export FZF_CTRL_T_OPTS="
+        --walker-skip .git,node_modules,target
+        --preview 'bat -n --color=always {}'
+        --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
-      # Various options
-      setopt autocd
-      setopt interactive_comments
-      setopt appendhistory
-      setopt sharehistory
-      setopt hist_ignore_space
-      setopt hist_ignore_all_dups
-      setopt hist_save_no_dups
-      setopt hist_ignore_dups
-      setopt hist_find_no_dups
+      export FZF_TMUX_OPTS="-p"
+      export FZF_DEFAULT_COMMAND="fd --type f"
+    '';
 
-      # History configuration
-      HISTSIZE=100000000
-      SAVEHIST=$HISTSIZE
-      HISTFILE="$XDG_DATA_HOME/history"
-      HISTDUP=erase
-
+    interactiveShellInit = ''
       # vi mode
       bindkey -v
       export KEYTIMEOUT=1
@@ -100,39 +95,16 @@ in
       bindkey -M vicmd '^e' edit-command-line
       bindkey -M visual '^[[P' vi-delete
 
-      # Set Stardict data directory
-      export STARDICT_DATA_DIR=~/.local/share/stardict/dic
-
-      # Add Rancher Desktop to PATH
-      export PATH="$PATH:/home/jonash/.rd/bin"
-
       # Load kubectl completions
       source <(kubectl completion zsh)
-
-      # Load Starship
-      eval "$(starship init zsh)"
 
       # Shell integrations
       eval "$(fzf --zsh)"
 
-      # FZF options
-      export FZF_CTRL_R_OPTS="
-        --preview 'echo {}' --preview-window up:3:hidden:wrap
-        --bind 'ctrl-/:toggle-preview'
-        --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
-        --color header:italic
-        --history-size=1000000
-        --header 'Press CTRL-Y to copy command into clipboard'"
-
-      export FZF_CTRL_T_OPTS="
-        --walker-skip .git,node_modules,target
-        --preview 'bat -n --color=always {}'
-        --bind 'ctrl-/:change-preview-window(down|hidden|)'"
-
-      export FZF_TMUX_OPTS="-p"
-      export FZF_DEFAULT_COMMAND="fd --type f"
-
       [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+      # Load Starship
+      eval "$(starship init zsh)"
 
       # Functions from aliasrc
       function gcm() {
@@ -164,6 +136,25 @@ in
         lynx "https://google.com/search?q=$url"
       }
     '';
+
+    loginShellInit = ''
+      # Various options
+      setopt autocd
+      setopt interactive_comments
+      setopt appendhistory
+      setopt sharehistory
+      setopt hist_ignore_space
+      setopt hist_ignore_all_dups
+      setopt hist_save_no_dups
+      setopt hist_ignore_dups
+      setopt hist_find_no_dups
+
+      # History configuration
+      HISTSIZE=100000000
+      SAVEHIST=$HISTSIZE
+      HISTFILE="$XDG_DATA_HOME/history"
+      HISTDUP=erase
+    '';
   };
 
   # Additional package dependencies
@@ -177,4 +168,7 @@ in
     kubectl
     lynx
   ];
+
+  # Enable Starship
+  programs.starship.enable = true;
 }
