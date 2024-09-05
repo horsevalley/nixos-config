@@ -31,5 +31,6 @@
     ./mpd.nix
     ./ncmpcpp.nix
     ./mpv.nix
+    ./dunst.nix
   ];
 }
