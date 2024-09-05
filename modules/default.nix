@@ -30,5 +30,6 @@
     ./zathura.nix
     ./mpd.nix
     ./ncmpcpp.nix
+    ./mpv.nix
   ];
 }
