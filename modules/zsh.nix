@@ -177,10 +177,4 @@ in
     kubectl
     lynx
   ];
-
-  # Enable zsh-autosuggestions
-  programs.zsh.autosuggestions.enable = true;
-
-  # Enable fast-syntax-highlighting (you might need to add this to your nixpkgs overlay)
-  programs.zsh.syntaxHighlighting.enable = true;
 }
