@@ -28,14 +28,25 @@
     };
   };
 
-  # Ensure the MPD user has access to the PipeWire socket
-  users.users.mpd.extraGroups = [ "audio" ];
+  # Configure MPD user and group
+  users.users.mpd = {
+    isSystemUser = true;
+    group = "mpd";
+    extraGroups = [ "audio" ];
+  };
+
+  users.groups.mpd = {};
 
   # Create the playlists directory
   system.activationScripts = {
     mpdPlaylistDir = ''
       mkdir -p /home/jonash/.config/mpd/playlists
-      chown -R jonash:users /home/jonash/.config/mpd
+      chown -R mpd:mpd /home/jonash/.config/mpd
     '';
+  };
+
+  # Ensure the MPD user has access to the music directory
+  systemd.services.mpd.serviceConfig = {
+    SupplementaryGroups = [ "users" ];
   };
 }
