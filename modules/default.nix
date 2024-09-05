@@ -27,5 +27,6 @@
     ./librewolf.nix
     ./gaming.nix
     ./zsh.nix
+    ./zathura.nix
   ];
 }
