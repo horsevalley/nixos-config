@@ -28,5 +28,7 @@
     ./gaming.nix
     ./zsh.nix
     ./zathura.nix
+    ./mpd.nix
+    ./ncmpcpp.nix
   ];
 }
