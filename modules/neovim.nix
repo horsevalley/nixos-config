@@ -3,8 +3,8 @@
 let
   unstable = import (fetchTarball {
     url = "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-    #sha256 = "1vc8bzz04ni7l15a9yd1x7jn0bw2b6rszg1krp6bcxyj3910pwb7";
-    sha256 = "1dmng7f5rv4hgd0b61chqx589ra7jajsrzw21n8gp8makw5khvb2";
+    sha256 = "1vc8bzz04ni7l15a9yd1x7jn0bw2b6rszg1krp6bcxyj3910pwb7";
+    # sha256 = "1dmng7f5rv4hgd0b61chqx589ra7jajsrzw21n8gp8makw5khvb2";
   }) { 
     # Assuming you're on the same system architecture as your NixOS configuration
     system = pkgs.system;
