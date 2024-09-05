@@ -27,7 +27,13 @@
     isSystemUser = true;
     group = "audio";
     extraGroups = [ "pipewire" ];
+    description = "Music Player Daemon user";
+    home = "/var/lib/mpd";
+    createHome = true;
   };
+
+  # Ensure the audio group exists
+  users.groups.audio = {};
 
   # Enable PipeWire
   services.pipewire = {
