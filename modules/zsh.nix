@@ -143,8 +143,8 @@ in
         local str="$*"
         local encoded=""
         local i c x
-        for (( i = 0; i<${#str}; i++)); do
-          c=${str:$i:1}
+        for (( i = 0; i<''${#str}; i++ )); do
+          c=''${str:$i:1}
           case "$c" in
             [-_.~a-zA-Z0-9] ) x="$c" ;;
             * ) x=$(printf '%%%02X' "'$c") ;;
@@ -163,5 +163,24 @@ in
         declare url=$(urlencode "$*")
         lynx "https://google.com/search?q=$url"
       }
+    '';
+  };
 
-      #
+  # Additional package dependencies
+  environment.systemPackages = with pkgs; [
+    fzf
+    bat
+    fd
+    lf
+    starship
+    tmux
+    kubectl
+    lynx
+  ];
+
+  # Enable zsh-autosuggestions
+  programs.zsh.autosuggestions.enable = true;
+
+  # Enable fast-syntax-highlighting (you might need to add this to your nixpkgs overlay)
+  programs.zsh.syntaxHighlighting.enable = true;
+}
