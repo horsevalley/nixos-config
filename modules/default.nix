@@ -26,5 +26,6 @@
     ./git.nix
     ./librewolf.nix
     ./gaming.nix
+    ./zsh.nix
   ];
 }
