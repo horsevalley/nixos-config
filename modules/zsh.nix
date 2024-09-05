@@ -12,7 +12,7 @@ in
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
 
-    initExtra = ''
+    interactiveShellInit = ''
       # Enable vi mode
       bindkey -v
       export KEYTIMEOUT=1
@@ -49,27 +49,30 @@ in
       # Bind Ctrl+A to beginning-of-line
       bindkey '^A' beginning-of-line
 
-      # Other Zsh settings...
-
-      ${config.programs.zsh.initExtra}
+      # Load Starship prompt
+      eval "$(starship init zsh)"
     '';
 
-    sessionVariables = {
-      # Your session variables...
-    };
+    shellInit = ''
+      # Your shell initialization code here
+    '';
 
-    shellAliases = {
-      # Your aliases...
-    };
+    loginShellInit = ''
+      # Your login shell initialization code here
+    '';
 
-    # Other Zsh settings...
+    promptInit = "";  # We're using Starship, so we can leave this empty
   };
 
   # Additional package dependencies
   environment.systemPackages = with pkgs; [
-    # Your package list...
+    starship
+    # Add other packages you need
   ];
 
   # Enable Starship
-  programs.starship.enable = true;
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 }
