@@ -1,38 +1,43 @@
 { config, lib, pkgs, ... }:
 
+let
+  zathuraConfig = pkgs.writeText "zathurarc" ''
+    set sandbox none
+    set statusbar-h-padding 0
+    set statusbar-v-padding 0
+    set page-padding 1
+    set selection-clipboard clipboard
+    map u scroll half-up
+    map d scroll half-down
+    map D toggle_page_mode
+    map r reload
+    map R rotate
+    map K zoom in
+    map J zoom out
+    map i recolor
+    map p print
+    map g goto top
+    map [fullscreen] u scroll half-up
+    map [fullscreen] d scroll half-down
+    map [fullscreen] D toggle_page_mode
+    map [fullscreen] r reload
+    map [fullscreen] R rotate
+    map [fullscreen] K zoom in
+    map [fullscreen] J zoom out
+    map [fullscreen] i recolor
+    map [fullscreen] p print
+    map [fullscreen] g goto top
+  '';
+in
 {
-  programs.zathura = {
-    enable = true;
-    options = {
-      sandbox = "none";
-      statusbar-h-padding = 0;
-      statusbar-v-padding = 0;
-      page-padding = 1;
-      selection-clipboard = "clipboard";
-    };
-    mappings = {
-      u = "scroll half-up";
-      d = "scroll half-down";
-      D = "toggle_page_mode";
-      r = "reload";
-      R = "rotate";
-      K = "zoom in";
-      J = "zoom out";
-      i = "recolor";
-      p = "print";
-      g = "goto top";
-    };
-    extraConfig = ''
-      map [fullscreen] u scroll half-up
-      map [fullscreen] d scroll half-down
-      map [fullscreen] D toggle_page_mode
-      map [fullscreen] r reload
-      map [fullscreen] R rotate
-      map [fullscreen] K zoom in
-      map [fullscreen] J zoom out
-      map [fullscreen] i recolor
-      map [fullscreen] p print
-      map [fullscreen] g goto top
+  environment.systemPackages = [ pkgs.zathura ];
+
+  environment.etc."zathura/zathurarc".source = zathuraConfig;
+
+  system.activationScripts = {
+    zathuraConfig = ''
+      mkdir -p /etc/zathura
+      ln -sf ${zathuraConfig} /etc/zathura/zathurarc
     '';
   };
 }
