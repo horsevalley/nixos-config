@@ -4,7 +4,7 @@
   services.mpd = {
     enable = true;
     musicDirectory = "/home/jonash/Music";  # Adjust this path
-    user = "mpd";
+    user = lib.mkForce "mpd";
     group = "audio";
     extraConfig = ''
       audio_output {
