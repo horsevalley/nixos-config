@@ -43,7 +43,6 @@
       url_color = "#F5E0DC";
       active_border_color = "#B4BEFE";
       inactive_border_color = "#6C7086";
-      bell_border_color = "#F9E2AF";
       active_tab_foreground = "#11111B";
       active_tab_background = "#CBA6F7";
       inactive_tab_foreground = "#CDD6F4";
