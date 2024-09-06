@@ -37,7 +37,7 @@
     LYNX_CFG_PATH = "$HOME/.config/lynx";
     DICS = "$XDG_DATA_HOME/stardict/dic";
     SD_DATA_PATH = "$XDG_DATA_HOME/stardict/dic";
-    SUDO_ASKPASS = "$HOME/.local/bin/dmenupass";
+    SUDO_ASKPASS = "$HOME/.local/bin/rofi-passmenu";
     FZF_DEFAULT_OPTS = "--layout=reverse --height 40%";
     LESS = "R";
     LESSOPEN = lib.mkForce "| ${pkgs.highlight}/bin/highlight -O ansi %s 2>/dev/null";
