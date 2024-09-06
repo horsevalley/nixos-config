@@ -65,6 +65,9 @@ in
         source "$(fzf-share)/key-bindings.zsh"
         source "$(fzf-share)/completion.zsh"
       fi
+
+      # Explicitly bind Ctrl-R to fzf-history-widget
+      bindkey '^R' fzf-history-widget
     '';
     shellInit = ''
       # Your shell initialization code here
