@@ -12,7 +12,7 @@ let
     enable_ligatures yes
     padding_width 5
     padding_height 5
-    background_opacity 1.0
+    background_opacity 0.75
     dynamic_background_opacity yes
     scrollback_lines 10000
     tab_bar_edge bottom
