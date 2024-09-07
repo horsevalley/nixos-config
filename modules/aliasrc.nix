@@ -132,6 +132,7 @@
     gpr = "git pull --rebase";
     gs = "git status";
     gd = "git diff";
+    gb = "git branch";
     gl = "git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
     gc = "git commit";
     gcm = "git commit -m";
@@ -162,5 +163,6 @@
     cfy = "vim ~/.config/yazi/yazi.toml";
     fr = "sudo nixos-rebuild switch --flake ~/repos/github/nixos-config/#$(hostname)";
     frd = "sudo nixos-rebuild dry-run --flake ~/repos/github/nixos-config/#$(hostname)";
+
   };
 }
