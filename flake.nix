@@ -4,9 +4,9 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
 
     # Adding unstable channel
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {

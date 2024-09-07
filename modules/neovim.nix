@@ -19,13 +19,15 @@
 #   ];
 
 let
-  unstablePkgs = import inputs.nixpkgs-unstable { inherit system; };
+  unstablePkgs = import inputs.nixpkgs-unstable {
+    inherit pkgs.system;
+  };
 in
 {
+  # Install Neovim from unstable
   environment.systemPackages = with pkgs; [
     unstablePkgs.neovim
   ];
-
   programs.neovim = {
     enable = true;
     defaultEditor = true;
