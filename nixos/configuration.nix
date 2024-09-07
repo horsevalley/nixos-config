@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      # inputs.home-manager.nixosModules.home-manager
+       inputs.home-manager.nixosModules.home-manager
       ./modules/audio.nix
       ./modules/X11.nix
       ./modules/gnome.nix
