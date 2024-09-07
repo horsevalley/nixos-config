@@ -218,6 +218,7 @@ in
       cp /etc/ncmpcpp/bindings /home/${username}/.config/ncmpcpp/bindings
       chown -R ${username}:users /home/${username}/.config/mpd
       chown -R ${username}:users /home/${username}/.config/ncmpcpp
+      chown -R ${username}:users /home/${username}/Music
     '';
   };
 }
