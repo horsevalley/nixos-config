@@ -3,24 +3,29 @@
 let
 
   urlHandler = pkgs.writeScriptBin "newsboat-url-handler" ''
-    #!${pkgs.bash}/bin/bash
+    #!/usr/bin/env bash
     url="$1"
     
+    # Function to open URL in default browser
+    open_in_browser() {
+      ${pkgs.xdg-utils}/bin/xdg-open "$1"
+    }
+
     # Check if the URL is a YouTube video
-    if echo "$url" | grep -q "youtube.com/watch\?v="; then
-      ${pkgs.mpv}/bin/mpv "$url"
-    elif echo "$url" | grep -q "youtu.be/"; then
+    if echo "$url" | grep -q -E "youtube.com/watch\?v=|youtu.be/"; then
       ${pkgs.mpv}/bin/mpv "$url"
     else
-      # Extract YouTube URLs from the page and play them with mpv
-      ${pkgs.curl}/bin/curl -s "$url" | 
-      ${pkgs.gnugrep}/bin/grep -oP 'https?://(?:www\.)?youtu(?:be\.com/watch\?v=|\.be/)[\w-]+' |
-      while read -r video_url; do
+      # Extract the first YouTube URL from the page and play it with mpv
+      video_url=$(${pkgs.curl}/bin/curl -s "$url" | 
+                  ${pkgs.gnugrep}/bin/grep -oP 'https?://(?:www\.)?youtu(?:be\.com/watch\?v=|\.be/)[\w-]+' |
+                  head -n 1)
+      
+      if [ -n "$video_url" ]; then
         ${pkgs.mpv}/bin/mpv "$video_url"
-      done
+      fi
       
       # Open the original URL in the default browser
-      ${pkgs.xdg-utils}/bin/xdg-open "$url"
+      open_in_browser "$url"
     fi
   '';
 
