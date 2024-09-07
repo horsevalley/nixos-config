@@ -4,6 +4,7 @@
 
   imports = [
       inputs.home-manager.nixosModules.home-manager
+      ./git.nix
     ];
 
   home.username = "jonash";
