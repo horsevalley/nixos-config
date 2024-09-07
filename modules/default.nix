@@ -34,5 +34,8 @@
     ./newsboat.nix
     ./pass.nix
     ./gpg.nix
+    ./neomutt.nix
+    ./isync.nix
+    ./msmtp.nix
   ];
 }
