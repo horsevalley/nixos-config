@@ -43,7 +43,9 @@ let
     color info white blue bold
     color article white default bold
     highlight all "---.*---" blue 
-    highlight feedlist ''.*\(0/0\)'' black
+    ''
+    highlight feedlist ''.*\\(0/0\\)'' black
+    ''
     highlight article "(^Feed:.*|^Title:.*|^Author:.*)" blue default bold 
     highlight article "(^Link:.*|^Date:.*)" blue default bold
     highlight article "https?://[^ ]+" white default bold
