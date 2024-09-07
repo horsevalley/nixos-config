@@ -140,7 +140,7 @@
 
     # Editors
     vim 
-    neovim
+    # neovim
     tmux 
 
     # File managers
