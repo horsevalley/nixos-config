@@ -1,25 +1,16 @@
-{ config, pkgs, inputs, ... }:
+# home-manager/common/default.nix
+{ config, pkgs, ... }:
 
 {
-
   imports = [
-      inputs.home-manager.nixosModules.home-manager
-      ./git.nix
-    ];
+    ./git.nix
+  ];
 
-  home.username = "jonash";
+  home.username = "Jonas Hestdahl";
   home.homeDirectory = "/home/jonash";
+  home.stateVersion = "24.05";
 
-  home.stateVersion = "24.05"; # Please read the comment before changing.
-
-  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    extraSpecialArgs = { inherit inputs; };
-    users.jonash = import ../../../home-manager/common;
-  };
-
+  # Add your other common configurations here
 }
