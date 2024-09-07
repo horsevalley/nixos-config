@@ -8,7 +8,7 @@
     git
     git-lfs
     newsboat
-    home-manager
+    # home-manager
     yt-dlp
     libnotify
     libvirt
