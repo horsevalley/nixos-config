@@ -1,6 +1,18 @@
-{ config, pkgs, ... }:
+{ pkgs, inputs, system, ... }:
 
+let
+  unstablePkgs = import inputs.nixpkgs-unstable {
+    inherit system;
+  };
+in
+{
+  # Install Neovim from unstable
+  environment.systemPackages = with pkgs; [
+    unstablePkgs.neovim
+  ];
 
+  # Additional Neovim-related configurations can go here
+}
 
 # let
 #   unstable = import (fetchTarball {
@@ -18,16 +30,6 @@
 #     neovim
 #   ];
 
-let
-  unstablePkgs = import inputs.nixpkgs-unstable {
-    inherit pkgs.system;
-  };
-in
-{
-  # Install Neovim from unstable
-  environment.systemPackages = with pkgs; [
-    unstablePkgs.neovim
-  ];
   programs.neovim = {
     enable = true;
     defaultEditor = true;
