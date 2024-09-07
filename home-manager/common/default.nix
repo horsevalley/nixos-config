@@ -6,9 +6,11 @@
     ./git.nix
   ];
 
-  home.username = "Jonas Hestdahl";
-  home.homeDirectory = "/home/jonash";
-  home.stateVersion = "24.05";
+  home = {
+    username = "jonash";
+    homeDirectory = "/home/jonash";
+    stateVersion = "24.05";
+  };
 
   programs.home-manager.enable = true;
 

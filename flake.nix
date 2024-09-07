@@ -21,34 +21,25 @@
       nixosConfigurations = {
         "horsepowr-nixos" = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
           modules = [
             ./hosts/workstation
-              home-manager.nixosModules.home-manager
+            home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.users.jonash = { ... }: {
-                imports = [ ./home-manager/workstation ];
-              };
+              home-manager.users.jonash = import ./home-manager/workstation;
             }
-
           ];
         };
         "legiony540-nixos" = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
           modules = [
             ./hosts/laptop
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.users.jonash = { ... }: {
-                imports = [ ./home-manager/laptop ];
-              };
+              home-manager.users.jonash = import ./home-manager/laptop;
             }
           ];
         };
