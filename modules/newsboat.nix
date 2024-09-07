@@ -4,6 +4,7 @@ let
   newsboatConfig = ''
     # General settings
     auto-reload yes
+    text-width 72
     reload-time 120
     download-retries 4
     download-timeout 10
@@ -28,26 +29,27 @@ let
     bind-key U show-urls
     bind-key x pb-delete
 
-    # Colors and highlighting
-    color listnormal cyan default
-    color listfocus black yellow standout bold
-    color listnormal_unread blue default
-    color listfocus_unread yellow default bold
-    color info red black bold
+    # AESTHETICS
+    color listnormal blue default bold
+    color listnormal_unread white default bold
+    color listfocus white blue bold
+    color listfocus_unread white blue bold
+    color info white blue bold
     color article white default bold
 
-    highlight all "---.*---" yellow
+    highlight all "---.*---" blue 
     highlight feedlist ".*(0/0))" black
-    highlight article "(^Feed:.*|^Title:.*|^Author:.*)" cyan default bold
-    highlight article "(^Link:.*|^Date:.*)" default default
-    highlight article "https?://[^ ]+" green default
-    highlight article "^(Title):.*$" blue default
+    highlight article "(^Feed:.*|^Title:.*|^Author:.*)" blue default bold 
+    highlight article "(^Link:.*|^Date:.*)" blue default bold
+    highlight article "https?://[^ ]+" white default bold
+    highlight article "^(Title):.*$" blue default bold
     highlight article "\\[[0-9][0-9]*\\]" magenta default bold
-    highlight article "\\[image\\ [0-9]+\\]" green default bold
-    highlight article "\\[embedded flash: [0-9][0-9]*\\]" green default bold
-    highlight article ":.*\\(link\\)$" cyan default
-    highlight article ":.*\\(image\\)$" blue default
+    highlight article "\\[image\\ [0-9]+\\]" blue default bold
+    highlight article "\\[embedded flash: [0-9][0-9]*\\]" blue default bold
+    highlight article ":.*\\(link\\)$" white default bold
+    highlight article ":.*\\(image\\)$" white default bold
     highlight article ":.*\\(embedded flash\\)$" magenta default
+
   '';
 
   newsboatUrls = ''
