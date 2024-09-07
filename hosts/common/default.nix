@@ -2,6 +2,13 @@
 { config, pkgs, ... }:
 
 {
+
+  imports =
+    [ 
+      ./hardware-configuration.nix
+      # Add other module imports here
+    ];
+
   users.users.jonash = {
     isNormalUser = true;
     home = "/home/jonash";
@@ -10,4 +17,10 @@
   };
 
   # Other system-wide configurations...
+  system.stateVersion = "24.05"; # Replace with your actual NixOS version if different
+
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
 }
