@@ -128,18 +128,6 @@ in {
       };
     };
 
-    # Add notmuch integration
-    programs.neomutt.extraConfig = ''
-      # Notmuch configuration for neomutt
-      set nm_default_uri = "notmuch://~/.local/share/mail"
-      set virtual_spoolfile = yes
-      
-      # Notmuch bindings
-      macro index,pager \Cf "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt -r --prompt search<enter><change-folder-readonly>`echo ~/.cache/notmuch/mutt/results`<enter>" "search mail (notmuch)"
-      macro index,pager \Cl "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt thread<enter><change-folder-readonly>`echo ~/.cache/notmuch/mutt/results`<enter><enter-command>set wait_key<enter>" "search and reconstruct owning thread (notmuch)"
-      macro index,pager \Cx "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt tag -inbox<enter>" "remove message from inbox (notmuch)"
-    '';
-
     # Set up notmuch
     environment.etc."notmuch-config".text = ''
       [database]
