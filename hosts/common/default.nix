@@ -1,11 +1,12 @@
+# hosts/common/default.nix
 { config, pkgs, ... }:
+
 {
-  # Common configurations
-  home.username = "Jonas Hestdahl";
-  home.homeDirectory = "/home/jonash";
-  home.stateVersion = "24.05";
+  users.users.jonash = {
+    isNormalUser = true;
+    home = "/home/jonash";
+    extraGroups = [ "wheel" ]; # Add other groups as needed
+  };
 
-  programs.home-manager.enable = true;
-
-  # Add your common configurations here
+  # Other system-wide configurations...
 }

@@ -24,15 +24,16 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./hosts/workstation
-            home-manager.nixosModules.home-manager
+              home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.users.jonash = { ... }: {
-                imports = [ ./home-manager/workstation/default.nix ];
+                imports = [ ./home-manager/workstation ];
               };
             }
+
           ];
         };
         "legiony540-nixos" = nixpkgs.lib.nixosSystem {
@@ -46,7 +47,7 @@
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.users.jonash = { ... }: {
-                imports = [ ./home-manager/laptop/default.nix ];
+                imports = [ ./home-manager/laptop ];
               };
             }
           ];
