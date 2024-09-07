@@ -33,5 +33,6 @@
     ./kitty.nix
     ./newsboat.nix
     ./ncmpcpp.nix
+    ./mpd.nix
   ];
 }
