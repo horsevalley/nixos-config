@@ -30,11 +30,11 @@ in
 #     neovim
 #   ];
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    vimAlias = true;
-    viAlias = true;
-  };
+  # programs.neovim = {
+  #   enable = true;
+  #   defaultEditor = true;
+  #   vimAlias = true;
+  #   viAlias = true;
+  # };
 
 }
