@@ -4,6 +4,7 @@ with lib;
 
 let
   cfg = config.programs.neomutt;
+  maildir = "/home/jonash/.mail";  # Adjust this path as needed
 in {
   options.programs.neomutt = {
     enable = mkEnableOption "neomutt email client";
@@ -14,12 +15,6 @@ in {
       defaultText = literalExpression "pkgs.neomutt";
       description = "The neomutt package to use.";
     };
-
-    mailboxPath = mkOption {
-      type = types.str;
-      default = "~/.mail";
-      description = "Path to the mail directory";
-    };
   };
 
   config = mkIf cfg.enable {
@@ -27,7 +22,7 @@ in {
 
     environment.etc."neomuttrc".text = ''
       # Mailbox configuration
-      set folder = "${cfg.mailboxPath}"
+      set folder = "${maildir}"
       set spoolfile = "+INBOX"
       set record = "+Sent"
       set postponed = "+Drafts"
@@ -43,7 +38,7 @@ in {
       set sort = 'reverse-date'
 
       # Sidebar mappings
-      set sidebar_visible = no
+      set sidebar_visible = yes
       set sidebar_width = 20
       set sidebar_short_path = yes
       set sidebar_next_new_wrap = yes
@@ -166,9 +161,13 @@ in {
       color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
     '';
 
-    # Ensure the mailbox directory exists
+    # Create mailbox directories
     system.activationScripts.neomuttMaildir = ''
-      mkdir -p ${cfg.mailboxPath}/{INBOX,Sent,Drafts,Trash,Junk}
+      mkdir -p ${maildir}/{INBOX,Sent,Drafts,Trash,Junk}
+      chown -R jonash:users ${maildir}
     '';
+
+    # Ensure neomutt uses the system-wide configuration
+    environment.variables.NEOMUTT = "/etc/neomuttrc";
   };
 }
