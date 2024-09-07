@@ -1,8 +1,7 @@
-# home-manager/workstation/default.nix or home-manager/laptop/default.nix
 { config, pkgs, ... }:
 
 {
-  imports = [ ../common/default.nix ];
+  imports = [ ../common ];
 
-  # Add any workstation or laptop specific configurations here
+  # Add any workstation specific configurations here
 }

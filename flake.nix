@@ -29,7 +29,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.users.your-username = import ./home-manager/workstation;
+              home-manager.users.jonash = import ./home-manager/workstation;
             }
           ];
         };
@@ -43,7 +43,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.users.your-username = import ./home-manager/laptop;
+              home-manager.users.jonash = import ./home-manager/laptop;
             }
           ];
         };
