@@ -36,5 +36,6 @@
     ./gpg.nix
     ./neomutt.nix
     ./isync.nix
+    ./notmuch.nix
   ];
 }
