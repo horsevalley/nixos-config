@@ -23,7 +23,6 @@
     ./pcmanfm.nix
     ./sddm.nix
     ./yazi.nix
-    ./git.nix
     ./librewolf.nix
     ./gaming.nix
     ./zsh.nix
