@@ -1,27 +1,33 @@
 { config, pkgs, lib, ... }:
 
 {
+  # Install pass (password store)
   environment.systemPackages = with pkgs; [
     pass
   ];
 
+  # Set the PASSWORD_STORE_DIR environment variable
+  # Use $XDG_DATA_HOME to maintain consistency with zsh.nix and profile.nix
   environment.variables = {
-    PASSWORD_STORE_DIR = "${config.users.users.jonash.home}/.local/share/password-store";
+    PASSWORD_STORE_DIR = lib.mkForce "$XDG_DATA_HOME/password-store";
   };
 
-  # Enable shell completion for pass
-  programs = {
-    zsh.enable = lib.mkDefault true;  # Enable zsh by default
-    bash.enableCompletion = true;
+  # Optional: Configure pass-specific options
+  programs.password-store = {
+    enable = true;
+    package = pkgs.pass;
   };
 
-  # Configure shell initialization for pass
+  # If you want to enable bash completion for pass
+  programs.bash.enableCompletion = true;
+
+  # Add shell initialization for pass
   environment.shellInit = ''
     if [[ -n "''${ZSH_VERSION-}" ]]; then
-      # ZSH
+      # For Zsh
       source ${pkgs.pass}/share/zsh/site-functions/_pass
     elif [[ -n "''${BASH_VERSION-}" ]]; then
-      # Bash
+      # For Bash
       source ${pkgs.pass}/share/bash-completion/completions/pass
     fi
   '';
