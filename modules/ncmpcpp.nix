@@ -1,51 +1,15 @@
 { config, lib, pkgs, ... }:
 
 let
-  ncmpcppConfig = pkgs.writeText "ncmpcpp-config" ''
-    ncmpcpp_directory = "~/.config/ncmpcpp"
-    lyrics_directory = "~/.local/share/lyrics"
-    mpd_music_dir = "~/Music"
-    message_delay_time = "1"
-    song_list_format = {$4%a - }{%t}|{$8%f$9}$R{$3(%l)$9}
-    song_status_format = $b{{$8"%t"}} $3by {$4%a{ $3in $7%b{ (%y)}} $3}|{$8%f}
-    song_library_format = {%n - }{%t}|{%f}
-    alternative_header_first_line_format = $b$1$aqqu$/a$9 {%t}|{%f} $1$atqq$/a$9$/b
-    alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%D}
-    current_item_prefix = $(cyan)$r$b
-    current_item_suffix = $/r$(end)$/b
-    current_item_inactive_column_prefix = $(magenta)$r
-    current_item_inactive_column_suffix = $/r$(end)
-    playlist_display_mode = columns
-    browser_display_mode = columns
-    progressbar_look = ->
-    media_library_primary_tag = album_artist
-    media_library_albums_split_by_date = no
-    startup_screen = "media_library"
-    display_volume_level = no
-    ignore_leading_the = yes
-    external_editor = nvim
-    use_console_editor = yes
-    empty_tag_color = magenta
-    main_window_color = white
-    progressbar_color = black:b
-    progressbar_elapsed_color = blue:b
-    statusbar_color = red
-    statusbar_time_color = cyan:b
-    execute_on_song_change = "pkill -RTMIN+11 dwmblocks"
-    execute_on_player_state_change = "pkill -RTMIN+11 dwmblocks"
-  '';
-
-  ncmpcppBindings = pkgs.writeText "ncmpcpp-bindings" ''
+  ncmpcppBindings = ''
     def_key "+"
         show_clock
     def_key "="
         volume_up
-
     def_key "j"
         scroll_down
     def_key "k"
         scroll_up
-
     def_key "ctrl-u"
         page_up
     def_key "ctrl-d"
@@ -58,15 +22,12 @@ let
         previous_column
     def_key "l"
         next_column
-
     def_key "."
         show_lyrics
-
     def_key "n"
         next_found_item
     def_key "N"
         previous_found_item
-
     def_key "J"
         move_sort_order_down
     def_key "K"
@@ -106,22 +67,52 @@ let
     def_key "P"
       show_playlist
   '';
+
+  ncmpcppConfig = ''
+    ncmpcpp_directory = "~/.config/ncmpcpp"
+    lyrics_directory = "~/.local/share/lyrics"
+    mpd_music_dir = "~/Music"
+    message_delay_time = "1"
+    song_list_format = {$4%a - }{%t}|{$8%f$9}$R{$3(%l)$9}
+    song_status_format = $b{{$8"%t"}} $3by {$4%a{ $3in $7%b{ (%y)}} $3}|{$8%f}
+    song_library_format = {%n - }{%t}|{%f}
+    alternative_header_first_line_format = $b$1$aqqu$/a$9 {%t}|{%f} $1$atqq$/a$9$/b
+    alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%D}
+    current_item_prefix = $(cyan)$r$b
+    current_item_suffix = $/r$(end)$/b
+    current_item_inactive_column_prefix = $(magenta)$r
+    current_item_inactive_column_suffix = $/r$(end)
+    playlist_display_mode = columns
+    browser_display_mode = columns
+    progressbar_look = ->
+    media_library_primary_tag = album_artist
+    media_library_albums_split_by_date = no
+    startup_screen = "media_library"
+    display_volume_level = no
+    ignore_leading_the = yes
+    external_editor = nvim
+    use_console_editor = yes
+    empty_tag_color = magenta
+    main_window_color = white
+    progressbar_color = black:b
+    progressbar_elapsed_color = blue:b
+    statusbar_color = red
+    statusbar_time_color = cyan:b
+  '';
+
 in
 {
-  environment.systemPackages = [ pkgs.ncmpcpp ];
+  config = {
+    environment.systemPackages = [ pkgs.ncmpcpp ];
 
-  environment.etc = {
-    "ncmpcpp/config".source = ncmpcppConfig;
-    "ncmpcpp/bindings".source = ncmpcppBindings;
-  };
+    environment.etc."ncmpcpp/bindings".text = ncmpcppBindings;
+    environment.etc."ncmpcpp/config".text = ncmpcppConfig;
 
-  system.activationScripts = {
-    ncmpcppSetup = ''
+    system.activationScripts.ncmpcpp-config = ''
       mkdir -p /home/jonash/.config/ncmpcpp
-      mkdir -p /home/jonash/.local/share/lyrics
-      ln -sf /etc/ncmpcpp/config /home/jonash/.config/ncmpcpp/config
-      ln -sf /etc/ncmpcpp/bindings /home/jonash/.config/ncmpcpp/bindings
-      chown -R jonash:users /home/jonash/.config/ncmpcpp /home/jonash/.local/share/lyrics
+      cp /etc/ncmpcpp/bindings /home/jonash/.config/ncmpcpp/bindings
+      cp /etc/ncmpcpp/config /home/jonash/.config/ncmpcpp/config
+      chown -R jonash:users /home/jonash/.config/ncmpcpp
     '';
   };
 }

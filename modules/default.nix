@@ -28,11 +28,10 @@
     ./gaming.nix
     ./zsh.nix
     ./zathura.nix
-    ./mpd.nix
-    ./ncmpcpp.nix
     ./mpv.nix
     ./dunst.nix
     ./kitty.nix
     ./newsboat.nix
+    ./ncmpcpp.nix
   ];
 }
