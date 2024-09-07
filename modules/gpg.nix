@@ -11,8 +11,8 @@
   programs.gnupg.agent = {
     enable = true;           # Enable the GPG agent
     enableSSHSupport = true; # Use GPG agent for SSH key management
-    pinentryFlavor = "curses"; # Use the terminal-based pinentry program
-    # Other options: "gtk2", "qt", "gnome3" for graphical interfaces
+    pinentryPackage = pkgs.pinentry-curses; # Use the terminal-based pinentry program
+    # Other options: pkgs.pinentry-gtk2, pkgs.pinentry-qt, pkgs.pinentry-gnome3 for graphical interfaces
   };
 
   # Enable pam-gnupg for automatic GPG key unlocking
