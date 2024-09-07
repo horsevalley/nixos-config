@@ -8,6 +8,19 @@ with lib;
 
 let
   cfg = config.programs.mutt-wizard;
+  
+  # Helper function to safely get the first email or return a default
+  getFirstEmail = emails:
+    if builtins.length emails > 0
+    then builtins.head emails
+    else "jonash@jonash.xyz";  # Default email if the list is empty
+
+  # Helper function to get all emails except the first one
+  getOtherEmails = emails:
+    if builtins.length emails > 1
+    then builtins.tail emails
+    else [];
+
 in {
   options.programs.mutt-wizard = {
     enable = mkEnableOption "mutt-wizard for email configuration";
@@ -134,8 +147,8 @@ in {
 
       [user]
       name=Jonas Hestdahl
-      primary_email=${cfg.accounts[0].email}
-      other_email=${builtins.concatStringsSep ";" (builtins.tail (map (a: a.email) cfg.accounts))};
+      primary_email=${getFirstEmail (map (a: a.email) cfg.accounts)}
+      other_email=${builtins.concatStringsSep ";" (getOtherEmails (map (a: a.email) cfg.accounts))};
 
       [new]
       tags=unread;inbox;
