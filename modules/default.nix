@@ -33,5 +33,6 @@
     ./mpv.nix
     ./dunst.nix
     ./kitty.nix
+    ./newsboat.nix
   ];
 }
