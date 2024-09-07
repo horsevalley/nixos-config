@@ -1,38 +1,29 @@
 { config, pkgs, ... }:
-
 {
-  # Security
-  # Enable polkit
+  # General Security Settings
+
+  # Enable PolicyKit, a toolkit for defining and handling authorizations
+  # It's used for controlling system-wide privileges
   security.polkit.enable = true;
 
-  # Configure PAM
-  security.pam.services = {
-    login.gnupg = {
-      enable = true;
-      storeOnly = true;
-    };
-    sudo.gnupg = {
-      enable = true;
-      storeOnly = true;
-    };
-  };
-
+  # Enable RealtimeKit, which allows real-time scheduling of processes
+  # This is often used by audio applications for low-latency audio processing
   security.rtkit.enable = true;
 
-  # Set SUID bit on slock
+  # Configure SUID wrapper for slock (simple X display locker)
+  # This allows slock to be run with elevated privileges
   security.wrappers.slock = {
-    owner = "jonash";
-    group = "wheel";
-    source = "${pkgs.slock}";
-    capabilities = "cap_ipc_lock+ep";
+    owner = "jonash";        # The owner of the slock binary
+    group = "wheel";         # The group of the slock binary
+    source = "${pkgs.slock}"; # The path to the slock binary
+    capabilities = "cap_ipc_lock+ep"; # Gives slock the ability to lock memory
   };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-   programs.mtr.enable = true;
-   programs.gnupg.agent = {
-     enable = true;
-     enableSSHSupport = true;
-   };
+  # Enable My TraceRoute (mtr), a network diagnostic tool
+  # It combines the functionality of 'traceroute' and 'ping'
+  programs.mtr.enable = true;
 
+  # Note: GPG-related configurations have been moved to gpg.nix
+  # This separation allows for better organization and easier management
+  # of GPG-specific settings
 }

@@ -1,33 +1,37 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Install necessary packages
+  # Install necessary packages for GPG functionality
   environment.systemPackages = with pkgs; [
-    gnupg    # The GNU Privacy Guard suite
-    pinentry # Program for entering passphrases
+    gnupg    # The GNU Privacy Guard suite for encryption and signing
+    pinentry # Program for secure passphrase entry
   ];
 
   # Configure the GPG agent
   programs.gnupg.agent = {
-    enable = true;           # Enable the GPG agent
-    enableSSHSupport = true; # Use GPG agent for SSH key management
+    enable = lib.mkForce true;           # Force enable the GPG agent
+    enableSSHSupport = lib.mkForce true; # Force enable GPG agent for SSH key management
     pinentryPackage = pkgs.pinentry-curses; # Use the terminal-based pinentry program
-    # Other options: pkgs.pinentry-gtk2, pkgs.pinentry-qt, pkgs.pinentry-gnome3 for graphical interfaces
+    # Other pinentry options:
+    # pkgs.pinentry-gtk2 - for GTK-based desktop environments
+    # pkgs.pinentry-qt - for Qt-based desktop environments
+    # pkgs.pinentry-gnome3 - for GNOME desktop environment
   };
 
-  # Enable pam-gnupg for automatic GPG key unlocking
+  # Configure PAM (Pluggable Authentication Modules) for GPG
+  # This allows for GPG key unlocking during login and sudo
   security.pam.services = {
-    # Configure for login
+    # Configure GPG for login
     login.gnupg = {
-      enable = true;      # Enable pam-gnupg for login
-      noAutostart = false; # Start GPG agent automatically
-      storeOnly = false;   # Allow using stored passphrases, not just storing them
+      enable = lib.mkForce true;        # Force enable GPG support for login
+      storeOnly = lib.mkForce false;    # Allow using stored passphrases, not just storing them
+      noAutostart = lib.mkForce false;  # Start GPG agent automatically on login
     };
-    # Configure for sudo (same settings as login)
+    # Configure GPG for sudo (same settings as login)
     sudo.gnupg = {
-      enable = true;
-      noAutostart = false;
-      storeOnly = false;
+      enable = lib.mkForce true;
+      storeOnly = lib.mkForce false;
+      noAutostart = lib.mkForce false;
     };
   };
 
@@ -36,6 +40,7 @@
     default-cache-ttl = 34560000; # Cache time for GPG keys (in seconds)
     max-cache-ttl = 34560000;     # Maximum cache time for GPG keys
     # 34,560,000 seconds = 400 days
+    # Adjust these values based on your security needs
   };
 
   # Optional: Set environment variables for GPG
@@ -45,6 +50,7 @@
   # };
 
   # Configure shell initialization for GPG
+  # This adds GPG completion to your shell
   environment.shellInit = ''
     # Source GPG completion scripts based on the current shell
     if [[ -n "''${ZSH_VERSION-}" ]]; then
@@ -57,14 +63,15 @@
   '';
 
   # Enable GPG agent socket for pam-gnupg
+  # This allows the GPG agent to communicate with PAM
   systemd.user.sockets.gpg-agent = {
     enable = true;
     wantedBy = [ "sockets.target" ];
     socketConfig = {
       ListenStream = "%t/gnupg/S.gpg-agent"; # Socket path
       FileDescriptorName = "std";
-      SocketMode = "0600";   # Set socket permissions
-      DirectoryMode = "0700"; # Set directory permissions
+      SocketMode = "0600";   # Set socket permissions (user read/write only)
+      DirectoryMode = "0700"; # Set directory permissions (user read/write/execute only)
     };
   };
 }
