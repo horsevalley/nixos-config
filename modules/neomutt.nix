@@ -14,12 +14,27 @@ in {
       defaultText = literalExpression "pkgs.neomutt";
       description = "The neomutt package to use.";
     };
+
+    mailboxPath = mkOption {
+      type = types.str;
+      default = "~/.mail";
+      description = "Path to the mail directory";
+    };
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = [ cfg.package ];
 
     environment.etc."neomuttrc".text = ''
+      # Mailbox configuration
+      set folder = "${cfg.mailboxPath}"
+      set spoolfile = "+INBOX"
+      set record = "+Sent"
+      set postponed = "+Drafts"
+      set trash = "+Trash"
+
+      mailboxes =INBOX =Sent =Drafts =Trash =Junk
+
       # Date format
       set date_format="%d/%m/%y %H:%M"
 
@@ -149,6 +164,11 @@ in {
       mono body bold "^gpg: Good signature"
       mono body bold "^gpg: BAD signature from.*"
       color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+    '';
+
+    # Ensure the mailbox directory exists
+    system.activationScripts.neomuttMaildir = ''
+      mkdir -p ${cfg.mailboxPath}/{INBOX,Sent,Drafts,Trash,Junk}
     '';
   };
 }
