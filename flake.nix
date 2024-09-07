@@ -28,6 +28,8 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.jonash = import ./home-manager/workstation;
+              nixpkgs.config.allowUnfree = true;
+
             }
           ];
         };
@@ -40,6 +42,8 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.jonash = import ./home-manager/laptop;
+              nixpkgs.config.allowUnfree = true;
+
             }
           ];
         };
