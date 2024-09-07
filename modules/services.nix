@@ -38,4 +38,28 @@
     #};
   };
 
+  # Mail config
+  # Enable and configure the services
+  programs.neomutt.enable = true;
+  services.mbsync = {
+    enable = true;
+    frequency = "*:0/5";  # Sync every 5 minutes
+  };
+
+  # msmtp configuration (using the built-in NixOS module)
+  programs.msmtp = {
+    enable = true;
+    accounts = {
+      default = {
+        auth = true;
+        tls = true;
+        from = "jonash@jonash.xyz";
+        host = "mail.jonash.xyz";
+        port = 587;
+        user = "jonash@jonash.xyz";
+        passwordeval = "pass email/jonash@jonash.xyz";
+      };
+    };
+  };
+
 }

@@ -11,41 +11,37 @@ let
   # Define the base mail directory (same as in isync.nix)
   maildir = "~/.mail";
 in {
-  options = {
-    programs.neomutt = {
-      # Option to enable or disable neomutt
-      enable = mkEnableOption "neomutt email client";
+  options.programs.neomutt = {
+    # Option to enable or disable neomutt
+    enable = mkEnableOption "neomutt email client";
 
-      # Option to specify which neomutt package to use
-      package = mkOption {
-        type = types.package;
-        default = pkgs.neomutt;
-        defaultText = literalExpression "pkgs.neomutt";
-        description = "The neomutt package to use.";
-      };
+    # Option to specify which neomutt package to use
+    package = mkOption {
+      type = types.package;
+      default = pkgs.neomutt;
+      defaultText = literalExpression "pkgs.neomutt";
+      description = "The neomutt package to use.";
+    };
 
-      # Option for additional neomutt configuration
-      configFile = mkOption {
-        type = types.lines;
-        default = "";
-        description = "Additional neomutt configuration";
-      };
+    # Option for additional neomutt configuration
+    configFile = mkOption {
+      type = types.lines;
+      default = "";
+      description = "Additional neomutt configuration";
+    };
 
-      # Option for any extra configuration that doesn't fit elsewhere
-      extraConfig = mkOption {
-        type = types.lines;
-        default = "";
-        description = "Any extra neomutt configuration";
-      };
+    # Option for any extra configuration that doesn't fit elsewhere
+    extraConfig = mkOption {
+      type = types.lines;
+      default = "";
+      description = "Any extra neomutt configuration";
     };
   };
 
   # The actual configuration to apply when neomutt is enabled
   config = mkIf cfg.enable {
-    # Ensure neomutt is installed
     environment.systemPackages = [ cfg.package ];
 
-    # Create the main neomutt configuration file
     environment.etc."neomuttrc".text = ''
       # Basic Settings
       set editor = "nvim"  # Use neovim as the default editor
@@ -87,7 +83,7 @@ in {
       # GPG settings for email encryption
       set crypt_use_gpgme = yes
       set pgp_use_gpg_agent = yes
-      set pgp_sign_as = 0x12345678 # Replace with your GPG key ID
+      set pgp_sign_as = 7FC814B3D47E2BA4154B9060259DB794215BE837 # Replace with your GPG key ID
       set crypt_autosign = yes
       set crypt_verify_sig = yes
 
@@ -99,35 +95,13 @@ in {
       ${cfg.extraConfig}
     '';
 
-    # Ensure the neomutt configuration directory exists
-    system.activationScripts.neomuttConfig = ''
-      mkdir -p ~/.config/neomutt/accounts
-    '';
-  };
-
-  # Enable and configure the services
-  programs.neomutt.enable = true;
-  services.mbsync.enable = true;
-
-  # msmtp configuration
-  programs.msmtp = {
-    enable = true;
-    accounts = {
-      default = {
-        auth = true;
-        tls = true;
-        from = "jonash@jonash.xyz";
-        host = "mail.jonash.xyz";
-        port = 587;
-        user = "jonash@jonash.xyz";
-        passwordeval = "pass email/jonash@jonash.xyz";
+    system.activationScripts = {
+      neomuttConfig = {
+        text = ''
+          mkdir -p ~/.config/neomutt/accounts
+        '';
+        deps = [];
       };
     };
   };
-
-  # Add any additional configuration here
-  environment.systemPackages = with pkgs; [
-    pass
-    # Any other packages you need
-  ];
 }

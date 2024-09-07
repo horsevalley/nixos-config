@@ -11,41 +11,37 @@ let
   # Define the base mail directory
   maildir = "~/.mail";
 in {
-  options = {
-    services.mbsync = {
-      # Option to enable or disable mbsync
-      enable = mkEnableOption "mbsync email synchronization";
+  options.services.mbsync = {
+    # Option to enable or disable mbsync
+    enable = mkEnableOption "mbsync email synchronization";
 
-      # Option to specify which isync package to use
-      package = mkOption {
-        type = types.package;
-        default = pkgs.isync;
-        defaultText = literalExpression "pkgs.isync";
-        description = "The isync package to use.";
-      };
+    # Option to specify which isync package to use
+    package = mkOption {
+      type = types.package;
+      default = pkgs.isync;
+      defaultText = literalExpression "pkgs.isync";
+      description = "The isync package to use.";
+    };
 
-      # Option for additional mbsync configuration
-      configFile = mkOption {
-        type = types.lines;
-        default = "";
-        description = "Additional mbsync configuration";
-      };
+    # Option for additional mbsync configuration
+    configFile = mkOption {
+      type = types.lines;
+      default = "";
+      description = "Additional mbsync configuration";
+    };
 
-      # Option to set how often mbsync should run
-      frequency = mkOption {
-        type = types.str;
-        default = "*:0/2";
-        description = "How often to run mbsync. Default is every 5 minutes.";
-      };
+    # Option to set how often mbsync should run
+    frequency = mkOption {
+      type = types.str;
+      default = "*:0/5";
+      description = "How often to run mbsync. Default is every 5 minutes.";
     };
   };
 
   # The actual configuration to apply when mbsync is enabled
   config = mkIf cfg.enable {
-    # Ensure isync is installed
     environment.systemPackages = [ cfg.package ];
 
-    # Create the mbsync configuration file
     environment.etc."mbsyncrc".text = ''
       # Default settings
       Create Both    # Create mailboxes if they don't exist on either side
@@ -79,7 +75,6 @@ in {
       ${cfg.configFile}
     '';
 
-    # Set up a systemd service to run mbsync
     systemd.user.services.mbsync = {
       description = "Mailbox synchronization service";
       after = [ "network-online.target" ];
@@ -87,19 +82,17 @@ in {
 
       serviceConfig = {
         Type = "oneshot";
-        # Create necessary directories before running mbsync
         ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p ${maildir}/personal/INBOX";
         ExecStart = "${cfg.package}/bin/mbsync -a";  # Sync all channels
       };
     };
 
-    # Set up a systemd timer to run the mbsync service periodically
     systemd.user.timers.mbsync = {
       description = "Periodic mailbox synchronization";
       wantedBy = [ "timers.target" ];
 
       timerConfig = {
-        OnBootSec = "2m";  # Run 2 minutes after boot
+        OnBootSec = "5m";  # Run 5 minutes after boot
         OnUnitActiveSec = cfg.frequency;  # Run at the specified frequency
         Unit = "mbsync.service";
       };
