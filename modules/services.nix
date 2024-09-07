@@ -41,10 +41,6 @@
   # Mail config
   # Enable and configure the services
   programs.neomutt.enable = true;
-  services.mbsync = {
-    enable = true;
-    frequency = "*:0/5";  # Sync every 5 minutes
-  };
 
   # msmtp configuration (using the built-in NixOS module)
   programs.msmtp = {
@@ -63,6 +59,7 @@
   };
 
     # Enable and configure mutt-wizard
+# Enable and configure mutt-wizard
   programs.mutt-wizard = {
     enable = true;
     accounts = [
@@ -81,7 +78,6 @@
       interval = "*:0/5";  # Sync every 5 minutes
     };
   };
-
 
 
 }

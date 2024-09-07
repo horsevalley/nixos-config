@@ -4,7 +4,6 @@
 
 { config, lib, pkgs, ... }:
 
-
 with lib;
 
 let
@@ -70,7 +69,7 @@ in {
       neomutt
       isync
       msmtp
-      notmuch
+      notmuch-mutt
       pass  # for password management
     ];
 
@@ -157,5 +156,4 @@ in {
       ln -sf /etc/notmuch-config /home/jonash/.notmuch-config
     '';
   };
-
 }
