@@ -4,26 +4,6 @@
 
 { config, lib, pkgs, ... }:
 
-  # Enable and configure mutt-wizard
-  programs.mutt-wizard = {
-    enable = true;
-    accounts = [
-      {
-        name = "personal";
-        email = "jonash@jonash.xyz";
-        type = "imap";
-        imap = "mail.jonash.xyz";
-        smtp = "mail.jonash.xyz";
-        passwordCommand = "pass email/jonash@jonash.xyz";
-      }
-      # Add more accounts as needed
-    ];
-    sync = {
-      enable = true;
-      interval = "*:0/5";  # Sync every 5 minutes
-    };
-  };
-
 
 with lib;
 
