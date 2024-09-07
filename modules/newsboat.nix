@@ -1,6 +1,29 @@
 { config, lib, pkgs, ... }:
 
 let
+
+  urlHandler = pkgs.writeScriptBin "newsboat-url-handler" ''
+    #!${pkgs.bash}/bin/bash
+    url="$1"
+    
+    # Check if the URL is a YouTube video
+    if echo "$url" | grep -q "youtube.com/watch\?v="; then
+      ${pkgs.mpv}/bin/mpv "$url"
+    elif echo "$url" | grep -q "youtu.be/"; then
+      ${pkgs.mpv}/bin/mpv "$url"
+    else
+      # Extract YouTube URLs from the page and play them with mpv
+      ${pkgs.curl}/bin/curl -s "$url" | 
+      ${pkgs.gnugrep}/bin/grep -oP 'https?://(?:www\.)?youtu(?:be\.com/watch\?v=|\.be/)[\w-]+' |
+      while read -r video_url; do
+        ${pkgs.mpv}/bin/mpv "$video_url"
+      done
+      
+      # Open the original URL in the default browser
+      ${pkgs.xdg-utils}/bin/xdg-open "$url"
+    fi
+  '';
+
   newsboatConfig = ''
     # General settings
     auto-reload yes
@@ -8,6 +31,9 @@ let
     reload-time 120
     download-retries 4
     download-timeout 10
+
+    # Use our custom URL handler
+    browser ${urlHandler}/bin/newsboat-url-handler
 
     # Keybindings
     bind-key j down
