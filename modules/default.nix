@@ -35,7 +35,6 @@
     ./pass.nix
     ./gpg.nix
     ./neomutt.nix
-    ./isync.nix
-    ./notmuch.nix
+    ./mutt-wizard.nix
   ];
 }
