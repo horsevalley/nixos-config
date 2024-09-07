@@ -58,7 +58,7 @@ in {
       macro index,pager \Cx "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt tag -inbox<enter>" "remove message from inbox (notmuch)"
     '';
 
-    home.file.".notmuch-config".text = ''
+    environment.etc."notmuch-config".text = ''
       [database]
       path=${maildir}
 
