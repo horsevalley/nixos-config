@@ -3,12 +3,6 @@
 
 {
 
-  imports =
-    [ 
-      ./hardware-configuration.nix
-      # Add other module imports here
-    ];
-
   users.users.jonash = {
     isNormalUser = true;
     home = "/home/jonash";
