@@ -2,57 +2,10 @@
 
 let
   newsboatConfig = ''
-    # General settings
-    auto-reload yes
-    reload-time 120
-    download-retries 4
-    download-timeout 10
-
-    # Keybindings
-    bind-key j down
-    bind-key k up
-    bind-key j next articlelist
-    bind-key k prev articlelist
-    bind-key J next-feed articlelist
-    bind-key K prev-feed articlelist
-    bind-key G end
-    bind-key g home
-    bind-key d pagedown
-    bind-key u pageup
-    bind-key l open
-    bind-key h quit
-    bind-key a toggle-article-read
-    bind-key n next-unread
-    bind-key N prev-unread
-    bind-key D pb-download
-    bind-key U show-urls
-    bind-key x pb-delete
-
-    # Catppuccin Mocha color scheme
-    color background default default
-    color listnormal default default
-    color listnormal_unread color10 default
-    color listfocus color15 color8
-    color listfocus_unread color15 color8 bold
-    color info color13 color8
-    color article default default
-
-    # Highlights
-    highlight article "^(Feed|Link):.*$" color14 default bold
-    highlight article "^(Title|Date|Author):.*$" color14 default bold
-    highlight article "https?://[^ ]+" color11 default underline
-    highlight article "\\[[0-9]+\\]" color14 default bold
-    highlight article "\\[image\\ [0-9]+\\]" color14 default bold
-    highlight feedlist "^─.*$" color14 default bold
-
-    # Other custom settings
-    text-width 80
-    
-    # You can add more custom settings here
+    # Your existing newsboat config here
   '';
 
   newsboatUrls = ''
-    # Your existing URLs here
     "-----------------------------------LUKE SMITH-----------------------------------"
     https://lukesmith.xyz/rss.xml "tech blog"
     https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "~Luke Smith (YouTube)"
@@ -74,7 +27,43 @@ let
     https://www.reddit.com/r/unixporn.rss "reddit" "linux"
     https://www.reddit.com/r/ChatGPT.rss "reddit" "chatgpt" "tech"
 
-    # ... (rest of your URLs)
+    "------------------------------------PROGRAMMING--------------------------------"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCGPGirOab9EGy7VH4IwmWVQ "programming" "tech"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UC4JX40jDee_tINbkjycV4Sg "programming" "python"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCmtC7HJIoMQxkvV4gh5dP0Q "programming" "git"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCDAck-gFPTrgTx_qp59-bQA "programming" "devops" "zettelkasten" "kubernetes" "MischaVanDenBurg"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UC2UXDak6o7rBm23k3Vv5dww "tech" "programming"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCWPJwoVXJhv0-ucr3pUs1dA "programming"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCEEVXcDuBRDiwxfXAgQjLGug "programming" "Linux"
+    https://charm.sh/blog/rss.xml
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCcDX-RWfzJ1YwprkagBXwrg "programming"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCs2Kaw3Soa63cJq3H0VA7og "programming"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCo71RUe6DX4w-Vd47rFLXPg "programming"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCppiOhLD5jQgs6m0j9-PYOA "programming" "ricing"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UC7yZ6keOGsvERMp2HaEbbXQ "programming"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCKQdc0-Targ4nDIAUrlfKiA "programming" "python"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCUyeluBRhGPCW4rPe_UvBZQ "theprimeagen"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw "theprimeagen"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCVk4b-svNJoeytrrlOixebQ "theprimeagen"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCcJQ96WlEhJ0Ve0SLmU310Q "programming"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCWr0mx597DnSGLFk1WfvSkQ "programming"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCDY981jZta5C5A6kQXioGUg "vim"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UCYuQjtwffrSIzfswH3V24mQ "programming"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UC5DNytAJ6_FISueUfzZCVsw "programming"
+    https://www.youtube.com/feeds/videos.xml?channel_id=UC9H0HzpKf5JlazkADWnW1Jw "programming"
+    https://lobste.rs/t/programming.rss "programming"
+    https://lobste.rs/t/python.rss "programming"
+    https://simonwillison.net/atom/everything/ "tech blog"
+    https://cipherlogs.com/rss.xml "programming" "vim"
+
+    # ... Add all your other URLs here ...
+
+    "--------------------------COPY YOUTUBE CHANNEL ID------------------------------"
+    "How to copy a YouTube channel_id:"
+    "1. Go to the About page"
+    "2. Share Channel -> copy channel id"
+    "3. https://www.youtube.com/feeds/videos.xml?channel_id=[insert channel id here, w/o brackets]"
+    "-------------------------------------------------------------------------------"
   '';
 
 in
