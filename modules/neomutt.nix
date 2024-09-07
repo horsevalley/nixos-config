@@ -104,4 +104,30 @@ in {
       mkdir -p ~/.config/neomutt/accounts
     '';
   };
+
+  # Enable and configure the services
+  programs.neomutt.enable = true;
+  services.mbsync.enable = true;
+
+  # msmtp configuration
+  programs.msmtp = {
+    enable = true;
+    accounts = {
+      default = {
+        auth = true;
+        tls = true;
+        from = "jonash@jonash.xyz";
+        host = "mail.jonash.xyz";
+        port = 587;
+        user = "jonash@jonash.xyz";
+        passwordeval = "pass email/jonash@jonash.xyz";
+      };
+    };
+  };
+
+  # Add any additional configuration here
+  environment.systemPackages = with pkgs; [
+    pass
+    # Any other packages you need
+  ];
 }
