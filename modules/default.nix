@@ -32,5 +32,7 @@
     ./dunst.nix
     ./kitty.nix
     ./newsboat.nix
+    ./pass.nix
+    ./gpg.nix
   ];
 }
