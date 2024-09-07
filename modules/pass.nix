@@ -1,15 +1,20 @@
 { config, pkgs, lib, ... }:
 
+let
+  # Replace this with your actual username
+  username = "jonash";
+in
 {
-  # Install pass (password store)
+  # Install pass and related tools
   environment.systemPackages = with pkgs; [
     pass
+    gnupg
+    pinentry
   ];
 
   # Set the PASSWORD_STORE_DIR environment variable
-  # Use $XDG_DATA_HOME to maintain consistency with zsh.nix and profile.nix
   environment.variables = {
-    PASSWORD_STORE_DIR = lib.mkForce "$XDG_DATA_HOME/password-store";
+    PASSWORD_STORE_DIR = lib.mkForce "$HOME/.local/share/password-store";
   };
 
   # Enable bash completion for pass
@@ -17,6 +22,9 @@
 
   # Add shell initialization for pass
   environment.shellInit = ''
+    # Ensure PASSWORD_STORE_DIR is set correctly
+    export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
+
     if [[ -n "''${ZSH_VERSION-}" ]]; then
       # For Zsh
       source ${pkgs.pass}/share/zsh/site-functions/_pass
@@ -24,5 +32,23 @@
       # For Bash
       source ${pkgs.pass}/share/bash-completion/completions/pass
     fi
+
+    # Ensure PASSWORD_STORE_DIR exists and has correct permissions
+    if [[ ! -d "$PASSWORD_STORE_DIR" ]]; then
+      mkdir -p "$PASSWORD_STORE_DIR"
+      chmod 700 "$PASSWORD_STORE_DIR"
+    fi
+
+    # Initialize pass if .gpg-id doesn't exist
+    if [[ ! -f "$PASSWORD_STORE_DIR/.gpg-id" ]]; then
+      echo "Initializing password store..."
+      pass init "Your GPG Key ID or Email"
+    fi
   '';
+
+  # Ensure GPG agent is configured correctly
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 }

@@ -5,6 +5,7 @@
   environment.systemPackages = with pkgs; [
     gnupg    # The GNU Privacy Guard suite for encryption and signing
     pinentry # Program for secure passphrase entry
+    pam_gnupg
   ];
 
   # Configure the GPG agent
