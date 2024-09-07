@@ -11,8 +11,6 @@ in {
   # Use Neovim from the unstable channel
   environment.systemPackages = with unstable; [
     neovim
-    ripgrep # Useful for searching in Neovim
-    fd      # Optional, but handy for fuzzy finding in Neovim
   ];
 
   # Optionally, configure Neovim to be the default editor
@@ -21,18 +19,6 @@ in {
     defaultEditor = true;
     vimAlias = true;
     viAlias = true;
-  };
-
-  # Neovim Plugin Installation
-  system.activationScripts = {
-    installNeovimPlugins = ''
-      NVIM_PLUGIN_DIR="$HOME/.local/share/nvim/site/pack/packer/start"
-      if [ ! -d "$NVIM_PLUGIN_DIR" ]; then
-        mkdir -p "$NVIM_PLUGIN_DIR"
-        ${unstable.git}/bin/git clone --depth 1 https://github.com/wbthomason/packer.nvim \
-          "$NVIM_PLUGIN_DIR/packer.nvim"
-      fi
-    '';
   };
 
   # Add Neovim to PATH and set any necessary environment variables
