@@ -18,7 +18,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs; };
-    users.your-username = import ../../../home-manager/common;
+    users.jonash = import ../../../home-manager/common;
   };
 
 }
