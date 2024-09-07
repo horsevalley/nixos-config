@@ -55,9 +55,9 @@
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";   # Optional, hint electron apps to use wayland
     WLR_NO_HARDWARE_CURSORS = "1";
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    LIBVA_DRIVER_NAME = "nvidia";
+    # GBM_BACKEND = "nvidia-drm";
+    # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    # LIBVA_DRIVER_NAME = "nvidia";
     PATH = [
       "/run/current-system/sw/bin"
       "$HOME/.local/bin"
