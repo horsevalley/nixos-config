@@ -2,6 +2,9 @@
   description = "NixOS multi-machine configuration";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+
+    # Adding unstable channel
+    nixpkgs-unstable.url = "nixpkgs/unstable";
   };
   outputs = { self, nixpkgs, ... }@inputs:
     let
