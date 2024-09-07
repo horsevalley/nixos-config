@@ -12,13 +12,7 @@
     PASSWORD_STORE_DIR = lib.mkForce "$XDG_DATA_HOME/password-store";
   };
 
-  # Optional: Configure pass-specific options
-  programs.password-store = {
-    enable = true;
-    package = pkgs.pass;
-  };
-
-  # If you want to enable bash completion for pass
+  # Enable bash completion for pass
   programs.bash.enableCompletion = true;
 
   # Add shell initialization for pass
