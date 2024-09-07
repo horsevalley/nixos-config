@@ -11,9 +11,14 @@ let
       ${pkgs.xdg-utils}/bin/xdg-open "$1"
     }
 
+    # Function to play video in mpv as a detached process
+    play_in_mpv() {
+      nohup ${pkgs.mpv}/bin/mpv "$1" </dev/null >/dev/null 2>&1 &
+    }
+
     # Check if the URL is a YouTube video
     if echo "$url" | grep -q -E "youtube.com/watch\?v=|youtu.be/"; then
-      ${pkgs.mpv}/bin/mpv "$url"
+      play_in_mpv "$url"
     else
       # Extract the first YouTube URL from the page and play it with mpv
       video_url=$(${pkgs.curl}/bin/curl -s "$url" | 
@@ -21,7 +26,7 @@ let
                   head -n 1)
       
       if [ -n "$video_url" ]; then
-        ${pkgs.mpv}/bin/mpv "$video_url"
+        play_in_mpv "$video_url"
       fi
       
       # Open the original URL in the default browser
