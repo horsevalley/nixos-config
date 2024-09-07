@@ -8,8 +8,6 @@
     ./programs/wayland/hyprland.nix
     ./neovim.nix
     ./fonts.nix
-    ./hardware/nvidia.nix
-    ./hardware/opengl.nix
     ./keyboard.nix
     ./localization.nix
     ./networking.nix
