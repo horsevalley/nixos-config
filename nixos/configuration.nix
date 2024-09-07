@@ -30,7 +30,6 @@
       ./modules/pcmanfm.nix
       ./modules/sddm.nix
       ./modules/yazi.nix
-      ./modules/git.nix
       ./modules/librewolf.nix
       ./modules/gaming.nix
     ];

@@ -4,8 +4,6 @@
   imports = [ 
     ../common/default.nix 
     ./hardware-configuration.nix 
-    ./nvidia.nix 
-    ./opengl.nix 
   ];
 
   # Networking

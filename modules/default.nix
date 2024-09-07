@@ -6,6 +6,8 @@
     ./X11.nix
     ./gnome.nix
     ./programs/wayland/hyprland.nix
+    ./hardware/nvidia.nix
+    ./hardware/opengl.nix
     ./neovim.nix
     ./fonts.nix
     ./keyboard.nix
