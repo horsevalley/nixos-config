@@ -47,6 +47,8 @@
     BAT_THEME = "Catppuccin Mocha";
     SNIPPETS_FILE = "$HOME/.local/bin/snippets";
     ANTHROPIC_API_KEY="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";
+    NEWSBOAT_CONFIG_DIR = "$HOME/.config/newsboat";
+
   };
 
   environment.shellInit = ''
