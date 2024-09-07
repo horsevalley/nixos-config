@@ -1,59 +1,81 @@
+# This module configures neomutt, a powerful, terminal-based email client.
+# It's part of a larger email setup including isync for syncing and msmtp for sending.
+
 { config, lib, pkgs, ... }:
 
 with lib;
 
 let
+  # This lets us refer to the user's neomutt configuration options easily
   cfg = config.programs.neomutt;
+  # Define the base mail directory (same as in isync.nix)
+  maildir = "~/.mail";
 in {
-  options.programs.neomutt = {
-    enable = mkEnableOption "neomutt email client";
+  options = {
+    programs.neomutt = {
+      # Option to enable or disable neomutt
+      enable = mkEnableOption "neomutt email client";
 
-    package = mkOption {
-      type = types.package;
-      default = pkgs.neomutt;
-      defaultText = literalExpression "pkgs.neomutt";
-      description = "The neomutt package to use.";
-    };
+      # Option to specify which neomutt package to use
+      package = mkOption {
+        type = types.package;
+        default = pkgs.neomutt;
+        defaultText = literalExpression "pkgs.neomutt";
+        description = "The neomutt package to use.";
+      };
 
-    configFile = mkOption {
-      type = types.lines;
-      default = "";
-      description = "neomutt configuration";
-    };
+      # Option for additional neomutt configuration
+      configFile = mkOption {
+        type = types.lines;
+        default = "";
+        description = "Additional neomutt configuration";
+      };
 
-    extraConfig = mkOption {
-      type = types.lines;
-      default = "";
-      description = "Additional neomutt configuration";
+      # Option for any extra configuration that doesn't fit elsewhere
+      extraConfig = mkOption {
+        type = types.lines;
+        default = "";
+        description = "Any extra neomutt configuration";
+      };
     };
   };
 
+  # The actual configuration to apply when neomutt is enabled
   config = mkIf cfg.enable {
+    # Ensure neomutt is installed
     environment.systemPackages = [ cfg.package ];
 
+    # Create the main neomutt configuration file
     environment.etc."neomuttrc".text = ''
       # Basic Settings
-      set editor = "nvim"
-      set sort = threads
-      set sort_aux = reverse-last-date-received
-      set charset = "utf-8"
+      set editor = "nvim"  # Use neovim as the default editor
+      set sort = threads   # Sort emails by thread
+      set sort_aux = reverse-last-date-received  # Sort threads by date
+      set charset = "utf-8"  # Use UTF-8 encoding
+
+      # Mail directory settings
+      set folder = "${maildir}/personal"  # Set the base mail directory
+      set spoolfile = "+INBOX"  # Set the default mailbox to open
+      set record = "+Sent"     # Where to store sent messages
+      set postponed = "+Drafts"  # Where to store draft messages
+      set trash = "+Trash"     # Where to move deleted messages
 
       # Sidebar Settings
-      set sidebar_visible = yes
-      set sidebar_width = 30
-      set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
-      set mail_check_stats
+      set sidebar_visible = yes  # Show the sidebar
+      set sidebar_width = 30     # Set sidebar width
+      set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"  # Sidebar format
+      set mail_check_stats  # Update mailbox statistics
 
-      # Mailboxes
+      # Mailboxes to show in the sidebar
       mailboxes =INBOX =Sent =Drafts =Trash =Junk
 
-      # Account Settings
+      # Source account-specific settings
       source ~/.config/neomutt/accounts/personal
 
-      # Key Bindings
-      bind index,pager \CP sidebar-prev
-      bind index,pager \CN sidebar-next
-      bind index,pager \CO sidebar-open
+      # Key Bindings for sidebar navigation
+      bind index,pager \CP sidebar-prev  # Ctrl-P to select previous mailbox
+      bind index,pager \CN sidebar-next  # Ctrl-N to select next mailbox
+      bind index,pager \CO sidebar-open  # Ctrl-O to open selected mailbox
 
       # Colors
       color normal default default
@@ -62,24 +84,24 @@ in {
       color sidebar_highlight red default
       color sidebar_divider brightblack black
 
-      # GPG settings
+      # GPG settings for email encryption
       set crypt_use_gpgme = yes
       set pgp_use_gpg_agent = yes
-      set pgp_sign_as = 7FC814B3D47E2BA4154B9060259DB794215BE837 # Replace with your GPG key ID
+      set pgp_sign_as = 0x12345678 # Replace with your GPG key ID
       set crypt_autosign = yes
       set crypt_verify_sig = yes
 
       # Use msmtp for sending emails
       set sendmail = "/run/wrappers/bin/msmtp"
 
+      # Include user's additional configuration
       ${cfg.configFile}
       ${cfg.extraConfig}
     '';
+
+    # Ensure the neomutt configuration directory exists
+    system.activationScripts.neomuttConfig = ''
+      mkdir -p ~/.config/neomutt/accounts
+    '';
   };
-
-  # Enable and configure the services
-  programs.neomutt.enable = true;
-  services.mbsync.enable = true;
-  programs.msmtp.enable = true;
-
 }
