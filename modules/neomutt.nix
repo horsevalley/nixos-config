@@ -159,20 +159,18 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ cfg.package ];
+    environment.systemPackages = [
+      cfg.package
+      (pkgs.writeScriptBin "neomutt" ''
+        #!${pkgs.bash}/bin/bash
+        exec ${cfg.package}/bin/neomutt -F ${neomuttConfig} "$@"
+      '')
+    ];
 
     # Create mailbox directories
     system.activationScripts.neomuttMaildir = ''
       mkdir -p ${maildir}/{INBOX,Sent,Drafts,Trash,Junk}
       chown -R ${username}:users ${maildir}
     '';
-
-    # Create a wrapper script that uses the user-specific config
-    environment.systemPackages = [
-      (pkgs.writeScriptBin "neomutt" ''
-        #!${pkgs.bash}/bin/bash
-        exec ${cfg.package}/bin/neomutt -F ${neomuttConfig} "$@"
-      '')
-    ];
   };
 }
