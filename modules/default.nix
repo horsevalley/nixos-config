@@ -25,7 +25,6 @@
     ./yazi.nix
     ./git.nix
     ./librewolf.nix
-    ./gaming.nix
     ./zsh.nix
     ./zathura.nix
     ./mpv.nix

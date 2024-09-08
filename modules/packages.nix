@@ -164,9 +164,9 @@
     abook
 
     # Gaming
-    bottles
-    lutris
-    heroic
+    # bottles
+    # lutris
+    # heroic
 
     # Security
     pam_gnupg
