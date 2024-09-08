@@ -38,24 +38,4 @@
     #};
   };
 
-  # Mail config
-  # Enable and configure the services
-  programs.neomutt.enable = true;
-
-  # msmtp configuration (using the built-in NixOS module)
-  programs.msmtp = {
-    enable = true;
-    accounts = {
-      default = {
-        auth = true;
-        tls = true;
-        from = "jonash@jonash.xyz";
-        host = "mail.jonash.xyz";
-        port = 587;
-        user = "jonash@jonash.xyz";
-        passwordeval = "pass email/jonash@jonash.xyz";
-      };
-    };
-  };
-
 }
