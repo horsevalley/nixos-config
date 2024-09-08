@@ -1,7 +1,7 @@
 { config, pkgs, unstable, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     (unstable.neovim.override {
       viAlias = true;
       vimAlias = true;
@@ -15,4 +15,11 @@
     EDITOR = "nvim";
     VISUAL = "nvim";
   };
+
+  # Force the system to use the unstable version
+  nixpkgs.overlays = [
+    (final: prev: {
+      neovim = unstable.neovim;
+    })
+  ];
 }
