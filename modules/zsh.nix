@@ -24,7 +24,6 @@ in
       export FZF_DEFAULT_OPTS="
         --height 80%
         --layout=reverse
-        --width 80%
         --preview 'echo {}'
         --preview-window up:3:hidden:wrap
         --bind 'ctrl-/:toggle-preview'
@@ -36,7 +35,7 @@ in
         --walker-skip .git,node_modules,target
         --preview 'bat -n --color=always {}'
         --bind 'ctrl-/:change-preview-window(down|hidden|)'"
-      export FZF_TMUX_OPTS="-p"
+      export FZF_TMUX_OPTS="-p 80%,80%"
       export FZF_DEFAULT_COMMAND="fd --type f"
       # Load fzf
       if [ -f "${pkgs.fzf}/share/fzf/completion.zsh" ]; then
@@ -47,6 +46,21 @@ in
       fi
       # Explicitly bind Ctrl-R to fzf-history-widget
       bindkey '^R' fzf-history-widget
+
+      # Function to set FZF_DEFAULT_OPTS dynamically based on terminal size
+      set_fzf_opts() {
+        local screen_width=$(tput cols)
+        local screen_height=$(tput lines)
+        local fzf_width=$((screen_width * 80 / 100))
+        export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --width $fzf_width"
+      }
+
+      # Call the function to set FZF_DEFAULT_OPTS
+      set_fzf_opts
+
+      # Add the function to precmd hook to update on terminal resize
+      autoload -Uz add-zsh-hook
+      add-zsh-hook precmd set_fzf_opts
     '';
   };
   # Enable Starship
