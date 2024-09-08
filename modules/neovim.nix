@@ -1,28 +1,18 @@
 { config, pkgs, unstable, ... }:
 
 {
-  # Use Neovim from the unstable channel
-  environment.systemPackages = [
-    unstable.neovim
+  environment.systemPackages = with pkgs; [
+    (unstable.neovim.override {
+      viAlias = true;
+      vimAlias = true;
+      withPython3 = true;
+      withNodeJs = true;
+      withRuby = true;
+    })
   ];
 
-  # Configure Neovim
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    vimAlias = true;
-    viAlias = true;
-    package = unstable.neovim;
-  };
-
-  # Ensure necessary tools are available system-wide
-  # environment.systemPackages = with pkgs; [
-  #   gcc
-  #   python3
-  # ];
-
-  # Set up any necessary environment variables
   environment.variables = {
     EDITOR = "nvim";
+    VISUAL = "nvim";
   };
 }
