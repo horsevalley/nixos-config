@@ -34,7 +34,5 @@
     ./newsboat.nix
     ./pass.nix
     ./gpg.nix
-    ./neomutt.nix
-    ./mutt-wizard.nix
   ];
 }
