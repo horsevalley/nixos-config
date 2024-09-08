@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  # Enable Steam
+  # Steam settings
   programs.steam.enable = true;
   hardware.steam-hardware.enable = true;
   programs.steam.proton = {
@@ -9,14 +9,35 @@
     experimental = true;  # Use Proton Experimental for better compatibility with games
   };
 
-  # Enable Wine and Lutris
+  # Set Steam library path
+  environment.variables.STEAM_LIBRARY_FOLDERS = "/mnt/IronWolf8TB/Games";
+
+  # Enable Lutris and Wine for non-Steam games
+  programs.lutris.enable = true;
   environment.systemPackages = with pkgs; [
     wine
-    winetricks   # Additional Wine tweaks
+    winetricks   # Useful for installing additional libraries needed by some Windows games
     lutris       # Game launcher for non-Steam games (like Battle.net)
+    heroic-games-launcher # Heroic Games Launcher for Epic Games and GOG
+    vkd3d        # DirectX 12 to Vulkan translation (for modern games)
+    dxvk         # DirectX 9, 10, 11 to Vulkan translation (improves performance on Wine)
+    vulkan-tools # Vulkan utilities for testing Vulkan capabilities
+    vulkan-headers # Vulkan development headers (optional but useful)
   ];
 
-  # NVIDIA drivers configuration
+  # Set Lutris and Heroic-specific game paths without overriding global variables
+  environment.variables = {
+    # Lutris-specific data directory
+    LUTRIS_RUNTIME_DIR = "/mnt/IronWolf8TB/Games/lutris";
+
+    # Wine prefix for Lutris/Battle.net games
+    WINEPREFIX_BATTLENET = "/mnt/IronWolf8TB/Games/battlenet";
+
+    # Heroic-specific games directory
+    HEROIC_GAMES_FOLDER = "/mnt/IronWolf8TB/Games/heroic";
+  };
+
+  # NVIDIA driver setup
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true;
@@ -26,24 +47,12 @@
     powerManagement.finegrained = false;
   };
 
-  # Enable Vulkan and DirectX-to-Vulkan translation (for games using DX9, DX10, DX11, DX12)
-  environment.systemPackages = with pkgs; [
-    vulkan-tools   # Vulkan testing tools
-    vulkan-headers # Vulkan development headers
-    vkd3d          # DirectX 12 to Vulkan translation
-    dxvk           # DirectX 9, 10, 11 to Vulkan translation
-  ];
-
-  # Enable GameMode for gaming performance tweaks
+  # Enable GameMode for gaming performance enhancements
   programs.gamemode.enable = true;
 
-  # Optional: Other gaming-related tools (add more if necessary)
-  environment.systemPackages = with pkgs; [
-    # Any other gaming-related software like benchmarking tools
-    # Example: glxinfo to check graphics information
-    mesa-utils  # OpenGL utilities like glxinfo/glxgears for testing
+  # Ensure the games directory exists with correct permissions
+  systemd.tmpfiles.rules = [
+    "d /mnt/IronWolf8TB/Games 0775 jonash users -"
   ];
-
-  # Configure Optimus if on a laptop with hybrid graphics (optional)
-  # hardware.nvidia.optimus.enable = true;
 }
+
