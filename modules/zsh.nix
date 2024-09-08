@@ -14,31 +14,36 @@ in
       bindkey -v
       export KEYTIMEOUT=1
 
-      # Change cursor shape for different vi modes
-      function zle-keymap-select {
-        if [[ ''${KEYMAP} == vicmd ]] ||
-           [[ $1 = 'block' ]]; then
-          echo -ne '\e[2 q'
-        elif [[ ''${KEYMAP} == main ]] ||
-             [[ ''${KEYMAP} == viins ]] ||
-             [[ ''${KEYMAP} = ''' ]] ||
-             [[ $1 = 'beam' ]]; then
-          echo -ne '\e[6 q'
-        fi
+      # Cursor shape changes
+      cursor_block='\e[2 q'
+      cursor_beam='\e[6 q'
+
+      function set_cursor_shape() {
+        case ''${KEYMAP:-main} in
+          vicmd)
+            echo -ne "$cursor_block"
+            ;;
+          viins|main)
+            echo -ne "$cursor_beam"
+            ;;
+        esac
       }
-      zle -N zle-keymap-select
 
-      # Use beam shape cursor on startup.
-      echo -ne '\e[6 q'
+      function zle-line-init() {
+        echo -ne "$cursor_beam"
+      }
+      zle -N zle-line-init
 
-      # Use beam shape cursor for each new prompt.
-      preexec() { echo -ne '\e[6 q' ;}
+      autoload -Uz add-zsh-hook
+      add-zsh-hook precmd set_cursor_shape
 
       # Use vim keys in tab complete menu
+      zmodload zsh/complist
       bindkey -M menuselect 'h' vi-backward-char
       bindkey -M menuselect 'k' vi-up-line-or-history
       bindkey -M menuselect 'l' vi-forward-char
       bindkey -M menuselect 'j' vi-down-line-or-history
+      bindkey -v '^?' backward-delete-char
 
       # Load Starship prompt
       eval "$(starship init zsh)"
@@ -58,6 +63,7 @@ in
         --walker-skip .git,node_modules,target
         --preview 'bat -n --color=always {}'
         --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+      export FZF_TMUX_OPTS="-p"
       export FZF_DEFAULT_COMMAND="fd --type f"
 
       # Function to set FZF_TMUX_OPTS dynamically
@@ -75,7 +81,6 @@ in
       set_fzf_tmux_opts
 
       # Add the function to precmd hook to update on new shell or tmux attach/detach
-      autoload -Uz add-zsh-hook
       add-zsh-hook precmd set_fzf_tmux_opts
 
       # Load fzf
@@ -114,12 +119,26 @@ in
     '';
   };
   # Enable Starship
-  programs.starship.enable = true;
-  # Ensure fzf and tmux are installed
+  programs.starship = {
+    enable = true;
+    settings = {
+      add_newline = false;
+      character = {
+        success_symbol = "[<ins>](bold blue)";
+        error_symbol = "[✗](bold red)";
+        vicmd_symbol = "[<norm>](bold blue)";
+      };
+    };
+  };
+  # Ensure required packages are installed
   environment.systemPackages = with pkgs; [
     fzf
     fd
     bat
     tmux
+    git
+    starship
+    gnupg
+    pass
   ];
 }
