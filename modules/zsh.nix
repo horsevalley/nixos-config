@@ -124,9 +124,9 @@ in
     settings = {
       add_newline = false;
       character = {
-        success_symbol = "[<ins>](bold blue)";
+        success_symbol = "[< ins >](bold blue)";
         error_symbol = "[✗](bold red)";
-        vicmd_symbol = "[<norm>](bold blue)";
+        vicmd_symbol = "[< norm >](bold blue)";
       };
     };
   };

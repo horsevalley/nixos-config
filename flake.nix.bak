@@ -2,7 +2,10 @@
   description = "NixOS multi-machine configuration";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+
+    # Adding unstable channel
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
   };
   outputs = { self, nixpkgs, nixpkgs-unstable, ... }@inputs:
     let
@@ -11,23 +14,17 @@
         inherit system;
         config.allowUnfree = true;
       };
-      unstable = import nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-      };
     in
     {
       nixosConfigurations = {
         "horsepowr-nixos" = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit unstable; };
           modules = [
             ./hosts/workstation
           ];
         };
         "legiony540-nixos" = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit unstable; };
           modules = [
             ./hosts/laptop
           ];
