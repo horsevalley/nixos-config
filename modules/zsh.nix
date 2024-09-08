@@ -21,19 +21,17 @@ in
       # Load Starship prompt
       eval "$(starship init zsh)"
       # FZF settings
-      # CTRL-/ to toggle small preview window to see the full command
-      # CTRL-Y to copy the command into clipboard using pbcopy
-      export FZF_CTRL_R_OPTS="
-        --preview 'echo {}' --preview-window up:3:hidden:wrap
+      export FZF_DEFAULT_OPTS="
+        --height 80%
+        --layout=reverse
+        --width 80%
+        --preview 'echo {}'
+        --preview-window up:3:hidden:wrap
         --bind 'ctrl-/:toggle-preview'
         --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
         --color header:italic
         --history-size=1000000
-        --header 'Press CTRL-Y to copy command into clipboard'
-        --height 40%
-        --layout=reverse
-        --width 80%"
-      # Preview file content using bat (https://github.com/sharkdp/bat)
+        --header 'Press CTRL-Y to copy command into clipboard'"
       export FZF_CTRL_T_OPTS="
         --walker-skip .git,node_modules,target
         --preview 'bat -n --color=always {}'
@@ -41,9 +39,11 @@ in
       export FZF_TMUX_OPTS="-p"
       export FZF_DEFAULT_COMMAND="fd --type f"
       # Load fzf
-      if [ -n "''${commands[fzf-share]}" ]; then
-        source "$(fzf-share)/key-bindings.zsh"
-        source "$(fzf-share)/completion.zsh"
+      if [ -f "${pkgs.fzf}/share/fzf/completion.zsh" ]; then
+        source "${pkgs.fzf}/share/fzf/completion.zsh"
+      fi
+      if [ -f "${pkgs.fzf}/share/fzf/key-bindings.zsh" ]; then
+        source "${pkgs.fzf}/share/fzf/key-bindings.zsh"
       fi
       # Explicitly bind Ctrl-R to fzf-history-widget
       bindkey '^R' fzf-history-widget
@@ -51,4 +51,10 @@ in
   };
   # Enable Starship
   programs.starship.enable = true;
+  # Ensure fzf is installed
+  environment.systemPackages = with pkgs; [
+    fzf
+    fd
+    bat
+  ];
 }
