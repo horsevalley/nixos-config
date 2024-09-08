@@ -1,13 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  # Steam settings
+  # Enable Steam
   programs.steam.enable = true;
   hardware.steam-hardware.enable = true;
-  programs.steam.proton = {
-    enable = true;
-    experimental = true;  # Use Proton Experimental for better compatibility with games
-  };
 
   # Set Steam library path
   environment.variables.STEAM_LIBRARY_FOLDERS = "/mnt/IronWolf8TB/Games";
