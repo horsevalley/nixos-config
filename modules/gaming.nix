@@ -12,8 +12,7 @@
   # Set Steam library path
   environment.variables.STEAM_LIBRARY_FOLDERS = "/mnt/IronWolf8TB/Games";
 
-  # Enable Lutris and Wine for non-Steam games
-  programs.lutris.enable = true;
+  # Install Lutris, Wine, and other gaming-related tools
   environment.systemPackages = with pkgs; [
     wine
     winetricks   # Useful for installing additional libraries needed by some Windows games
