@@ -33,5 +33,6 @@
     ./newsboat.nix
     ./pass.nix
     ./gpg.nix
+    ./gaming.nix
   ];
 }
