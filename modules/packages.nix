@@ -93,15 +93,15 @@
     # Audio
     wireplumber
     pulsemixer 
-    youtube-music
+    mpd
+    mpc-cli
     ncmpcpp
+    youtube-music
     playerctl
     pamixer
 
     # Video
     mpv
-    mpd
-    mpc-cli
     ffmpeg
     wf-recorder # Utility program for screen recording of wlroots-based compositors
     # jellyfin
