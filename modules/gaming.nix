@@ -8,12 +8,12 @@
   # Set Steam library path
   environment.variables.STEAM_LIBRARY_FOLDERS = "/mnt/IronWolf8TB/Games";
 
-  # Install Lutris, Wine, and other gaming-related tools
+  # Install Lutris, Heroic, and Wine
   environment.systemPackages = with pkgs; [
     wine
     winetricks   # Useful for installing additional libraries needed by some Windows games
     lutris       # Game launcher for non-Steam games (like Battle.net)
-    heroic-games-launcher # Heroic Games Launcher for Epic Games and GOG
+    heroic       # Official Heroic Games Launcher package
     vkd3d        # DirectX 12 to Vulkan translation (for modern games)
     dxvk         # DirectX 9, 10, 11 to Vulkan translation (improves performance on Wine)
     vulkan-tools # Vulkan utilities for testing Vulkan capabilities
