@@ -163,7 +163,7 @@
     cfy = "vim ~/.config/yazi/yazi.toml";
     fr = "sudo nixos-rebuild switch --flake ~/repos/github/nixos-config/#$(hostname)";
     frd = "sudo nixos-rebuild dry-run --flake ~/repos/github/nixos-config/#$(hostname)";
-    repos="cd ~/repos && ls" \
+    repos="cd ~/repos && ls" ;
 
   };
 }
