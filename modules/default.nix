@@ -34,5 +34,6 @@
     ./pass.nix
     ./gpg.nix
     ./gaming.nix
+    ./rofi.nix
   ];
 }
