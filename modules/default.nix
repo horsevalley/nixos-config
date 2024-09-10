@@ -35,5 +35,6 @@
     ./gpg.nix
     ./gaming.nix
     ./rofi.nix
+    ./eww.nix
   ];
 }
