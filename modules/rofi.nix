@@ -31,7 +31,8 @@ let
         fg-col: #cdd6f4;
         fg-col2: #f38ba8;
         grey: #6c7086;
-        font: "JetBrainsMono Nerd Font 12";
+        width: 600;
+        font: "JetBrainsMono Nerd Font 18";
     }
 
     element-text, element-icon , mode-switcher {
@@ -40,7 +41,8 @@ let
     }
 
     window {
-        border: 2px;
+        height: 300px;
+        border: 3px;
         border-color: @border-col;
         background-color: @bg-col;
     }
