@@ -4,10 +4,11 @@ let
   rofiConfig = pkgs.writeText "config.rasi" ''
     configuration {
       modi: "drun,run,window";
-      icon-theme: "Oranchelo";
+      icon-theme: "Papirus";
       show-icons: true;
       terminal: "kitty";
       drun-display-format: "{icon} {name}";
+      location: 0;
       disable-history: false;
       hide-scrollbar: true;
       display-drun: "   Apps ";
@@ -20,12 +21,18 @@ let
     @theme "catppuccin-mocha"
 
     window {
-      transparency: "real";
-      background-color: @bg-col;
+      width: 45%;
+      border: 3px;
+      border-color: @border-col;
+      border-radius: 12px;
+      padding: 0px;
     }
 
     mainbox {
       children: [inputbar, listview];
+      padding: 10px;
+      border-radius: 15px;
+      background-color: @bg-col;
     }
 
     inputbar {
@@ -33,6 +40,7 @@ let
       background-color: @bg-col;
       border-radius: 5px;
       padding: 2px;
+      margin: 0px 0px 10px 0px;
     }
 
     prompt {
@@ -40,7 +48,7 @@ let
       padding: 6px;
       text-color: @bg-col;
       border-radius: 3px;
-      margin: 20px 0px 0px 20px;
+      margin: 0px 5px 0px 0px;
     }
 
     textbox-prompt-colon {
@@ -50,7 +58,7 @@ let
 
     entry {
       padding: 6px;
-      margin: 20px 0px 0px 10px;
+      margin: 0px 0px 0px 5px;
       text-color: @fg-col;
       background-color: @bg-col;
     }
@@ -58,7 +66,7 @@ let
     listview {
       border: 0px 0px 0px;
       padding: 6px 0px 0px;
-      margin: 10px 0px 0px 20px;
+      margin: 10px 0px 0px 0px;
       columns: 2;
       background-color: @bg-col;
     }
@@ -76,6 +84,7 @@ let
     element selected {
       background-color: @selected-col;
       text-color: @fg-col2;
+      border-radius: 3px;
     }
   '';
 
@@ -89,7 +98,8 @@ let
       fg-col: #cdd6f4;
       fg-col2: #f38ba8;
       grey: #6c7086;
-      font: "JetBrainsMono Nerd Font 14";
+      width: 600;
+      font: "JetBrainsMono Nerd Font 12";
     }
   '';
 in
