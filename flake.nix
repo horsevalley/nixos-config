@@ -32,6 +32,13 @@
             ./hosts/laptop
           ];
         };
+        "x99-5930k-nixos" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit unstable; };
+          modules = [
+            ./hosts/x99-5930k
+          ];
+        };
       };
     };
 }
