@@ -3,7 +3,7 @@
 let
   rofiConfig = pkgs.writeText "config.rasi" ''
     configuration {
-      modi: "run,window,combi,drun";
+      modi: "run,window,combi";
       icon-theme: "Oranchelo";
       show-icons: true;
       terminal: "kitty";
@@ -14,7 +14,7 @@ let
       display-combi: " 🖥️  All ";
       display-run: " 🏃  Run ";
       display-window: " 🪟  Window";
-      sidebar-mode: true;
+      sidebar-mode: false;
     }
 
     @theme "catppuccin-mocha"
@@ -31,8 +31,7 @@ let
         fg-col: #cdd6f4;
         fg-col2: #f38ba8;
         grey: #6c7086;
-        width: 600;
-        font: "JetBrainsMono Nerd Font 18";
+        font: "JetBrainsMono Nerd Font 12";
     }
 
     element-text, element-icon , mode-switcher {
@@ -41,8 +40,7 @@ let
     }
 
     window {
-        height: 360px;
-        border: 3px;
+        border: 2px;
         border-color: @border-col;
         background-color: @bg-col;
     }
