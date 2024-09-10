@@ -3,7 +3,7 @@
 let
   rofiConfig = pkgs.writeText "config.rasi" ''
     configuration {
-      modi: "run,window,combi";
+      modi: "drun,run,window";
       icon-theme: "Oranchelo";
       show-icons: true;
       terminal: "kitty";
@@ -11,37 +11,20 @@ let
       location: 0;
       disable-history: false;
       hide-scrollbar: true;
-      display-combi: " 🖥️  All ";
-      display-run: " 🏃  Run ";
-      display-window: " 🪟  Window";
+      display-drun: "   Apps ";
+      display-run: "   Run ";
+      display-window: "   Window";
+      display-Network: " 󰤨  Network";
       sidebar-mode: true;
     }
+
     @theme "catppuccin-mocha"
-  '';
-
-  rofiTheme = pkgs.writeText "catppuccin-mocha.rasi" ''
-    * {
-      bg-col:  #1e1e2e;
-      bg-col-light: #1e1e2e;
-      border-col: #1e1e2e;
-      selected-col: #1e1e2e;
-      blue: #89b4fa;
-      fg-col: #cdd6f4;
-      fg-col2: #f38ba8;
-      grey: #6c7086;
-      width: 600;
-      font: "JetBrainsMono Nerd Font 18";
-    }
-
-    element-text, element-icon , mode-switcher {
-      background-color: inherit;
-      text-color:       inherit;
-    }
 
     window {
-      height: 360px;
+      width: 1000px;
       border: 3px;
       border-color: @border-col;
+      border-radius: 12px;
       background-color: @bg-col;
     }
 
@@ -129,6 +112,21 @@ let
       margin: 20px 0px 0px 20px;
       text-color: @blue;
       background-color: @bg-col-light;
+    }
+  '';
+
+  rofiTheme = pkgs.writeText "catppuccin-mocha.rasi" ''
+    * {
+      bg-col:  #1e1e2e;
+      bg-col-light: #1e1e2e;
+      border-col: #89b4fa;
+      selected-col: #45475a;
+      blue: #89b4fa;
+      fg-col: #cdd6f4;
+      fg-col2: #f38ba8;
+      grey: #6c7086;
+      width: 600;
+      font: "JetBrainsMono Nerd Font 14";
     }
   '';
 in
