@@ -16,24 +16,6 @@
   boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1"  "usbcore.autosuspend=-1" "quiet" "loglevel=3" "rd.udev.log_level=3" "vt.global_cursor_default=0" ];
   boot.consoleLogLevel = 0;
 
-
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/31bf8a74-6cac-45e1-8252-a4150417d90c";
-      fsType = "ext4";
-    };
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/DC58-AB52";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
-    };
-
-swapDevices = [
-  { device = "/swapfile";
-    size = 16*1024;
-  }
-];
-
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction

@@ -6,12 +6,6 @@
   ];
   networking.hostName = "x99-5930k-nixos";
 
-  swapDevices = [
-  { device = "/swapfile";
-    size = 16*1024;
-  }
-];
-
   # use GRUB bootloader instead of systemd
   boot.loader = {
   grub = {
@@ -37,6 +31,11 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  swapDevices = [
+  { device = "/swapfile";
+    size = 16*1024;
+  }
+];
 
   system.stateVersion = "24.05";
 }
