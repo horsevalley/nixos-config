@@ -31,6 +31,11 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  fileSystems."/mnt/SamsungEvo8702TB" = {
+    device = "/dev/disk/by-uuid/4b449511-0b39-42f9-bb49-d49773598c7d";
+    fsType = "ext4";
+  };
+
   swapDevices = [
   { device = "/swapfile";
     size = 16*1024;
