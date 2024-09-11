@@ -22,14 +22,7 @@
           inherit system;
           specialArgs = { inherit unstable; };
           modules = [
-            ./hosts/workstation
-          ];
-        };
-        "legiony540-nixos" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit unstable; };
-          modules = [
-            ./hosts/laptop
+            ./hosts/horsepowr
           ];
         };
         "x99-5930k-nixos" = nixpkgs.lib.nixosSystem {
@@ -39,6 +32,22 @@
             ./hosts/x99-5930k
           ];
         };
+        "legiony540-nixos" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit unstable; };
+          modules = [
+            ./hosts/legiony540
+          ];
+        };
+        "tpt14s-nixos" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit unstable; };
+          modules = [
+            ./hosts/tpt14s
+          ];
+        };
+
+
       };
     };
 }
