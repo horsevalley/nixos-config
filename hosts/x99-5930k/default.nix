@@ -26,5 +26,17 @@
   };
 };
 
+    fileSystems."/" =
+    { device = "/dev/disk/by-uuid/4208f3d1-29a3-4799-a296-57a323be4cb0";
+      fsType = "ext4";
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/EA9B-87F0";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
+
+
   system.stateVersion = "24.05";
 }
