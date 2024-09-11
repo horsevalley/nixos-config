@@ -3,6 +3,7 @@
   imports = [
     ../common/default.nix
     ./hardware-configuration.nix
+    ./ckb-next.nix
   ];
   networking.hostName = "x99-5930k-nixos";
 
