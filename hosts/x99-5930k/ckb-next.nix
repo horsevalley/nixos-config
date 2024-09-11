@@ -5,7 +5,7 @@ let
     {
         "name": "Scimitar",
         "guid": "{00000000-0000-0000-0000-000000000000}",
-        "modified": ${toString (builtins.currentTime * 1000)},
+        "modified": 1700000000000,
         "modes": [
             {
                 "name": "Default",
