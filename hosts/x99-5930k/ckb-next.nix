@@ -29,12 +29,6 @@ let
   '';
 in
 {
-  # Enable ckb-next service
-  services.ckb-next = {
-    enable = true;
-    package = pkgs.ckb-next;
-  };
-
   # Install ckb-next package
   environment.systemPackages = [ pkgs.ckb-next ];
 
@@ -55,23 +49,35 @@ in
   '';
 
   # Create ckb-next profile
-  system.userActivationScripts.setupCkbNextProfile = {
+  system.activationScripts.setupCkbNextProfile = {
     text = ''
-      mkdir -p ~/.config/ckb-next/profiles
-      cat > ~/.config/ckb-next/profiles/Scimitar.ckbprofile << EOF
+      mkdir -p /var/lib/ckb-next/profiles
+      cat > /var/lib/ckb-next/profiles/Scimitar.ckbprofile << EOF
       ${scimitarProfile}
       EOF
     '';
     deps = [];
   };
 
+  # Systemd service to start ckb-next daemon
+  systemd.services.ckb-next-daemon = {
+    description = "Corsair RGB Keyboard Daemon";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.ckb-next}/bin/ckb-next-daemon";
+      Restart = "always";
+    };
+  };
+
   # Systemd service to load ckb-next profile on startup
-  systemd.user.services.ckb-next-load-profile = {
+  systemd.services.ckb-next-load-profile = {
     description = "Load ckb-next profile for Scimitar mouse";
-    wantedBy = [ "default.target" ];
+    wantedBy = [ "multi-user.target" ];
+    after = [ "ckb-next-daemon.service" ];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.ckb-next}/bin/ckb-next-daemon -p ~/.config/ckb-next/profiles/Scimitar.ckbprofile";
+      ExecStart = "${pkgs.ckb-next}/bin/ckb-next-daemon -p /var/lib/ckb-next/profiles/Scimitar.ckbprofile";
     };
   };
 }
