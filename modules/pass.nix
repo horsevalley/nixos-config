@@ -17,9 +17,6 @@ in
     PASSWORD_STORE_DIR = lib.mkForce "$HOME/.local/share/password-store";
   };
 
-  # Enable bash completion for pass
-  programs.bash.enableCompletion = true;
-
   # Add shell initialization for pass
   environment.shellInit = ''
     # Ensure PASSWORD_STORE_DIR is set correctly
@@ -47,8 +44,8 @@ in
   '';
 
   # Ensure GPG agent is configured correctly
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
 }
