@@ -8,7 +8,6 @@
     ./programs/wayland/hyprland.nix
     ./neovim.nix
     ./fonts.nix
-    ./hardware/nvidia.nix
     ./hardware/opengl.nix
     ./keyboard.nix
     ./localization.nix
@@ -33,7 +32,6 @@
     ./newsboat.nix
     ./pass.nix
     ./gpg.nix
-    ./gaming.nix
     ./rofi.nix
     ./eww.nix
   ];

@@ -3,6 +3,8 @@
   imports = [
     ../common/default.nix
     ./hardware-configuration.nix
+    ../../modules/gaming.nix
+    ../../modules/hardware/nvidia.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
