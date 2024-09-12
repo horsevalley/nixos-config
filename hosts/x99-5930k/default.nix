@@ -4,7 +4,10 @@
     ../common/default.nix
     ./hardware-configuration.nix
     ./ckb-next.nix
+    ../../modules/gaming.nix
+    ../../modules/hardware/nvidia.nix
   ];
+
   networking.hostName = "x99-5930k-nixos";
 
   # use GRUB bootloader instead of systemd
