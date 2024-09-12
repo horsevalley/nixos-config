@@ -22,14 +22,6 @@ in
     # Ensure PASSWORD_STORE_DIR is set correctly
     export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
 
-    if [[ -n "''${ZSH_VERSION-}" ]]; then
-      # For Zsh
-      source ${pkgs.pass}/share/zsh/site-functions/_pass
-    elif [[ -n "''${BASH_VERSION-}" ]]; then
-      # For Bash
-      source ${pkgs.pass}/share/bash-completion/completions/pass
-    fi
-
     # Ensure PASSWORD_STORE_DIR exists and has correct permissions
     if [[ ! -d "$PASSWORD_STORE_DIR" ]]; then
       mkdir -p "$PASSWORD_STORE_DIR"
