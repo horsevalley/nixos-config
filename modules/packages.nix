@@ -176,6 +176,7 @@
     pinentry-curses
     gpgme
     kdePackages.polkit-kde-agent-1
+    zbar
 
     # System monitoring 
     htop-vim
