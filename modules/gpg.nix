@@ -50,19 +50,6 @@
   #   GPGKEY = "YOUR_GPG_KEY_ID"; # Set default GPG key
   # };
 
-  # Configure shell initialization for GPG
-  # This adds GPG completion to your shell
-  environment.shellInit = ''
-    # Source GPG completion scripts based on the current shell
-    if [[ -n "''${ZSH_VERSION-}" ]]; then
-      # For Zsh
-      source ${pkgs.gnupg}/share/zsh/site-functions/_gpg
-    elif [[ -n "''${BASH_VERSION-}" ]]; then
-      # For Bash
-      source ${pkgs.gnupg}/share/bash-completion/completions/gpg
-    fi
-  '';
-
   # Enable GPG agent socket for pam-gnupg
   # This allows the GPG agent to communicate with PAM
   systemd.user.sockets.gpg-agent = {
