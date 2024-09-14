@@ -9,7 +9,6 @@ let
       lidSwitch = "suspend";
       lidSwitchDocked = "ignore";
       handleLidSwitch = "suspend";
-      handleLidSwitchExternalPower = "ignore";
       handleSuspendKey = "suspend";
       handleHibernateKey = "hibernate";
       idleAction = "suspend";
@@ -41,7 +40,6 @@ let
     powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   };
 in
-{
-  # Apply settings based on whether the system is a laptop or desktop
-  (if config.hardware.isLaptop then laptopSettings else desktopSettings)
-}
+# Merge the appropriate settings based on whether the system is a laptop
+(if config.hardware.isLaptop then laptopSettings else desktopSettings)
+
