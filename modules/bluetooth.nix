@@ -1,18 +1,8 @@
-
 { config, pkgs, ... }:
 
 {
   ##### Enable Bluetooth Service #####
-  services.bluez = {
-    enable = true;
-    # Optional: Customize Bluetooth settings
-    # deviceName = "MyNixOSDevice";
-    # deviceClass = "0x00041C";
-    # Enable experimental features if needed
-    # experimental = true;
-    # For auto-enable adapters
-     autoEnable = true;
-  };
+  hardware.bluetooth.enable = true;
 
   ##### Include Blueman in System Packages #####
   environment.systemPackages = with pkgs; [
@@ -25,3 +15,4 @@
   hardware.firmware = [ pkgs.linux-firmware ];
 
 }
+

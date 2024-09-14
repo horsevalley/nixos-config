@@ -34,5 +34,6 @@
     ./gpg.nix
     ./rofi.nix
     ./eww.nix
+    ./bluetooth.nix
   ];
 }
