@@ -22,7 +22,7 @@
     '' else ''
       HandleLidSwitch=ignore
       HandleLidSwitchExternalPower=ignore
-      HandleSuspendKey=suspend
+      HandleSuspendKey=ignore
       HandleHibernateKey=ignore
       IdleAction=ignore
     '';
