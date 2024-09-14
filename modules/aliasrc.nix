@@ -83,9 +83,15 @@
     cal = "cal -m -w -3";
     gconfig = "/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME";
     code = "cd ~/code/ && ll || ls -lh";
-    b = "blueman-manager";
     s = "speedtest";
-    fdv = "cd /home/jonash/Documents/FDV && ls -l";
+    b = "blueman-manager";
+    jblcharge5_disconnect="echo -e 'disconnect F8:5C:7D:67:B9:14' | bluetoothctl" ;
+    pxc550="echo -e 'connect 00:16:94:23:F3:FF' | bluetoothctl" ;
+    pxc550_disconnect="echo -e 'disconnect 00:16:94:23:F3:FF' | bluetoothctl" ;
+    sony_headphones="echo -e 'connect AC:80:0A:3A:5E:12' | bluetoothctl" ;
+    sony_headphones_disconnect="echo -e 'disconnect AC:80:0A:3A:5E:12' | bluetoothctl" ;
+    sony_earplugs="echo -e 'connect   F8:4E:17:CF:40:B8' | bluetoothctl" ;
+    sony_earplugs_disconnect="echo -e 'disconnect   F8:4E:17:CF:40:B8' | bluetoothctl" ;
     pm = "pulsemixer";
     py = "python";
     finance = "cd /home/jonash/Documents/finance";

@@ -6,7 +6,7 @@
     isNormalUser = true;
     description = "Jonas Hestdahl";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" "user" "audio" "pipewire" "pulse" "pulse-access" "video" "input" "lib" "libexec" "mpd" ];
+    extraGroups = [ "networkmanager" "wheel" "user" "audio" "bluetooth" "pipewire" "pulse" "pulse-access" "video" "input" "lib" "libexec" "mpd" ];
     packages = with pkgs; [];
   };
 
