@@ -1,54 +1,39 @@
 # modules/power-settings.nix
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 
-let
-  ##### Laptop-Specific Settings #####
-  laptopSettings = {
-    services.logind = {
-      lidSwitch = lib.mkForce "suspend";
-      lidSwitchDocked = lib.mkForce "ignore";
-      handleLidSwitch = lib.mkForce "suspend";
-      handleSuspendKey = lib.mkForce "suspend";
-      # Uncomment if 'handleHibernateKey' exists
-      # handleHibernateKey = lib.mkForce "hibernate";
-      idleAction = lib.mkForce "suspend";
-      idleActionDelaySec = 1800; # 30 minutes
-    };
-
-    services.tlp.enable = true;
-    powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-    services.acpid.enable = true;
-  };
-
-  ##### Desktop-Specific Settings #####
-  desktopSettings = {
-    services.logind = {
-      lidSwitch = lib.mkForce "ignore";
-      handleLidSwitch = lib.mkForce "ignore";
-      handleSuspendKey = lib.mkForce "ignore";
-      # Uncomment if 'handleHibernateKey' exists
-      # handleHibernateKey = lib.mkForce "ignore";
-      idleAction = lib.mkForce "ignore";
-    };
-
-    powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
-  };
-in
 {
   ##### Define Custom Option #####
-  options = {
-    myConfig.isLaptop = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Set to true if the system is a laptop";
-    };
+  options.myConfig.isLaptop = lib.mkOption {
+    type = lib.types.bool;
+    default = false;
+    description = "Set to true if the system is a laptop";
   };
 
-  ##### Conditionally Include Configurations #####
-  # Merge laptop settings if 'myConfig.isLaptop' is true
-  config = lib.mkIf config.myConfig.isLaptop laptopSettings
+  ##### Configuration #####
+  config = {
+    services.logind.extraConfig = if config.myConfig.isLaptop then ''
+      HandleLidSwitch=suspend
+      HandleLidSwitchDocked=ignore
+      HandleLidSwitchExternalPower=ignore
+      HandleSuspendKey=suspend
+      HandleHibernateKey=hibernate
+      IdleAction=suspend
+      IdleActionSec=1800
+    '' else ''
+      HandleLidSwitch=ignore
+      HandleLidSwitchExternalPower=ignore
+      HandleSuspendKey=ignore
+      HandleHibernateKey=ignore
+      IdleAction=ignore
+    '';
 
-  # Merge desktop settings if 'myConfig.isLaptop' is false
-    // lib.mkIf (!config.myConfig.isLaptop) desktopSettings;
+    powerManagement.cpuFreqGovernor = if config.myConfig.isLaptop then "powersave" else "performance";
+
+    # Enable TLP for laptops
+    services.tlp.enable = config.myConfig.isLaptop;
+
+    # Remove or comment out the following line to avoid conflict
+    # services.acpid.enable = config.myConfig.isLaptop;
+  };
 }
 
