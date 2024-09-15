@@ -31,9 +31,9 @@
   }
 ];
 
-  services.logind.extraConfig = ''
-    HandleLidSwitchExternalPower=ignore
-  '';
+  # services.logind.extraConfig = ''
+  #   HandleLidSwitchExternalPower=ignore
+  # '';
 
   system.stateVersion = "24.05";
 
