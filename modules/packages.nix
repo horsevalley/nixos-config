@@ -27,6 +27,7 @@
     glibc
     dunst
     lm_sensors
+    upower
 
     # Aesthetic sysinfo
     fastfetch 
