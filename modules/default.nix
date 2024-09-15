@@ -35,6 +35,5 @@
     ./rofi.nix
     ./eww.nix
     ./bluetooth.nix
-    ./power-settings.nix
   ];
 }
