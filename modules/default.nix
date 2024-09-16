@@ -27,7 +27,7 @@
     ./zsh.nix
     ./zathura.nix
     ./mpv.nix
-    ./dunst.nix
+    # ./dunst.nix
     ./kitty.nix
     ./newsboat.nix
     ./pass.nix
@@ -35,5 +35,6 @@
     ./rofi.nix
     ./eww.nix
     ./bluetooth.nix
+    ./swaync.nix
   ];
 }

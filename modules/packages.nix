@@ -25,9 +25,10 @@
     libdbusmenu-gtk3
     cairo
     glibc
-    dunst
+    # dunst
     lm_sensors
     upower
+    swaynotificationcenter
 
     # Aesthetic sysinfo
     fastfetch 
