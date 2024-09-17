@@ -54,6 +54,7 @@ let
     set autosave=true
     set www_command=xdg-open
     set use_mouse=true
+    set database_file=$HOME/.config/abook/addressbook
   '';
 
 in {
@@ -72,14 +73,18 @@ in {
     environment.systemPackages = [ cfg.package ];
 
     system.activationScripts.abookSetup = ''
-      mkdir -p ~/.config/abook
-      cp ${abookDbFile} ~/.config/abook/addressbook
-      cp ${abookConfigFile} ~/.config/abook/abookrc
-      chmod 600 ~/.config/abook/addressbook ~/.config/abook/abookrc
+      mkdir -p $HOME/.config/abook
+      cp ${abookDbFile} $HOME/.config/abook/addressbook
+      cp ${abookConfigFile} $HOME/.config/abook/abookrc
+      chmod 600 $HOME/.config/abook/addressbook $HOME/.config/abook/abookrc
     '';
 
     environment.sessionVariables = {
       ABOOK_CONFIG = "$HOME/.config/abook/abookrc";
     };
+
+    environment.shellInit = ''
+      export ABOOK_CONFIG="$HOME/.config/abook/abookrc"
+    '';
   };
 }
