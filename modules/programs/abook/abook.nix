@@ -35,63 +35,72 @@ let
     in
     builtins.concatStringsSep "\n" (map convertCsvToAbookEntry dataLines);
 
-  # Create a wrapper script for abook
-  abookWrapper = pkgs.writeScriptBin "abook" ''
-    #!${pkgs.bash}/bin/bash
-    export HOME_ABOOK_DIR="$HOME/.config/abook"
-    export ABOOK_CONFIG="$HOME_ABOOK_DIR/abookrc"
-    export ABOOK_DB="$HOME_ABOOK_DIR/addressbook"
+  # Create a custom abook script
+  customAbook = pkgs.writeScriptBin "abook" ''
+    #!${pkgs.python3}/bin/python3
+    import os
+    import sys
+    import configparser
 
-    mkdir -p "$HOME_ABOOK_DIR"
+    HOME = os.environ['HOME']
+    CONFIG_DIR = os.path.join(HOME, '.config', 'abook')
+    CONFIG_FILE = os.path.join(CONFIG_DIR, 'abookrc')
+    DATABASE_FILE = os.path.join(CONFIG_DIR, 'addressbook')
 
-    if [ ! -f "$ABOOK_CONFIG" ]; then
-      cp /etc/abook/abookrc "$ABOOK_CONFIG"
-    fi
+    def ensure_config():
+        os.makedirs(CONFIG_DIR, exist_ok=True)
+        if not os.path.exists(CONFIG_FILE):
+            with open(CONFIG_FILE, 'w') as f:
+                f.write("""
+                set show_all_emails=true
+                set add_email_prevent_duplicates=true
+                set autosave=true
+                set www_command=xdg-open
+                set use_mouse=true
+                set database_file=~/.config/abook/addressbook
+                """)
+        if not os.path.exists(DATABASE_FILE):
+            with open(DATABASE_FILE, 'w') as f:
+                f.write("""
+                # abook addressbook file
 
-    if [ ! -f "$ABOOK_DB" ]; then
-      cp /etc/abook/addressbook "$ABOOK_DB"
-    fi
+                [format]
+                program=abook
+                version=0.6.1
 
-    exec ${cfg.package}/bin/abook --datafile "$ABOOK_DB" --config "$ABOOK_CONFIG" "$@"
+                ${abookData}
+                """)
+
+    def main():
+        ensure_config()
+        print("Custom abook script")
+        print("Config file:", CONFIG_FILE)
+        print("Database file:", DATABASE_FILE)
+        
+        # Here you would implement the actual abook functionality
+        # For now, we'll just print the contents of the addressbook
+        config = configparser.ConfigParser()
+        config.read(DATABASE_FILE)
+        for section in config.sections():
+            if section != 'format':
+                print(f"\nName: {config[section].get('name', '')}")
+                print(f"Email: {config[section].get('email', '')}")
+                print(f"Phone: {config[section].get('phone', '')}")
+
+    if __name__ == "__main__":
+        main()
   '';
 
 in {
   options.programs.abook = {
-    enable = lib.mkEnableOption "abook address book manager";
-
-    package = lib.mkOption {
-      type = lib.types.package;
-      default = pkgs.abook;
-      description = "The abook package to use.";
-    };
+    enable = lib.mkEnableOption "custom abook script";
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ abookWrapper ];
-
-    environment.etc."abook/addressbook".text = ''
-      # abook addressbook file
-
-      [format]
-      program=abook
-      version=0.6.1
-
-      ${abookData}
-    '';
-
-    environment.etc."abook/abookrc".text = ''
-      set show_all_emails=true
-      set add_email_prevent_duplicates=true
-      set autosave=true
-      set www_command=xdg-open
-      set use_mouse=true
-      set database_file=$HOME/.config/abook/addressbook
-    '';
+    environment.systemPackages = [ customAbook ];
 
     system.activationScripts.abook-setup = ''
       mkdir -p /home/${username}/.config/abook
-      cp /etc/abook/addressbook /home/${username}/.config/abook/addressbook
-      cp /etc/abook/abookrc /home/${username}/.config/abook/abookrc
       chown -R ${username}:users /home/${username}/.config/abook
     '';
   };
