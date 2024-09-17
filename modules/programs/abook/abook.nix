@@ -83,9 +83,9 @@ let
         config.read(DATABASE_FILE)
         for section in config.sections():
             if section != 'format':
-                print(f"\nName: {config[section].get('name', '')}")
-                print(f"Email: {config[section].get('email', '')}")
-                print(f"Phone: {config[section].get('phone', '')}")
+                print(f"\\nName: {{config[section].get('name', '')}}")
+                print(f"Email: {{config[section].get('email', '')}}")
+                print(f"Phone: {{config[section].get('phone', '')}}")
 
     if __name__ == "__main__":
         main()
