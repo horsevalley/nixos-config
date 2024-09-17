@@ -68,9 +68,9 @@ let
     # AESTHETICS
     color listnormal blue default bold
     color listnormal_unread white default bold
-    color listfocus white blue bold
-    color listfocus_unread white blue bold
-    color info white blue bold
+    color listfocus black blue bold
+    color listfocus_unread black blue bold
+    color info black blue bold
     color article white default bold
 
     highlight all "---.*---" blue 
