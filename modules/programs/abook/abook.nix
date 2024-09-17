@@ -5,6 +5,36 @@ with lib;
 let
   cfg = config.programs.abook;
 
+  # Custom abook package with patched default directory
+  customAbook = pkgs.abook.overrideAttrs (oldAttrs: {
+    patches = (oldAttrs.patches or []) ++ [
+      (pkgs.writeText "abook-config-dir.patch" ''
+        diff --git a/abook.c b/abook.c
+        index xxxxxxx..yyyyyyy 100644
+        --- a/abook.c
+        +++ b/abook.c
+        @@ -xxx,7 +xxx,7 @@ init_abook()
+         {
+         	char *home = getenv("HOME");
+         	
+        -	snprintf(rcfile, sizeof(rcfile), "%s/.abook/abookrc", home);
+        +	snprintf(rcfile, sizeof(rcfile), "%s/.config/abook/abookrc", home);
+         	
+         	init_opts();
+         	
+        @@ -yyy,7 +yyy,7 @@ init_abook()
+         		strncpy(rcfile, CFG_FILE, sizeof(rcfile));
+         	
+         	if(!database) {
+        -		snprintf(datafile, sizeof(datafile), "%s/.abook/addressbook", home);
+        +		snprintf(datafile, sizeof(datafile), "%s/.config/abook/addressbook", home);
+         		database = xstrdup(datafile);
+         	}
+         }
+      '')
+    ];
+  });
+
   # Function to convert a CSV line to abook format
   convertCsvToAbookEntry = line:
     let
@@ -54,37 +84,21 @@ let
     set autosave=true
     set www_command=xdg-open
     set use_mouse=true
-    set database_file=$HOME/.config/abook/addressbook
   '';
 
 in {
   options.programs.abook = {
     enable = mkEnableOption "abook address book manager";
-
-    package = mkOption {
-      type = types.package;
-      default = pkgs.abook;
-      defaultText = literalExpression "pkgs.abook";
-      description = "The abook package to use.";
-    };
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ cfg.package ];
+    environment.systemPackages = [ customAbook ];
 
     system.activationScripts.abookSetup = ''
       mkdir -p $HOME/.config/abook
       cp ${abookDbFile} $HOME/.config/abook/addressbook
       cp ${abookConfigFile} $HOME/.config/abook/abookrc
       chmod 600 $HOME/.config/abook/addressbook $HOME/.config/abook/abookrc
-    '';
-
-    environment.sessionVariables = {
-      ABOOK_CONFIG = "$HOME/.config/abook/abookrc";
-    };
-
-    environment.shellInit = ''
-      export ABOOK_CONFIG="$HOME/.config/abook/abookrc"
     '';
   };
 }
