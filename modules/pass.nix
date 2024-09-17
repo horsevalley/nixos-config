@@ -34,10 +34,4 @@ in
       pass init "Your GPG Key ID or Email"
     fi
   '';
-
-  # Ensure GPG agent is configured correctly
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 }
