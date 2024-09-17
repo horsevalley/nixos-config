@@ -1,0 +1,22 @@
+# abook addressbook file
+
+[format]
+program=abook
+version=0.6.1
+
+
+[0]
+name=Jonas Hestdahl
+email=jonash@jonash.xyz
+mobile=97799798
+
+[1]
+name=Stein-Ivar Hestdahl
+email=steinhest@hotmail.com
+mobile=91761093
+
+[2]
+name=Elin Aunet Hestdahl
+email=lyselin@hotmail.com
+mobile=46969607
+
