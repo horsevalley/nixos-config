@@ -2,37 +2,36 @@
 
 let
   cfg = config.programs.abook;
+  username = "jonash"; # Replace with your actual username
 
-  # Function to convert a CSV line to abook format
-  convertCsvToAbookEntry = line:
-    let
-      fields = builtins.split "," line;
-      name = builtins.elemAt fields 0;
-      email = builtins.elemAt fields 4;
-      phone = builtins.elemAt fields 5;
-      address = builtins.elemAt fields 7;
-      organization = builtins.elemAt fields 8;
-      notes = builtins.elemAt fields 9;
-    in
-    ''
-      [${name}]
-      name=${name}
-      email=${email}
-      phone=${phone}
-      address=${address}
-      organization=${organization}
-      notes=${notes}
-    '';
+  populateScript = pkgs.writeScriptBin "populate-abook" ''
+    #!${pkgs.python3}/bin/python3
+    import csv
+    import os
 
-  # Read the CSV file and convert it to abook format
-  abookData = 
-    let
-      csvContent = builtins.readFile ./cleaned_contacts.csv;
-      csvLines = builtins.filter (line: line != "") (builtins.split "\n" csvContent);
-      # Skip the header line
-      dataLines = builtins.tail csvLines;
-    in
-    builtins.concatStringsSep "\n" (map convertCsvToAbookEntry dataLines);
+    HOME = os.environ['HOME']
+    ABOOK_DIR = os.path.join(HOME, '.config', 'abook')
+    ADDRESSBOOK_FILE = os.path.join(ABOOK_DIR, 'addressbook')
+    CSV_FILE = '${./cleaned_contacts.csv}'
+
+    def convert_csv_to_abook():
+        with open(CSV_FILE, 'r') as csvfile, open(ADDRESSBOOK_FILE, 'w') as abookfile:
+            reader = csv.DictReader(csvfile)
+            abookfile.write("[format]\nprogram=abook\nversion=0.6.1\n\n")
+            for row in reader:
+                abookfile.write(f"[{row['Name']}]\n")
+                abookfile.write(f"name={row['Name']}\n")
+                abookfile.write(f"email={row['E-mail 1 - Value']}\n")
+                abookfile.write(f"phone={row['Phone 1 - Value']}\n")
+                abookfile.write(f"address={row['Address 1 - Formatted']}\n")
+                abookfile.write(f"organization={row['Organization 1 - Name']}\n")
+                abookfile.write(f"notes={row['Notes']}\n\n")
+
+    if __name__ == "__main__":
+        os.makedirs(ABOOK_DIR, exist_ok=True)
+        convert_csv_to_abook()
+        print(f"Addressbook populated at {ADDRESSBOOK_FILE}")
+  '';
 
 in
 {
@@ -47,31 +46,20 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ cfg.package ];
+    environment.systemPackages = [ cfg.package populateScript ];
 
     environment.sessionVariables = {
-      ABOOK_CONFIG = "$XDG_CONFIG_HOME/abook/abookrc";
-    };
-
-    environment.variables = {
-      XDG_CONFIG_HOME = "$HOME/.config";
+      ABOOK_CONFIG = "$HOME/.config/abook/abookrc";
     };
 
     system.activationScripts.abook-setup = ''
-      mkdir -p $HOME/.config/abook
-      if [ ! -f $HOME/.config/abook/abookrc ]; then
-        echo "set database_file=$HOME/.config/abook/addressbook" > $HOME/.config/abook/abookrc
+      mkdir -p /home/${username}/.config/abook
+      if [ ! -f /home/${username}/.config/abook/abookrc ]; then
+        echo "set database_file=/home/${username}/.config/abook/addressbook" > /home/${username}/.config/abook/abookrc
       fi
-      cat > $HOME/.config/abook/addressbook <<EOL
-      # abook addressbook file
-
-      [format]
-      program=abook
-      version=0.6.1
-
-      ${abookData}
-      EOL
-      chmod 600 $HOME/.config/abook/abookrc $HOME/.config/abook/addressbook
+      ${populateScript}/bin/populate-abook
+      chown -R ${username}:users /home/${username}/.config/abook
+      chmod 600 /home/${username}/.config/abook/abookrc /home/${username}/.config/abook/addressbook
     '';
   };
 }
