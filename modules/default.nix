@@ -15,7 +15,7 @@
     ./packages.nix
     ./security.nix
     ./services.nix
-    ./shell.nix
+    # ./shell.nix
     ./system.nix
     ./users.nix
     ./variables.nix

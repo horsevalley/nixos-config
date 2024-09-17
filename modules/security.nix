@@ -18,12 +18,4 @@
     source = "${pkgs.slock}"; # The path to the slock binary
     capabilities = "cap_ipc_lock+ep"; # Gives slock the ability to lock memory
   };
-
-  # Enable My TraceRoute (mtr), a network diagnostic tool
-  # It combines the functionality of 'traceroute' and 'ping'
-  programs.mtr.enable = true;
-
-  # Note: GPG-related configurations have been moved to gpg.nix
-  # This separation allows for better organization and easier management
-  # of GPG-specific settings
 }
