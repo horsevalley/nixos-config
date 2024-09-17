@@ -2,7 +2,6 @@
 
 let
   cfg = config.programs.abook;
-  username = "jonash"; # Replace with your actual username
 
   # Function to convert a CSV line to abook format
   convertCsvToAbookEntry = line:
@@ -35,73 +34,44 @@ let
     in
     builtins.concatStringsSep "\n" (map convertCsvToAbookEntry dataLines);
 
-  # Create a custom abook script
-  customAbook = pkgs.writeScriptBin "abook" ''
-    #!${pkgs.python3}/bin/python3
-    import os
-    import sys
-    import configparser
-
-    HOME = os.environ['HOME']
-    CONFIG_DIR = os.path.join(HOME, '.config', 'abook')
-    CONFIG_FILE = os.path.join(CONFIG_DIR, 'abookrc')
-    DATABASE_FILE = os.path.join(CONFIG_DIR, 'addressbook')
-
-    def ensure_config():
-        os.makedirs(CONFIG_DIR, exist_ok=True)
-        if not os.path.exists(CONFIG_FILE):
-            with open(CONFIG_FILE, 'w') as f:
-                f.write("""
-                set show_all_emails=true
-                set add_email_prevent_duplicates=true
-                set autosave=true
-                set www_command=xdg-open
-                set use_mouse=true
-                set database_file=~/.config/abook/addressbook
-                """)
-        if not os.path.exists(DATABASE_FILE):
-            with open(DATABASE_FILE, 'w') as f:
-                f.write("""
-                # abook addressbook file
-
-                [format]
-                program=abook
-                version=0.6.1
-
-                ${abookData}
-                """)
-
-    def main():
-        ensure_config()
-        print("Custom abook script")
-        print("Config file: {}".format(CONFIG_FILE))
-        print("Database file: {}".format(DATABASE_FILE))
-        
-        # Here you would implement the actual abook functionality
-        # For now, we'll just print the contents of the addressbook
-        config = configparser.ConfigParser()
-        config.read(DATABASE_FILE)
-        for section in config.sections():
-            if section != 'format':
-                print("\nName: {}".format(config[section].get('name', '')))
-                print("Email: {}".format(config[section].get('email', '')))
-                print("Phone: {}".format(config[section].get('phone', '')))
-
-    if __name__ == "__main__":
-        main()
-  '';
-
-in {
+in
+{
   options.programs.abook = {
-    enable = lib.mkEnableOption "custom abook script";
+    enable = lib.mkEnableOption "abook address book manager";
+
+    package = lib.mkOption {
+      type = lib.types.package;
+      default = pkgs.abook;
+      description = "The abook package to use.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ customAbook ];
+    environment.systemPackages = [ cfg.package ];
+
+    environment.sessionVariables = {
+      ABOOK_CONFIG = "$XDG_CONFIG_HOME/abook/abookrc";
+    };
+
+    environment.variables = {
+      XDG_CONFIG_HOME = "$HOME/.config";
+    };
 
     system.activationScripts.abook-setup = ''
-      mkdir -p /home/${username}/.config/abook
-      chown -R ${username}:users /home/${username}/.config/abook
+      mkdir -p $HOME/.config/abook
+      if [ ! -f $HOME/.config/abook/abookrc ]; then
+        echo "set database_file=$HOME/.config/abook/addressbook" > $HOME/.config/abook/abookrc
+      fi
+      cat > $HOME/.config/abook/addressbook <<EOL
+      # abook addressbook file
+
+      [format]
+      program=abook
+      version=0.6.1
+
+      ${abookData}
+      EOL
+      chmod 600 $HOME/.config/abook/abookrc $HOME/.config/abook/addressbook
     '';
   };
 }
