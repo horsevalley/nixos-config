@@ -29,6 +29,7 @@
     lm_sensors
     upower
     swaynotificationcenter
+    ookla-speedtest
 
     # Aesthetic sysinfo
     fastfetch 
