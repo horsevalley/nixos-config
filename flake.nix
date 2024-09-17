@@ -20,28 +20,28 @@
       nixosConfigurations = {
         "horsepowr-nixos" = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs unstable; };
           modules = [
             ./hosts/horsepowr
           ];
         };
         "x99-5930k-nixos" = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs unstable; };
           modules = [
             ./hosts/x99-5930k
           ];
         };
         "legiony540-nixos" = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs unstable; };
           modules = [
             ./hosts/legiony540
           ];
         };
         "tpt14s-nixos" = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs unstable; };
           modules = [
             ./hosts/tpt14s
           ];
