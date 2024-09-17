@@ -36,6 +36,5 @@
     ./eww.nix
     ./bluetooth.nix
     ./swaync.nix
-    ./programs/abook/abook.nix
   ];
 }
