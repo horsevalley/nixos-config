@@ -15,7 +15,6 @@
     ./packages.nix
     ./security.nix
     ./services.nix
-    # ./shell.nix
     ./system.nix
     ./users.nix
     ./variables.nix
@@ -27,13 +26,12 @@
     ./zsh.nix
     ./zathura.nix
     ./mpv.nix
-    # ./dunst.nix
     ./kitty.nix
     ./newsboat.nix
     ./pass.nix
     ./gpg.nix
     ./rofi.nix
-    ./eww.nix
+    # ./eww.nix
     ./bluetooth.nix
     ./swaync.nix
   ];
