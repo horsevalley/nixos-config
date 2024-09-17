@@ -74,8 +74,8 @@ let
     def main():
         ensure_config()
         print("Custom abook script")
-        print("Config file:", CONFIG_FILE)
-        print("Database file:", DATABASE_FILE)
+        print("Config file: {}".format(CONFIG_FILE))
+        print("Database file: {}".format(DATABASE_FILE))
         
         # Here you would implement the actual abook functionality
         # For now, we'll just print the contents of the addressbook
@@ -83,9 +83,9 @@ let
         config.read(DATABASE_FILE)
         for section in config.sections():
             if section != 'format':
-                print(f"\\nName: {{config[section].get('name', '')}}")
-                print(f"Email: {{config[section].get('email', '')}}")
-                print(f"Phone: {{config[section].get('phone', '')}}")
+                print("\nName: {}".format(config[section].get('name', '')))
+                print("Email: {}".format(config[section].get('email', '')))
+                print("Phone: {}".format(config[section].get('phone', '')))
 
     if __name__ == "__main__":
         main()
