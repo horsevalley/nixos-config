@@ -35,26 +35,43 @@ let
     in
     builtins.concatStringsSep "\n" (map convertCsvToAbookEntry dataLines);
 
-  # Create a wrapper script for abook
-  abookWrapper = pkgs.writeScriptBin "abook" ''
-    #!${pkgs.bash}/bin/bash
-    export ABOOK_CONFIG="$HOME/.config/abook/abookrc"
-    exec ${cfg.package}/bin/abook --datafile "$HOME/.config/abook/addressbook" "$@"
-  '';
+  # Custom abook package with hardcoded paths
+  customAbook = pkgs.abook.overrideAttrs (oldAttrs: {
+    patches = (oldAttrs.patches or []) ++ [
+      (pkgs.writeText "abook-custom-paths.patch" ''
+        diff --git a/abook.c b/abook.c
+        index xxxxxxx..yyyyyyy 100644
+        --- a/abook.c
+        +++ b/abook.c
+        @@ -xxx,7 +xxx,7 @@ init_abook()
+         {
+         	char *home = getenv("HOME");
+         	
+        -	snprintf(rcfile, sizeof(rcfile), "%s/.abook/abookrc", home);
+        +	snprintf(rcfile, sizeof(rcfile), "%s/.config/abook/abookrc", home);
+         	
+         	init_opts();
+         	
+        @@ -yyy,7 +yyy,7 @@ init_abook()
+         		strncpy(rcfile, CFG_FILE, sizeof(rcfile));
+         	
+         	if(!database) {
+        -		snprintf(datafile, sizeof(datafile), "%s/.abook/addressbook", home);
+        +		snprintf(datafile, sizeof(datafile), "%s/.config/abook/addressbook", home);
+         		database = xstrdup(datafile);
+         	}
+         }
+      '')
+    ];
+  });
 
 in {
   options.programs.abook = {
     enable = lib.mkEnableOption "abook address book manager";
-
-    package = lib.mkOption {
-      type = lib.types.package;
-      default = pkgs.abook;
-      description = "The abook package to use.";
-    };
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ abookWrapper ];
+    environment.systemPackages = [ customAbook ];
 
     environment.etc."abook/addressbook".text = ''
       # abook addressbook file
@@ -72,7 +89,6 @@ in {
       set autosave=true
       set www_command=xdg-open
       set use_mouse=true
-      set database_file=$HOME/.config/abook/addressbook
     '';
 
     system.activationScripts.abook-setup = ''
