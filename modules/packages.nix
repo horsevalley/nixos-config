@@ -109,6 +109,7 @@
     wf-recorder # Utility program for screen recording of wlroots-based compositors
     # jellyfin
     # jftui
+    obs-studio
 
     # Photo/image 
     gimp
