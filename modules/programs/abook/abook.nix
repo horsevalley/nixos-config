@@ -35,6 +35,13 @@ let
     in
     builtins.concatStringsSep "\n" (map convertCsvToAbookEntry dataLines);
 
+  # Create a wrapper script for abook
+  abookWrapper = pkgs.writeScriptBin "abook" ''
+    #!${pkgs.bash}/bin/bash
+    export ABOOK_CONFIG="$HOME/.config/abook/abookrc"
+    exec ${cfg.package}/bin/abook --datafile "$HOME/.config/abook/addressbook" "$@"
+  '';
+
 in {
   options.programs.abook = {
     enable = lib.mkEnableOption "abook address book manager";
@@ -47,7 +54,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ cfg.package ];
+    environment.systemPackages = [ abookWrapper ];
 
     environment.etc."abook/addressbook".text = ''
       # abook addressbook file
@@ -65,6 +72,7 @@ in {
       set autosave=true
       set www_command=xdg-open
       set use_mouse=true
+      set database_file=$HOME/.config/abook/addressbook
     '';
 
     system.activationScripts.abook-setup = ''
@@ -73,9 +81,5 @@ in {
       cp /etc/abook/abookrc /home/${username}/.config/abook/abookrc
       chown -R ${username}:users /home/${username}/.config/abook
     '';
-
-    environment.sessionVariables = {
-      ABOOK_CONFIG = "$HOME/.config/abook/abookrc";
-    };
   };
 }
