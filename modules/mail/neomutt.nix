@@ -104,6 +104,7 @@ in
     macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
     macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
     macro index,pager gj "<change-folder>=Junk<enter>" "go to junk"
+    macro index,pager O "<shell-escape>mailsync<enter>" "run mailsync to sync all mail"
 
     # Account Settings
     set realname = "Jonash"
