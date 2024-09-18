@@ -34,5 +34,6 @@
     # ./eww.nix
     ./bluetooth.nix
     ./swaync.nix
+    ./email.nix
   ];
 }
