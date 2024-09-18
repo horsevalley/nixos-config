@@ -177,7 +177,7 @@ in
     mono error bold
     color normal default default
     color indicator brightblack white
-    color sidebar_highlight red default
+    color sidebar_highlight default default
     color sidebar_divider brightblack black
     color sidebar_flagged red black
     color sidebar_new green black
