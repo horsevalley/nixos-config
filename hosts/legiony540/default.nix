@@ -5,7 +5,7 @@
   imports = [
      ./hardware-configuration.nix
     ../common/default.nix
-    ../../modules/gaming.nix
+    ../../modules/gaming/gaming.nix
     ../../modules/hardware/nvidia.nix
 
   ];
