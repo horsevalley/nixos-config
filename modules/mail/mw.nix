@@ -27,6 +27,9 @@ let
     tlsline="tls_starttls off"
     maxmes="0"
 
+    # Set the correct PASSWORD_STORE_DIR
+    PASSWORD_STORE_DIR="/home/jonash/.local/share/password-store"
+
     alias mbsync='${pkgs.isync}/bin/mbsync -c "$mbsyncrc"'
 
     master="Far"
@@ -36,7 +39,6 @@ let
 
     checkbasics() {
       command -V ${pkgs.gnupg}/bin/gpg >/dev/null 2>&1 && GPG="${pkgs.gnupg}/bin/gpg" || GPG="${pkgs.gnupg}/bin/gpg2"
-      PASSWORD_STORE_DIR="''${PASSWORD_STORE_DIR:-$HOME/.password-store}"
       [ -r "$PASSWORD_STORE_DIR/.gpg-id" ] || {
         echo "First run \`pass init <yourgpgemail>\` to set up a password archive."
         echo "(If you don't already have a GPG key pair, first run \`$GPG --full-generate-key\`.)"
@@ -116,6 +118,18 @@ let
       *) mwinfo; exit 1 ;;
     esac
   '';
+
+  insertpass() {
+        printf "%s" "$password" | ${pkgs.pass}/bin/pass insert -fe "$passprefix$fulladdr"
+      }
+
+      getpass() {
+        while :; do
+          ${pkgs.pass}/bin/pass rm -f "$passprefix$fulladdr" >/dev/null 2>&1
+          ${pkgs.pass}/bin/pass insert -f "$passprefix$fulladdr" && break
+        done
+      }
+
 in {
   environment.systemPackages = [ mw ];
 }
