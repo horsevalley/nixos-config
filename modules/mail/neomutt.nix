@@ -19,10 +19,9 @@ in
     set mailcap_path = ~/.config/neomutt/mailcap
     set date_format="%A %d %m %y %H:%M"
     set index_format="%2C %Z %?X?A& ? %D %-15.15F %s (%-4.4c)"
-    set sort = 'threads'
+    set sort = 'reverse-date'
     set sort_aux = 'reverse-last-date-received'
     set uncollapse_jump
-    set sort_re
     set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
     set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
     set send_charset = "utf-8"
