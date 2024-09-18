@@ -266,6 +266,7 @@ let
 # http://feeds2.feedburner.com/TheArtOfManliness "tech blog"
 # http://feeds.kottke.org/main "tech blog"
 # https://hnrss.org/frontpage "tech blog"
+  https://world.hey.com/dhh/feed.atom "tech blog" "DHH"
 
   "-----------------------------------TECH NEWS-------------------------------------"
 
