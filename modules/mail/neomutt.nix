@@ -110,6 +110,21 @@ in
     color index_author brightblue default '.*'
     color index_subject brightblue default '.*'
 
+    # New mail is boldened:
+    color index brightwhite default "~N"
+    color index_author brightwhite default "~N"
+    color index_subject brightwhite default "~N"
+
+    # Tagged mail is highlighted:
+    color index brightyellow blue "~T"
+    color index_author brightred blue "~T"
+    color index_subject brightcyan blue "~T"
+
+    # Flagged mail is highlighted:
+    color index brightgreen default "~F"
+    color index_subject brightgreen default "~F"
+    color index_author brightgreen default "~F"
+
     # Vim-like macros
     macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
     macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
