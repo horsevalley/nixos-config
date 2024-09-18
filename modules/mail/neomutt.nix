@@ -17,7 +17,7 @@ in
     cat > /home/${username}/.config/neomutt/neomuttrc << EOL
     # Basic Settings
     set mailcap_path = ~/.config/neomutt/mailcap
-    set date_format="%y/%m/%d %I:%M%p"
+    set date_format="%a/%d/%b %H:%M"
     set index_format="%2C %Z %?X?A& ? %D %-15.15F %s (%-4.4c)"
     set sort = 'threads'
     set sort_aux = 'reverse-last-date-received'
