@@ -77,13 +77,19 @@ in
     set include                          # include message in replies
     set forward_quote                    # include message in forwards
 
-    # Sidebar
-    set sidebar_visible
-    set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+    # Sidebar mappings
+    set sidebar_visible = no
+    set sidebar_width = 20
+    set sidebar_short_path = yes
+    set sidebar_next_new_wrap = yes
     set mail_check_stats
-    bind index,pager \CP sidebar-prev
-    bind index,pager \CN sidebar-next
-    bind index,pager \CO sidebar-open
+    set sidebar_format = '%D%?F? [%F]?%* %?N?%N/? %?S?%S?'
+    bind index,pager \Ck sidebar-prev
+    bind index,pager \Cj sidebar-next
+    bind index,pager \Co sidebar-open
+    bind index,pager \Cp sidebar-prev-new
+    bind index,pager \Cn sidebar-next-new
+    bind index,pager B sidebar-toggle-visible
 
     # Colors
     color normal        default         default
