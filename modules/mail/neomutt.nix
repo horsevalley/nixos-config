@@ -138,16 +138,16 @@ in
     bind index,pager B sidebar-toggle-visible
 
     # Colors
-    color normal        default         default
-    color index         color4          default         ~N # new messages
-    color index         color1          default         ~F # flagged messages
-    color index         color3          default         ~T # tagged messages
-    color index         color1          default         ~D # deleted messages
-    color body          color2          default         "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URLs
-    color body          color2          default         "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # email addresses
-    color attachment    color5          default
-    color signature     color8          default
-    color search        color11         default
+    # color normal        default         default
+    # color index         color4          default         ~N # new messages
+    # color index         color1          default         ~F # flagged messages
+    # color index         color3          default         ~T # tagged messages
+    # color index         color1          default         ~D # deleted messages
+    # color body          color2          default         "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URLs
+    # color body          color2          default         "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # email addresses
+    # color attachment    color5          default
+    # color signature     color8          default
+    # color search        color11         default
 
     # Default index colors:
     color index_number blue default
@@ -176,7 +176,7 @@ in
     mono indicator reverse
     mono error bold
     color normal default default
-    color indicator brightblack white
+    color indicator brightblack blue
     color sidebar_highlight red default
     color sidebar_divider brightblack black
     color sidebar_flagged red black
@@ -187,8 +187,7 @@ in
     color markers red white
     color attachment white default
     color search brightmagenta default
-    # color status brightyellow black
-    color status brightblack blue
+    color status bold brightblack blue
     color hdrdefault brightgreen default
     color quoted green default
     color quoted1 blue default
