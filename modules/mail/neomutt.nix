@@ -118,7 +118,7 @@ in
     set tmpdir = "~/.cache/mutt/tmp"
 
     # Mailboxes
-    mailboxes =jonash@jonash.xyz/INBOX =jonash@jonash.xyz/Sent =jonash@jonash.xyz/Drafts =jonash@jonash.xyz/Trash =jonash@jonash.xyz/Archive
+    mailboxes =INBOX =Sent =Drafts =Trash =Archive
 
     # Hook to set the correct From address when replying
     reply-hook . 'set from="jonash@jonash.xyz"'

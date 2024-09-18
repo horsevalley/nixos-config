@@ -18,6 +18,8 @@ let
     muttrc="$XDG_CONFIG_HOME/mutt/muttrc"
     accdir="$XDG_CONFIG_HOME/mutt/accounts"
     mwconfig="$XDG_CONFIG_HOME/mw"
+    mbsyncrc="$MBSYNCRC"
+    notmuchrc="$NOTMUCH_CONFIG"
 
     exec ${pkgs.mutt-wizard}/bin/mw "$@"
   '';
@@ -42,7 +44,6 @@ in
     mkdir -p /home/${username}/.cache/mutt/{headers,bodies}
     mkdir -p /home/${username}/.cache/mutt-wizard
     mkdir -p /home/${username}/.config/mw
-    mkdir -p /home/${username}/.mbsyncrc.d
     touch /home/${username}/.mbsyncrc
     touch /home/${username}/.notmuch-config
     touch /home/${username}/.config/mutt/muttrc
@@ -56,7 +57,6 @@ in
     chown -R ${username}:users /home/${username}/.cache/mutt-wizard
     chown -R ${username}:users /home/${username}/.config/mw
     chown ${username}:users /home/${username}/.mbsyncrc
-    chown ${username}:users /home/${username}/.mbsyncrc.d
     chown ${username}:users /home/${username}/.notmuch-config
   '';
 
