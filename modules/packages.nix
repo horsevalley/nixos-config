@@ -158,7 +158,7 @@
     firefox
 
     # Email
-    # mutt-wizard
+    mutt-wizard
     neomutt
     curl
     isync
