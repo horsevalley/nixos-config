@@ -104,6 +104,12 @@ in
     color signature     color8          default
     color search        color11         default
 
+    # Default index colors:
+    color index_number blue default
+    color index blue default '.*'
+    color index_author brightblue default '.*'
+    color index_subject brightblue default '.*'
+
     # Vim-like macros
     macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
     macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
@@ -113,7 +119,7 @@ in
     macro index,pager O "<shell-escape>mailsync<enter>" "run mailsync to sync all mail"
 
     # Account Settings
-    set realname = "Jonash"
+    set realname = "Jonas Hestdahl"
     set from = "${email}"
     set use_from = yes
     set envelope_from = yes
