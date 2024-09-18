@@ -15,6 +15,7 @@ in
     
     # Create neomutt config file
     cat > /home/${username}/.config/neomutt/neomuttrc << EOL
+
     # Basic Settings
     set mailcap_path = ~/.config/neomutt/mailcap
     set date_format="%A %d %m %y %H:%M"
@@ -29,25 +30,41 @@ in
     set charset = "utf-8"
     set editor = "vim"
 
-    # Vim-like keybindings
-    bind index,pager g noop
+    # General rebindings
     bind index gg first-entry
+    bind index j next-entry
+    bind index k previous-entry
+    bind attach <return> view-mailcap
+    bind attach l view-mailcap
+    bind editor <space> noop
     bind index G last-entry
+    bind pager,attach h exit
+    bind pager j next-line
+    bind pager k previous-line
+    bind pager l view-attachments
+    bind index D delete-message
+    bind index U undelete-message
+    bind index L limit
+    bind index h noop
+    bind index l display-message
+    bind index,query <space> tag-entry
+    #bind browser h goto-parent
+    macro browser h '<change-dir><kill-line>..<enter>' "Go to parent folder"
+    bind index,pager H view-raw-message
+    bind browser l select-entry
+    bind browser gg top-page
+    bind browser G bottom-page
     bind pager gg top
     bind pager G bottom
-    bind index,pager \Cd half-down
-    bind index,pager \Cu half-up
-    bind index,pager N search-opposite
-    bind index L limit
-    bind pager L exit
-
-    # Use Vim keys in menus
-    bind generic,index,pager k previous-entry
-    bind generic,index,pager j next-entry
-    bind generic,index,pager \Ck previous-page
-    bind generic,index,pager \Cj next-page
-    bind generic,index,pager,browser gg first-entry
-    bind generic,index,pager,browser G last-entry
+    bind index,pager,browser d half-down
+    bind index,pager,browser u half-up
+    bind index,pager S sync-mailbox
+    bind index,pager R group-reply
+    bind index \031 previous-undeleted	# Mouse wheel
+    bind index \005 next-undeleted		# Mouse wheel
+    bind pager \031 previous-line		# Mouse wheel
+    bind pager \005 next-line		# Mouse wheel
+    bind editor <Tab> complete-query
 
     # Pager View Options
     set pager_index_lines = 10
