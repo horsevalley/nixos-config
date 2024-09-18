@@ -38,5 +38,6 @@
     ./mail/isync.nix
     ./mail/msmtp.nix
     ./mail/neomutt.nix
+    ./mail/mw.nix
   ];
 }
