@@ -31,6 +31,10 @@ in
 
     # Vim-like keybindings
     bind index,pager g noop
+    bind index,pager i noop
+    bind index \Cf noop
+    bind index,pager M noop
+    bind index,pager C noop
     bind index gg first-entry
     bind index G last-entry
     bind pager gg top
@@ -43,10 +47,6 @@ in
     bind attach <return> view-mailcap
     bind attach l view-mailcap
 
-    bind index,pager i noop
-    bind index \Cf noop
-    bind index,pager M noop
-    bind index,pager C noop
 
     # Use Vim keys in menus
     bind generic,index,pager k previous-entry
