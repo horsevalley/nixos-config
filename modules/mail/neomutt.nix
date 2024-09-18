@@ -137,6 +137,67 @@ in
     bind index,pager \CO sidebar-open
     bind index,pager B sidebar-toggle-visible
 
+
+    # Vim-like macros
+    macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
+    macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
+    macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
+    macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
+    macro index,pager gj "<change-folder>=Junk<enter>" "go to junk"
+    macro index,pager O "<shell-escape>mailsync<enter>" "run mailsync to sync all mail"
+
+    macro index,pager Mi ";<save-message>=INBOX<enter>" "move mail to inbox"
+    macro index,pager Ci ";<copy-message>=INBOX<enter>" "copy mail to inbox"
+    macro index,pager Md ";<save-message>=Drafts<enter>" "move mail to drafts"
+    macro index,pager Cd ";<copy-message>=Drafts<enter>" "copy mail to drafts"
+    macro index,pager Mj ";<save-message>=Junk<enter>" "move mail to junk"
+    macro index,pager Cj ";<copy-message>=Junk<enter>" "copy mail to junk"
+    macro index,pager Mt ";<save-message>=Trash<enter>" "move mail to trash"
+    macro index,pager Ct ";<copy-message>=Trash<enter>" "copy mail to trash"
+    macro index,pager Ms ";<save-message>=Sent<enter>" "move mail to sent"
+    macro index,pager Cs ";<copy-message>=Sent<enter>" "copy mail to sent"
+
+    # Account Settings
+    set realname = "Jonas Hestdahl"
+    set from = "${email}"
+    set use_from = yes
+    set envelope_from = yes
+
+    # Paths
+    set folder = "~/.local/share/mail/${email}"
+    set spoolfile = "+INBOX"
+    set postponed = "+Drafts"
+    set record = "+Sent"
+    set trash = "+Trash"
+    set header_cache = "~/.cache/mutt/headers"
+    set message_cachedir = "~/.cache/mutt/bodies"
+    set certificate_file = "~/.config/neomutt/certificates"
+    set mailcap_path = "~/.config/neomutt/mailcap"
+    set tmpdir = "~/.cache/mutt/tmp"
+
+    # Mailboxes
+    named-mailboxes "Inbox" =INBOX
+    named-mailboxes "Sent" =Sent
+    named-mailboxes "Drafts" =Drafts
+    named-mailboxes "Trash" =Trash
+    named-mailboxes "Junk" =Junk
+
+    # Hook to set the correct From address when replying
+    reply-hook . 'set from="${email}"'
+    EOL
+
+    # Create mailcap file
+    cat > /home/${username}/.config/neomutt/mailcap << EOL
+    text/html; ${pkgs.lynx}/bin/lynx -dump -force_html %s; copiousoutput; description=HTML Text; nametemplate=%s.html
+    application/pdf; ${pkgs.zathura}/bin/zathura %s; test=test -n "$DISPLAY"
+    image/*; ${pkgs.feh}/bin/feh %s; test=test -n "$DISPLAY"
+    EOL
+
+    # Set correct permissions
+    chown -R ${username}:users /home/${username}/.config/neomutt
+    chown -R ${username}:users /home/${username}/.local/share/mail
+    chown -R ${username}:users /home/${username}/.cache/mutt
+
     # Colors
     color normal        default         default
     color index         color4          default         ~N # new messages
@@ -200,64 +261,6 @@ in
     color bold black default
     color underline black default
 
-    # Vim-like macros
-    macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
-    macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
-    macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
-    macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
-    macro index,pager gj "<change-folder>=Junk<enter>" "go to junk"
-    macro index,pager O "<shell-escape>mailsync<enter>" "run mailsync to sync all mail"
 
-    macro index,pager Mi ";<save-message>=INBOX<enter>" "move mail to inbox"
-    macro index,pager Ci ";<copy-message>=INBOX<enter>" "copy mail to inbox"
-    macro index,pager Md ";<save-message>=Drafts<enter>" "move mail to drafts"
-    macro index,pager Cd ";<copy-message>=Drafts<enter>" "copy mail to drafts"
-    macro index,pager Mj ";<save-message>=Junk<enter>" "move mail to junk"
-    macro index,pager Cj ";<copy-message>=Junk<enter>" "copy mail to junk"
-    macro index,pager Mt ";<save-message>=Trash<enter>" "move mail to trash"
-    macro index,pager Ct ";<copy-message>=Trash<enter>" "copy mail to trash"
-    macro index,pager Ms ";<save-message>=Sent<enter>" "move mail to sent"
-    macro index,pager Cs ";<copy-message>=Sent<enter>" "copy mail to sent"
-
-    # Account Settings
-    set realname = "Jonas Hestdahl"
-    set from = "${email}"
-    set use_from = yes
-    set envelope_from = yes
-
-    # Paths
-    set folder = "~/.local/share/mail/${email}"
-    set spoolfile = "+INBOX"
-    set postponed = "+Drafts"
-    set record = "+Sent"
-    set trash = "+Trash"
-    set header_cache = "~/.cache/mutt/headers"
-    set message_cachedir = "~/.cache/mutt/bodies"
-    set certificate_file = "~/.config/neomutt/certificates"
-    set mailcap_path = "~/.config/neomutt/mailcap"
-    set tmpdir = "~/.cache/mutt/tmp"
-
-    # Mailboxes
-    named-mailboxes "Inbox" =INBOX
-    named-mailboxes "Sent" =Sent
-    named-mailboxes "Drafts" =Drafts
-    named-mailboxes "Trash" =Trash
-    named-mailboxes "Junk" =Junk
-
-    # Hook to set the correct From address when replying
-    reply-hook . 'set from="${email}"'
-    EOL
-
-    # Create mailcap file
-    cat > /home/${username}/.config/neomutt/mailcap << EOL
-    text/html; ${pkgs.lynx}/bin/lynx -dump -force_html %s; copiousoutput; description=HTML Text; nametemplate=%s.html
-    application/pdf; ${pkgs.zathura}/bin/zathura %s; test=test -n "$DISPLAY"
-    image/*; ${pkgs.feh}/bin/feh %s; test=test -n "$DISPLAY"
-    EOL
-
-    # Set correct permissions
-    chown -R ${username}:users /home/${username}/.config/neomutt
-    chown -R ${username}:users /home/${username}/.local/share/mail
-    chown -R ${username}:users /home/${username}/.cache/mutt
   '';
 }
