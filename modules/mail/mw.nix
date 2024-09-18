@@ -2,29 +2,23 @@
 
 let
   username = "jonash";  # Replace with your actual username
-  mwPatch = pkgs.writeText "mw.patch" ''
-    diff --git a/mw b/mw
-    index a5c8d53..b5c2c70 100755
-    --- a/mw
-    +++ b/mw
-    @@ -14,8 +14,8 @@ muttshare="''${XDG_DATA_HOME:-$HOME/.local/share}/mutt-wizard"
-     sslcerts="/etc/ssl/certs/ca-certificates.crt"
-     cachedir="$HOME/.cache/mutt-wizard"
-     muttrc="$muttshare/mutt-wizard.muttrc"
-    -mbsyncrc="/mbsync/config"
-    -notmuchrc="/notmuch-config"
-    +mbsyncrc="''${MBSYNCRC:-$HOME/.mbsyncrc}"
-    +notmuchrc="''${NOTMUCH_CONFIG:-$HOME/.notmuch-config}"
-     muttrc="$HOME/.config/mutt/muttrc"
-     accdir="$HOME/.config/mutt/accounts"
-     mwconfig="$HOME/.config/mw"
-  '';
   mwWrapper = pkgs.writeScriptBin "mw" ''
     #!${pkgs.stdenv.shell}
     export HOME="/home/${username}"
     export XDG_CONFIG_HOME="/home/${username}/.config"
     export XDG_DATA_HOME="/home/${username}/.local/share"
     export XDG_CACHE_HOME="/home/${username}/.cache"
+    export MBSYNCRC="/home/${username}/.mbsyncrc"
+    export NOTMUCH_CONFIG="/home/${username}/.notmuch-config"
+    export PATH="${pkgs.mutt-wizard}/bin:$PATH"
+    
+    # Override the variables in the original mw script
+    muttshare="$XDG_DATA_HOME/mutt-wizard"
+    cachedir="$XDG_CACHE_HOME/mutt-wizard"
+    muttrc="$XDG_CONFIG_HOME/mutt/muttrc"
+    accdir="$XDG_CONFIG_HOME/mutt/accounts"
+    mwconfig="$XDG_CONFIG_HOME/mw"
+
     exec ${pkgs.mutt-wizard}/bin/mw "$@"
   '';
 in
@@ -44,19 +38,22 @@ in
     mkdir -p /home/${username}/.config/mutt
     mkdir -p /home/${username}/.config/neomutt
     mkdir -p /home/${username}/.local/share/mail
+    mkdir -p /home/${username}/.local/share/mutt-wizard
     mkdir -p /home/${username}/.cache/mutt/{headers,bodies}
+    mkdir -p /home/${username}/.cache/mutt-wizard
     mkdir -p /home/${username}/.config/mw
     mkdir -p /home/${username}/.mbsyncrc.d
     touch /home/${username}/.mbsyncrc
     touch /home/${username}/.notmuch-config
     touch /home/${username}/.config/mutt/muttrc
-    touch /home/${username}/.config/neomutt/neomuttrc
 
     # Set correct permissions
     chown -R ${username}:users /home/${username}/.config/mutt
     chown -R ${username}:users /home/${username}/.config/neomutt
     chown -R ${username}:users /home/${username}/.local/share/mail
+    chown -R ${username}:users /home/${username}/.local/share/mutt-wizard
     chown -R ${username}:users /home/${username}/.cache/mutt
+    chown -R ${username}:users /home/${username}/.cache/mutt-wizard
     chown -R ${username}:users /home/${username}/.config/mw
     chown ${username}:users /home/${username}/.mbsyncrc
     chown ${username}:users /home/${username}/.mbsyncrc.d
@@ -68,9 +65,4 @@ in
     MBSYNCRC = "/home/${username}/.mbsyncrc";
     NOTMUCH_CONFIG = lib.mkForce "/home/${username}/.notmuch-config";
   };
-
-  # Patch mutt-wizard to use user-specific directories
-  system.activationScripts.patchMuttWizard = ''
-    ${pkgs.patch}/bin/patch ${pkgs.mutt-wizard}/bin/mw ${mwPatch}
-  '';
 }
