@@ -40,6 +40,8 @@ in
     bind index,pager N search-opposite
     bind index L limit
     bind pager L exit
+    bind attach <return> view-mailcap
+    bind attach l view-mailcap
 
     # Use Vim keys in menus
     bind generic,index,pager k previous-entry
