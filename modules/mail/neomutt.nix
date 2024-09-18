@@ -69,6 +69,7 @@ in
     set menu_scroll
     set tilde
     unset markers
+    set split_window=no
 
     # General rebindings
     bind index gg first-entry
