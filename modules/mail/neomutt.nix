@@ -188,7 +188,7 @@ in
     color attachment white default
     color search brightmagenta default
     # color status brightyellow black
-    color status brightwhite blue
+    color status brightblack blue
     color hdrdefault brightgreen default
     color quoted green default
     color quoted1 blue default
@@ -208,24 +208,16 @@ in
     macro index,pager gj "<change-folder>=Junk<enter>" "go to junk"
     macro index,pager O "<shell-escape>mailsync<enter>" "run mailsync to sync all mail"
 
-    macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
     macro index,pager Mi ";<save-message>=INBOX<enter>" "move mail to inbox"
     macro index,pager Ci ";<copy-message>=INBOX<enter>" "copy mail to inbox"
-    macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
     macro index,pager Md ";<save-message>=Drafts<enter>" "move mail to drafts"
     macro index,pager Cd ";<copy-message>=Drafts<enter>" "copy mail to drafts"
-    macro index,pager gj "<change-folder>=Junk<enter>" "go to junk"
     macro index,pager Mj ";<save-message>=Junk<enter>" "move mail to junk"
     macro index,pager Cj ";<copy-message>=Junk<enter>" "copy mail to junk"
-    macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
     macro index,pager Mt ";<save-message>=Trash<enter>" "move mail to trash"
     macro index,pager Ct ";<copy-message>=Trash<enter>" "copy mail to trash"
-    macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
     macro index,pager Ms ";<save-message>=Sent<enter>" "move mail to sent"
     macro index,pager Cs ";<copy-message>=Sent<enter>" "copy mail to sent"
-    macro index,pager ga "<change-folder>=Archive<enter>" "go to archive"
-    macro index,pager Ma ";<save-message>=Archive<enter>" "move mail to archive"
-    macro index,pager Ca ";<copy-message>=Archive<enter>" "copy mail to archive"
 
     # Account Settings
     set realname = "Jonas Hestdahl"
