@@ -2,6 +2,7 @@
 
 let
   username = "jonash";  # Replace with your actual username
+  email = "jonash@jonash.xyz";  # Replace with your actual email
 in
 {
   environment.systemPackages = [ pkgs.neomutt ];
@@ -9,7 +10,7 @@ in
   system.activationScripts.neomuttSetup = ''
     # Ensure XDG directories exist
     mkdir -p /home/${username}/.config/neomutt
-    mkdir -p /home/${username}/.local/share/mail
+    mkdir -p /home/${username}/.local/share/mail/${email}
     mkdir -p /home/${username}/.cache/mutt/{headers,bodies}
     
     # Create neomutt config file
@@ -105,12 +106,16 @@ in
 
     # Account Settings
     set realname = "Jonash"
-    set from = "jonash@jonash.xyz"
+    set from = "${email}"
     set use_from = yes
     set envelope_from = yes
 
     # Paths
-    set folder = "~/.local/share/mail"
+    set folder = "~/.local/share/mail/${email}"
+    set spoolfile = "+INBOX"
+    set postponed = "+Drafts"
+    set record = "+Sent"
+    set trash = "+Trash"
     set header_cache = "~/.cache/mutt/headers"
     set message_cachedir = "~/.cache/mutt/bodies"
     set certificate_file = "~/.config/neomutt/certificates"
@@ -118,10 +123,14 @@ in
     set tmpdir = "~/.cache/mutt/tmp"
 
     # Mailboxes
-    mailboxes =INBOX =Sent =Drafts =Trash =Archive
+    named-mailboxes "Inbox" =INBOX
+    named-mailboxes "Sent" =Sent
+    named-mailboxes "Drafts" =Drafts
+    named-mailboxes "Trash" =Trash
+    named-mailboxes "Archive" =Archive
 
     # Hook to set the correct From address when replying
-    reply-hook . 'set from="jonash@jonash.xyz"'
+    reply-hook . 'set from="${email}"'
     EOL
 
     # Create mailcap file
