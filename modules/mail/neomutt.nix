@@ -16,12 +16,13 @@ in
     # Create neomutt config file
     cat > /home/${username}/.config/neomutt/neomuttrc << EOL
     # vim: filetype=neomuttrc
+    # This file is a slightly modified version of Luke Smith's mutt-wizard.muttrc
+    # https://raw.githubusercontent.com/LukeSmithxyz/mutt-wizard/master/share/mutt-wizard.muttrc
 
     # General Settings
     set mailcap_path = ~/.config/neomutt/mailcap
-    set date_format="%d/%m/%y %H:%M"
+    set date_format="%y/%m/%d %I:%M%p"
     set index_format="%2C %Z %?X?A& ? %D %-15.15F %s (%-4.4c)"
-    set sort = 'reverse-date'
     set markers = no
     set mark_old = no
     set mime_forward = yes
@@ -29,17 +30,20 @@ in
     set wait_key = no
     set rfc2047_parameters = yes
     set sleep_time = 0
+    set markers = no
+    set mime_forward = yes
+    set forward_format = "Fwd: %s"
+    set forward_decode = yes
+    set forward_quote = yes
+    set reverse_name = yes
+    set include = yes
 
     # Ensure TLS is enforced
     set ssl_starttls = yes
     set ssl_force_tls = yes
 
-    # Sidebar settings
-    set sidebar_visible = no
-    set sidebar_width = 20
-    set sidebar_short_path = yes
-    set sidebar_next_new_wrap = yes
-    set mail_check_stats
+    # Sort by newest mail
+    set sort = reverse-date-received
 
     auto_view text/html
     alternative_order text/plain text/enriched text/html
@@ -51,6 +55,12 @@ in
     set menu_scroll
     set tilde
     unset markers
+
+    # Email Headers
+    ignore *
+    unignore from: to: cc: date: subject:
+    unhdr_order *
+    hdr_order from: to: cc: date: subject:
 
     # Compose View Options
     set envelope_from                    # which from?
@@ -88,89 +98,81 @@ in
     bind index L limit
     bind pager L exit
 
-    # Sidebar bindings
+    # Use Vim keys in menus
+    bind generic,index,pager k previous-entry
+    bind generic,index,pager j next-entry
+    bind generic,index,pager \Ck previous-page
+    bind generic,index,pager \Cj next-page
+    bind generic,index,pager,browser gg first-entry
+    bind generic,index,pager,browser G last-entry
+
+    # Sidebar
+    set sidebar_visible
+    set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+    set mail_check_stats
     bind index,pager \CP sidebar-prev
     bind index,pager \CN sidebar-next
     bind index,pager \CO sidebar-open
 
-    # AESTHETICS
-
-    # Default index colors:
+    # Colors
+    color index yellow default '.*'
+    color index_author red default '.*'
     color index_number blue default
-    color index blue default '.*'
-    color index_author brightblue default '.*'
-    color index_subject brightblue default '.*'
+    color index_subject cyan default '.*'
 
-    # New mail is boldened:
-    color index brightwhite default "~N"
-    color index_author brightwhite default "~N"
-    color index_subject brightwhite default "~N"
+    # For new mail:
+    color index brightyellow black "~N"
+    color index_author brightred black "~N"
+    color index_subject brightcyan black "~N"
 
-    # Tagged mail is highlighted:
-    color index brightyellow blue "~T"
-    color index_author brightred blue "~T"
-    color index_subject brightcyan blue "~T"
-
-    # Flagged mail is highlighted:
-    color index brightgreen default "~F"
-    color index_subject brightgreen default "~F"
-    color index_author brightgreen default "~F"
-
-    # Other colors and aesthetic settings:
-    mono bold bold
-    mono underline underline
-    mono indicator reverse
-    mono error bold
-    color normal default default
-    color indicator brightblack white
-    color sidebar_highlight red default
-    color sidebar_divider brightblack black
-    color sidebar_flagged red black
-    color sidebar_new green black
-    color error red default
-    color tilde black default
-    color message cyan default
-    color markers red white
-    color attachment white default
-    color search brightmagenta default
-    color status brightwhite blue
-    color hdrdefault brightgreen default
-    color quoted green default
-    color quoted1 blue default
-    color quoted2 cyan default
-    color quoted3 yellow default
-    color quoted4 red default
-    color quoted5 brightred default
-    color signature brightgreen default
-    color bold black default
-    color underline black default
-
-    # Regex highlighting:
-    color header brightmagenta default "^From"
-    color header brightcyan default "^Subject"
-    color header brightwhite default "^(CC|BCC)"
     color header blue default ".*"
-    color body brightred default "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
-    color body brightblue default "(https?|ftp)://[\\-\\.,/%~_:?&=\\#a-zA-Z0-9]+"
-    color body green default "\\`[^\\`]*\\`"
-    color body brightblue default "^# \\.*"
-    color body brightcyan default "^## \\.*"
-    color body brightgreen default "^### \\.*"
-    color body yellow default "^(\\t| )*(-|\\*) \\.*"
-    color body brightcyan default "[;:][-o][)/(|]"
-    color body brightcyan default "[;:][)(|]"
-    color body brightcyan default "[ ][*][^*]*[*][ ]?"
-    color body brightcyan default "[ ]?[*][^*]*[*][ ]"
-    color body red default "(BAD signature)"
-    color body cyan default "(Good signature)"
-    color body brightblack default "^gpg: Good signature .*"
-    color body brightyellow default "^gpg: "
-    color body brightyellow red "^gpg: BAD signature from.*"
-    mono body bold "^gpg: Good signature"
-    mono body bold "^gpg: BAD signature from.*"
+    color header brightmagenta default "^(From)"
+    color header brightcyan default "^(Subject)"
+    color header brightwhite default "^(CC|BCC)"
 
-    # URL regex
-    color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+    color quoted blue default
+    color quoted1 cyan default
+    color quoted2 yellow default
+    color quoted3 red default
+    color quoted4 brightred default
+
+    color body brightcyan default "[;:]-*[)>(<lt;|]"
+    color body brightcyan default "[ ][*][^*]*[*][ ]?"
+    color body brightcyan default "[-+]>[-+]+"
+    color body brightcyan default "[!?]{4,}"
+    color body cyan default "\[[0-9]+\]"
+    color body brightblue default "^ *-+$"
+    color body brightgreen default "^[-_]=*$"
+    color body yellow default "(^| )+(|[<>|])[a-zA-Z]{3,}(|[<>|])(|$)+"
+    color body brightcyan default "(^| )+=(|[<>|])[a-zA-Z]{3,}(|[<>|])(|$)+"
+    color body brightcyan default "(^| )+(|[<>|])[a-zA-Z]{3,}=(|[<>|])(|$)+"
+    color body brightcyan default "=[a-zA-Z]{1,}="
+    color body brightblue default "(^| )+\$[a-zA-Z]+:?$"
+    color body brightblue default "(^|[[:space:]])\\$[a-zA-Z0-9]+"
+    color body brightyellow default "(^| )+\`[^\`]+\`"
+    color body brightblue default "(^| )+\\[a-zA-Z0-9]"
+    color body brightblue default "(^|[[:space:]])@[a-zA-Z0-9]+"
+    color body brightcyan default "^ {3,4}(#+)[ \t]+.*$"
+    color body brightgreen default "^(#+)[ \t]+.*$"
+    color body brightcyan default "([a-zA-Z]|[[:space:]])+://[^ ]+[^])"
+    color body brightblue default "\\[[0-9]+\\]"
+
+    color body red default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+"
+    color body brightblue default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+"
+    color attachment yellow default
+    color signature brightgreen default
+    color search brightmagenta default
+
+    color indicator green default
+    color error red default
+    color message cyan default
+    color status brightwhite default
+    color tree white default
+    color normal white default
+    color tilde green default
+    color bold cyan default
+    color underline cyan default
+    color markers brightcyan default
 
     # Vim-like macros
     macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
