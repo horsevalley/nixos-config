@@ -62,7 +62,7 @@ in
   environment.variables = {
     MUTT_WIZARD_CONFIG = "/home/${username}/.config/mw";
     MBSYNCRC = "/home/${username}/.mbsyncrc";
-    NOTMUCH_CONFIG = "/home/${username}/.notmuch-config";
+    NOTMUCH_CONFIG = lib.mkForce "/home/${username}/.notmuch-config";
   };
 
   # Patch mutt-wizard to use user-specific directories
