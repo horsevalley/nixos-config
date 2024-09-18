@@ -63,13 +63,12 @@ in
     bind index,pager R group-reply
 
     # Pager View Options
-    set pager_index_lines = 10
-    set pager_context = 3
+    # set pager_index_lines = 10
+    # set pager_context = 3
     set pager_stop
     set menu_scroll
     set tilde
     unset markers
-    set split_window = no
 
     # General rebindings
     bind index gg first-entry
