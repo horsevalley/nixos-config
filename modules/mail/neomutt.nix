@@ -175,11 +175,11 @@ in
     mono underline underline
     mono indicator reverse
     mono error bold
-    color normal default default
+    color normal white blue
     color indicator brightblack white
     color sidebar_highlight default default
     color sidebar_divider brightblack black
-    color sidebar_flagged red black
+    color sidebar_flagged default black
     color sidebar_new green black
     color error red default
     color tilde black default
@@ -188,7 +188,7 @@ in
     color attachment white default
     color search brightmagenta default
     # color status brightyellow black
-    color status black blue
+    color status white blue
     color hdrdefault brightgreen default
     color quoted green default
     color quoted1 blue default
@@ -201,13 +201,7 @@ in
     color underline black default
 
     # Vim-like macros
-    macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
-    macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
-    macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
-    macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
-    macro index,pager gj "<change-folder>=Junk<enter>" "go to junk"
     macro index,pager O "<shell-escape>mailsync<enter>" "run mailsync to sync all mail"
-
     macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
     macro index,pager Mi ";<save-message>=INBOX<enter>" "move mail to inbox"
     macro index,pager Ci ";<copy-message>=INBOX<enter>" "copy mail to inbox"
