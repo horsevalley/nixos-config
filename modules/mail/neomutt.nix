@@ -188,7 +188,7 @@ in
     color attachment white default
     color search brightmagenta default
     # color status brightyellow black
-    color status blue black
+    color status black blue
     color hdrdefault brightgreen default
     color quoted green default
     color quoted1 blue default
