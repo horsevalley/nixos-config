@@ -121,6 +121,7 @@ in
     set attribution = "On %d, %n wrote:" # format of quoting header
     set reply_to                         # reply to Reply to: field
     set reverse_name                     # reply as whomever it was to
+    set wait_key = no	                   # mutt won't ask "press key to continue"
     set include                          # include message in replies
     set forward_quote                    # include message in forwards
     set mail_check=60 # to avoid lags using IMAP with some email providers (yahoo for example)
