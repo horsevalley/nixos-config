@@ -2,42 +2,45 @@
 
 {
   imports = [
-    ./audio.nix
-    ./X11.nix
-    ./gnome.nix
-    ./programs/wayland/hyprland.nix
-    ./neovim.nix
-    ./fonts.nix
+    ./gaming/gaming.nix
+    ./hardware/nvidia.nix
     ./hardware/opengl.nix
-    ./keyboard.nix
-    ./localization.nix
-    ./networking.nix
-    ./packages.nix
-    ./security.nix
-    ./services.nix
-    ./system.nix
-    ./users.nix
-    ./variables.nix
-    ./pcmanfm.nix
-    ./sddm.nix
-    ./yazi.nix
-    ./git.nix
-    ./librewolf.nix
-    ./zsh.nix
-    ./zathura.nix
-    ./mpv.nix
-    ./kitty.nix
-    ./newsboat.nix
-    ./pass.nix
-    ./gpg.nix
-    ./rofi.nix
-    # ./eww.nix
-    ./bluetooth.nix
-    ./swaync.nix
-    ./mail/lynx.nix
     ./mail/isync.nix
+    ./mail/lynx.nix
     ./mail/msmtp.nix
-    ./mail/neomutt.nix
     ./mail/mw.nix
+    ./mail/neomutt.nix
+    ./programs/wayland/hyprland.nix
+    # ./programs/dunst.nix
+    ./programs/fastfetch.nix
+    ./programs/git.nix
+    ./programs/kitty.nix
+    ./programs/librewolf.nix
+    ./programs/mpv.nix
+    ./programs/neovim.nix
+    ./programs/newsboat.nix
+    ./programs/pcmanfm.nix
+    ./programs/rofi.nix
+    ./programs/sddm.nix
+    ./programs/swaync.nix
+    ./programs/yazi.nix
+    ./programs/zathura.nix
+    ./security/gpg.nix
+    ./security/pass.nix
+    ./security/security.nix
+    ./shell/aliasrc.nix
+    ./shell/profile.nix
+    ./shell/zsh.nix
+    ./system/audio.nix
+    ./system/bluetooth.nix
+    ./system/fonts.nix
+    ./system/gnome.nix
+    ./system/keyboard.nix
+    ./system/localization.nix
+    ./system/networking.nix
+    ./system/packages.nix
+    ./system/services.nix
+    ./system/system.nix
+    ./system/users.nix
   ];
 }

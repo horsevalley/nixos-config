@@ -3,6 +3,7 @@
 {
   environment.variables = {
     EDITOR = "nvim";
+    VISUAL = "nvim";
     TERMINAL = "kitty";
     TERMINAL_PROG = "Kitty";
     BROWSER = "qutebrowser";
@@ -10,7 +11,12 @@
     MUSICPLAYER = "ncmpcpp";
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_DATA_DIRS = "$HOME/.local/share" "$XDG_DATA_DIRS";
     XDG_CACHE_HOME = "$HOME/.cache";
+    XDG_DEFAULT_PDF_VIEWER = "zathura";
+    XDG_DEFAULT_IMAGE_VIEWER = "nsxiv";
+    XDG_DEFAULT_VIDEO_PLAYER = "mpv";
+    XDG_DEFAULT_BROWSER = "qutebrowser";
     NOTMUCH_CONFIG = "$XDG_CONFIG_HOME/notmuch-config";
     GTK2_RC_FILES = "$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0";
     WGETRC = "$XDG_CONFIG_HOME/wget/wgetrc";
@@ -74,6 +80,9 @@
     highlight
     gnupg
   ];
+
+  # Enable xdg mime
+  xdg.mime.enable = true;
 
   # Add ~/.local/bin to PATH
   environment.pathsToLink = [ "/share/zsh" ];

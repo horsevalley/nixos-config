@@ -167,11 +167,6 @@
     notmuch
     abook
 
-    # Gaming
-    # bottles
-    # lutris
-    # heroic
-
     # Security
     pam_gnupg
     pass
@@ -191,6 +186,11 @@
     tremc 
     transmission 
     transmission-remote-gtk 
+
+    # X11
+    xorg.xorgserver
+    xorg.xinit
+    wl-clipboard-x11
 
     # Silly programs
     cowsay
