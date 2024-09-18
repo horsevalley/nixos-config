@@ -2,6 +2,23 @@
 
 let
   username = "jonash";  # Replace with your actual username
+  mwPatch = pkgs.writeText "mw.patch" ''
+    diff --git a/mw b/mw
+    index a5c8d53..b5c2c70 100755
+    --- a/mw
+    +++ b/mw
+    @@ -14,8 +14,8 @@ muttshare="${XDG_DATA_HOME:-$HOME/.local/share}/mutt-wizard"
+     sslcerts="/etc/ssl/certs/ca-certificates.crt"
+     cachedir="$HOME/.cache/mutt-wizard"
+     muttrc="$muttshare/mutt-wizard.muttrc"
+    -mbsyncrc="/mbsync/config"
+    -notmuchrc="/notmuch-config"
+    +mbsyncrc="${MBSYNCRC:-$HOME/.mbsyncrc}"
+    +notmuchrc="${NOTMUCH_CONFIG:-$HOME/.notmuch-config}"
+     muttrc="$HOME/.config/mutt/muttrc"
+     accdir="$HOME/.config/mutt/accounts"
+     mwconfig="$HOME/.config/mw"
+  '';
 in
 {
   environment.systemPackages = [ pkgs.mutt-wizard pkgs.neomutt pkgs.isync pkgs.msmtp pkgs.notmuch pkgs.pass ];
@@ -34,26 +51,7 @@ in
 
   # Patch mutt-wizard to use user-specific directories
   system.activationScripts.patchMuttWizard = ''
-    patch_file=$(mktemp)
-    cat > $patch_file << 'EOL'
-    diff --git a/mw b/mw
-    index a5c8d53..b5c2c70 100755
-    --- a/mw
-    +++ b/mw
-    @@ -14,8 +14,8 @@ muttshare="${XDG_DATA_HOME:-$HOME/.local/share}/mutt-wizard"
-     sslcerts="/etc/ssl/certs/ca-certificates.crt"
-     cachedir="$HOME/.cache/mutt-wizard"
-     muttrc="$muttshare/mutt-wizard.muttrc"
-    -mbsyncrc="/mbsync/config"
-    -notmuchrc="/notmuch-config"
-    +mbsyncrc="${MBSYNCRC:-$HOME/.mbsyncrc}"
-    +notmuchrc="${NOTMUCH_CONFIG:-$HOME/.notmuch-config}"
-     muttrc="$HOME/.config/mutt/muttrc"
-     accdir="$HOME/.config/mutt/accounts"
-     mwconfig="$HOME/.config/mw"
-    EOL
-
-    patch ${pkgs.mutt-wizard}/bin/mw $patch_file
+    patch ${pkgs.mutt-wizard}/bin/mw ${mwPatch}
   '';
 
   # Create a wrapper script for mw
