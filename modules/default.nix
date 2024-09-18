@@ -34,7 +34,9 @@
     # ./eww.nix
     ./bluetooth.nix
     ./swaync.nix
-    ./mail/mw.nix
-    ./mail/mailsync.nix
+    ./mail/lynx.nix
+    ./mail/isync.nix
+    ./mail/msmtp.nix
+    ./mail/neomutt.nix
   ];
 }
