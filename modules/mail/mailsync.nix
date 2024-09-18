@@ -7,15 +7,12 @@ let
     # Run only if not already running in other instance
     ${pkgs.procps}/bin/pgrep mbsync >/dev/null && { echo "mbsync is already running."; exit ;}
 
-    # Load environment variables
-    . ${config.environment.sessionVariables}
-
     export GPG_TTY="$(tty)"
 
     [ -n "$MBSYNCRC" ] && alias mbsync="${pkgs.isync}/bin/mbsync -c $MBSYNCRC" || MBSYNCRC="$HOME/.mbsyncrc"
-    [ -n "$MPOPRC" ] || MPOPRC="''${XDG_CONFIG_HOME}/mpop/config"
+    [ -n "$MPOPRC" ] || MPOPRC="''${XDG_CONFIG_HOME:-$HOME/.config}/mpop/config"
 
-    lastrun="''${XDG_CONFIG_HOME}/mutt/.mailsynclastrun"
+    lastrun="''${XDG_CONFIG_HOME:-$HOME/.config}/mutt/.mailsynclastrun"
 
     notify() {
       ${pkgs.libnotify}/bin/notify-send --app-name="mutt-wizard" "$1" "$2"

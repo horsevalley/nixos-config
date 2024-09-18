@@ -6,16 +6,15 @@ let
 
     set -a
 
-    prefix="${config.environment.variables.PREFIX}"
-    maildir="${config.environment.variables.XDG_DATA_HOME}/mail"
-    muttshare="${prefix}/share/mutt-wizard"
-    cachedir="${config.environment.variables.XDG_CACHE_HOME}/mutt-wizard"
-    muttrc="${config.environment.variables.XDG_CONFIG_HOME}/mutt/muttrc"
-    accdir="${config.environment.variables.XDG_CONFIG_HOME}/mutt/accounts"
-    msmtprc="${config.environment.variables.XDG_CONFIG_HOME}/msmtp/config"
-    msmtplog="${config.environment.variables.XDG_STATE_HOME}/msmtp/msmtp.log"
+    maildir="''${XDG_DATA_HOME:-$HOME/.local/share}/mail"
+    muttshare="${pkgs.mutt-wizard}/share/mutt-wizard"
+    cachedir="''${XDG_CACHE_HOME:-$HOME/.cache}/mutt-wizard"
+    muttrc="''${XDG_CONFIG_HOME:-$HOME/.config}/mutt/muttrc"
+    accdir="''${XDG_CONFIG_HOME:-$HOME/.config}/mutt/accounts"
+    msmtprc="''${XDG_CONFIG_HOME:-$HOME/.config}/msmtp/config"
+    msmtplog="''${XDG_STATE_HOME:-$HOME/.local/state}/msmtp/msmtp.log"
     mbsyncrc="''${MBSYNCRC:-$HOME/.mbsyncrc}"
-    mpoprc="${config.environment.variables.XDG_CONFIG_HOME}/mpop/config"
+    mpoprc="''${XDG_CONFIG_HOME:-$HOME/.config}/mpop/config"
     mpoptemp="$muttshare/mpop-temp"
     mbsynctemp="$muttshare/mbsync-temp"
     mutttemp="$muttshare/mutt-temp"
@@ -45,7 +44,11 @@ let
       }
     }
 
-    # ... (rest of the mw script, adapted to use Nix paths)
+    getaccounts() { accounts="$(${pkgs.findutils}/bin/find -L "$accdir" -type f 2>/dev/null | ${pkgs.gnugrep}/bin/grep -o "\S*.muttrc" | ${pkgs.gnused}/bin/sed "s|.*/\([0-9]-\)*||;s/\.muttrc$//" | ${pkgs.coreutils}/bin/nl)"; }
+
+    list() { getaccounts && [ -n "$accounts" ] && echo "$accounts" || exit 1; }
+
+    # ... (rest of the mw script functions, adapted to use Nix paths)
 
     while getopts "rfpXlhodTYD:y:i:I:s:S:u:a:n:P:x:m:t:" o; do case "''${o}" in
       # ... (getopts cases)
