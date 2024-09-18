@@ -234,7 +234,6 @@ let
           pkgs.coreutils
           pkgs.curl
           pkgs.gawk
-          pkgs.urlview
         ]}
     '';
   };
