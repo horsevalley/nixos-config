@@ -201,7 +201,13 @@ in
     color underline black default
 
     # Vim-like macros
+    macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
+    macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
+    macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
+    macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
+    macro index,pager gj "<change-folder>=Junk<enter>" "go to junk"
     macro index,pager O "<shell-escape>mailsync<enter>" "run mailsync to sync all mail"
+
     macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
     macro index,pager Mi ";<save-message>=INBOX<enter>" "move mail to inbox"
     macro index,pager Ci ";<copy-message>=INBOX<enter>" "copy mail to inbox"
