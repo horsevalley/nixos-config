@@ -15,25 +15,11 @@ in
     
     # Create neomutt config file
     cat > /home/${username}/.config/neomutt/neomuttrc << EOL
-
-    # Compose View Options
-    set envelope_from                    # which from?
-    set edit_headers                     # show headers when composing
-    set fast_reply                       # skip to compose when replying
-    set askcc                            # ask for CC:
-    set fcc_attach                       # save attachments with the body
-    set forward_format = "Fwd: %s"       # format of subject when forwarding
-    set forward_decode                   # decode when forwarding
-    set attribution = "On %d, %n wrote:" # format of quoting header
-    set reply_to                         # reply to Reply to: field
-    set reverse_name                     # reply as whomever it was to
-    set include                          # include message in replies
-    set forward_quote                    # include message in forwards
-
+    # Basic Settings
     set mailcap_path = ~/.config/neomutt/mailcap
-    set date_format="%a/%d/%b %H:%M"
+    set date_format="%y/%m/%d %I:%M%p"
     set index_format="%2C %Z %?X?A& ? %D %-15.15F %s (%-4.4c)"
-    set sort = 'reverse-date'
+    set sort = 'threads'
     set sort_aux = 'reverse-last-date-received'
     set uncollapse_jump
     set sort_re
@@ -42,18 +28,26 @@ in
     set send_charset = "utf-8"
     set charset = "utf-8"
     set editor = "vim"
-    set rfc2047_parameters = yes
-    set sleep_time = 0		# Pause 0 seconds for informational messages
-    set markers = no		# Disables the `+` displayed at line wraps
-    set mark_old = no		# Unread mail stay unread until read
-    set mime_forward = no	# mail body is forwarded as text
-    set forward_attachments = yes	# attachments are forwarded with mail
-    set wait_key = no		# mutt won't ask "press key to continue"
-    set mail_check=60 # to avoid lags using IMAP with some email providers (yahoo for example)
-    auto_view text/html		# automatically show html (mailcap uses lynx)
-    auto_view application/pgp-encrypted
-    alternative_order text/plain text/enriched text/html
 
+    # Vim-like keybindings
+    bind index,pager g noop
+    bind index gg first-entry
+    bind index G last-entry
+    bind pager gg top
+    bind pager G bottom
+    bind index,pager \Cd half-down
+    bind index,pager \Cu half-up
+    bind index,pager N search-opposite
+    bind index L limit
+    bind pager L exit
+
+    # Use Vim keys in menus
+    bind generic,index,pager k previous-entry
+    bind generic,index,pager j next-entry
+    bind generic,index,pager \Ck previous-page
+    bind generic,index,pager \Cj next-page
+    bind generic,index,pager,browser gg first-entry
+    bind generic,index,pager,browser G last-entry
 
     # Pager View Options
     set pager_index_lines = 10
@@ -69,6 +63,39 @@ in
     unhdr_order *
     hdr_order from: to: cc: date: subject:
 
+    # Compose View Options
+    set envelope_from                    # which from?
+    set edit_headers                     # show headers when composing
+    set fast_reply                       # skip to compose when replying
+    set askcc                            # ask for CC:
+    set fcc_attach                       # save attachments with the body
+    set forward_format = "Fwd: %s"       # format of subject when forwarding
+    set forward_decode                   # decode when forwarding
+    set attribution = "On %d, %n wrote:" # format of quoting header
+    set reply_to                         # reply to Reply to: field
+    set reverse_name                     # reply as whomever it was to
+    set include                          # include message in replies
+    set forward_quote                    # include message in forwards
+
+    # Sidebar
+    set sidebar_visible
+    set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+    set mail_check_stats
+    bind index,pager \CP sidebar-prev
+    bind index,pager \CN sidebar-next
+    bind index,pager \CO sidebar-open
+
+    # Colors
+    color normal        default         default
+    color index         color4          default         ~N # new messages
+    color index         color1          default         ~F # flagged messages
+    color index         color3          default         ~T # tagged messages
+    color index         color1          default         ~D # deleted messages
+    color body          color2          default         "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URLs
+    color body          color2          default         "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # email addresses
+    color attachment    color5          default
+    color signature     color8          default
+    color search        color11         default
 
     # Vim-like macros
     macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
@@ -77,10 +104,8 @@ in
     macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
     macro index,pager gj "<change-folder>=Junk<enter>" "go to junk"
 
-
-
     # Account Settings
-    set realname = "Jonas Hestdahl"
+    set realname = "Jonash"
     set from = "${email}"
     set use_from = yes
     set envelope_from = yes
@@ -119,96 +144,5 @@ in
     chown -R ${username}:users /home/${username}/.config/neomutt
     chown -R ${username}:users /home/${username}/.local/share/mail
     chown -R ${username}:users /home/${username}/.cache/mutt
-
-    # Sidebar mappings
-    set sidebar_visible = no
-    set sidebar_width = 20
-    set sidebar_short_path = yes
-    set sidebar_next_new_wrap = yes
-    set mail_check_stats
-    set sidebar_format = '%D%?F? [%F]?%* %?N?%N/? %?S?%S?'
-    bind index,pager \Ck sidebar-prev
-    bind index,pager \Cj sidebar-next
-    bind index,pager \Co sidebar-open
-    bind index,pager \Cp sidebar-prev-new
-    bind index,pager \Cn sidebar-next-new
-    bind index,pager B sidebar-toggle-visible
-
-    # Aesthetics
-    # Default index colors:
-    color index_number blue default
-    color index blue default '.*'
-    color index_author brightblue default '.*'
-    color index_subject brightblue default '.*'
-
-    # New mail is boldened:
-    color index brightwhite default "~N"
-    color index_author brightwhite default "~N"
-    color index_subject brightwhite default "~N"
-
-    # Tagged mail is highlighted:
-    color index brightyellow blue "~T"
-    color index_author brightred blue "~T"
-    color index_subject brightcyan blue "~T"
-
-    # Flagged mail is highlighted:
-    color index brightgreen default "~F"
-    color index_subject brightgreen default "~F"
-    color index_author brightgreen default "~F"
-
-    # Other colors and aesthetic settings:
-    mono bold bold
-    mono underline underline
-    mono indicator reverse
-    mono error bold
-    color normal default default
-    color indicator brightblack white
-    color sidebar_highlight red default
-    color sidebar_divider brightblack black
-    color sidebar_flagged red black
-    color sidebar_new green black
-    color error red default
-    color tilde black default
-    color message cyan default
-    color markers red white
-    color attachment white default
-    color search brightmagenta default
-    color status brightwhite blue
-    color hdrdefault brightgreen default
-    color quoted green default
-    color quoted1 blue default
-    color quoted2 cyan default
-    color quoted3 yellow default
-    color quoted4 red default
-    color quoted5 brightred default
-    color signature brightgreen default
-    color bold black default
-    color underline black default
-
-    # Regex highlighting:
-    color header brightmagenta default "^From"
-    color header brightcyan default "^Subject"
-    color header brightwhite default "^(CC|BCC)"
-    color header blue default ".*"
-    color body brightred default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # Email addresses
-    color body brightblue default "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URL
-    color body green default "\`[^\`]*\`" # Green text between ` and `
-    color body brightblue default "^# \.*" # Headings as bold blue
-    color body brightcyan default "^## \.*" # Subheadings as bold cyan
-    color body brightgreen default "^### \.*" # Subsubheadings as bold green
-    color body yellow default "^(\t| )*(-|\\*) \.*" # List items as yellow
-    color body brightcyan default "[;:][-o][)/(|]" # emoticons
-    color body brightcyan default "[;:][)(|]" # emoticons
-    color body brightcyan default "[ ][*][^*]*[*][ ]?" # more emoticon?
-    color body brightcyan default "[ ]?[*][^*]*[*][ ]" # more emoticon?
-    color body red default "(BAD signature)"
-    color body cyan default "(Good signature)"
-    color body brightblack default "^gpg: Good signature .*"
-    color body brightyellow default "^gpg: "
-    color body brightyellow red "^gpg: BAD signature from.*"
-    mono body bold "^gpg: Good signature"
-    mono body bold "^gpg: BAD signature from.*"
-    color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
-
   '';
 }
