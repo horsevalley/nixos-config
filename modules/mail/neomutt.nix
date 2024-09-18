@@ -127,6 +127,35 @@ in
     color index_subject brightgreen default "~F"
     color index_author brightgreen default "~F"
 
+    # Other colors and aesthetic settings:
+    mono bold bold
+    mono underline underline
+    mono indicator reverse
+    mono error bold
+    color normal default default
+    color indicator brightblack white
+    color sidebar_highlight red default
+    color sidebar_divider brightblack black
+    color sidebar_flagged red black
+    color sidebar_new green black
+    color error red default
+    color tilde black default
+    color message cyan default
+    color markers red white
+    color attachment white default
+    color search brightmagenta default
+    color status brightyellow black
+    color hdrdefault brightgreen default
+    color quoted green default
+    color quoted1 blue default
+    color quoted2 cyan default
+    color quoted3 yellow default
+    color quoted4 red default
+    color quoted5 brightred default
+    color signature brightgreen default
+    color bold black default
+    color underline black default
+
     # Vim-like macros
     macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
     macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
