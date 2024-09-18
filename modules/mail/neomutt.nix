@@ -46,7 +46,6 @@ in
     bind attach <return> view-mailcap
     bind attach l view-mailcap
 
-
     # Use Vim keys in menus
     bind generic,index,pager k previous-entry
     bind generic,index,pager j next-entry
@@ -188,7 +187,8 @@ in
     color markers red white
     color attachment white default
     color search brightmagenta default
-    color status brightyellow black
+    # color status brightyellow black
+    color status blue black
     color hdrdefault brightgreen default
     color quoted green default
     color quoted1 blue default
