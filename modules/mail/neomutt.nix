@@ -43,6 +43,11 @@ in
     bind attach <return> view-mailcap
     bind attach l view-mailcap
 
+    bind index,pager i noop
+    bind index \Cf noop
+    bind index,pager M noop
+    bind index,pager C noop
+
     # Use Vim keys in menus
     bind generic,index,pager k previous-entry
     bind generic,index,pager j next-entry
