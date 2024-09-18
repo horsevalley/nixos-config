@@ -164,7 +164,6 @@ let
         [ "$type" != "online" ] && echo "$mailboxes" | ${pkgs.findutils}/bin/xargs -I {} ${pkgs.coreutils}/bin/mkdir -p "$maildir/$fulladdr/{}/cur" "$maildir/$fulladdr/{}/tmp" "$maildir/$fulladdr/{}/new"
         ${pkgs.coreutils}/bin/mkdir -p "$cachedir/$safename/bodies"
         echo "$fulladdr (account #$idnum) added successfully."
-        command -v ${pkgs.urlview}/bin/urlview >/dev/null 2>&1 && [ ! -f "$HOME/.urlview" ] && echo "COMMAND \$BROWSER" >"$HOME/.urlview"
         return 0
       }
 
