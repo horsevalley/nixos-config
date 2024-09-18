@@ -48,10 +48,54 @@ let
 
     list() { getaccounts && [ -n "$accounts" ] && echo "$accounts" || exit 1; }
 
-    # ... (rest of the mw script functions, adapted to use Nix paths)
+    mwinfo() {
+      cat <<EOF
+    mw: mutt-wizard, auto-configure email accounts for mutt
+    including downloadable mail with \`isync\`.
+
+    Main actions:
+      -a your@email.com	Add an email address
+      -l			List email addresses configured
+      -d			Remove an already added address
+      -D your@email.com	Force remove account without confirmation
+      -t number		Toggle automatic mailsync every <number> minutes
+      -T			Toggle automatic mailsync
+      -r			Reorder account numbers
+
+    Options allowed with -a:
+      -u	Account login name if not full address
+      -n	"Real name" to be on the email account
+      -i	IMAP/POP server address
+      -I	IMAP/POP server port
+      -s	SMTP server address
+      -S	SMTP server port
+      -x	Password for account (recommended to be in double quotes)
+      -p	Add for a POP server instead of IMAP.
+      -P	Pass Prefix (prefix of the file where password is stored)
+      -X	Delete an account's local email too when deleting.
+      -o	Configure address, but keep mail online.
+      -f	Assume typical English mailboxes without attempting log-on.
+
+    NOTE: Once at least one account is added, you can run
+    \`mbsync -a\` to begin downloading mail.
+
+    To change an account's password, run \`pass edit '$passprefix'your@email.com\`.
+    EOF
+    }
+
+    # ... (other functions like askinfo, insertpass, getpass, etc.)
 
     while getopts "rfpXlhodTYD:y:i:I:s:S:u:a:n:P:x:m:t:" o; do case "''${o}" in
-      # ... (getopts cases)
+      l) action="list" ;;
+      r) action="reorder" ;;
+      d) action="delete" ;;
+      D) action="delete"; fulladdr="$OPTARG" ;;
+      y) action="sync"; fulladdr="$OPTARG" ;;
+      Y) action="sync" ;;
+      a) action="add"; fulladdr="$OPTARG" ;;
+      # ... (other cases)
+      h) action="info" ;;
+      *) echo "Invalid option. See \`mw -h\` for help."; exit 1 ;;
     esac done
 
     [ -z "$action" ] && action="info"
@@ -68,10 +112,8 @@ let
         ;;
       toggle) togglecron ;;
       reorder) reorder ;;
-      info)
-        mwinfo
-        exit 1
-        ;;
+      info) mwinfo ;;
+      *) mwinfo; exit 1 ;;
     esac
   '';
 in {
