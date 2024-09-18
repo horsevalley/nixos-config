@@ -37,9 +37,9 @@ in
     bind index,pager \Cd half-down
     bind index,pager \Cu half-up
     bind index,pager N search-opposite
-    bind index,pager L limit
-    bind index l display-message
-    
+    bind index L limit
+    bind pager L exit
+
     # Use Vim keys in menus
     bind generic,index,pager k previous-entry
     bind generic,index,pager j next-entry
@@ -118,7 +118,7 @@ in
     set tmpdir = "~/.cache/mutt/tmp"
 
     # Mailboxes
-    mailboxes =INBOX =Sent =Drafts =Trash =Archive
+    mailboxes =jonash@jonash.xyz/INBOX =jonash@jonash.xyz/Sent =jonash@jonash.xyz/Drafts =jonash@jonash.xyz/Trash =jonash@jonash.xyz/Archive
 
     # Hook to set the correct From address when replying
     reply-hook . 'set from="jonash@jonash.xyz"'

@@ -42,15 +42,19 @@ in
   system.activationScripts.muttWizardSetup = ''
     # Ensure necessary directories exist
     mkdir -p /home/${username}/.config/mutt
+    mkdir -p /home/${username}/.config/neomutt
     mkdir -p /home/${username}/.local/share/mail
     mkdir -p /home/${username}/.cache/mutt/{headers,bodies}
     mkdir -p /home/${username}/.config/mw
     mkdir -p /home/${username}/.mbsyncrc.d
     touch /home/${username}/.mbsyncrc
     touch /home/${username}/.notmuch-config
+    touch /home/${username}/.config/mutt/muttrc
+    touch /home/${username}/.config/neomutt/neomuttrc
 
     # Set correct permissions
     chown -R ${username}:users /home/${username}/.config/mutt
+    chown -R ${username}:users /home/${username}/.config/neomutt
     chown -R ${username}:users /home/${username}/.local/share/mail
     chown -R ${username}:users /home/${username}/.cache/mutt
     chown -R ${username}:users /home/${username}/.config/mw
