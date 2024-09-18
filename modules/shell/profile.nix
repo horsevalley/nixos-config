@@ -11,7 +11,6 @@
     MUSICPLAYER = "ncmpcpp";
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/.local/share";
-    XDG_DATA_DIRS = "$XDG_DATA_DIRS";
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_DEFAULT_PDF_VIEWER = "zathura";
     XDG_DEFAULT_IMAGE_VIEWER = "nsxiv";
