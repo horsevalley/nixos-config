@@ -99,10 +99,10 @@ in
 
     # Vim-like macros
     macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
-    macro index,pager ga "<change-folder>=Archive<enter>" "go to archive"
     macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
     macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
     macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
+    macro index,pager gj "<change-folder>=Junk<enter>" "go to junk"
 
     # Account Settings
     set realname = "Jonash"
@@ -127,7 +127,7 @@ in
     named-mailboxes "Sent" =Sent
     named-mailboxes "Drafts" =Drafts
     named-mailboxes "Trash" =Trash
-    named-mailboxes "Archive" =Archive
+    named-mailboxes "Junk" =Junk
 
     # Hook to set the correct From address when replying
     reply-hook . 'set from="${email}"'
