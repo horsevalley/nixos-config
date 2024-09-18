@@ -1,15 +1,23 @@
 { config, pkgs, lib, ... }:
 
+let
+  username = "jonash";  # Replace with your actual username
+in
 {
   environment.systemPackages = [ pkgs.msmtp ];
 
-  environment.etc."msmtprc".text = ''
+  system.activationScripts.msmtpSetup = ''
+    # Ensure XDG config directory exists
+    mkdir -p /home/${username}/.config/msmtp
+
+    # Create msmtp config file
+    cat > /home/${username}/.config/msmtp/config << EOL
     # Set default values for all following accounts.
     defaults
     auth           on
     tls            on
     tls_trust_file /etc/ssl/certs/ca-certificates.crt
-    logfile        /var/log/msmtp.log
+    logfile        ~/.config/msmtp/msmtp.log
 
     # jonash@jonash.xyz
     account        jonash@jonash.xyz
@@ -21,12 +29,19 @@
 
     # Set a default account
     account default : jonash@jonash.xyz
+    EOL
+
+    # Create log file
+    touch /home/${username}/.config/msmtp/msmtp.log
+
+    # Set correct permissions
+    chown -R ${username}:users /home/${username}/.config/msmtp
+    chmod 600 /home/${username}/.config/msmtp/config
+    chmod 600 /home/${username}/.config/msmtp/msmtp.log
   '';
 
-  # Ensure the log file exists and is writable
-  system.activationScripts.msmtpLogFile = ''
-    touch /var/log/msmtp.log
-    chmod 660 /var/log/msmtp.log
-    chown root:mail /var/log/msmtp.log
+  # Create a symlink for compatibility with some programs
+  system.activationScripts.msmtpCompatibility = ''
+    ln -sf /home/${username}/.config/msmtp/config /home/${username}/.msmtprc
   '';
 }
