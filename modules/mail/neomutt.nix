@@ -175,11 +175,11 @@ in
     mono underline underline
     mono indicator reverse
     mono error bold
-    color normal white blue
+    color normal default default
     color indicator brightblack white
-    color sidebar_highlight default default
+    color sidebar_highlight red default
     color sidebar_divider brightblack black
-    color sidebar_flagged default black
+    color sidebar_flagged red black
     color sidebar_new green black
     color error red default
     color tilde black default
@@ -188,7 +188,7 @@ in
     color attachment white default
     color search brightmagenta default
     # color status brightyellow black
-    color status white blue
+    color status brightwhite blue
     color hdrdefault brightgreen default
     color quoted green default
     color quoted1 blue default
