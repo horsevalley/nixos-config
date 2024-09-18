@@ -19,9 +19,25 @@ let
      accdir="$HOME/.config/mutt/accounts"
      mwconfig="$HOME/.config/mw"
   '';
+  mwWrapper = pkgs.writeScriptBin "mw" ''
+    #!${pkgs.stdenv.shell}
+    export HOME="/home/${username}"
+    export XDG_CONFIG_HOME="/home/${username}/.config"
+    export XDG_DATA_HOME="/home/${username}/.local/share"
+    export XDG_CACHE_HOME="/home/${username}/.cache"
+    exec ${pkgs.mutt-wizard}/bin/mw "$@"
+  '';
 in
 {
-  environment.systemPackages = [ pkgs.mutt-wizard pkgs.neomutt pkgs.isync pkgs.msmtp pkgs.notmuch pkgs.pass ];
+  environment.systemPackages = [
+    pkgs.mutt-wizard
+    pkgs.neomutt
+    pkgs.isync
+    pkgs.msmtp
+    pkgs.notmuch
+    pkgs.pass
+    mwWrapper
+  ];
 
   system.activationScripts.muttWizardSetup = ''
     # Ensure necessary directories exist
@@ -53,16 +69,4 @@ in
   system.activationScripts.patchMuttWizard = ''
     ${pkgs.patch}/bin/patch ${pkgs.mutt-wizard}/bin/mw ${mwPatch}
   '';
-
-  # Create a wrapper script for mw
-  environment.systemPackages = [
-    (pkgs.writeScriptBin "mw" ''
-      #!${pkgs.stdenv.shell}
-      export HOME="/home/${username}"
-      export XDG_CONFIG_HOME="/home/${username}/.config"
-      export XDG_DATA_HOME="/home/${username}/.local/share"
-      export XDG_CACHE_HOME="/home/${username}/.cache"
-      exec ${pkgs.mutt-wizard}/bin/mw "$@"
-    '')
-  ];
 }
