@@ -28,7 +28,7 @@
     ANSIBLE_CONFIG = "$XDG_CONFIG_HOME/ansible/ansible.cfg";
     UNISON = "$XDG_DATA_HOME/unison";
     HISTFILE = "$XDG_DATA_HOME/history";
-    MBSYNCRC = "$XDG_CONFIG_HOME/mbsync/config";
+    # MBSYNCRC = "$XDG_CONFIG_HOME/mbsync/config";
     ELECTRUMDIR = "$XDG_DATA_HOME/electrum";
     PYTHONSTARTUP = "$XDG_CONFIG_HOME/python/pythonrc";
     SQLITE_HISTORY = "$XDG_DATA_HOME/sqlite_history";
