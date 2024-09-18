@@ -17,7 +17,7 @@ in
     cat > /home/${username}/.config/neomutt/neomuttrc << EOL
     # Basic Settings
     set mailcap_path = ~/.config/neomutt/mailcap
-    set date_format="%y/%m/%d %I:%M%p"
+    set date_format="%d/%m/%y %H:%M"
     set index_format="%2C %Z %?X?A& ? %D %-15.15F %s (%-4.4c)"
     set sort = 'threads'
     set sort_aux = 'reverse-last-date-received'
@@ -78,12 +78,13 @@ in
     set forward_quote                    # include message in forwards
 
     # Sidebar
-    set sidebar_visible
+    set sidebar_visible = no
     set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
     set mail_check_stats
     bind index,pager \CP sidebar-prev
     bind index,pager \CN sidebar-next
     bind index,pager \CO sidebar-open
+    bind index,pager B sidebar-toggle-visible
 
     # Colors
     color normal        default         default
