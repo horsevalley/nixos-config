@@ -159,6 +159,27 @@ let
         toappend="mailboxes $(echo "$mailboxes" | ${pkgs.gnused}/bin/sed "s/^/\"=/;s/$/\"/;s/'/\\\'/g" | ${pkgs.coreutils}/bin/paste -sd ' ' -)"
       }
 
+      getprofiles() {
+        safename="$(echo $fulladdr | ${pkgs.gnused}/bin/sed 's/@/_/g')"
+        case "$type" in
+          online)
+            folder="imaps://$login@$imap:$iport"
+            extra="$(${pkgs.gnused}/bin/sed "s/\$fulladdr/$fulladdr/g;s/\$folder/$folder/g;s/\$imap/$imap/g;s/\$smtp/$smtp/g;s/\$port/$port/g;s/\$iport/$iport/g;s/\$sport/$sport/g;s/\$imapssl/$imapssl/g;s/\$tlsline/$tlsline/g;s/\$login/$login/g;s/\$maxmes/$maxmes/g;s/\$realname/$realname/g" "$onlinetemp")"
+            ;;
+          pop) prepmpop ;;
+          *)
+            case "$iport" in
+              1143) imapssl=None ;;
+              143) imapssl=STARTTLS ;;
+            esac
+            prepmbsync
+            ;;
+        esac
+        prepmsmtp
+        prepmutt
+        prepnotmuch
+      }
+
       finalize() {
         echo "$toappend" >>"$accdir/$fulladdr.muttrc"
         [ "$type" != "online" ] && echo "$mailboxes" | ${pkgs.findutils}/bin/xargs -I {} ${pkgs.coreutils}/bin/mkdir -p "$maildir/$fulladdr/{}/cur" "$maildir/$fulladdr/{}/tmp" "$maildir/$fulladdr/{}/new"
