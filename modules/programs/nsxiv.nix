@@ -1,8 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Install nsxiv
-  environment.systemPackages = [ pkgs.nsxiv ];
 
   # Create a custom wrapper for nsxiv with our desired configuration
   environment.systemPackages = with pkgs; [
