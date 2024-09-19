@@ -9,12 +9,13 @@ in
     neomutt
     lynx
     zathura
-    feh
-    poppler_utils  # For pdftotext
+    # feh
+    # poppler_utils  # For pdftotext
     isync  # For mbsync
     msmtp
     pass
     notmuch
+    xdg-utils # for xdg-open
   ];
 
   system.activationScripts.neomuttSetup = ''
@@ -25,6 +26,7 @@ in
     
     # Create neomutt config file
     cat > /home/${username}/.config/neomutt/neomuttrc << EOL
+
     # Basic Settings
     set mailcap_path = ~/.config/neomutt/mailcap
     set date_format="%A %d %m %y %H:%M"
@@ -247,9 +249,9 @@ in
     # Create mailcap file
     cat > /home/${username}/.config/neomutt/mailcap << EOL
     text/html; ${pkgs.lynx}/bin/lynx -dump -force_html %s; copiousoutput; description=HTML Text; nametemplate=%s.html
-    application/pdf; ${pkgs.zathura}/bin/zathura %s; test=test -n "$DISPLAY"
+    application/pdf; ${pkgs.xdg-utils}/bin/xdg-open %s; test=test -n "$DISPLAY"
     application/pdf; ${pkgs.poppler_utils}/bin/pdftotext -layout %s -; copiousoutput; description=PDF Document
-    image/*; ${pkgs.feh}/bin/feh %s; test=test -n "$DISPLAY"
+    image/*; ${pkgs.xdg-utils}/bin/xdg-open %s; test=test -n "$DISPLAY"
     EOL
 
     # Set correct permissions
