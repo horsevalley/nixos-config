@@ -139,6 +139,7 @@ in
     # Sidebar
     set sidebar_visible = no
     set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+    set sidebar_width = 20
     set mail_check_stats
     bind index,pager \CP sidebar-prev
     bind index,pager \CN sidebar-next
