@@ -30,6 +30,7 @@
     upower
     swaynotificationcenter
     ookla-speedtest
+    xdg-utils # for xdg-open
 
     # Aesthetic sysinfo
     fastfetch 

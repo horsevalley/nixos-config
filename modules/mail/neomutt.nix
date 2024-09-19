@@ -9,8 +9,6 @@ in
     neomutt
     lynx
     zathura
-    # feh
-    # poppler_utils  # For pdftotext
     isync  # For mbsync
     msmtp
     pass
@@ -304,27 +302,4 @@ in
     account default : ${email}
   '';
 
-  # # Systemd service for mbsync
-  # systemd.user.services.mbsync = {
-  #   description = "Mailbox synchronization service";
-  #   after = [ "network.target" ];
-  #   wantedBy = [ "default.target" ];
-  #
-  #   serviceConfig = {
-  #     Type = "oneshot";
-  #     ExecStart = "${pkgs.isync}/bin/mbsync -a";
-  #     Restart = "on-failure";
-  #     RestartSec = "2m";
-  #   };
-  # };
-  #
-  # systemd.user.timers.mbsync = {
-  #   description = "Periodic mailbox synchronization";
-  #   wantedBy = [ "timers.target" ];
-  #   timerConfig = {
-  #     OnBootSec = "2m";
-  #     OnUnitActiveSec = "2m";
-  #     Unit = "mbsync.service";
-  #   };
-  # };
 }
