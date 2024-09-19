@@ -35,7 +35,7 @@
       Type = "oneshot";
       ExecStart = "${pkgs.isync}/bin/mbsync -a";
       Restart = "on-failure";
-      RestartSec = "5m";
+      RestartSec = "2m";
     };
   };
 
