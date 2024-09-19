@@ -176,7 +176,8 @@ in
     color normal default default
     color indicator brightblack blue
     color sidebar_highlight red default
-    color sidebar_divider brightblack black
+    # color sidebar_divider brightblack black
+    color sidebar_divider 
     color sidebar_flagged red black
     color sidebar_new green black
     color error red default
