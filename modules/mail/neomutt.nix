@@ -253,6 +253,11 @@ in
     image/*; ${pkgs.xdg-utils}/bin/xdg-open %s; needsterminal
     EOL
 
+    cat >> /home/${username}/.config/neomutt/neomuttrc << EOL
+    # Send notification for new emails
+    set new_mail_command="notify-send 'New Email' '%n new messages, %u unread.' &"
+    EOL
+
     # Set correct permissions
     chown -R ${username}:users /home/${username}/.config/neomutt
     chown -R ${username}:users /home/${username}/.local/share/mail
