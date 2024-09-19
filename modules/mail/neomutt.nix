@@ -249,9 +249,8 @@ in
     # Create mailcap file
     cat > /home/${username}/.config/neomutt/mailcap << EOL
     text/html; ${pkgs.lynx}/bin/lynx -dump -force_html %s; copiousoutput; description=HTML Text; nametemplate=%s.html
-    application/pdf; ${pkgs.xdg-utils}/bin/xdg-open %s; test=test -n "$DISPLAY"
-    application/pdf; ${pkgs.poppler_utils}/bin/pdftotext -layout %s -; copiousoutput; description=PDF Document
-    image/*; ${pkgs.xdg-utils}/bin/xdg-open %s; test=test -n "$DISPLAY"
+    application/pdf; ${pkgs.xdg-utils}/bin/xdg-open %s; needsterminal
+    image/*; ${pkgs.xdg-utils}/bin/xdg-open %s; needsterminal
     EOL
 
     # Set correct permissions
