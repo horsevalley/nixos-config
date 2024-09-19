@@ -5,7 +5,17 @@ let
   email = "jonash@jonash.xyz";  # Replace with your actual email
 in
 {
-  environment.systemPackages = [ pkgs.neomutt ];
+  environment.systemPackages = with pkgs; [
+    neomutt
+    lynx
+    zathura
+    feh
+    poppler_utils  # For pdftotext
+    isync  # For mbsync
+    msmtp
+    pass
+    notmuch
+  ];
 
   system.activationScripts.neomuttSetup = ''
     # Ensure XDG directories exist
@@ -61,8 +71,6 @@ in
     bind index,pager R group-reply
 
     # Pager View Options
-    # set pager_index_lines = 10
-    # set pager_context = 3
     set pager_stop
     set menu_scroll
     set tilde
@@ -138,17 +146,6 @@ in
     bind index,pager B sidebar-toggle-visible
 
     # Colors
-    # color normal        default         default
-    # color index         color4          default         ~N # new messages
-    # color index         color1          default         ~F # flagged messages
-    # color index         color3          default         ~T # tagged messages
-    # color index         color1          default         ~D # deleted messages
-    # color body          color2          default         "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URLs
-    # color body          color2          default         "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # email addresses
-    # color attachment    color5          default
-    # color signature     color8          default
-    # color search        color11         default
-
     # Default index colors:
     color index_number blue default
     color index blue default '.*'
@@ -205,7 +202,7 @@ in
     macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
     macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
     macro index,pager gj "<change-folder>=Junk<enter>" "go to junk"
-    macro index,pager O "<shell-escape>mailsync<enter>" "run mailsync to sync all mail"
+    macro index,pager O "<shell-escape>mbsync -a<enter>" "run mbsync to sync all mail"
 
     macro index,pager Mi ";<save-message>=INBOX<enter>" "move mail to inbox"
     macro index,pager Ci ";<copy-message>=INBOX<enter>" "copy mail to inbox"
@@ -251,6 +248,7 @@ in
     cat > /home/${username}/.config/neomutt/mailcap << EOL
     text/html; ${pkgs.lynx}/bin/lynx -dump -force_html %s; copiousoutput; description=HTML Text; nametemplate=%s.html
     application/pdf; ${pkgs.zathura}/bin/zathura %s; test=test -n "$DISPLAY"
+    application/pdf; ${pkgs.poppler_utils}/bin/pdftotext -layout %s -; copiousoutput; description=PDF Document
     image/*; ${pkgs.feh}/bin/feh %s; test=test -n "$DISPLAY"
     EOL
 
@@ -259,4 +257,68 @@ in
     chown -R ${username}:users /home/${username}/.local/share/mail
     chown -R ${username}:users /home/${username}/.cache/mutt
   '';
+
+  # Configure isync (mbsync)
+  environment.etc."mbsyncrc".text = ''
+    IMAPAccount ${email}
+    Host mail.jonash.xyz
+    User ${email}
+    PassCmd "pass email/${email}"
+    SSLType IMAPS
+
+    IMAPStore ${email}-remote
+    Account ${email}
+
+    MaildirStore ${email}-local
+    Path ~/.local/share/mail/${email}/
+    Inbox ~/.local/share/mail/${email}/INBOX
+    SubFolders Verbatim
+
+    Channel ${email}
+    Far :${email}-remote:
+    Near :${email}-local:
+    Patterns *
+    Create Both
+    Expunge Both
+    SyncState *
+  '';
+
+  # Configure msmtp
+  environment.etc."msmtprc".text = ''
+    account ${email}
+    host mail.jonash.xyz
+    port 587
+    from ${email}
+    user ${email}
+    passwordeval "pass email/${email}"
+    auth on
+    tls on
+    tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+    account default : ${email}
+  '';
+
+  # Systemd service for mbsync
+  systemd.user.services.mbsync = {
+    description = "Mailbox synchronization service";
+    after = [ "network.target" ];
+    wantedBy = [ "default.target" ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.isync}/bin/mbsync -a";
+      Restart = "on-failure";
+      RestartSec = "5m";
+    };
+  };
+
+  systemd.user.timers.mbsync = {
+    description = "Periodic mailbox synchronization";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "5m";
+      OnUnitActiveSec = "5m";
+      Unit = "mbsync.service";
+    };
+  };
 }
