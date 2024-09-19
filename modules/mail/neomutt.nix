@@ -133,8 +133,8 @@ in
     set wait_key = no	                   # mutt won't ask "press key to continue"
     set include                          # include message in replies
     set forward_quote                    # include message in forwards
-    set mail_check=60 # to avoid lags using IMAP with some email providers (yahoo for example)
-    auto_view text/html		# automatically show html (mailcap uses lynx)
+    set mail_check=60                    # to avoid lags using IMAP with some email providers (yahoo for example)
+    auto_view text/html		               # automatically show html (mailcap uses lynx)
     auto_view application/pgp-encrypted
     alternative_order text/plain text/enriched text/html
 
@@ -314,7 +314,7 @@ in
       Type = "oneshot";
       ExecStart = "${pkgs.isync}/bin/mbsync -a";
       Restart = "on-failure";
-      RestartSec = "5m";
+      RestartSec = "2m";
     };
   };
 
@@ -322,8 +322,8 @@ in
     description = "Periodic mailbox synchronization";
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      OnBootSec = "5m";
-      OnUnitActiveSec = "5m";
+      OnBootSec = "2m";
+      OnUnitActiveSec = "2m";
       Unit = "mbsync.service";
     };
   };
