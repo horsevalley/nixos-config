@@ -103,6 +103,7 @@
     youtube-music
     playerctl
     pamixer
+    spotify
 
     # Video
     mpv
