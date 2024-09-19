@@ -37,6 +37,7 @@
     ./system/gnome.nix
     ./system/keyboard.nix
     ./system/localization.nix
+    ./system/mimeapps.nix
     ./system/networking.nix
     ./system/packages.nix
     ./system/services.nix
