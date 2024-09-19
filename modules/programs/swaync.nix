@@ -124,7 +124,8 @@ in
         }
 
         .notification-content {
-          background: transparent;
+          # background: transparent;
+          background: solid;
           padding: 6px;
           border-radius: 12px;
         }
