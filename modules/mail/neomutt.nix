@@ -27,7 +27,7 @@ in
 
     # Basic Settings
     set mailcap_path = ~/.config/neomutt/mailcap
-    set date_format="%A %d %m %y %H:%M"
+    set date_format="%A %d.%m.%y %H:%M"
     set index_format="%2C %Z %?X?A& ? %D %-15.15F %s (%-4.4c)"
     set sort = 'reverse-date'
     set sort_aux = 'reverse-last-date-received'
