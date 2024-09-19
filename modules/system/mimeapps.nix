@@ -8,6 +8,7 @@ in
   # Configure system-wide MIME type associations
   xdg.mime.enable = true;
   xdg.mime.defaultApplications = {
+    "application/pdf" = "org.pwmt.zathura.desktop";
     "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
     "text/html" = "org.qutebrowser.qutebrowser.desktop";
     "application/xhtml+xml" = "org.qutebrowser.qutebrowser.desktop";
