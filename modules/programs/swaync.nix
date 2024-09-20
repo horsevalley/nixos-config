@@ -7,6 +7,37 @@ let
 
   configFile = pkgs.writeText "swaync-config.json" (builtins.toJSON cfg.settings);
   styleFile = pkgs.writeText "swaync-style.css" cfg.style;
+
+  debugScript = pkgs.writeShellScript "swaync-debug" ''
+    echo "SwayNC Debug Information" > /tmp/swaync_debug.log
+    echo "-------------------------" >> /tmp/swaync_debug.log
+    echo "Date: $(date)" >> /tmp/swaync_debug.log
+    echo "User: $USER" >> /tmp/swaync_debug.log
+    echo "Home: $HOME" >> /tmp/swaync_debug.log
+    echo "XDG_CONFIG_HOME: $XDG_CONFIG_HOME" >> /tmp/swaync_debug.log
+    echo "-------------------------" >> /tmp/swaync_debug.log
+    echo "Checking SwayNC configuration:" >> /tmp/swaync_debug.log
+    if [ -d "$HOME/.config/swaync" ]; then
+      echo "~/.config/swaync directory exists" >> /tmp/swaync_debug.log
+      ls -l "$HOME/.config/swaync" >> /tmp/swaync_debug.log
+    else
+      echo "~/.config/swaync directory does not exist" >> /tmp/swaync_debug.log
+    fi
+    echo "-------------------------" >> /tmp/swaync_debug.log
+    echo "Checking /etc/swaync:" >> /tmp/swaync_debug.log
+    if [ -d "/etc/swaync" ]; then
+      echo "/etc/swaync directory exists" >> /tmp/swaync_debug.log
+      ls -l /etc/swaync >> /tmp/swaync_debug.log
+    else
+      echo "/etc/swaync directory does not exist" >> /tmp/swaync_debug.log
+    fi
+    echo "-------------------------" >> /tmp/swaync_debug.log
+    echo "SwayNC service status:" >> /tmp/swaync_debug.log
+    systemctl --user status swaync >> /tmp/swaync_debug.log 2>&1
+    echo "-------------------------" >> /tmp/swaync_debug.log
+    echo "SwayNC logs:" >> /tmp/swaync_debug.log
+    journalctl --user -u swaync -n 50 >> /tmp/swaync_debug.log 2>&1
+  '';
 in
 {
   options.programs.swaync = {
@@ -291,20 +322,32 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = [ cfg.package ];
 
-    # Place configuration files in /etc/swaync
     environment.etc = {
       "swaync/config.json".source = configFile;
       "swaync/style.css".source = styleFile;
     };
 
-    # Create a script to set up the user's configuration
-    system.userActivationScripts.setupSwaync = ''
-      if [ ! -d "$HOME/.config/swaync" ]; then
-        mkdir -p "$HOME/.config/swaync"
-      fi
-      ln -sf /etc/swaync/config.json "$HOME/.config/swaync/config.json"
-      ln -sf /etc/swaync/style.css "$HOME/.config/swaync/style.css"
-    '';
+    system.activationScripts = {
+      setupSwaync = ''
+        echo "Running SwayNC setup script" >> /tmp/swaync_setup.log
+        mkdir -p /etc/swaync
+        cp -f ${configFile} /etc/swaync/config.json
+        cp -f ${styleFile} /etc/swaync/style.css
+        chmod 644 /etc/swaync/config.json /etc/swaync/style.css
+        echo "SwayNC setup completed" >> /tmp/swaync_setup.log
+      '';
+    };
+
+    # User-specific setup script
+    system.userActivationScripts = {
+      setupUserSwaync = ''
+        echo "Setting up SwayNC for user $USER" >> /tmp/swaync_user_setup.log
+        mkdir -p $HOME/.config/swaync
+        ln -sf /etc/swaync/config.json $HOME/.config/swaync/config.json
+        ln -sf /etc/swaync/style.css $HOME/.config/swaync/style.css
+        echo "User SwayNC setup completed for $USER" >> /tmp/swaync_user_setup.log
+      '';
+    };
 
     systemd.user.services.swaync = {
       description = "SwayNC notification daemon";
@@ -313,6 +356,7 @@ in
       serviceConfig = {
         Type = "dbus";
         BusName = "org.freedesktop.Notifications";
+        ExecStartPre = "${debugScript}";
         ExecStart = "${cfg.package}/bin/swaync";
         ExecReload = "${cfg.package}/bin/swaync-client --reload-config";
         Restart = "on-failure";
