@@ -31,7 +31,6 @@ let
         fg-col: #cdd6f4;
         fg-col2: #f38ba8;
         grey: #6c7086;
-        # width: 600;
         font: "JetBrainsMono Nerd Font 18";
     }
 
@@ -41,7 +40,6 @@ let
     }
 
     window {
-        # height: 300px;
         border: 3px;
         border-color: @border-col;
         background-color: @bg-col;
@@ -82,8 +80,8 @@ let
         border: 0px 0px 0px;
         padding: 6px 0px 0px;
         margin: 10px 0px 0px 20px;
-        columns: 2;
-        lines: 5;
+        columns: 1;
+        lines: 3;
         background-color: @bg-col;
     }
 
