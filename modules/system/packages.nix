@@ -31,6 +31,7 @@
     swaynotificationcenter
     ookla-speedtest
     xdg-utils # for xdg-open
+    slop
 
     # Aesthetic sysinfo
     fastfetch 
