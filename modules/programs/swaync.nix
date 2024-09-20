@@ -291,18 +291,19 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = [ cfg.package ];
 
+    # Place configuration files in /etc/swaync
     environment.etc = {
-      "xdg/swaync/config.json".source = configFile;
-      "xdg/swaync/style.css".source = styleFile;
+      "swaync/config.json".source = configFile;
+      "swaync/style.css".source = styleFile;
     };
 
-    environment.shellInit = ''
-      if [ -z "$XDG_CONFIG_HOME" ]; then
-        export XDG_CONFIG_HOME="$HOME/.config"
+    # Create a script to set up the user's configuration
+    system.userActivationScripts.setupSwaync = ''
+      if [ ! -d "$HOME/.config/swaync" ]; then
+        mkdir -p "$HOME/.config/swaync"
       fi
-      mkdir -p "$XDG_CONFIG_HOME/swaync"
-      ln -sf /etc/xdg/swaync/config.json "$XDG_CONFIG_HOME/swaync/config.json"
-      ln -sf /etc/xdg/swaync/style.css "$XDG_CONFIG_HOME/swaync/style.css"
+      ln -sf /etc/swaync/config.json "$HOME/.config/swaync/config.json"
+      ln -sf /etc/swaync/style.css "$HOME/.config/swaync/style.css"
     '';
 
     systemd.user.services.swaync = {
