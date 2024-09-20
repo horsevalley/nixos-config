@@ -6,15 +6,7 @@ let
   cfg = config.programs.swaync;
 
   configFile = pkgs.writeText "swaync-config.json" (builtins.toJSON cfg.settings);
-
   styleFile = pkgs.writeText "swaync-style.css" cfg.style;
-
-  copyConfigScript = pkgs.writeShellScript "copy-swaync-config" ''
-    CONFIG_DIR="''${XDG_CONFIG_HOME:-$HOME/.config}/swaync"
-    mkdir -p "$CONFIG_DIR"
-    cp ${configFile} "$CONFIG_DIR/config.json"
-    cp ${styleFile} "$CONFIG_DIR/style.css"
-  '';
 in
 {
   options.programs.swaync = {
@@ -299,6 +291,20 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = [ cfg.package ];
 
+    environment.etc = {
+      "xdg/swaync/config.json".source = configFile;
+      "xdg/swaync/style.css".source = styleFile;
+    };
+
+    environment.shellInit = ''
+      if [ -z "$XDG_CONFIG_HOME" ]; then
+        export XDG_CONFIG_HOME="$HOME/.config"
+      fi
+      mkdir -p "$XDG_CONFIG_HOME/swaync"
+      ln -sf /etc/xdg/swaync/config.json "$XDG_CONFIG_HOME/swaync/config.json"
+      ln -sf /etc/xdg/swaync/style.css "$XDG_CONFIG_HOME/swaync/style.css"
+    '';
+
     systemd.user.services.swaync = {
       description = "SwayNC notification daemon";
       wantedBy = [ "graphical-session.target" ];
@@ -306,7 +312,6 @@ in
       serviceConfig = {
         Type = "dbus";
         BusName = "org.freedesktop.Notifications";
-        ExecStartPre = "${copyConfigScript}";
         ExecStart = "${cfg.package}/bin/swaync";
         ExecReload = "${cfg.package}/bin/swaync-client --reload-config";
         Restart = "on-failure";
