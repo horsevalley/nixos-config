@@ -10,9 +10,10 @@ let
   styleFile = pkgs.writeText "swaync-style.css" cfg.style;
 
   copyConfigScript = pkgs.writeShellScript "copy-swaync-config" ''
-    mkdir -p "$HOME/.config/swaync"
-    cp ${configFile} "$HOME/.config/swaync/config.json"
-    cp ${styleFile} "$HOME/.config/swaync/style.css"
+    CONFIG_DIR="''${XDG_CONFIG_HOME:-$HOME/.config}/swaync"
+    mkdir -p "$CONFIG_DIR"
+    cp ${configFile} "$CONFIG_DIR/config.json"
+    cp ${styleFile} "$CONFIG_DIR/style.css"
   '';
 in
 {
@@ -80,6 +81,11 @@ in
     style = mkOption {
       type = types.lines;
       default = ''
+        * {
+          all: unset;
+          font-family: "DejaVu Sans", sans-serif;
+        }
+
         /* Catppuccin Mocha colors */
         @define-color base   #1e1e2e;
         @define-color mantle #181825;
@@ -112,26 +118,38 @@ in
         @define-color flamingo  #f2cdcd;
         @define-color rosewater #f5e0dc;
 
+        .control-center {
+          background: @base;
+          border-radius: 12px;
+          border: 2px solid @blue;
+          color: @text;
+          padding: 10px;
+        }
+
         .notification-row {
           outline: none;
+          margin: 10px;
+          padding: 10px;
         }
 
         .notification-row:focus,
         .notification-row:hover {
           background: @surface0;
+          border-radius: 12px;
         }
 
         .notification {
+          background: @mantle;
           border-radius: 12px;
           margin: 6px 12px;
           box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.7),
             0 2px 6px 2px rgba(0, 0, 0, 0.3);
-          padding: 0;
+          padding: 10px;
         }
 
         .notification-content {
-          background: solid;
-          padding: 6px;
+          background: @surface0;
+          padding: 10px;
           border-radius: 12px;
         }
 
@@ -150,7 +168,6 @@ in
         }
 
         .close-button:hover {
-          box-shadow: none;
           background: @maroon;
           transition: all 0.15s ease-in-out;
         }
@@ -163,11 +180,11 @@ in
           background: @surface0;
           border: 1px solid @surface1;
           color: @text;
+          transition: all 0.15s ease-in-out;
         }
 
         .notification-default-action:hover,
         .notification-action:hover {
-          -gtk-icon-effect: none;
           background: @surface1;
         }
 
@@ -191,38 +208,6 @@ in
         .notification-action:last-child {
           border-bottom-left-radius: 10px;
           border-bottom-right-radius: 10px;
-        }
-
-        .inline-reply {
-          margin-top: 8px;
-        }
-        .inline-reply-entry {
-          background: @surface0;
-          color: @text;
-          caret-color: @text;
-          border: 1px solid @surface1;
-          border-radius: 12px;
-        }
-        .inline-reply-button {
-          margin-left: 4px;
-          background: @surface0;
-          border: 1px solid @surface1;
-          border-radius: 12px;
-          color: @text;
-        }
-        .inline-reply-button:disabled {
-          background: initial;
-          color: initial;
-          border: 1px solid transparent;
-        }
-        .inline-reply-button:hover {
-          background: @surface1;
-        }
-
-        .body-image {
-          margin-top: 6px;
-          background-color: @crust;
-          border-radius: 12px;
         }
 
         .summary {
@@ -250,10 +235,6 @@ in
           text-shadow: none;
         }
 
-        .control-center {
-          background: @base;
-        }
-
         .control-center-list {
           background: transparent;
         }
@@ -266,36 +247,34 @@ in
           background: transparent;
         }
 
-        /* Window behind control center and on all other monitors */
-        .blank-window {
-          background: alpha(@crust, 0.25);
-        }
-
-        /*** Widgets ***/
-
-        /* Title widget */
+        /* Widget specific */
         .widget-title {
-          margin: 8px;
+          color: @text;
           font-size: 1.5rem;
+          margin: 10px;
         }
+
         .widget-title > button {
-          font-size: initial;
+          font-size: 1rem;
           color: @text;
           text-shadow: none;
           background: @surface0;
           border: 1px solid @surface1;
           box-shadow: none;
           border-radius: 12px;
+          padding: 5px 10px;
+          margin: 0px 5px;
         }
+
         .widget-title > button:hover {
           background: @surface1;
         }
 
-        /* DND widget */
         .widget-dnd {
-          margin: 8px;
           font-size: 1.1rem;
+          margin: 10px;
         }
+
         .widget-dnd > switch {
           font-size: initial;
           border-radius: 12px;
@@ -303,103 +282,14 @@ in
           border: 1px solid @surface1;
           box-shadow: none;
         }
+
         .widget-dnd > switch:checked {
           background: @green;
         }
+
         .widget-dnd > switch slider {
           background: @surface2;
           border-radius: 12px;
-        }
-
-        /* Label widget */
-        .widget-label {
-          margin: 8px;
-        }
-        .widget-label > label {
-          font-size: 1.1rem;
-        }
-
-        /* Mpris widget */
-        .widget-mpris-player {
-          padding: 8px;
-          margin: 8px;
-        }
-        .widget-mpris-title {
-          font-weight: bold;
-          font-size: 1.25rem;
-        }
-        .widget-mpris-subtitle {
-          font-size: 1.1rem;
-        }
-
-        /* Buttons widget */
-        .widget-buttons-grid {
-          padding: 8px;
-          margin: 8px;
-          border-radius: 12px;
-          background-color: @surface0;
-        }
-
-        .widget-buttons-grid>flowbox>flowboxchild>button{
-          background: @surface1;
-          border-radius: 12px;
-        }
-
-        .widget-buttons-grid>flowbox>flowboxchild>button:hover {
-          background: @surface2;
-        }
-
-        /* Menubar widget */
-        .widget-menubar>box>.menu-button-bar>button {
-          border: none;
-          background: transparent;
-        }
-
-        /* Volume widget */
-
-        .widget-volume {
-          background-color: @surface0;
-          padding: 8px;
-          margin: 8px;
-          border-radius: 12px;
-        }
-
-        .widget-volume>box>button {
-          background: transparent;
-          border: none;
-        }
-
-        .per-app-volume {
-          background-color: @surface0;
-          padding: 4px 8px 8px 8px;
-          margin: 0px 8px 8px 8px;
-          border-radius: 12px;
-        }
-
-        /* Backlight widget */
-        .widget-backlight {
-          background-color: @surface0;
-          padding: 8px;
-          margin: 8px;
-          border-radius: 12px;
-        }
-
-        /* Title widget */
-        .widget-inhibitors {
-          margin: 8px;
-          font-size: 1.5rem;
-        }
-        .widget-inhibitors > button {
-          font-size: initial;
-          color: @text;
-          text-shadow: none;
-          background: @surface0;
-          border: 1px solid @surface1;
-          box-shadow: none;
-          border-radius: 12px;
-        }
-        .widget-inhibitors > button:hover {
-          background: @surface1;
         }
       '';
       description = "CSS styling for SwayNC.";

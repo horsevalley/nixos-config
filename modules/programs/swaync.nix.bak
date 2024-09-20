@@ -8,6 +8,12 @@ let
   configFile = pkgs.writeText "swaync-config.json" (builtins.toJSON cfg.settings);
 
   styleFile = pkgs.writeText "swaync-style.css" cfg.style;
+
+  copyConfigScript = pkgs.writeShellScript "copy-swaync-config" ''
+    mkdir -p "$HOME/.config/swaync"
+    cp ${configFile} "$HOME/.config/swaync/config.json"
+    cp ${styleFile} "$HOME/.config/swaync/style.css"
+  '';
 in
 {
   options.programs.swaync = {
@@ -124,7 +130,6 @@ in
         }
 
         .notification-content {
-          # background: transparent;
           background: solid;
           padding: 6px;
           border-radius: 12px;
@@ -411,16 +416,12 @@ in
       serviceConfig = {
         Type = "dbus";
         BusName = "org.freedesktop.Notifications";
+        ExecStartPre = "${copyConfigScript}";
         ExecStart = "${cfg.package}/bin/swaync";
         ExecReload = "${cfg.package}/bin/swaync-client --reload-config";
         Restart = "on-failure";
         RestartSec = 5;
       };
-    };
-
-    environment.etc = {
-      "xdg/swaync/config.json".source = configFile;
-      "xdg/swaync/style.css".source = styleFile;
     };
   };
 }
