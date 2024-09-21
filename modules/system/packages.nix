@@ -89,6 +89,8 @@
     rustc
     cargo
     nodejs_22
+    R
+    rPackages.tinytex
 
     # DevOps programs and utilities
     kubernetes
