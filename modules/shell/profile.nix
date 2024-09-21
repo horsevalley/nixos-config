@@ -28,7 +28,8 @@
     TMUX_TMPDIR = "$XDG_RUNTIME_DIR";
     ANDROID_SDK_HOME = "$XDG_CONFIG_HOME/android";
     CARGO_HOME = "$XDG_DATA_HOME/cargo";
-    GOPATH = "$XDG_DATA_HOME/go";
+    GOPATH = "$HOME/.local/share/go";   
+    # GOPATH = "$XDG_DATA_HOME/go";
     GOMODCACHE = "$XDG_CACHE_HOME/go/mod";
     ANSIBLE_CONFIG = "$XDG_CONFIG_HOME/ansible/ansible.cfg";
     UNISON = "$XDG_DATA_HOME/unison";
@@ -59,15 +60,6 @@
   };
 
   environment.shellInit = ''
-    # LESS color settings
-    export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
-    export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
-    export LESS_TERMCAP_me="$(printf '%b' '[0m')"
-    export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
-    export LESS_TERMCAP_se="$(printf '%b' '[0m')"
-    export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
-    export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
-
     # Java settings
     export _JAVA_AWT_WM_NONREPARENTING=1
 
