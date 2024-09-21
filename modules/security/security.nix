@@ -10,12 +10,4 @@
   # This is often used by audio applications for low-latency audio processing
   security.rtkit.enable = true;
 
-  # Configure SUID wrapper for slock (simple X display locker)
-  # This allows slock to be run with elevated privileges
-  security.wrappers.slock = {
-    owner = "jonash";        # The owner of the slock binary
-    group = "wheel";         # The group of the slock binary
-    source = "${pkgs.slock}"; # The path to the slock binary
-    capabilities = "cap_ipc_lock+ep"; # Gives slock the ability to lock memory
-  };
 }

@@ -171,8 +171,9 @@
 
     # Security
     pam_gnupg
-    pass
-    pass-nodmenu
+    # pass
+    # pass-nodmenu
+    pass-wayland
     passExtensions.pass-otp
     pinentry-curses
     gpgme

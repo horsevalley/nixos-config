@@ -7,7 +7,8 @@ in
 {
   # Install pass and related tools
   environment.systemPackages = with pkgs; [
-    pass
+    # pass
+    pass-wayland
     gnupg
     pinentry
   ];
