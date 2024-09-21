@@ -15,6 +15,7 @@
     ./programs/fastfetch.nix
     ./programs/git.nix
     ./programs/kitty.nix
+    ./programs/latex.nix
     ./programs/librewolf.nix
     ./programs/mpv.nix
     ./programs/neovim.nix
