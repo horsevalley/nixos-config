@@ -33,7 +33,6 @@ let
         "swap",
         "disk",
         "localip",
-        "publicip",
         "battery",
         "poweradapter",
         "locale",
