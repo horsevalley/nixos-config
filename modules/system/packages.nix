@@ -90,7 +90,7 @@
     cargo
     nodejs_22
     R
-    rPackages.tinytex
+    texliveFull # TeX Live environment
 
     # DevOps programs and utilities
     kubernetes
