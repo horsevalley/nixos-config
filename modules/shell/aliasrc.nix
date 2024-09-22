@@ -123,7 +123,7 @@
     remastered = "cd /home/jonash/code/python/python-developer-bootcamp-tuomas-kivioja/remastered && ls";
     aic = "ascii-image-converter";
     website = "cd ~/repos/github/website-jonashxyz/jonashxyz/ && ls";
-    update_website = "rsync -vrP --delete-after /home/jonash/website-jonashxyz/jonashxyz/public/ root@jonash.xyz:/var/www/jonashxyz/";
+    update_website = "rsync -vrP --delete-after /home/jonash/repos/github/website-jonashxyz/jonashxyz/public/ root@jonash.xyz:/var/www/jonashxyz/";
     ms = "mailsync";
     kindle = "cd /mnt/kindle/documents/Downloads/Books/ && ls";
     reading = "bat ~/vimwiki/2024.wiki";
