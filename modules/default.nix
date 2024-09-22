@@ -25,7 +25,6 @@
     ./programs/rofi.nix
     ./programs/sddm.nix
     ./programs/swaync.nix
-    ./programs/yazi.nix
     ./security/gpg.nix
     ./security/pass.nix
     ./security/security.nix
