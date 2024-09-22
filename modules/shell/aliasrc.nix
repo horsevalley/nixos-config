@@ -122,7 +122,7 @@
     cft = "vim ~/.config/tmux/tmux.conf";
     remastered = "cd /home/jonash/code/python/python-developer-bootcamp-tuomas-kivioja/remastered && ls";
     aic = "ascii-image-converter";
-    website = "cd ~/website-jonashxyz/jonashxyz/ && ls";
+    website = "cd ~/repos/github/website-jonashxyz/jonashxyz/ && ls";
     update_website = "rsync -vrP --delete-after /home/jonash/website-jonashxyz/jonashxyz/public/ root@jonash.xyz:/var/www/jonashxyz/";
     ms = "mailsync";
     kindle = "cd /mnt/kindle/documents/Downloads/Books/ && ls";
