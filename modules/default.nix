@@ -26,7 +26,6 @@
     ./programs/sddm.nix
     ./programs/swaync.nix
     ./programs/yazi.nix
-    ./programs/zathura.nix
     ./security/gpg.nix
     ./security/pass.nix
     ./security/security.nix
