@@ -93,6 +93,7 @@
     texliveFull # TeX Live environment
     pandoc
     latex2html
+    hugo # A fast and modern static website engine
 
     # DevOps programs and utilities
     kubernetes
