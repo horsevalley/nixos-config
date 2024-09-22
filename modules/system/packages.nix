@@ -91,6 +91,7 @@
     nodejs_22
     R
     texliveFull # TeX Live environment
+    pandoc
 
     # DevOps programs and utilities
     kubernetes
