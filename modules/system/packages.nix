@@ -92,6 +92,7 @@
     R
     texliveFull # TeX Live environment
     pandoc
+    latex2html
 
     # DevOps programs and utilities
     kubernetes
