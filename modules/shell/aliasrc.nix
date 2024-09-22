@@ -82,7 +82,7 @@
     focus = "mpv /home/jonash/Music/Smoothed\\ Brown\\ Noise\\ 8-Hours\\ -\\ Remastered,\\ for\\ Relaxation,\\ Sleep,\\ Studying\\ and\\ Tinnitus.mp4";
     cal = "cal -m -w -3";
     gconfig = "/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME";
-    code = "cd ~/code/ && ll || ls -lh";
+    code = "cd ~/repos/github/code/ && ll || ls -lh";
     s = "speedtest";
     b = "blueman-manager";
     jblcharge5_disconnect="echo -e 'disconnect F8:5C:7D:67:B9:14' | bluetoothctl" ;
