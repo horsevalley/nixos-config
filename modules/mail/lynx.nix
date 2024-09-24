@@ -32,46 +32,11 @@ in
     VERBOSE_IMAGES:ON
     MAKE_LINKS_FOR_ALL_IMAGES:ON
 
-    # Vim-like Navigation
-    KEYMAP:j:NEXT_LINE
-    KEYMAP:k:PREV_LINE
-    KEYMAP:h:PREV_DOC
-    KEYMAP:l:NEXT_DOC
-    KEYMAP:g:HOME
-    KEYMAP:G:END
-    KEYMAP:/:WHEREIS
-    KEYMAP:n:NEXT
-    KEYMAP:N:PREV
-    KEYMAP:i:NOCACHE
-
-    # Additional Vim-inspired Keybindings
-    KEYMAP:H:HELP
-    KEYMAP:u:HISTORY
-    KEYMAP:U:GOTO
-    KEYMAP:r:RELOAD
-    KEYMAP:ZZ:QUIT
-    KEYMAP:gg:HOME
-    KEYMAP:f:NEXT_PAGE
-    KEYMAP:b:PREV_PAGE
-    KEYMAP:d:DOWNLOAD
-    KEYMAP:o:OPTIONS
-    KEYMAP:O:TRACE_TOGGLE
-
-    # Colors
-    COLOR:0:black:white
-    COLOR:1:blue:white
-    COLOR:2:yellow:blue
-    COLOR:3:green:white
-    COLOR:4:magenta:white
-    COLOR:5:blue:white
-    COLOR:6:red:white
-    COLOR:7:magenta:cyan
-
     # External Programs
-    EXTERNAL:http:firefox %s:TRUE
-    EXTERNAL:https:firefox %s:TRUE
-    EXTERNAL:ftp:firefox %s:TRUE
-    EXTERNAL:file:firefox %s:TRUE
+    EXTERNAL:http:qutebrowser %s:TRUE
+    EXTERNAL:https:qutebrowser %s:TRUE
+    EXTERNAL:ftp:qutebrowser %s:TRUE
+    EXTERNAL:file:qutebrowser %s:TRUE
 
     # Misc
     CASE_SENSITIVE_SEARCHING:OFF
