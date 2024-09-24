@@ -163,6 +163,7 @@
     qutebrowser
     librewolf
     firefox
+    widevine-cdm
 
     # Email
     mutt-wizard
