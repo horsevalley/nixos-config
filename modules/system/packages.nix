@@ -32,6 +32,7 @@
     ookla-speedtest
     xdg-utils # for xdg-open
     slop
+    wev # Wayland Event Viewer
 
     # Aesthetic sysinfo
     fastfetch 
