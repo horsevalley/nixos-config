@@ -33,6 +33,7 @@
     xdg-utils # for xdg-open
     slop
     wev # Wayland Event Viewer
+    wtype # xdotool type for wayland
 
     # Aesthetic sysinfo
     fastfetch 
