@@ -8,7 +8,7 @@
   };
 
   # Load VirtualBox kernel modules
-  boot.kernelModules = [ "vboxdrv" "vboxnetadp" "vboxnetflt" ];
+  boot.kernelModules = [ "vboxdrv" "vboxnetadp" "vboxnetflt" "kvm-intel" ];  # Add kvm-intel (or kvm-amd for AMD processors)
 
   # Install VirtualBox package
   environment.systemPackages = with pkgs; [
@@ -17,6 +17,10 @@
 
   # Add user to vboxusers group
   users.extraGroups.vboxusers.members = [ "jonash" ];
+
+  # Enable KVM
+  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
 
   # Optional: Set up VirtualBox web service
   # Uncomment if you want to use VirtualBox's web interface
