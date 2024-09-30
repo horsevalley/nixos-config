@@ -36,6 +36,15 @@
     HandleLidSwitch=suspend
   '';
 
+  # Udev service
+  services.udev = {
+    # Allows member of the "video" group to change system backlight
+    extraRules = ''
+      ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils}/bin/chgrp video %S%p/brightness", RUN+="${pkgs.coreutils}/bin/chmod g+w %S%p/brightness"
+    '';
+    path = [ pkgs.coreutils ]; # For chgrp
+  };
+
   system.stateVersion = "24.05";
 
 }
