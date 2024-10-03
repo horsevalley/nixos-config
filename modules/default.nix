@@ -20,7 +20,8 @@
     ./programs/neovim.nix
     ./programs/newsboat.nix
     ./programs/nsxiv.nix
-    ./programs/obs.nix
+    ./programs/obs-studio.nix
+    # ./programs/obs.nix
     ./programs/pcmanfm.nix
     ./programs/rofi.nix
     ./programs/sddm.nix
