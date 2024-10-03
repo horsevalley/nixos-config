@@ -54,6 +54,7 @@
     sc = "cd /home/jonash/.local/bin && ls -A";
     src = "cd /home/jonash/.local/src && ls -A";
     vv = "cd /home/jonash/Videos && ls -A";
+    tt = "cd /home/jonash/Videos/tv-shows/ && ls -A";
     bf = "$EDITOR /home/jonash/.config/shell/bm-files";
     bd = "$EDITOR /home/jonash/.config/shell/bm-dirs";
     cfx = "$EDITOR /home/jonash/.config/x11/xresources";
