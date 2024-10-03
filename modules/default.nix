@@ -11,7 +11,6 @@
     ./mail/mw.nix
     ./mail/neomutt.nix
     ./programs/wayland/hyprland.nix
-    # ./programs/dunst.nix
     ./programs/fastfetch.nix
     ./programs/git.nix
     ./programs/kitty.nix
@@ -24,7 +23,6 @@
     ./programs/obs.nix
     ./programs/pcmanfm.nix
     ./programs/rofi.nix
-    ./programs/sdcv.nix
     ./programs/sddm.nix
     ./programs/swaync.nix
     ./security/gpg.nix
