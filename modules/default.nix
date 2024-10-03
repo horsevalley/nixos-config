@@ -24,7 +24,6 @@
     ./programs/obs.nix
     ./programs/pcmanfm.nix
     ./programs/rofi.nix
-    ./programs/sdcv.nix
     ./programs/sddm.nix
     ./programs/swaync.nix
     ./security/gpg.nix
