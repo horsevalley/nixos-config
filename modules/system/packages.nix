@@ -121,7 +121,7 @@
     # jellyfin
     # jftui
     obs-studio
-    obs-cli # command-line remote control for OBS
+    # obs-cli # command-line remote control for OBS
 
     # Photo/image 
     gimp
