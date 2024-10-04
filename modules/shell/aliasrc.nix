@@ -172,6 +172,7 @@
     fr = "sudo nixos-rebuild switch --flake ~/repos/github/nixos-config/#$(hostname)";
     frd = "sudo nixos-rebuild dry-run --flake ~/repos/github/nixos-config/#$(hostname)";
     ghrepos="cd ~/repos/github/ && ls" ;
+    recordings = "cd ~/recordings/ && ls";
 
   };
 }
