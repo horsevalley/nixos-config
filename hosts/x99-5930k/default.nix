@@ -40,6 +40,11 @@
     fsType = "ext4";
   };
 
+  fileSystems."/mnt/Lacie4TB" = {
+    device = "/dev/disk/by-uuid/6142-F029";
+    fsType = "exfat";
+  };
+
   swapDevices = [
   { device = "/swapfile";
     size = 16*1024;
