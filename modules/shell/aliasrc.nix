@@ -164,7 +164,7 @@
     cfh = "nvim ~/.config/hypr/hyprland.conf";
     youtube = "youtube-tui";
     rofi = "rofi -show drun";
-    nixos-config = "cd ~/repos/github/nixos-config/ && la ";
+    nixosconf = "cd ~/repos/github/nixos-config/ && la ";
     nconfig-backup = "/home/jonash/dotfiles-nix/scripts/.local/bin/nixos-backup";
     podcasts = "cd ~/Videos/podcasts/ && la";
     nfu = "sudo nix flake update";

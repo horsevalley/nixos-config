@@ -8,7 +8,7 @@
     ./mail/isync.nix
     ./mail/lynx.nix
     ./mail/msmtp.nix
-    ./mail/mw.nix
+    ./mail/mutt-wizard.nix
     ./mail/neomutt.nix
     ./programs/wayland/hyprland.nix
     ./programs/fastfetch.nix
