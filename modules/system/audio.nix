@@ -7,7 +7,7 @@ in
   config = {
     # Enable sound
     sound.enable = true;
-    hardware.pulseaudio.enable = false;
+    # hardware.pulseaudio.enable = false;
 
     # PipeWire configuration
     services.pipewire = {
@@ -96,7 +96,7 @@ in
       progressbar_look = ->
       media_library_primary_tag = album_artist
       media_library_albums_split_by_date = no
-      startup_screen = "media_library"
+      startup_screen = "playlist"
       display_volume_level = no
       ignore_leading_the = yes
       external_editor = nvim
