@@ -260,7 +260,14 @@ in
     EOL
 
     # Add urlscan configuration to neomuttrc
-    echo 'macro index,pager \\Cu "<pipe-message>urlscan<enter>" "call urlscan to extract URLs"' >> /home/${username}/.config/neomutt/neomuttrc
+    cat >> /home/${username}/.config/neomutt/neomuttrc << EOL
+
+    # Unbind the backslash key
+    bind index,pager \\ noop
+
+    # Add urlscan macro
+    macro index,pager \\Cu "<pipe-message>urlscan<enter>" "call urlscan to extract URLs"
+    EOL
 
     # Create urlscan configuration file
     mkdir -p /home/${username}/.config/urlscan
@@ -273,6 +280,10 @@ in
       }
     }
     EOL
+
+    # Set correct permissions
+    chown -R ${username}:users /home/${username}/.config/urlscan
+  '';
 
     # Set correct permissions
     chown -R ${username}:users /home/${username}/.config/neomutt
