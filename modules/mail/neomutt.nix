@@ -15,6 +15,7 @@ in
     notmuch
     xdg-utils # for xdg-open
     urlscan  # Add urlscan to the system packages
+    nsxiv
   ];
 
   system.activationScripts.neomuttSetup = ''
@@ -274,12 +275,33 @@ in
     }
     EOL
 
+    # Create mailcap file
+    cat > /home/${username}/.config/neomutt/mailcap << EOL
+    # Images
+    image/*; nohup nsxiv %s >/dev/null 2>&1 &; copiousoutput
+
+    # PDFs
+    application/pdf; nohup zathura %s >/dev/null 2>&1 &; copiousoutput
+
+    # HTML
+    text/html; lynx -dump %s; nametemplate=%s.html; copiousoutput
+
+    # Fallback
+    application/*; nohup xdg-open %s >/dev/null 2>&1 &; copiousoutput
+    EOL
+
+    # Add mailcap configuration to neomuttrc
+    echo "set mailcap_path = /home/${username}/.config/neomutt/mailcap" >> /home/${username}/.config/neomutt/neomuttrc
+    echo "auto_view text/html" >> /home/${username}/.config/neomutt/neomuttrc
+
+
     # Set correct permissions
     chown -R ${username}:users /home/${username}/.config/neomutt
     chown -R ${username}:users /home/${username}/.local/share/mail
     chown -R ${username}:users /home/${username}/.cache/mutt
     chown -R ${username}:users /home/${username}/.config/urlscan
-    chown ${username}:users /home/${username}/.config/neomutt/neomuttrc
+    chown -R ${username}:users /home/${username}/.config/neomutt/neomuttrc
+    chown -R ${username}:users /home/${username}/.config/neomutt/mailcap
   '';
 
   # Configure isync (mbsync)
