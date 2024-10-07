@@ -42,6 +42,5 @@
     ./system/services.nix
     ./system/system.nix
     ./system/users.nix
-    ./virtualization/virtualbox.nix
   ];
 }
