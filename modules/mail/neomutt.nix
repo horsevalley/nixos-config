@@ -3,18 +3,6 @@
 let
   username = "jonash";  # Replace with your actual username
   email = "jonash@jonash.xyz";  # Replace with your actual email
-
- fzf-url-script = pkgs.writeScriptBin "fzf-url" ''
-    #!${pkgs.bash}/bin/bash
-    urls=$(cat)
-    selected=$(echo "$urls" | ${pkgs.fzf}/bin/fzf -m --reverse)
-    if [ -n "$selected" ]; then
-      echo "$selected" | while read -r url; do
-        ${pkgs.xdg-utils}/bin/xdg-open "$url" &
-      done
-    fi
-  '';
-
 in
 {
   environment.systemPackages = with pkgs; [
@@ -26,8 +14,6 @@ in
     pass
     notmuch
     xdg-utils # for xdg-open
-    fzf
-    fzf-url-script
     urlscan  # Add urlscan to the system packages
   ];
 
@@ -273,14 +259,19 @@ in
     set new_mail_command="notify-send 'New Email' '%n new messages, %u unread.' &"
     EOL
 
-    # Add fzf-url configuration to neomuttrc
-    cat >> /home/${username}/.config/neomutt/neomuttrc << EOL
+    # Add urlscan configuration to neomuttrc
+    echo 'macro index,pager \\Cu "<pipe-message>urlscan<enter>" "call urlscan to extract URLs"' >> /home/${username}/.config/neomutt/neomuttrc
 
-    # Add fzf-url configuration to neomuttrc
-    cat >> /home/${username}/.config/neomutt/neomuttrc << EOL
-
-    # fzf-url configuration
-    macro index,pager \\Cu "<pipe-message>urlscan<enter><pipe-entry>fzf-url<enter>" "call fzf-url"
+    # Create urlscan configuration file
+    mkdir -p /home/${username}/.config/urlscan
+    cat > /home/${username}/.config/urlscan/config.json << EOL
+    {
+      "open_command": "${pkgs.xdg-utils}/bin/xdg-open '{}'",
+      "url_picker": {
+        "enabled": true,
+        "alphabetize": false
+      }
+    }
     EOL
 
     # Set correct permissions
