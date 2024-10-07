@@ -4,16 +4,16 @@ let
   username = "jonash";  # Replace with your actual username
   email = "jonash@jonash.xyz";  # Replace with your actual email
 
-  fzf-url-script = pkgs.writeScriptBin "fzf-url" ''
-      #!${pkgs.bash}/bin/bash
-      urls=$(cat)
-      selected=$(echo "$urls" | ${pkgs.fzf}/bin/fzf -m --reverse)
-      if [ -n "$selected" ]; then
-        echo "$selected" | while read -r url; do
-          ${pkgs.xdg-utils}/bin/xdg-open "$url" &
-        done
-      fi
-    '';
+ fzf-url-script = pkgs.writeScriptBin "fzf-url" ''
+    #!${pkgs.bash}/bin/bash
+    urls=$(cat)
+    selected=$(echo "$urls" | ${pkgs.fzf}/bin/fzf -m --reverse)
+    if [ -n "$selected" ]; then
+      echo "$selected" | while read -r url; do
+        ${pkgs.xdg-utils}/bin/xdg-open "$url" &
+      done
+    fi
+  '';
 
 in
 {
@@ -26,6 +26,9 @@ in
     pass
     notmuch
     xdg-utils # for xdg-open
+    fzf
+    fzf-url-script
+    urlscan  # Add urlscan to the system packages
   ];
 
   system.activationScripts.neomuttSetup = ''
@@ -273,11 +276,11 @@ in
     # Add fzf-url configuration to neomuttrc
     cat >> /home/${username}/.config/neomutt/neomuttrc << EOL
 
-    # fzf-url configuration
-    macro index,pager \\Cu "<enter-command>set pipe_decode<enter><pipe-message>urlscan<enter><pipe-entry>fzf-url<enter>" "call fzf-url"
+    # Add fzf-url configuration to neomuttrc
+    cat >> /home/${username}/.config/neomutt/neomuttrc << EOL
 
-    # Set up urlscan as the default url_command
-    set urlview_command = "urlscan"
+    # fzf-url configuration
+    macro index,pager \\Cu "<pipe-message>urlscan<enter><pipe-entry>fzf-url<enter>" "call fzf-url"
     EOL
 
     # Set correct permissions
