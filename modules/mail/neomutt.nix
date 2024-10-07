@@ -258,6 +258,13 @@ in
     set new_mail_command="notify-send 'New Email' '%n new messages, %u unread.' &"
     EOL
 
+    # Add fzf-url configuration to neomuttrc
+    cat >> /home/${username}/.config/neomutt/neomuttrc << EOL
+
+    # fzf-url configuration
+    macro index,pager \\Cu "<pipe-message> urlscan --compact | fzf --multi | xargs -r firefox" "call fzf-url"
+    EOL
+
     # Set correct permissions
     chown -R ${username}:users /home/${username}/.config/neomutt
     chown -R ${username}:users /home/${username}/.local/share/mail
