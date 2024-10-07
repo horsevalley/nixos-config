@@ -34,7 +34,6 @@
     slop
     wev # Wayland Event Viewer
     wtype # xdotool type for wayland
-    virtualboxWithExtpack
     nethogs
 
     # Aesthetic sysinfo
