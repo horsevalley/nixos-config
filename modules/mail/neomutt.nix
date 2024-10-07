@@ -282,13 +282,10 @@ in
     EOL
 
     # Set correct permissions
-    chown -R ${username}:users /home/${username}/.config/urlscan
-  '';
-
-    # Set correct permissions
     chown -R ${username}:users /home/${username}/.config/neomutt
     chown -R ${username}:users /home/${username}/.local/share/mail
     chown -R ${username}:users /home/${username}/.cache/mutt
+    chown -R ${username}:users /home/${username}/.config/urlscan
   '';
 
   # Configure isync (mbsync)
