@@ -3,6 +3,18 @@
 let
   username = "jonash";  # Replace with your actual username
   email = "jonash@jonash.xyz";  # Replace with your actual email
+
+  fzf-url-script = pkgs.writeScriptBin "fzf-url" ''
+      #!${pkgs.bash}/bin/bash
+      urls=$(cat)
+      selected=$(echo "$urls" | ${pkgs.fzf}/bin/fzf -m --reverse)
+      if [ -n "$selected" ]; then
+        echo "$selected" | while read -r url; do
+          ${pkgs.xdg-utils}/bin/xdg-open "$url" &
+        done
+      fi
+    '';
+
 in
 {
   environment.systemPackages = with pkgs; [
@@ -262,7 +274,10 @@ in
     cat >> /home/${username}/.config/neomutt/neomuttrc << EOL
 
     # fzf-url configuration
-    macro index,pager \\Cu "<pipe-message> urlscan --compact | fzf --multi | xargs -r firefox" "call fzf-url"
+    macro index,pager \\Cu "<enter-command>set pipe_decode<enter><pipe-message>urlscan<enter><pipe-entry>fzf-url<enter>" "call fzf-url"
+
+    # Set up urlscan as the default url_command
+    set urlview_command = "urlscan"
     EOL
 
     # Set correct permissions
