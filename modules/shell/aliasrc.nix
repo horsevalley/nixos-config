@@ -33,7 +33,7 @@
     xi = "sudo xbps-install";
     xr = "sudo xbps-remove -R";
     xq = "xbps-query";
-    z = "nohup zathura '$full_path' >/dev/null 2>&1 & ";
+    z = "nohup zathura >/dev/null 2>&1 & ";
     ".." = "cd ..";
     "..." = "cd ../..";
     "...." = "cd ../../..";
