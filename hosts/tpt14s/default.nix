@@ -5,7 +5,7 @@
   imports = [
      ./hardware-configuration.nix
     ../common/default.nix
-    ./graphics.nix
+    # ./graphics.nix
 
   ];
 
