@@ -200,6 +200,9 @@
     transmission 
     transmission-remote-gtk 
 
+    # Crypto
+    exodus # Top-rated cryptocurrency wallet with Trezor integration and built-in Exchange
+
     # X11
     xorg.xorgserver
     xorg.xinit
