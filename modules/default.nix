@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./crypto/crypto.nix
     ./gaming/gaming.nix
     ./hardware/nvidia.nix
     ./hardware/opengl.nix
