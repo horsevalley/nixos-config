@@ -57,29 +57,17 @@ in
     deps = [];
   };
 
-  # Systemd service to start ckb-next daemon
+  # Systemd service to start ckb-next daemon and load profile
   systemd.services.ckb-next-daemon = {
     description = "Corsair RGB Keyboard Daemon";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      Type = "simple";
+      Type = "forking";
       ExecStart = "${pkgs.ckb-next}/bin/ckb-next-daemon";
+      ExecStartPost = "${pkgs.bash}/bin/bash -c 'sleep 5 && ${pkgs.ckb-next}/bin/ckb-next-daemon -p /var/lib/ckb-next/profiles/Scimitar.ckbprofile'";
       ExecStartPre = "${pkgs.coreutils}/bin/rm -f /dev/input/ckb0/pid";
       Restart = "always";
       RestartSec = "5s";
-    };
-  };
-
-  # Systemd service to load ckb-next profile on startup
-  systemd.services.ckb-next-load-profile = {
-    description = "Load ckb-next profile for Scimitar mouse";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "ckb-next-daemon.service" ];
-    requires = [ "ckb-next-daemon.service" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.bash}/bin/bash -c 'sleep 5 && ${pkgs.ckb-next}/bin/ckb-next -p /var/lib/ckb-next/profiles/Scimitar.ckbprofile --background'";
-      RemainAfterExit = "yes";
     };
   };
 }
