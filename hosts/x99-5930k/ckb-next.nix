@@ -78,7 +78,7 @@ in
     requires = [ "ckb-next-daemon.service" ];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.bash}/bin/bash -c 'sleep 5 && ${pkgs.ckb-next}/bin/ckb-next-animations -n -p /var/lib/ckb-next/profiles/Scimitar.ckbprofile'";
+      ExecStart = "${pkgs.bash}/bin/bash -c 'sleep 5 && ${pkgs.ckb-next}/bin/ckb-next -p /var/lib/ckb-next/profiles/Scimitar.ckbprofile --background'";
       RemainAfterExit = "yes";
     };
   };
