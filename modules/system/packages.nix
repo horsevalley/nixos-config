@@ -35,6 +35,7 @@
     wev # Wayland Event Viewer
     wtype # xdotool type for wayland
     nethogs
+    libinput # Handles input devices in Wayland compositors and provides a generic X.Org input driver
 
     # Aesthetic sysinfo
     fastfetch 
