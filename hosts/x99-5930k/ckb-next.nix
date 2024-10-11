@@ -70,7 +70,7 @@ in
     after = [ "ckb-next-daemon.service" ];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.ckb-next}/bin/ckb-next --profile /var/lib/ckb-next/profiles/Scimitar.ckbprofile";
+      ExecStart = "${pkgs.ckb-next}/bin/ckb-next-daemon -n -p /var/lib/ckb-next/profiles/Scimitar.ckbprofile";
       RemainAfterExit = "yes";
     };
   };
