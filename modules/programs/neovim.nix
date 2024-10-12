@@ -8,6 +8,7 @@
       withPython3 = true;
       withNodeJs = true;
       withRuby = true;
+      withGo = true;
     })
   ];
 
