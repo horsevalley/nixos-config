@@ -2,7 +2,7 @@
 
 {
   # Enable CUPS to print documents
-  services.printing.enable = true; 
+  services.printing.enable = false; 
 
   # Enable dbus
   services.dbus.enable = true;
