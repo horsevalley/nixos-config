@@ -1,8 +1,11 @@
 { config, pkgs, unstable, ... }:
 
 {
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     unstable.yazi
+    file
+    imagemagick
+    kitty
   ];
 
   # Force the system to use the unstable version
@@ -10,12 +13,5 @@
     (final: prev: {
       yazi = unstable.yazi;
     })
-  ];
-
-  # Ensure necessary dependencies are installed
-  environment.systemPackages = with pkgs; [
-    file
-    imagemagick
-    kitty
   ];
 }
