@@ -129,6 +129,7 @@
     imagemagick
     ueberzug
     ffmpegthumbnailer
+    libsForQt5.ffmpegthumbs
     poppler
     # exif # A utility to read and manipulate EXIF data in digital photographs
     # exiftool # A tool to read, write and edit EXIF meta information
