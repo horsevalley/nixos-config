@@ -32,6 +32,13 @@ let
     update_title yes
     layout tabbed
     enable_kitty_graphics = true
+    linux_display_server wayland
+    repaint_delay 10
+    input_delay 3
+    sync_to_monitor yes
+    file_transfer_size_limit 25
+
+
 
     # Theme settings
     foreground #CDD6F4
