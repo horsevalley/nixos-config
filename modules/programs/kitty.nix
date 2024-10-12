@@ -31,8 +31,6 @@ let
     enable_smooth_scrolling yes
     update_title yes
     layout tabbed
-    enable_kitty_graphics = true
-    term = xterm-kitty
 
     # Theme settings
     foreground #CDD6F4
