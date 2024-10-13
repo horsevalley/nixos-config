@@ -9,11 +9,8 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-  # boot.initrd.kernelModules = [ "nvidia" ];
-  boot.blacklistedKernelModules = ["nouveau"];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-  # boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1"  "usbcore.autosuspend=-1" "quiet" "loglevel=3" "rd.udev.log_level=3" "vt.global_cursor_default=0" ];
   boot.consoleLogLevel = 0;
 
 
