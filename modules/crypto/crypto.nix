@@ -1,26 +1,24 @@
 { config, pkgs, lib, ... }:
 
 let
+  exodusVersion = "24.3.15"; # Update this when a new version is released
+
   exodus = pkgs.stdenv.mkDerivation (finalAttrs: {
     pname = "exodus";
-    version = "24.3.15"; # Update this when a new version is released
+    version = exodusVersion;
 
-    src = pkgs.fetchurl {
-      name = "exodus-linux-x64-${finalAttrs.version}.zip";
-      url = "https://downloads.exodus.com/releases/exodus-linux-x64-${finalAttrs.version}.zip";
-      sha256 = "sha256-aYYZv0z9ZZYm31QoJhZhRFW+NQ7KsxnNnF4G9n4KxiM="; # Update this when changing the version
-    };
+    src = ~/Downloads/exodus-linux-x64-24.41.3.zip # Replace with actual path
 
     nativeBuildInputs = [ pkgs.unzip ];
 
     installPhase = ''
       mkdir -p $out/bin $out/share/applications
-      cp -r . $out
+      unzip $src -d $out
       ln -s $out/Exodus $out/bin/Exodus
       ln -s $out/bin/Exodus $out/bin/exodus
-      ln -s $out/exodus.desktop $out/share/applications
+      mv $out/exodus.desktop $out/share/applications/
       substituteInPlace $out/share/applications/exodus.desktop \
-            --replace 'Exec=bash -c "cd \`dirname %k\` && ./Exodus %u"' "Exec=Exodus %u"
+        --replace 'Exec=bash -c "cd \`dirname %k\` && ./Exodus %u"' "Exec=Exodus %u"
     '';
 
     dontPatchELF = true;
@@ -70,7 +68,6 @@ let
       description = "Top-rated cryptocurrency wallet with Trezor integration and built-in Exchange";
       homepage = "https://www.exodus.com/";
       license = licenses.unfree;
-      maintainers = with maintainers; [ mmahut rople380 ];
       platforms = [ "x86_64-linux" ];
     };
   });
