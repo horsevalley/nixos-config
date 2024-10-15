@@ -1,13 +1,17 @@
 { config, pkgs, lib, ... }:
 
 let
-  exodusVersion = "24.3.15"; # Update this when a new version is released
+  exodusVersion = "24.41.3"; # Update this when a new version is released
+
+  exodusZip = pkgs.runCommandNoCC "exodus-linux-x64-${exodusVersion}.zip" {} ''
+    cp ${./exodus-linux-x64-${exodusVersion}.zip} $out
+  '';
 
   exodus = pkgs.stdenv.mkDerivation (finalAttrs: {
     pname = "exodus";
     version = exodusVersion;
 
-    src = ~/Downloads/exodus-linux-x64-24.41.3.zip # Replace with actual path
+    src = exodusZip;
 
     nativeBuildInputs = [ pkgs.unzip ];
 
