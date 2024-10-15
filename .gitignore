@@ -20,3 +20,4 @@ Thumbs.db
 
 # Sops
 .decrypted~*
+*.zip
