@@ -56,6 +56,7 @@
     NEWSBOAT_CONFIG_DIR = "$HOME/.config/newsboat";
     ABOOK_CONFIG = "$XDG_CONFIG_HOME/abook/abookrc";
     PASSWORD_STORE_ENABLE_EXTENSIONS = "true";
+    GRIM_DEFAULT_DIR = "~/Pictures/Screenshots/";
 
   };
 
