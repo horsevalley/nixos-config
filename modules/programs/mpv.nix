@@ -111,18 +111,18 @@ in
     "mpv/script_modules/mpvSockets/mpvSockets.lua".source = mpvSocketsLua;
     "mpv/scripts/yt-dlp_background.lua".source = ytDlpBackgroundScript;
   };
-  system.activationScripts = {
-    mpvSetup = ''
-      mkdir -p /home/jonash/.config/mpv/scripts
-      mkdir -p /home/jonash/.config/mpv/script_modules/mpvSockets
-      mkdir -p /home/jonash/Videos
-      ln -sf /etc/mpv/mpv.conf /home/jonash/.config/mpv/mpv.conf
-      ln -sf /etc/mpv/input.conf /home/jonash/.config/mpv/input.conf
-      ln -sf /etc/mpv/scripts/modules.lua /home/jonash/.config/mpv/scripts/modules.lua
-      ln -sf /etc/mpv/script_modules/mpvSockets/mpvSockets.lua /home/jonash/.config/mpv/script_modules/mpvSockets/mpvSockets.lua
-      ln -sf /etc/mpv/scripts/yt-dlp_background.lua /home/jonash/.config/mpv/scripts/yt-dlp_background.lua
-      chown -R jonash:users /home/jonash/.config/mpv
-      chown jonash:users /home/jonash/Videos
-    '';
-  };
+  # system.activationScripts = {
+  #   mpvSetup = ''
+  #     mkdir -p /home/jonash/.config/mpv/scripts
+  #     mkdir -p /home/jonash/.config/mpv/script_modules/mpvSockets
+  #     mkdir -p /home/jonash/Videos
+  #     ln -sf /etc/mpv/mpv.conf /home/jonash/.config/mpv/mpv.conf
+  #     ln -sf /etc/mpv/input.conf /home/jonash/.config/mpv/input.conf
+  #     ln -sf /etc/mpv/scripts/modules.lua /home/jonash/.config/mpv/scripts/modules.lua
+  #     ln -sf /etc/mpv/script_modules/mpvSockets/mpvSockets.lua /home/jonash/.config/mpv/script_modules/mpvSockets/mpvSockets.lua
+  #     ln -sf /etc/mpv/scripts/yt-dlp_background.lua /home/jonash/.config/mpv/scripts/yt-dlp_background.lua
+  #     chown -R jonash:users /home/jonash/.config/mpv
+  #     chown jonash:users /home/jonash/Videos
+  #   '';
+  # };
 }
