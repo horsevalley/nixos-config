@@ -100,7 +100,6 @@
     hugo # A fast and modern static website engine
     groff
     ghostscript
-    pdfroff
 
     # DevOps programs and utilities
     kubernetes
