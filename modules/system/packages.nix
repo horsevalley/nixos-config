@@ -124,6 +124,7 @@
     # jftui
     obs-studio
     # obs-cli # command-line remote control for OBS
+    pipe-viewer # lightweight youtube cli
 
     # Photo/image 
     gimp
