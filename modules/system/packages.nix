@@ -49,7 +49,6 @@
     signal-desktop 
 
     # Productivity
-    obsidian
     libreoffice
     mnemosyne # spaced repetiton software 
     calcurse
