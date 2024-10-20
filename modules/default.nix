@@ -10,7 +10,6 @@
     ./mail/msmtp.nix
     ./mail/mutt-wizard.nix
     ./mail/neomutt.nix
-    ./programs/newsboat/newsboat.nix
     ./programs/wayland/hyprland.nix
     ./programs/fastfetch.nix
     ./programs/git.nix
@@ -19,6 +18,7 @@
     ./programs/librewolf.nix
     ./programs/mpv.nix
     ./programs/neovim.nix
+    ./programs/newsboat.nix
     ./programs/nsxiv.nix
     ./programs/pcmanfm.nix
     ./programs/rofi.nix
