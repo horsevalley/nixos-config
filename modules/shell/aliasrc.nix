@@ -156,7 +156,7 @@
     lzd = "lazydocker";
     wallpapers = "cd ~/repos/github/wallpapers/ && ls";
     ff = "fastfetch";
-    cv = "cd ~/repos/github/CV && ls";
+    cv = "cd ~/repos/github/cv && ls";
     cfk = "vim ~/.config/kitty/kitty.conf";
     nconfig = "sudo nvim /etc/nixos/configuration.nix";
     cfh = "nvim ~/.config/hypr/hyprland.conf";
