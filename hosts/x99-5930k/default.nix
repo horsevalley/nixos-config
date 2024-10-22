@@ -3,7 +3,7 @@
   imports = [
     ../common/default.nix
     ./hardware-configuration.nix
-    ./ckb-next.nix
+    # ./ckb-next.nix
     ../../modules/gaming/gaming.nix
     ../../modules/hardware/nvidia.nix
   ];
