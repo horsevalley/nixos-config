@@ -61,6 +61,7 @@
 
     # Networking and utilities
     networkmanagerapplet
+    nmap
 
     # Linux utilities
     fzf # general-purpose command-line fuzzy finder
