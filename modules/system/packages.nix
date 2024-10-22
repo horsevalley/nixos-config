@@ -36,6 +36,7 @@
     wtype # xdotool type for wayland
     nethogs
     libinput # Handles input devices in Wayland compositors and provides a generic X.Org input driver
+    util-linux # utillinux deprecated?
 
     # Aesthetic sysinfo
     fastfetch 
