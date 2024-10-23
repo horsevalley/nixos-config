@@ -103,6 +103,7 @@
     gopls
     nixpkgs-fmt
     alejandra
+    nixd
 
     # DevOps programs and utilities
     kubernetes
