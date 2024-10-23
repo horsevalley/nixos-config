@@ -102,6 +102,7 @@
     ghostscript
     gopls
     nixpkgs-fmt
+    alejandra
 
     # DevOps programs and utilities
     kubernetes
