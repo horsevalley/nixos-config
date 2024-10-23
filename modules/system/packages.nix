@@ -100,6 +100,8 @@
     hugo # A fast and modern static website engine
     groff
     ghostscript
+    gopls
+    nixpkgs-fmt
 
     # DevOps programs and utilities
     kubernetes
