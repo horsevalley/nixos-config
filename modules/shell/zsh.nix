@@ -78,9 +78,9 @@ in
       }
 
       # Zathura non-blocking behavior
-      function z() {
-      nohup zathura "$1" >/dev/null 2>&1 &
-      }
+      # function z() {
+      # nohup zathura "$1" >/dev/null 2>&1 &
+      # }
 
       # Call the function to set FZF_TMUX_OPTS
       set_fzf_tmux_opts
