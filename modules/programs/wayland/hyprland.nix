@@ -35,7 +35,7 @@
     xdg-desktop-portal-wlr
     swaylock
     swaylock-effects
-    eww # ElKowar’s Wacky Widgets
+    eww # ElKowar’s Wacky Widgets statusbar
 
     catppuccin-sddm
 
@@ -53,13 +53,13 @@
   services.hypridle.enable = true;
 
   # Optional, hint electron apps to use wayland
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    PATH = [
-      "/run/current-system/sw/bin"
-      "$HOME/.local/bin"
-      "$PATH"
-    ];
-  };
+  # environment.sessionVariables = {
+  #   NIXOS_OZONE_WL = "1";
+  #   PATH = [
+  #     "/run/current-system/sw/bin"
+  #     "$HOME/.local/bin"
+  #     "$PATH"
+  #   ];
+  # };
 
 }
