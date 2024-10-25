@@ -34,7 +34,6 @@
     slop
     wev # Wayland Event Viewer
     wtype # xdotool type for wayland
-    nethogs
     libinput # Handles input devices in Wayland compositors and provides a generic X.Org input driver
 
     # Aesthetic sysinfo
@@ -199,10 +198,12 @@
     kdePackages.polkit-kde-agent-1
     zbar
 
-    # System monitoring 
+    # System monitoring and utils
     htop-vim
     gotop 
     bottom 
+    nethogs
+    pstree # Show the set of running processes as a tree
 
     # Torrenting
     tremc 
