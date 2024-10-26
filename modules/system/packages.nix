@@ -205,7 +205,6 @@
     nethogs
     pstree # Show the set of running processes as a tree
     btop
-    bpytop
 
     # Torrenting
     tremc 
