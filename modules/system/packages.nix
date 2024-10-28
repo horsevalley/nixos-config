@@ -35,6 +35,8 @@
     wev # Wayland Event Viewer
     wtype # xdotool type for wayland
     libinput # Handles input devices in Wayland compositors and provides a generic X.Org input driver
+    slack
+    discord
 
     # Aesthetic sysinfo
     fastfetch 
