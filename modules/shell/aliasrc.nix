@@ -46,7 +46,7 @@
     d = "cd /home/jonash/Documents && ls -A";
     dt = "cd /home/jonash/.local/share && ls -A";
     rr = "cd /home/jonash/.local/src && ls -A";
-    h = "cd /home/jonash && ls -A";
+    h = "cd && ls -A";
     m = "cd /home/jonash/Music && ls -A";
     mn = "cd /mnt && ls -A";
     pp = "cd /home/jonash/Pictures && ls -A";
