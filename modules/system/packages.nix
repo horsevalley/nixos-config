@@ -5,49 +5,38 @@
   environment.systemPackages = with pkgs; [
     wget
     curl
-    git
-    git-lfs
-    newsboat
+    newsboat # RSS Reader
     # home-manager
-    yt-dlp
-    libnotify
-    libvirt
-    slock
+    yt-dlp # Command-line tool to download videos from YouTube.com and other sites (youtube-dl fork)
+    libnotify # A library that sends desktop notifications to a notification daemon
+    libvirt # A toolkit to interact with the virtualization capabilities of recent versions of Linux and other OS
     unclutter # hides mouse when idle 
-    arandr  
-    dmenu
+    arandr # A simple visual front end for XRandR
+    # dmenu # A generic, highly customizable, and efficient menu for the X Window System
     intelmetool # used to optimize system settings for intel chipsets
-    swaylock
-    swaylock-effects
     socat
     gtk-layer-shell
     pango
     libdbusmenu-gtk3
-    cairo
-    glibc
-    # dunst
-    lm_sensors
-    upower
-    swaynotificationcenter
+    cairo # A 2D graphics library with support for multiple output devices
+    lm_sensors # Tools for reading hardware sensors
+    upower # A D-Bus service for power management
     ookla-speedtest
     xdg-utils # for xdg-open
-    slop
+    slop # Queries a selection from the user and prints to stdout
     wev # Wayland Event Viewer
     wtype # xdotool type for wayland
     libinput # Handles input devices in Wayland compositors and provides a generic X.Org input driver
-    slack
-    discord
 
-    # Aesthetic sysinfo
-    fastfetch 
-    neofetch 
-    inxi 
-    glxinfo 
-    nvtopPackages.full
-    mediainfo
+    # Git
+    git
+    git-lfs
+    gh # GitHub CLI tool
 
     # Social
     signal-desktop 
+    discord
+    slack
 
     # Productivity
     libreoffice
@@ -85,9 +74,9 @@
     man
     highlight # Source code highlighting tool
 
-
     # Programming languages and compilers
     gcc
+    glibc # The GNU C Library
     gnumake
     python3
     go
@@ -155,13 +144,13 @@
     # Shell
     zsh
     zsh-syntax-highlighting
+    zsh-fast-syntax-highlighting
     zsh-autosuggestions
     zsh-autocomplete
     starship
     
     # Terminal emulators
     kitty
-    st 
 
     # Editors
     vim 
@@ -180,19 +169,17 @@
     widevine-cdm
 
     # Email
-    mutt-wizard
-    neomutt
-    curl
-    isync
-    msmtp
-    lynx
-    notmuch
-    abook
+    # mutt-wizard
+    # neomutt
+    # curl
+    # isync
+    # msmtp
+    # lynx
+    # notmuch
+    # abook
 
     # Security
     pam_gnupg
-    # pass
-    # pass-nodmenu
     pass-wayland
     passExtensions.pass-otp
     pinentry-curses
@@ -207,6 +194,12 @@
     nethogs
     pstree # Show the set of running processes as a tree
     btop
+    fastfetch 
+    neofetch 
+    inxi 
+    glxinfo 
+    nvtopPackages.full
+    mediainfo
 
     # Torrenting
     tremc 
