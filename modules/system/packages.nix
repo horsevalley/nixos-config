@@ -44,7 +44,6 @@
     calcurse
     sdcv # console version of stardict
     bc # basic calculator 
-    presenterm # A terminal based slideshow tool
 
     # File sync
     syncthing 

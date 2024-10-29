@@ -22,6 +22,7 @@
     ./programs/nsxiv.nix
     ./programs/obsidian.nix
     ./programs/pcmanfm.nix
+    ./programs/presenterm.nix
     ./programs/rofi.nix
     ./programs/sddm.nix
     ./programs/swaync.nix
