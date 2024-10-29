@@ -27,7 +27,8 @@
     wev # Wayland Event Viewer
     wtype # xdotool type for wayland
     libinput # Handles input devices in Wayland compositors and provides a generic X.Org input driver
-    devpod-desktop # Codespaces but open-source, client-only and unopinionated: Works with any IDE and lets you use any cloud, kubernetes or just localhost docker
+    # devpod-desktop # Codespaces but open-source, client-only and unopinionated: Works with any IDE and lets you use any cloud, kubernetes or just localhost docker
+    devpod
 
     # Git
     git
