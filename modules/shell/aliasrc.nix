@@ -172,6 +172,6 @@
     ghrepos="cd ~/repos/github/ && ls" ;
     recordings = "cd ~/recordings/ && ls";
     z="zathura";
-
+    hl = "cd ~/repos/github/homelab/ && ls -A";
   };
 }
