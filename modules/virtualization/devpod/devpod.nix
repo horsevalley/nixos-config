@@ -2,6 +2,7 @@
 {
   environment.systemPackages = [
     unstable.devpod
+    unstable.direnv
   ];
 
   # Force the system to use the unstable version
