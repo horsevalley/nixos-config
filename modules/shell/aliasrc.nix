@@ -155,12 +155,12 @@
     cfh = "nvim ~/.config/hypr/hyprland.conf";
     youtube = "youtube-tui";
     rofi = "rofi -show drun";
-    nconf = "cd $GHREPOS/nixos-config/ && la ";
     podcasts = "cd ~/Videos/podcasts/ && la";
-    nfu = "cd $GHREPOS/nixos-config/ && sudo nix flake update";
     cfy = "vim ~/.config/yazi/yazi.toml";
-    fr = "sudo nixos-rebuild switch --flake $GHREPOS/nixos-config/#$(hostname)";
-    frd = "sudo nixos-rebuild dry-run --flake $GHREPOS/nixos-config/#$(hostname)";
+    nconf = "cd $GHREPOS/nixos-config/ && la ";
+    nfu = "cd $GHREPOS/nixos-config/ && sudo nix flake update";
+    fr = "sudo nixos-rebuild switch --flake /home/jonash/repos/github/jonashestdahl/nixos-config/#$(hostname)";
+    frd = "sudo nixos-rebuild dry-run --flake /home/jonash/repos/github/jonashestdahl/nixos-config/#$(hostname)";
     ghrepos="cd $GHREPOS && ls" ;
     recordings = "cd ~/recordings/ && ls";
     z="zathura";
