@@ -2,7 +2,6 @@
 
 {
   environment.shellAliases = {
-    # Existing aliases
     cp = "cp -iv";
     mv = "mv -iv";
     rm = "rm -vI";
@@ -30,9 +29,6 @@
     e = "$EDITOR";
     v = "$EDITOR";
     p = "pacman";
-    xi = "sudo xbps-install";
-    xr = "sudo xbps-remove -R";
-    xq = "xbps-query";
     ".." = "cd ..";
     "..." = "cd ../..";
     "...." = "cd ../../..";
@@ -79,9 +75,8 @@
     sus = "sudo systemctl suspend";
     ym = "youtube-music";
     notion = "notion-app";
-    focus = "mpv /home/jonash/Music/Smoothed\\ Brown\\ Noise\\ 8-Hours\\ -\\ Remastered,\\ for\\ Relaxation,\\ Sleep,\\ Studying\\ and\\ Tinnitus.mp4";
-    gconfig = "/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME";
-    code = "cd ~/repos/github/code/ && ll || ls -lh";
+    # gconfig = "/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME";
+    code = "cd $GHREPOS/code/ && ll || ls -lh";
     s = "speedtest";
     b = "blueman-manager";
     jblcharge5_disconnect="echo -e 'disconnect F8:5C:7D:67:B9:14' | bluetoothctl" ;
@@ -104,12 +99,11 @@
     pyvenv = "source ~/python-venv/bin/activate";
     pyvenv_deactivate = "deactivate";
     clock = "tty-clock -c -f '%a %d %b %H:%M'";
-    dotfiles = "cd ~/dotfiles-nix && ls";
+    dotfiles = "cd $DOTFILES && ls";
     sxiv = "nsxiv";
     hst = "history 1 -1 | cut -c 8- | sort | uniq | fzf | tr -d '\\n' | xclip -sel c";
     gpumonitor = "watch -n 2 nvidia-smi";
     bottles = "flatpak run com.usebottles.bottles";
-    todo = "bat ~/obsidian/TODO.md";
     newnet = "sudo systemctl restart NetworkManager";
     enword = "sdcv --color '$@' | w3m -graph";
     lukesmith = "cd ~/Videos/Luke\\ Smith/ && ls";
@@ -121,15 +115,15 @@
     cft = "vim ~/.config/tmux/tmux.conf";
     remastered = "cd /home/jonash/code/python/python-developer-bootcamp-tuomas-kivioja/remastered && ls";
     aic = "ascii-image-converter";
-    website = "cd ~/repos/github/website-jonashxyz/jonashxyz/ && ls";
+    website = "cd $GHREPOS/website-jonashxyz/jonashxyz/ && ls";
     update_website = "rsync -vrP --delete-after /home/jonash/repos/github/website-jonashxyz/jonashxyz/public/ root@jonash.xyz:/var/www/jonashxyz/";
     update-all-github-repos="dotfiles-sync-github && obsidian-sync-github && code-sync-github && website-sync-github-jonashxyz && wallpaper-sync-github && cv-sync-github && nixos-config-sync-github";
     ms = "mailsync";
     kindle = "cd /mnt/kindle/documents/Downloads/Books/ && ls";
     reading = "bat ~/vimwiki/2024.wiki";
-    sb = "cd ~/repos/github/obsidian/ && ll";
+    sb = "cd $GHREPOS/obsidian/ && ll";
     lg = "lazygit";
-    scripts = "cd ~/dotfiles-nix/scripts/.local/bin/ && ls";
+    scripts = "cd $SCRIPTS && ls";
     hss = "hugo server --noHTTPCache";
     nb = "newsboat";
     ga = "git add";
@@ -154,24 +148,23 @@
     brightness_reduce = "brightnessctl set 5%";
     brightness_max = "brightnessctl set 100%";
     lzd = "lazydocker";
-    wallpapers = "cd ~/repos/github/wallpapers/ && ls";
+    wallpapers = "cd $GHREPOS/wallpapers/ && ls";
     ff = "fastfetch";
-    cv = "cd ~/repos/github/CV && ls";
+    cv = "cd $GHREPOS/CV && ls";
     cfk = "vim ~/.config/kitty/kitty.conf";
-    nconfig = "sudo nvim /etc/nixos/configuration.nix";
     cfh = "nvim ~/.config/hypr/hyprland.conf";
     youtube = "youtube-tui";
     rofi = "rofi -show drun";
-    nconf = "cd ~/repos/github/nixos-config/ && la ";
-    nconfig-backup = "/home/jonash/dotfiles-nix/scripts/.local/bin/nixos-backup";
+    nconf = "cd $GHREPOS/nixos-config/ && la ";
     podcasts = "cd ~/Videos/podcasts/ && la";
-    nfu = "sudo nix flake update";
+    nfu = "cd $GHREPOS/nixos-config/ && sudo nix flake update";
     cfy = "vim ~/.config/yazi/yazi.toml";
-    fr = "sudo nixos-rebuild switch --flake ~/repos/github/nixos-config/#$(hostname)";
-    frd = "sudo nixos-rebuild dry-run --flake ~/repos/github/nixos-config/#$(hostname)";
-    ghrepos="cd ~/repos/github/ && ls" ;
+    fr = "sudo nixos-rebuild switch --flake $GHREPOS/nixos-config/#$(hostname)";
+    frd = "sudo nixos-rebuild dry-run --flake $GHREPOS/nixos-config/#$(hostname)";
+    ghrepos="cd $GHREPOS && ls" ;
     recordings = "cd ~/recordings/ && ls";
     z="zathura";
-    hl = "cd ~/repos/github/homelab/ && ls -A";
+    hl = "cd $GHREPOS/homelab/ && ls -A";
   };
+  # Variables declared in profile.nix
 }
