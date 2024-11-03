@@ -1,20 +1,25 @@
 { config, pkgs, unstable, ... }:
-
 {
   environment.systemPackages = with pkgs; [
-    unstable.yazi
     file
     imagemagick
     kitty
   ];
 
-  # Force the system to use the unstable version
   nixpkgs.overlays = [
     (final: prev: {
-      yazi = unstable.yazi;
       _7zz = prev._7zz.override {
-        enableAsm = false;  # Disable assembly optimizations
+        enableAsm = false;
+        useSystemAsm = false;
+        useMasm = false;
       };
+      yazi = (unstable.yazi.override {
+        inherit (_7zz);
+      }).overrideAttrs (old: {
+        buildInputs = (old.buildInputs or []) ++ [
+          final._7zz
+        ];
+      });
     })
   ];
 }
