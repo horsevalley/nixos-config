@@ -58,7 +58,7 @@
     PASSWORD_STORE_ENABLE_EXTENSIONS = "true";
     GRIM_DEFAULT_DIR = "~/Pictures/Screenshots/";
     REPOS = "$HOME/repos/";
-    DOTFILES = "$HOME/dotfiles-nix/";
+    DOTFILES = "$HOME/repos/github/jonashestdahl/dotfiles-nix";
     GHREPOS = "$HOME/repos/github/jonashestdahl/";
     GITUSER = "jonashestdahl";
     SCRIPTS = "$HOME/.local/bin";
