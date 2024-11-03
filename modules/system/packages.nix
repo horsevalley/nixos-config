@@ -65,7 +65,6 @@
     xh # modern, feature-rich DNS client for the command-line
     ripgrep # line-oriented search tool that recursively searches the current directory for a regex pattern
     unzip
-    p7zip
     stow
     xclip
     tree
