@@ -3,9 +3,9 @@
 {
   environment.systemPackages = with pkgs; [
     unstable.yazi
-    file
-    imagemagick
-    kitty
+    # file
+    # imagemagick
+    # kitty
   ];
 
   # Force the system to use the unstable version
