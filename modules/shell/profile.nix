@@ -79,9 +79,6 @@
     gnupg
   ];
 
-  # Enable xdg mime
-  xdg.mime.enable = true;
-
   # Add ~/.local/bin to PATH
   environment.pathsToLink = [ "/share/zsh" ];
   environment.extraOutputsToInstall = [ "man" "doc" ];
