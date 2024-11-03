@@ -12,6 +12,9 @@
   nixpkgs.overlays = [
     (final: prev: {
       yazi = unstable.yazi;
+      _7zz = prev._7zz.override {
+        enableAsm = false;  # Disable assembly optimizations
+      };
     })
   ];
 }
