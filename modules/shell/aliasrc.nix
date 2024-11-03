@@ -165,6 +165,8 @@
     recordings = "cd ~/recordings/ && ls";
     z="zathura";
     hl = "cd $GHREPOS/homelab/ && ls -A";
+    stowdotfiles='cd /home/jonash/repos/github/jonashestdahl/dotfiles-nix && stow -t /home/jonash *'
+
   };
   # Variables declared in profile.nix
 }
