@@ -62,7 +62,7 @@
     GHREPOS = "$HOME/repos/github/jonashestdahl/";
     GITUSER = "jonashestdahl";
     SCRIPTS = "$HOME/.local/bin";
-    GITHUB_TOKEN = "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";
+    GITHUB_TOKEN = "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";
     GITHUB_USER = "horsevalley";
 
   };
