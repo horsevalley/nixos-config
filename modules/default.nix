@@ -46,5 +46,6 @@
     ./system/system.nix
     ./system/users.nix
     ./virtualization/devpod/devpod.nix
+    ./virtualization/kubernetes.nix
   ];
 }

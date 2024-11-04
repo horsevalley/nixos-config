@@ -95,11 +95,6 @@
     alejandra
     nixd
 
-    # DevOps programs and utilities
-    kubernetes
-    kubectl
-    k3s
-
     # Audio
     wireplumber
     pulsemixer 
