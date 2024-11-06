@@ -153,7 +153,7 @@
     tmux 
 
     # File managers
-    yazi
+    # yazi
     lf
     pcmanfm
 
