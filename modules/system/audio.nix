@@ -66,7 +66,9 @@ in
         type   "fifo"
         name   "Visualizer feed"
         path   "/tmp/mpd.fifo"
-        format "44100:16:2"
+        # format "44100:16:2"
+        format "192000:24:2"    # Updated to match main output quality. default is 44100:16:2
+
       }
 
       bind_to_address "127.0.0.1"
