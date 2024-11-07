@@ -83,18 +83,23 @@ in
       lyrics_directory = "~/.local/share/lyrics"
       mpd_music_dir = "~/Music"
       message_delay_time = "1"
-      song_list_format = "{$5%a - }{$5%t}|{$5%f}$9${@b$5}[$5%l]${@b}"
-      song_status_format = "$5{{%a{ "%b"{ (%y)}} - }{%t}}|{%f}"
-      song_library_format = "$5{%n - }{%t}|{%f}"
-      alternative_header_first_line_format = "$5$b{{%a - %t}|{%f}}$/b"
-      alternative_header_second_line_format = "$5{{$b%a$/b}{ - $b%b$/b}{ ($b%y$/b)}}|{%D}"
-      current_item_prefix = "$b$5"
-      current_item_suffix = "$/b$9"
-      current_item_inactive_column_prefix = "$b$5"
-      current_item_inactive_column_suffix = "$/b$9"
+      
+      # Highlight current playing song with light blue background
+      current_item_prefix = "$0$45"   # 45 is for light blue background
+      current_item_suffix = "$0$9"
+      
+      # Format for song list display
+      song_list_format = "{%a - }{%t}|{%f} $5[%l]"
+      current_item_inactive_column_prefix = "$0$45"
+      current_item_inactive_column_suffix = "$0$9"
+      
+      now_playing_prefix = "$0$45"
+      now_playing_suffix = "$0$9"
+      
+      # Other display settings
       playlist_display_mode = "columns"
       browser_display_mode = "columns"
-      progressbar_look = "->"
+      progressbar_look = "━━─"
       media_library_primary_tag = "album_artist"
       media_library_albums_split_by_date = "no"
       startup_screen = "playlist"
@@ -102,6 +107,8 @@ in
       ignore_leading_the = "yes"
       external_editor = "nvim"
       use_console_editor = "yes"
+      
+      # Colors
       colors_enabled = "yes"
       empty_tag_color = "blue"
       header_window_color = "blue"
@@ -119,14 +126,20 @@ in
       alternative_ui_separator_color = "blue"
       window_border_color = "blue"
       active_window_border = "blue"
-      now_playing_prefix = "$b$5>> "
-      now_playing_suffix = "$/b$9"
+      
       selected_item_prefix = "$5"
       selected_item_suffix = "$9"
       modified_item_prefix = "$5"
-      browser_playlist_prefix = "$5playlist$5 "
-      song_columns_list_format = "(6)[blue]{n} (20)[blue]{a} (50)[blue]{t} (20)[blue]{b} (7f)[blue]{l}"
-      empty_tag_marker = ""
+      
+      # Column settings
+      song_columns_list_format = "(20)[blue]{a} (50)[blue]{t} (20)[blue]{b} (7f)[blue]{l}"
+      
+      # Alternative header settings
+      alternative_header_first_line_format = "$5{%t}"
+      alternative_header_second_line_format = "{$5%a} - {$5%b}"
+      
+      # Status format
+      song_status_format = "{%a - }{%t}|{%f}"
     '';
 
     environment.etc."ncmpcpp/bindings".text = ''
