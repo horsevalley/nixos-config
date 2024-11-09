@@ -77,24 +77,26 @@ in
       restore_paused "yes"
     '';
 
-    # ncmpcpp configuration
+# ncmpcpp configuration
     environment.etc."ncmpcpp/config".text = ''
       ncmpcpp_directory = "~/.config/ncmpcpp"
       lyrics_directory = "~/.local/share/lyrics"
       mpd_music_dir = "~/Music"
       message_delay_time = "1"
       
-      # Highlight current playing song with light blue background
-      current_item_prefix = "$0$45"   # 45 is for light blue background
-      current_item_suffix = "$0$9"
+      # Full-width highlighting for current playing song
+      current_item_prefix = "$(blue)$r"
+      current_item_suffix = "$/r$(end)"
       
-      # Format for song list display
-      song_list_format = "{%a - }{%t}|{%f} $5[%l]"
-      current_item_inactive_column_prefix = "$0$45"
-      current_item_inactive_column_suffix = "$0$9"
+      # Format for song list display - removed right-aligned time to allow full highlight
+      song_list_format = "{%a - }{%t}|{%f}"
       
-      now_playing_prefix = "$0$45"
-      now_playing_suffix = "$0$9"
+      # Current item inactive column settings
+      current_item_inactive_column_prefix = "$(blue)$r"
+      current_item_inactive_column_suffix = "$/r$(end)"
+      
+      now_playing_prefix = "$(blue)$r"
+      now_playing_suffix = "$/r$(end)"
       
       # Other display settings
       playlist_display_mode = "columns"
@@ -131,8 +133,8 @@ in
       selected_item_suffix = "$9"
       modified_item_prefix = "$5"
       
-      # Column settings
-      song_columns_list_format = "(20)[blue]{a} (50)[blue]{t} (20)[blue]{b} (7f)[blue]{l}"
+      # Column settings - adjusted to ensure full-width highlight
+      song_columns_list_format = "(20)[]{a} (50)[]{t} (20)[]{b} (7f)[]{l}"
       
       # Alternative header settings
       alternative_header_first_line_format = "$5{%t}"
