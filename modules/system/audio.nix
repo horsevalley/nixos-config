@@ -66,7 +66,7 @@ in
         type   "fifo"
         name   "Visualizer feed"
         path   "/tmp/mpd.fifo"
-        format "192000:24:2"
+        format "44100:16:2"
 
       }
 
