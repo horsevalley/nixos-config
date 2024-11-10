@@ -7,6 +7,7 @@
     kubernetes
     kubectl
     k3s
+    k9s
     fluxcd
 
   ];
