@@ -140,7 +140,7 @@
     gf = "git fetch";
     k = "kubectl";
     kgp = "kubectl get pods";
-    fishies = "asciiquarium";
+    kns = "kubens";
     fp = "fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
     matrix = "mpv -fs --loop-playlist=inf ~/Videos/screensavers/matrix.webm";
     lastmod = "find . -type f -not -path '*/\\.*' -exec ls -lrt {} +";
@@ -161,11 +161,11 @@
     nfu = "cd $GHREPOS/nixos-config/ && sudo nix flake update";
     fr = "sudo nixos-rebuild switch --flake /home/jonash/repos/github/jonashestdahl/nixos-config/#$(hostname)";
     frd = "sudo nixos-rebuild dry-run --flake /home/jonash/repos/github/jonashestdahl/nixos-config/#$(hostname)";
-    ghrepos="cd $GHREPOS && ls" ;
+    ghrepos = "cd $GHREPOS && ls" ;
     recordings = "cd ~/recordings/ && ls";
-    z="zathura";
+    z = "zathura";
     hl = "cd $GHREPOS/homelab/ && ls -A";
-    stowdotfiles="cd /home/jonash/repos/github/jonashestdahl/dotfiles-nix && stow -t /home/jonash *";
+    stowdotfiles = "cd /home/jonash/repos/github/jonashestdahl/dotfiles-nix && stow -t /home/jonash *";
 
   };
   # Variables declared in profile.nix
