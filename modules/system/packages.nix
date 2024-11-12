@@ -45,6 +45,7 @@
     calcurse
     sdcv # console version of stardict
     bc # basic calculator 
+    speedcrunch # fast, high precision, cross-platform calculator
 
     # File sync
     syncthing 
