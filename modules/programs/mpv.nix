@@ -23,6 +23,15 @@ let
     S cycle sub
     f cycle fullscreen
     D script-message download_with_yt-dlp
+    a cycle-values video-aspect-override "16:9" "4:3" "2.35:1" "-1"  # Cycle through common aspect ratios
+    A cycle video-unscaled                                           # Toggle scaling
+    Alt+1 set video-zoom 0; set video-pan-x 0; set video-pan-y 0    # Reset zoom and pan
+    Alt+= add video-zoom 0.1                                        # Zoom in
+    Alt+- add video-zoom -0.1                                       # Zoom out
+    Alt+left  add video-pan-x  0.1                                  # Pan left
+    Alt+right add video-pan-x -0.1                                  # Pan right
+    Alt+up    add video-pan-y  0.1                                  # Pan up
+    Alt+down  add video-pan-y -0.1                                  # Pan down
   '';
   mpvModulesLua = pkgs.writeText "modules.lua" ''
     local mpv_config_dir_path = require("mp").command_native({"expand-path", "~~/"})
