@@ -254,6 +254,7 @@ let
 
   https://waitbutwhy.com/feed "tech blog"
   https://jonash.xyz/index.xml "tech blog"
+  https://mischavandenburg.substack.com/feed "substack" "MischaVanDenBurg"
   https://mischavandenburg.com/index.xml "tech blog" "MischaVanDenBurg" 
   https://zettelkasten.mischavandenburg.net/index.xml "tech blog" "zettelkasten" "MischaVanDenBurg"
   https://omerxx.com/feed.xml "tech blog"
