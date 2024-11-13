@@ -11,6 +11,7 @@ in
     pass-wayland
     gnupg
     pinentry
+    passExtensions.pass-otp
   ];
 
   # Set the PASSWORD_STORE_DIR environment variable
