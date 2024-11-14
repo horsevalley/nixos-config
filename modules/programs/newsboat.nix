@@ -466,6 +466,9 @@ let
   "---Sabbatical---"
   https://www.youtube.com/feeds/videos.xml?channel_id=UCib80j_q5o_C5XsCA9YsAFg "travel"
 
+  "---MMA---"
+  https://www.youtube.com/feeds/videos.xml?channel_id=UCvgfXK4nTYKudb0rFR6noLA "MMA" "UFC"
+
   "--------------------------COPY YOUTUBE CHANNEL ID------------------------------"
 
   "How to copy a YouTube channel_id:"
