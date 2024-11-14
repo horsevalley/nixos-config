@@ -82,6 +82,7 @@
     python3
     go
     rustc
+    rustup 
     cargo
     nodejs_22
     R
