@@ -13,7 +13,7 @@
           owner = "cjbassi";
           repo = "neotop";
           rev = "master";  # or a specific commit hash or tag
-          # sha256 = "hash-here";  # Replace with the actual hash from the commit you're using
+          sha256 = "0nf8xppqwd2bxvxhjqclwplm3gv9gw3vqqnfyhkapqvi83zlg6y2";  # Replace with the actual hash from the commit you're using
         };
 
         cargoSha256 = "hash-here";  # Replace with the cargo lockfile hash
