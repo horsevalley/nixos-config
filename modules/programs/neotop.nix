@@ -16,7 +16,7 @@
           sha256 = "0nf8xppqwd2bxvxhjqclwplm3gv9gw3vqqnfyhkapqvi83zlg6y2";  # Replace with the actual hash from the commit you're using
         };
 
-        cargoSha256 = "hash-here";  # Replace with the cargo lockfile hash
+        cargoSha256 = "0Bx46sm9M5ivAd/ab9R6eWUYQn77ks0ju";  # Replace with the cargo lockfile hash
 
         meta = with pkgs.lib; {
           description = "Neotop - A modern system monitor";
