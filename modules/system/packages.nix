@@ -29,6 +29,7 @@
     libinput # Handles input devices in Wayland compositors and provides a generic X.Org input driver
     zellij # A terminal workspace with batteries included
     nix-prefetch # Prefetch any fetcher function call, e.g. package sources
+    nix-prefetch-github # Prefetch sources from github
 
     # Git
     git
