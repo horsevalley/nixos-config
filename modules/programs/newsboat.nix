@@ -105,6 +105,7 @@ let
   "-----------------------------------REDDIT-------------------------------------"
 
   "---Reddit---"
+  https://www.reddit.com/r/unixporn.rss  "reddit" "unixporn" 
   https://www.reddit.com/r/worldnews.rss  "reddit" "news"
   https://www.reddit.com/r/selfhosted.rss "selfhosted" "networking"
   https://www.reddit.com/r/HomeNetworking.rss  "reddit" "networking"
