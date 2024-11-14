@@ -59,7 +59,7 @@
     GRIM_DEFAULT_DIR = "~/Pictures/Screenshots/";
     REPOS = "$HOME/repos/";
     DOTFILES = "$HOME/repos/github/jonashestdahl/dotfiles-nix";
-    GHREPOS = "$HOME/repos/github/jonashestdahl/";
+    GHREPOS = "$HOME/repos/github/jonashestdahl";
     GITUSER = "jonashestdahl";
     SCRIPTS = "$HOME/.local/bin";
     GITHUB_TOKEN = "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";
