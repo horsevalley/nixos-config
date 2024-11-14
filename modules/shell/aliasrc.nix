@@ -159,7 +159,8 @@
     cfy = "vim ~/.config/yazi/yazi.toml";
     nconf = "cd $GHREPOS/nixos-config/ && la ";
     nfu = "cd $GHREPOS/nixos-config/ && sudo nix flake update";
-    fr = "sudo nixos-rebuild switch --flake /home/jonash/repos/github/jonashestdahl/nixos-config/#$(hostname)";
+    # fr = "sudo nixos-rebuild switch --flake /home/jonash/repos/github/jonashestdahl/nixos-config/#$(hostname)";
+    fr = "sudo nixos-rebuild switch --flake $GHREPOS/nixos-config/#$(hostname)";
     frd = "sudo nixos-rebuild dry-run --flake /home/jonash/repos/github/jonashestdahl/nixos-config/#$(hostname)";
     ghrepos = "cd $GHREPOS && ls" ;
     recordings = "cd ~/recordings/ && ls";
