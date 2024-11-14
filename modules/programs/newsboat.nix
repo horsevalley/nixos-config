@@ -468,6 +468,7 @@ let
 
   "---MMA---"
   https://www.youtube.com/feeds/videos.xml?channel_id=UCvgfXK4nTYKudb0rFR6noLA "MMA" "UFC"
+  https://www.youtube.com/feeds/videos.xml?channel_id=UC4f1JueVgo5t9HSmobCRPug "MMA" "SBN"
 
   "--------------------------COPY YOUTUBE CHANNEL ID------------------------------"
 
