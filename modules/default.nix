@@ -17,6 +17,7 @@
     ./programs/latex.nix
     ./programs/librewolf.nix
     ./programs/mpv.nix
+    ./programs/neotop.nix
     ./programs/neovim.nix
     ./programs/newsboat.nix
     ./programs/nsxiv.nix
