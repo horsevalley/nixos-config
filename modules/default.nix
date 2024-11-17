@@ -27,7 +27,6 @@
     ./programs/rofi.nix
     ./programs/sddm.nix
     ./programs/swaync.nix
-    ./programs/teams.nix
     ./programs/yazi.nix
     ./security/gpg.nix
     ./security/pass.nix
