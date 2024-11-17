@@ -16,6 +16,7 @@
     ./programs/kitty.nix
     ./programs/latex.nix
     ./programs/librewolf.nix
+    ./programs/microsoft-edge.nix
     ./programs/mpv.nix
     ./programs/neovim.nix
     ./programs/newsboat.nix
