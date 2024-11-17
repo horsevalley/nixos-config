@@ -166,6 +166,7 @@
     librewolf
     firefox
     widevine-cdm
+    microsoft-edge
 
     # Email
     # mutt-wizard
