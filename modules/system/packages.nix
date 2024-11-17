@@ -48,7 +48,7 @@
     sdcv # console version of stardict
     bc # basic calculator 
     speedcrunch # fast, high precision, cross-platform calculator
-    teams # microsoft teams
+    teams-for-linux # Unofficial Microsoft Teams client for Linux
 
     # File sync
     syncthing 
