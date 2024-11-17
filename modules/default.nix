@@ -21,7 +21,6 @@
     ./programs/neovim.nix
     ./programs/newsboat.nix
     ./programs/nsxiv.nix
-    ./programs/nvidia-teams.nix
     ./programs/obsidian.nix
     ./programs/pcmanfm.nix
     ./programs/presenterm.nix
