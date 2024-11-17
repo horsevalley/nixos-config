@@ -21,13 +21,13 @@
     ./programs/neovim.nix
     ./programs/newsboat.nix
     ./programs/nsxiv.nix
+    ./programs/nvidia-teams.nix
     ./programs/obsidian.nix
     ./programs/pcmanfm.nix
     ./programs/presenterm.nix
     ./programs/rofi.nix
     ./programs/sddm.nix
     ./programs/swaync.nix
-    ./programs/teams-wayland-fix.nix
     ./programs/yazi.nix
     ./security/gpg.nix
     ./security/pass.nix
