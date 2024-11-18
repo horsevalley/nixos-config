@@ -98,6 +98,8 @@
     nixpkgs-fmt
     alejandra
     nixd
+    jq # A lightweight and flexible command-line JSON processor
+    yq # Command-line YAML/XML/TOML processor - jq wrapper for YAML, XML, TOML documents
 
     # Audio
     wireplumber
