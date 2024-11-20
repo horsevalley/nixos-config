@@ -38,7 +38,7 @@
     ELECTRUMDIR = "$XDG_DATA_HOME/electrum";
     PYTHONSTARTUP = "$XDG_CONFIG_HOME/python/pythonrc";
     SQLITE_HISTORY = "$XDG_DATA_HOME/sqlite_history";
-    SECOND_BRAIN = "$HOME/obsidian";
+    SECOND_BRAIN = "$GHREPOS/obsidian";
     LYNX_CFG = "$HOME/.config/lynx/lynx.cfg";
     LYNX_CFG_PATH = "$HOME/.config/lynx";
     DICS = "$XDG_DATA_HOME/stardict/dic";
