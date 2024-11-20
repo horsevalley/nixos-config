@@ -101,7 +101,8 @@ in
       # Other display settings
       playlist_display_mode = "columns"
       browser_display_mode = "columns"
-      progressbar_look = "━━─"
+      # progressbar_look = "━━─"
+      progressbar_look = ->
       media_library_primary_tag = "album_artist"
       media_library_albums_split_by_date = "no"
       startup_screen = "playlist"
