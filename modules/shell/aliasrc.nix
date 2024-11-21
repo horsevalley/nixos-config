@@ -118,7 +118,7 @@
     remastered = "cd /home/jonash/code/python/python-developer-bootcamp-tuomas-kivioja/remastered && ls";
     aic = "ascii-image-converter";
     website = "cd $GHREPOS/website-jonashxyz/jonashxyz/ && ls";
-    update_website = "rsync -vrP --delete-after /home/jonash/repos/github/website-jonashxyz/jonashxyz/public/ root@jonash.xyz:/var/www/jonashxyz/";
+    update_website = "rsync -vrP --delete-after /home/jonash/repos/github/jonashestdahl/website-jonashxyz/jonashxyz/public/ root@jonash.xyz:/var/www/jonashxyz/";
     update-all-github-repos="dotfiles-sync-github && obsidian-sync-github && code-sync-github && website-sync-github-jonashxyz && wallpaper-sync-github && cv-sync-github && nixos-config-sync-github";
     ms = "mailsync";
     kindle = "cd /mnt/kindle/documents/Downloads/Books/ && ls";
