@@ -9,7 +9,7 @@
   # Force the system to use the unstable version
   nixpkgs.overlays = [
     (final: prev: {
-      age = unstable.age;
+      age = unstable.age; # Modern encryption tool with small explicit keys
     })
   ];
 }
