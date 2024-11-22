@@ -70,7 +70,7 @@
     
     # Your other existing aliases
     school = "cd ~/Insync/hestdahl@gmail.com/School/Bachelor\\ Ingeniørfag/Bachelor\\ Ingeniørfag\\ -\\ Bygg && ls -lahN";
-    so = "source ~/.config/zsh/.zshrc";
+    so = "source /etc/zshrc";
     calc = "speedcrunch";
     sus = "sudo systemctl suspend";
     ym = "youtube-music";
