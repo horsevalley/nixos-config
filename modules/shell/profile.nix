@@ -64,7 +64,7 @@
     SCRIPTS = "$HOME/.local/bin";
     GITHUB_TOKEN = "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";
     GITHUB_USER = "horsevalley";
-    AGE_KEY = "age1metul8425dkcs8vf9w79fa7qp86llceyshxh95yrxr445pqv44uq9ceqqx";
+    AGE_PUBLIC = "age1metul8425dkcs8vf9w79fa7qp86llceyshxh95yrxr445pqv44uq9ceqqx";
 
   };
 
