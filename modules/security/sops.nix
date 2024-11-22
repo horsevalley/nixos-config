@@ -1,10 +1,15 @@
-
-{ config, pkgs, lib, ... }:
+{ config, pkgs, unstable, ... }:
 
 {
-  # Install necessary packages for GPG functionality
-  environment.systemPackages = with pkgs; [
-    sops # Simple and flexible tool for managing secrets
+  environment.systemPackages = [
+    (unstable.sops.override {
+    })
   ];
 
+  # Force the system to use the unstable version
+  nixpkgs.overlays = [
+    (final: prev: {
+      sops = unstable.sops;
+    })
+  ];
 }
