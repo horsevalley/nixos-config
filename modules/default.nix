@@ -28,9 +28,11 @@
     ./programs/sddm.nix
     ./programs/swaync.nix
     ./programs/yazi.nix
+    ./security/age.nix
     ./security/gpg.nix
     ./security/pass.nix
     ./security/security.nix
+    ./security/sops.nix
     ./shell/aliasrc.nix
     ./shell/profile.nix
     ./shell/zsh.nix
