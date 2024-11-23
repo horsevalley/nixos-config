@@ -27,6 +27,7 @@
     ./programs/rofi.nix
     ./programs/sddm.nix
     ./programs/swaync.nix
+    ./programs/teams-for-linux.nix
     ./programs/yazi.nix
     ./security/age.nix
     ./security/gpg.nix
