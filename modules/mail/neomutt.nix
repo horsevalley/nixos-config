@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let
-  username = "jonash";  # Replace with your actual username
-  email = "jonash@jonash.xyz";  # Replace with your actual email
+  username = "jonash";  
+  email = "jonash@jonash.xyz";  
 in
 {
   environment.systemPackages = with pkgs; [
