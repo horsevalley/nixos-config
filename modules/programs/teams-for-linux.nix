@@ -3,15 +3,14 @@
 {
   config = {
     environment.systemPackages = with pkgs; [
+      # Wrapper script
       (writeShellScriptBin "teams-for-linux" ''
         export GDK_BACKEND=x11
         export WEBKIT_FORCE_SANDBOX=0
         exec ${pkgs.teams-for-linux}/bin/teams-for-linux "$@"
       '')
-    ];
-
-    # Create desktop entry
-    environment.systemPackages = with pkgs; [
+      
+      # Desktop entry
       (makeDesktopItem {
         name = "teams-for-linux";
         desktopName = "Teams for Linux";
