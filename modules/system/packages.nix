@@ -35,6 +35,7 @@
     git
     git-lfs
     gh # GitHub CLI tool
+    lazygit # Simple terminal UI for git commands
 
     # Social
     signal-desktop 
