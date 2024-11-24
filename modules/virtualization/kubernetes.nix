@@ -11,6 +11,7 @@
     k9s # Kubernetes CLI To Manage Your Clusters In Style
     fluxcd # Open and extensible continuous delivery solution for Kubernetes
     cloudflared # Cloudflare Tunnel daemon, Cloudflare Access toolkit, and DNS-over-HTTPS client
+    kubernetes-helm # A package manager for Kubernetes
 
   ];
 
