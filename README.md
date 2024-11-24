@@ -42,6 +42,10 @@ Remember to regularly update your flake inputs:
 nix flake update
 ```
 
+## TODO
+
+- Implement disko declarative disk partitioning and formatting using nix <https://github.com/nix-community/disko>
+
 ## Contributing
 
 Feel free to submit issues or pull requests if you have suggestions for improvements or encounter any problems.
