@@ -1,4 +1,4 @@
-# NixOS Multi-Machine Configuration
+# jonash NixOS Multi-Machine Configuration
 
 This repository contains a NixOS configuration for managing multiple machines using a modular approach.
 
