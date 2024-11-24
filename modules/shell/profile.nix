@@ -63,7 +63,7 @@
     SCRIPTS = "$HOME/.local/bin";
     GITHUB_USER = "horsevalley";
     AGE_PUBLIC = "age1metul8425dkcs8vf9w79fa7qp86llceyshxh95yrxr445pqv44uq9ceqqx";
-    SOPS_AGE_KEY_FILE = "~/.age/age.agekey";
+    SOPS_AGE_KEY_FILE = "/home/jonash/.age/age.agekey";
     ANTHROPIC_API_KEY = "${config.sops.secrets.anthropic_api_key.path}";
     GITHUB_TOKEN = "${config.sops.secrets.github_token.path}";
 
