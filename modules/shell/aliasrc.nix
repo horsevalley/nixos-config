@@ -143,6 +143,7 @@
     k = "kubectl";
     kgp = "kubectl get pods";
     kns = "kubens";
+    fgk = "flux get kustomizations";
     fp = "fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
     matrix = "mpv -fs --loop-playlist=inf ~/Videos/screensavers/matrix.webm";
     lastmod = "find . -type f -not -path '*/\\.*' -exec ls -lrt {} +";
