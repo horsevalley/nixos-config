@@ -32,6 +32,7 @@
     ./security/age.nix
     ./security/gpg.nix
     ./security/pass.nix
+    ./security/secrets.nix
     ./security/security.nix
     ./security/sops.nix
     ./shell/aliasrc.nix

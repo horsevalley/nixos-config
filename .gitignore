@@ -21,3 +21,4 @@ Thumbs.db
 # Sops
 .decrypted~*
 *.zip
+secrets/

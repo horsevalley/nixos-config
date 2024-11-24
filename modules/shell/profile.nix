@@ -52,7 +52,6 @@
     AWT_TOOLKIT = "MToolkit wmname LG3D";
     BAT_THEME = "Catppuccin Mocha";
     SNIPPETS_FILE = "$HOME/.local/bin/snippets";
-    ANTHROPIC_API_KEY="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";
     NEWSBOAT_CONFIG_DIR = "$HOME/.config/newsboat";
     ABOOK_CONFIG = "$XDG_CONFIG_HOME/abook/abookrc";
     PASSWORD_STORE_ENABLE_EXTENSIONS = "true";
@@ -62,9 +61,11 @@
     GHREPOS = "$HOME/repos/github/jonashestdahl";
     GITUSER = "jonashestdahl";
     SCRIPTS = "$HOME/.local/bin";
-    GITHUB_TOKEN = "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";
     GITHUB_USER = "horsevalley";
     AGE_PUBLIC = "age1metul8425dkcs8vf9w79fa7qp86llceyshxh95yrxr445pqv44uq9ceqqx";
+    SOPS_AGE_KEY_FILE = "~/.age/age.agekey";
+    ANTHROPIC_API_KEY = "${config.sops.secrets.anthropic_api_key.path}";
+    GITHUB_TOKEN = "${config.sops.secrets.github_token.path}";
 
   };
 
