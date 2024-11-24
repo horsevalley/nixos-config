@@ -77,6 +77,7 @@
     killall
     man
     highlight # Source code highlighting tool
+    busybox # Tiny versions of common UNIX utilities in a single small executable
 
     # Programming languages and compilers
     gcc
